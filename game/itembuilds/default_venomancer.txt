@@ -33,19 +33,19 @@
             "item"      "item_veil_of_discord_5"
             "item"      "item_ultimate_scepter_5"
             "item"      "item_yasha_and_kaya_5"
-            "item"      "item_satanic_core_3"
+            "item"      "item_octarine_core_5"
             "item"      "item_shivas_guard_5"
         }
 
         "#DOTA_Item_Build_Luxury"
         {
             "item"      "item_cyclone"
-            "item"      "item_octarine_core_5"
-            "item"      "item_silver_edge_5"
-            "item"      "item_hurricane_pike_5"
-            "item"      "item_spirit_vessel_5"
-            "item"      "item_lotus_orb_5"
-            "item"      "item_ethereal_blade_5"
+            "item"      "item_satanic_core_1"
+            "item"      "item_silver_edge"
+            "item"      "item_hurricane_pike"
+            "item"      "item_spirit_vessel"
+            "item"      "item_lotus_orb"
+            "item"      "item_ethereal_blade"
         }
     }
 }

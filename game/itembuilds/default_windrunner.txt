@@ -17,7 +17,7 @@
 
         "#DOTA_Item_Build_Early_Game"
         {
-            "item"      "item_greater_tranquil_boots"
+            "item"      "item_mjollnir"
             "item"      "item_monkey_king_bar"
         }
 
@@ -26,28 +26,28 @@
             "item"      "item_ultimate_scepter"
             "item"      "item_black_king_bar"
             "item"      "item_greater_crit"
-            "item"      "item_blink"
+            "item"      "item_octarine_core"
         }
 
         "#DOTA_Item_Build_Late_Items"
         {
-            "item"      "item_greater_guardian_greaves_4"
+            "item"      "item_mjollnir_5"
             "item"      "item_monkey_king_bar_5"
             "item"      "item_ultimate_scepter_5"
             "item"      "item_black_king_bar_5"
             "item"      "item_greater_crit_5"
-            "item"      "item_blink_5"
+            "item"      "item_octarine_core_5"
         }
 
         "#DOTA_Item_Build_Luxury"
         {
-            "item"      "item_octarine_core_5"
-            "item"      "item_sheepstick_5"
-            "item"      "item_sphere_5"
-            "item"      "item_blink_5"
-            "item"      "item_bloodthorn_5"
-            "item"      "item_hurricane_pike_5"
-            "item"      "item_desolator_5"
+            "item"      "item_sheepstick_4"
+            "item"      "item_sphere"
+            "item"      "item_blink"
+            "item"      "item_bloodthorn"
+            "item"      "item_nullifier_3"
+            "item"      "item_hurricane_pike"
+            "item"      "item_desolator"
         }
     }
 }

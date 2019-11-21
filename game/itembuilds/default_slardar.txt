@@ -16,7 +16,6 @@
 
         "#DOTA_Item_Build_Early_Game"
         {
-            "item"      "item_greater_tranquil_boots"
             "item"      "item_solar_crest"
             "item"      "item_desolator"
         }
@@ -25,33 +24,34 @@
         {
             "item"      "item_black_king_bar"
             "item"      "item_assault"
-            "item"      "item_heart"
+            "item"      "item_satanic"
+            "item"      "item_greater_crit"
         }
 
         "#DOTA_Item_Build_Late_Items"
         {
-            "item"      "item_greater_guardian_greaves_4"
+            "item"      "item_greater_crit_5"
+            "item"      "item_satanic_5"
             "item"      "item_solar_crest_5"
-            "item"      "item_devastator_5"
+            "item"      "item_desolator_5"
             "item"      "item_black_king_bar_5"
             "item"      "item_assault_5"
-            "item"      "item_heart_5"
         }
 
         "#DOTA_Item_Build_Luxury"
         {
-            "item"      "item_blink_5"
-            "item"      "item_ultimate_scepter_5"
-            "item"      "item_echo_sabre_5"
-            "item"      "item_satanic_5"
-            "item"      "item_vladmir_5"
-            "item"      "item_crimson_guard_5"
-            "item"      "item_greater_crit_5"
-            "item"      "item_helm_of_the_dominator_5"
-            "item"      "item_monkey_king_bar_5"
-            "item"      "item_silver_edge_5"
-            "item"      "item_heavens_halberd_5"
-            "item"      "item_pipe_5"
+            "item"      "item_blink"
+            "item"      "item_devastator_3"
+            "item"      "item_ultimate_scepter"
+            "item"      "item_echo_sabre_2"
+            "item"      "item_heart"
+            "item"      "item_vladmir"
+            "item"      "item_crimson_guard"
+            "item"      "item_helm_of_the_dominator_2"
+            "item"      "item_monkey_king_bar"
+            "item"      "item_silver_edge"
+            "item"      "item_heavens_halberd"
+            "item"      "item_pipe"
         }
     }
 }

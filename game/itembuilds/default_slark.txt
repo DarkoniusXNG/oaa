@@ -14,25 +14,22 @@
 
 		"#DOTA_Item_Build_Early_Game"
 		{
-			"item"		"item_greater_arcane_boots"
-			"item"		"item_invis_sword"
 			"item"		"item_silver_edge"
+      "item"    "item_mjollnir"
+      "item"    "item_eye_of_skadi"
 		}
 
 		"#DOTA_Item_Build_Mid_Items"
 		{
-			"item"		"item_greater_guardian_greaves"
-			"item"		"item_eye_of_skadi"
-			"item"		"item_ultimate_scepter"
-			"item"		"item_bloodthorn"
-			"item"		"item_sphere"
+			"item"	 "item_ultimate_scepter"
+			"item"   "item_black_king_bar_1"
 		}
 
 
 		"#DOTA_Item_Build_Late_Items"
 		{
-			"item"		"item_abyssal_blade_3"
-			"item"		"item_bloodthorn_3"
+			"item"    "item_bloodthorn"
+      "item"    "item_abyssal_blade_3"
 		}
 
 
@@ -41,7 +38,7 @@
 		{
 			"item"		"item_butterfly_2"
 			"item"		"item_blink"
-			"item"		"item_black_king_bar_1"
+			"item"    "item_sphere"
 			"item"		"item_sange_and_yasha"
 			"item"		"item_trumps_fists"
 			"item"		"item_monkey_king_bar"

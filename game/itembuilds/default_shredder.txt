@@ -45,8 +45,7 @@
 			"item"		"item_cyclone"
 			"item"		"item_sheepstick_4"
 			"item"		"item_sphere"
-
-
+      "item"    "item_octarine_core"
 		}
 	}
 }
