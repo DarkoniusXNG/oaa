@@ -48,4 +48,4 @@
 			"item"		"item_vladmir"
 		}
 	}
-}
+
