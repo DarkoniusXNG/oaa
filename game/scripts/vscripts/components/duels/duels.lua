@@ -396,6 +396,7 @@ function Duels:ActuallyStartDuel(options)
 
   local gamemode = GameRules:GetGameModeEntity()
   gamemode:SetTPScrollSlotItemOverride("item_dust")
+  gamemode:SetCustomBackpackSwapCooldown(1.0)
 
   self:SpawnPlayersOnArenas(split, smallArenaIndex, bigArenaIndex)
   self:PreparePlayersToStartDuel(options, split)
@@ -593,6 +594,7 @@ function Duels:EndDuel ()
 
   local gamemode = GameRules:GetGameModeEntity()
   gamemode:SetTPScrollSlotItemOverride("item_tpscroll")
+  gamemode:SetCustomBackpackSwapCooldown(3.0)
 
   local currentDuel = self.currentDuel
   self:CleanUpDuel()
@@ -683,7 +685,7 @@ function Duels:SwapItems(intendedItemname, hero, player)
   local current = hero:GetItemInSlot(DOTA_ITEM_TP_SCROLL)
   if current then
     -- Set charges to 1
-	if current:GetCurrentCharges() > 1 then
+    if current:GetCurrentCharges() > 1 then
       current:SetCurrentCharges(1)
     end
     -- Remove the item
