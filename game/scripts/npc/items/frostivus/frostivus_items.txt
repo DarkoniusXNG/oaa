@@ -1,0 +1,509 @@
+"DOTAItems"
+{
+	//=================================================================================================================
+	// Snowballs (Throw Snowball)
+	//=================================================================================================================
+	"item_snowball_oaa"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"                                              "87804"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/snowball_oaa"
+		"AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"                           "DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"                           "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"                          "DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityCastAnimation"                            "ACT_INVALID"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"                                "600"
+		"AbilityCastPoint"                                "0.2"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"                                 "0.5"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"                                 "0"
+		
+		"ItemCost"                                        "0"
+		"ItemInitialCharges"                              "10"
+		"ItemDisplayCharges"                              "1"
+		"ItemRequiresCharges"                             "1"
+		"ItemKillable"                                    "1"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE_STACKING"
+		
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "consumable"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+        "ItemStackable"                                   "1"
+        "ItemPermanent"                                   "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1000"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Snow Chunks (Build Snowman)
+	//=================================================================================================================
+	"item_summon_snowman_oaa"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"                                              "87806"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/summon_snowman_oaa"
+		"AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCastAnimation"                            "ACT_INVALID"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"                                "350"
+		"AbilityCastPoint"                                "0.3"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"                                 "10"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"                                 "0"
+
+		"ItemCost"                                        "0"
+		"ItemInitialCharges"                              "3"
+		"ItemDisplayCharges"                              "1"
+		"ItemRequiresCharges"                             "1"
+		"ItemKillable"                                    "1"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE_STACKING"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "consumable"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+        "ItemStackable"                                   "1"
+        "ItemPermanent"                                   "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"30"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"grace_period"		"1.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"search_distance"		"70"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"think_interval"	"0.2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Sliding Penguin (Summon Penguin)
+	//=================================================================================================================
+	"item_summon_penguin_oaa"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"                                              "87814"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/summon_penguin_oaa"
+		"AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCastAnimation"                            "ACT_INVALID"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"                                "400"
+		"AbilityCastPoint"                                "0.3"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"                                 "30"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"                                 "0"
+
+		"ItemCost"                                        "0"
+		"ItemInitialCharges"                              "1"
+		"ItemDisplayCharges"                              "1"
+		"ItemRequiresCharges"                             "1"
+		"ItemKillable"                                    "1"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE_STACKING"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "consumable"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+        "ItemStackable"                                   "1"
+        "ItemPermanent"                                   "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"initial_lifetime"		"20.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"initial_speed"			"100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_step"			"1"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_speed"				"1000"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"impaired_duration"		"3.0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bump_delay"			"1.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bump_collision_radius"	"120"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"spawn_offset"			"150"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"run_distance"			"200"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"jump_distance"			"150"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_after_crash"		"125"
+			}
+			"12"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"speed_gain_per_hero_bump"	"60"
+			}
+			"13"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"speed_step_interval"	"0.05"
+			}
+			"14"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"max_gainable_lifetime"	"20.0"
+			}
+			"15"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"lifetime_gain_per_hero_bump"	"5.0"
+			}
+			"16"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"min_speech_repeat_time"	"0.5"
+			}
+			"17"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bump_delay_absolute"	"0.25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Decorating materials (Decorate Tree)
+	//=================================================================================================================
+	"item_decorate_tree_oaa"
+    {
+        "ID"                                              "87807"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/decorate_tree_oaa"
+        "AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"                           "DOTA_UNIT_TARGET_TREE"
+		"AbilityCastAnimation"                            "ACT_INVALID"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"                                "165"
+		"AbilityCastPoint"                                "0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"                                 "2.0"
+
+		"ItemCost"                                        "0"
+		"ItemInitialCharges"                              "5"
+		"ItemDisplayCharges"                              "1"
+		"ItemRequiresCharges"                             "1"
+		"ItemKillable"                                    "1"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE_STACKING"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "consumable"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+        "ItemStackable"                                   "1"
+        "ItemPermanent"                                   "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"300"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Frostivus Firework
+	//=================================================================================================================
+	"item_frostivus_firework_oaa"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"                                              "87809"
+        "BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/frostivus_firework_oaa"
+		"AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCastAnimation"                            "ACT_INVALID"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"                                "1200"
+		"AbilityCastPoint"                                "0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"                                 "0.5"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"                                 "0"
+		
+		"ItemCost"                                        "0"
+		"ItemInitialCharges"                              "3"
+		"ItemDisplayCharges"                              "1"
+		"ItemRequiresCharges"                             "1"
+		"ItemKillable"                                    "1"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE_STACKING"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "consumable"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+        "ItemStackable"                                   "1"
+        "ItemPermanent"                                   "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"600"
+			}
+			"02"
+			{	
+				"var_type"			"FIELD_INTEGER"
+				"speed"				"1200"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"linger_duration"	"5.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Frostivus Stocking - bonus magic resistance
+	//=================================================================================================================
+	"item_frostivus_stocking_oaa"
+    {
+        "ID"                                              "88511"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/frostivus_stocking_oaa"
+        "AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"ItemCost"                                        "0"
+		"ItemKillable"                                    "0"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "artifact"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"                                "FIELD_INTEGER"
+				"magic_resistance"                        "50"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Frostivus Skates - bonus ms, free pathing, unslowable and no unit collision but turn rate worse
+	//=================================================================================================================
+	"item_frostivus_skates_oaa"
+    {
+        "ID"                                              "88512"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/frostivus_skates_oaa"
+        "AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"ItemCost"                                        "0"
+		"ItemKillable"                                    "0"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "artifact"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"                                "FIELD_INTEGER"
+				"bonus_movement_speed_percent"            "50"
+			}
+			"02"
+			{
+				"var_type"                                "FIELD_INTEGER"
+				"turn_rate"                               "-100"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Frostivus Suprise (Bundle of Frostivus stuff)
+	//=================================================================================================================
+	"item_frostivus_suprise_oaa"
+    {
+        "ID"                                              "88513"
+		"BaseClass"                                       "item_lua"
+		"ScriptFile"                                      "frostivus/items.lua"
+		"AbilityTextureName"                              "custom/frostivus_suprise_oaa"
+        "AbilityBehavior"                                 "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastAnimation"                            "ACT_INVALID"
+        "AbilityCastPoint"                                "0"
+        "AbilityCooldown"                                 "1"
+        "AbilityManaCost"                                 "0"
+        
+		"ItemCost"                                        "0"
+		"ItemInitialCharges"                              "1"
+		"ItemDisplayCharges"                              "1"
+		"ItemRequiresCharges"                             "1"
+		"ItemKillable"                                    "1"
+		"ItemSellable"                                    "0"
+		"ItemPurchasable"                                 "0"
+		"ItemIsNeutralDrop"                               "1"
+		"ItemDroppable"                                   "1"
+        "ItemShareability"                                "ITEM_FULLY_SHAREABLE_STACKING"
+
+		"Model"                                           "models/props_winter/present.vmdl"
+        "Effect"                                          "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality"                                     "consumable"
+        "SideShop"                                        "0"
+        "SecretShop"                                      "0"
+        "ItemStackable"                                   "1"
+        "ItemPermanent"                                   "0"
+    }
+}

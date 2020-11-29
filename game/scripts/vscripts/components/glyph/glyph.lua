@@ -15,7 +15,6 @@ function Glyph:Init()
   self.ward = {}
   self.scan = {}
 
-
   self.ward.cooldown = POOP_WARD_COOLDOWN
   self.scan.cooldown = SCAN_REVEAL_COOLDOWN
 
@@ -28,7 +27,6 @@ function Glyph:Init()
   FilterManager:AddFilter(FilterManager.ExecuteOrder, self, Dynamic_Wrap(Glyph, "Filter"))
 end
 
-
 function Glyph:Filter(keys)
   local order = keys.order_type
   local abilityEID = keys.entindex_ability
@@ -36,15 +34,14 @@ function Glyph:Filter(keys)
   local issuerID = keys.issuer_player_id_const
   local target = EntIndexToHScript(keys.entindex_target)
 
-
   if order == DOTA_UNIT_ORDER_GLYPH then
     -- Handle Glyph aka Ward Button
-    DebugPrintTable(keys)
+    --DebugPrintTable(keys)
     self:CastWard(issuerID)
     return false
   elseif order == DOTA_UNIT_ORDER_RADAR then
     -- Handle Scan
-    DebugPrintTable(keys)
+    --DebugPrintTable(keys)
     self:CastScan(issuerID, keys)
     return false
   end
@@ -57,7 +54,7 @@ function Glyph:CastWard(playerID)
     CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "custom_dota_hud_error_message", {reason=61, message=""})
     return
   end
-  self:ResetWardCooldown(playerID)
+
   local hero = PlayerResource:GetSelectedHeroEntity(playerID)
   local position = hero:GetAbsOrigin()
   --[[for i=0,256 do
@@ -71,6 +68,8 @@ function Glyph:CastWard(playerID)
   local ward = CreateUnitByName("npc_dota_observer_wards", position, true, nil, hero, hero:GetTeam())
   ward:AddNewModifier(ward, nil, "modifier_kill", { duration = POOP_WARD_DURATION })
   ward:AddNewModifier(ward, nil, "modifier_ward_invisibility", { })
+
+  self:ResetWardCooldown(playerID)
 end
 
 function Glyph:ResetWardCooldown(playerID)
@@ -115,7 +114,6 @@ end
 ]]--
 
 function Glyph:CastScan(playerID, keys)
-
   if self:GetScanCooldown(playerID) > 0 then
     CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "custom_dota_hud_error_message", {reason=61, message=""})
     return
@@ -128,7 +126,6 @@ function Glyph:CastScan(playerID, keys)
   CreateModifierThinker( hero, nil, "modifier_oaa_scan_thinker", {duration = SCAN_DURATION}, position, hero:GetTeamNumber(), false )
 
   self:ResetScanCooldown(playerID)
-
 end
 
 function Glyph:ResetScanCooldown(playerID)

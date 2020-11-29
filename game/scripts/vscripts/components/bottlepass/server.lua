@@ -1,4 +1,4 @@
-Debug:EnableDebugging()
+--Debug:EnableDebugging()
 DebugPrint('Bottlepass script loaded')
 
 Bottlepass = Bottlepass or class({})
@@ -13,9 +13,11 @@ if IsInToolsMode() then
 end
 
 function Bottlepass:Init ()
-  Debug:EnableDebugging()
-  GameEvents:OnCustomGameSetup(partial(Bottlepass.Ready, self))
-  GameEvents:OnGameInProgress(partial(Bottlepass.SendTeams, self))
+  --Debug:EnableDebugging()
+  if not IsInToolsMode() then
+    GameEvents:OnCustomGameSetup(partial(Bottlepass.Ready, self))
+    GameEvents:OnGameInProgress(partial(Bottlepass.SendTeams, self))
+  end
 end
 
 function Bottlepass:StateLoad (players, callback)

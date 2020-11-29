@@ -1,1 +1,0 @@
-"dota_hud_error_no_buildings_here"                                      "Invalid location for building"
