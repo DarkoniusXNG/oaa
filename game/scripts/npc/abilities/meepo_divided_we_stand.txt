@@ -7,17 +7,17 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5433"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5433" // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "BaseClass"                                           "ability_lua"
-    "ScriptFile"                                          "abilities/oaa_divided_we_stand.lua"
+    //"BaseClass"                                           "ability_lua"
+    //"ScriptFile"                                          "abilities/oaa_divided_we_stand.lua"
     "AbilityTextureName"                                  "meepo_divided_we_stand"
     "DisplayAdditionalHeroes"                             "1"
     "LevelsBetweenUpgrades"                               "7"
     "RequiredLevel"                                       "3"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
-    "MaxLevel"                                            "5"
+    "MaxLevel"                                            "3"
     "HasScepterUpgrade"                                   "1"
 
     // Special
@@ -27,7 +27,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "tooltip_clones"                                  "1 2 3 4 5"
+        "tooltip_clones"                                  "1 2 3"
       }
       "02"
       {
@@ -48,6 +48,12 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "tooltip_respawn"                                 "20"
+      }
+      "06"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "tooltip_scepter_bonus_meepo"                     "1"
+        "RequiresScepter"                                 "1"
       }
     }
   }
