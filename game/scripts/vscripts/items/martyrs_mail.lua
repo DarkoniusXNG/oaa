@@ -1,13 +1,23 @@
-LinkLuaModifier( "modifier_item_martyrs_mail_passive", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_item_martyrs_mail_martyr_active", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_item_martyrs_mail_martyr_aura", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_intrinsic_multiplexer", "modifiers/modifier_intrinsic_multiplexer.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_martyrs_mail_passive", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_martyrs_mail_passive_aura", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_martyrs_mail_passive_aura_effect", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_martyrs_mail_martyr_active", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_martyrs_mail_martyr_aura", "items/martyrs_mail.lua", LUA_MODIFIER_MOTION_NONE)
 
 --------------------------------------------------------------------------------
 
 item_martyrs_mail = class(ItemBaseClass)
 
 function item_martyrs_mail:GetIntrinsicModifierName()
-	return "modifier_item_martyrs_mail_passive"
+  return "modifier_intrinsic_multiplexer"
+end
+
+function item_martyrs_mail:GetIntrinsicModifierNames()
+  return {
+    "modifier_item_martyrs_mail_passive",
+    "modifier_item_martyrs_mail_passive_aura",
+  }
 end
 
 function item_martyrs_mail:OnSpellStart()
@@ -16,6 +26,10 @@ function item_martyrs_mail:OnSpellStart()
 
 	hCaster:EmitSound( "DOTA_Item.BladeMail.Activate" )
 	hCaster:AddNewModifier( hCaster, self, "modifier_item_martyrs_mail_martyr_active", { duration = martyr_duration } )
+end
+
+function item_martyrs_mail:ProcsMagicStick()
+  return false
 end
 
 item_martyrs_mail_2 = class(item_martyrs_mail)
@@ -39,9 +53,12 @@ function modifier_item_martyrs_mail_passive:GetAttributes()
 end
 
 function modifier_item_martyrs_mail_passive:OnCreated()
-	self.bonus_damage = self:GetAbility():GetSpecialValueFor( "bonus_damage" )
-	self.bonus_armor = self:GetAbility():GetSpecialValueFor( "bonus_armor" )
-	self.bonus_intellect = self:GetAbility():GetSpecialValueFor( "bonus_intellect" )
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.bonus_damage = ability:GetSpecialValueFor( "bonus_damage" )
+    self.bonus_armor = ability:GetSpecialValueFor( "bonus_armor" )
+    self.bonus_intellect = ability:GetSpecialValueFor( "bonus_intellect" )
+  end
 end
 
 modifier_item_martyrs_mail_passive.OnRefresh = modifier_item_martyrs_mail_passive.OnCreated
@@ -59,7 +76,6 @@ function modifier_item_martyrs_mail_passive:GetModifierPreAttack_BonusDamage()
 	return self.bonus_damage
 end
 
-
 function modifier_item_martyrs_mail_passive:GetModifierPhysicalArmorBonus()
 	return self.bonus_armor
 end
@@ -68,48 +84,110 @@ function modifier_item_martyrs_mail_passive:GetModifierBonusStats_Intellect()
 	return self.bonus_intellect
 end
 
---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+modifier_item_martyrs_mail_passive_aura = class(ModifierBaseClass)
+
+function modifier_item_martyrs_mail_passive_aura:IsHidden()
+  return true
+end
+
+function modifier_item_martyrs_mail_passive_aura:IsDebuff()
+  return false
+end
+
+function modifier_item_martyrs_mail_passive_aura:IsPurgable()
+  return false
+end
+
+function modifier_item_martyrs_mail_passive_aura:OnCreated()
+  self.aura_radius = 1200
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.aura_radius = ability:GetSpecialValueFor("aura_radius")
+  end
+end
+
+modifier_item_martyrs_mail_passive_aura.OnRefresh = modifier_item_martyrs_mail_passive_aura.OnCreated
+
+function modifier_item_martyrs_mail_passive_aura:IsAura()
+  return true
+end
+
+function modifier_item_martyrs_mail_passive_aura:GetModifierAura()
+  return "modifier_item_martyrs_mail_passive_aura_effect"
+end
+
+function modifier_item_martyrs_mail_passive_aura:GetAuraRadius()
+  return self.aura_radius
+end
+
+function modifier_item_martyrs_mail_passive_aura:GetAuraSearchTeam()
+  return DOTA_UNIT_TARGET_TEAM_FRIENDLY
+end
+
+function modifier_item_martyrs_mail_passive_aura:GetAuraSearchType()
+  return bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC)
+end
+
+---------------------------------------------------------------------------------------------------
 
 modifier_item_martyrs_mail_martyr_active = class(ModifierBaseClass)
 
-function modifier_item_martyrs_mail_martyr_active:IsAura()
-	return true
+function modifier_item_martyrs_mail_martyr_active:IsHidden()
+  return false
+end
+
+function modifier_item_martyrs_mail_martyr_active:IsDebuff()
+  return false
 end
 
 function modifier_item_martyrs_mail_martyr_active:IsPurgable()
   return false
 end
 
+function modifier_item_martyrs_mail_martyr_active:IsAura()
+  return true
+end
+
 function modifier_item_martyrs_mail_martyr_active:GetModifierAura()
-	return "modifier_item_martyrs_mail_martyr_aura"
+  return "modifier_item_martyrs_mail_martyr_aura"
 end
 
 function modifier_item_martyrs_mail_martyr_active:GetAuraEntityReject( hEntity )
-	return self:GetCaster() == hEntity
+  return self:GetCaster() == hEntity
 end
 
 function modifier_item_martyrs_mail_martyr_active:GetAuraRadius()
-	return self.martyr_heal_aoe
+  return self.martyr_heal_aoe or 900
 end
 
 function modifier_item_martyrs_mail_martyr_active:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
+  return DOTA_UNIT_TARGET_TEAM_FRIENDLY
 end
 
 function modifier_item_martyrs_mail_martyr_active:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+  return bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC)
 end
 
 function modifier_item_martyrs_mail_martyr_active:DeclareFunctions()
-	local funcs = {
-		MODIFIER_EVENT_ON_TAKEDAMAGE,
-	}
-	return funcs
+  local funcs = {
+    MODIFIER_EVENT_ON_TAKEDAMAGE,
+  }
+  return funcs
 end
 
 function modifier_item_martyrs_mail_martyr_active:OnCreated()
-	self.martyr_heal_aoe = self:GetAbility():GetSpecialValueFor( "martyr_heal_aoe" )
+  local ability = self:GetAbility()
+  local radius = 900
+  if ability and not ability:IsNull() then
+    radius = ability:GetSpecialValueFor("martyr_heal_aoe")
+  end
+
+  self.martyr_heal_aoe = radius
 end
+
+modifier_item_martyrs_mail_martyr_active.OnRefresh = modifier_item_martyrs_mail_martyr_active.OnCreated
 
 function modifier_item_martyrs_mail_martyr_active:OnTakeDamage( kv )
 	if IsServer() then
@@ -156,9 +234,25 @@ function modifier_item_martyrs_mail_martyr_active:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
---------------------------------------------------------------------------------
+function modifier_item_martyrs_mail_martyr_active:GetTexture()
+  return "custom/martyrs_mail_4"
+end
+
+---------------------------------------------------------------------------------------------------
 
 modifier_item_martyrs_mail_martyr_aura = class(ModifierBaseClass)
+
+function modifier_item_martyrs_mail_martyr_aura:IsHidden()
+  return false
+end
+
+function modifier_item_martyrs_mail_martyr_aura:IsDebuff()
+  return false
+end
+
+function modifier_item_martyrs_mail_martyr_aura:IsPurgable()
+  return false
+end
 
 function modifier_item_martyrs_mail_martyr_aura:GetEffectName()
 	return "particles/world_shrine/radiant_shrine_active_ray.vpcf"
@@ -168,4 +262,67 @@ function modifier_item_martyrs_mail_martyr_aura:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
---------------------------------------------------------------------------------
+function modifier_item_martyrs_mail_martyr_aura:GetTexture()
+  return "custom/martyrs_mail_4"
+end
+
+---------------------------------------------------------------------------------------------------
+
+modifier_item_martyrs_mail_passive_aura_effect = class(ModifierBaseClass)
+
+function modifier_item_martyrs_mail_passive_aura_effect:IsHidden()
+  return false
+end
+
+function modifier_item_martyrs_mail_passive_aura_effect:IsDebuff()
+  return false
+end
+
+function modifier_item_martyrs_mail_passive_aura_effect:IsPurgable()
+  return false
+end
+
+function modifier_item_martyrs_mail_passive_aura_effect:GetPriority()
+  return MODIFIER_PRIORITY_SUPER_ULTRA + 10000
+end
+
+function modifier_item_martyrs_mail_passive_aura_effect:OnCreated()
+  self.attack_speed = 100
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.attack_speed = ability:GetSpecialValueFor("aura_attack_speed")
+  end
+end
+
+modifier_item_martyrs_mail_passive_aura_effect.OnRefresh = modifier_item_martyrs_mail_passive_aura_effect.OnCreated
+
+function modifier_item_martyrs_mail_passive_aura_effect:CheckState()
+  local state = {
+    [MODIFIER_STATE_PASSIVES_DISABLED] = false,
+    --[MODIFIER_STATE_FEARED] = false,
+  }
+
+  return state
+end
+
+function modifier_item_martyrs_mail_passive_aura_effect:DeclareFunctions()
+  return {
+    MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+  }
+end
+
+function modifier_item_martyrs_mail_passive_aura_effect:GetModifierAttackSpeedBonus_Constant()
+  return self.attack_speed or self:GetAbility():GetSpecialValueFor("aura_attack_speed")
+end
+
+--function modifier_item_martyrs_mail_passive_aura_effect:GetEffectName()
+	--return "particles/world_shrine/radiant_shrine_active_ray.vpcf"
+--end
+
+--function modifier_item_martyrs_mail_passive_aura_effect:GetEffectAttachType()
+	--return PATTACH_ABSORIGIN_FOLLOW
+--end
+
+function modifier_item_martyrs_mail_passive_aura_effect:GetTexture()
+  return "custom/martyrs_mail_4"
+end

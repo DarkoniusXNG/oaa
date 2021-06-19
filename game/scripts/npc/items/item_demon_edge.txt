@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   "item_demon_edge"
   {
@@ -22,7 +22,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "42"
+        "bonus_damage"                                    "40"
       }
     }
   }

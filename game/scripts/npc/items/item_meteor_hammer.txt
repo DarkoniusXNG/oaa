@@ -1,9 +1,11 @@
-"DOTAItems"
+"DOTAAbilities"
 {
+  "item_recipe_meteor_hammer"                             "REMOVE"
+  "item_meteor_hammer"                                    "REMOVE"
+
   //=================================================================================================================
   // Recipe: Meteor Hammer 1
   //=================================================================================================================
-  "item_recipe_meteor_hammer" "REMOVED"
   "item_recipe_meteor_hammer_1"
   {
     // General
@@ -15,7 +17,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "0"
+    "ItemCost"                      "1000"
     "ItemShopTags"                  ""
 
     // Recipe
@@ -24,14 +26,13 @@
     "ItemResult"                    "item_meteor_hammer_1"
     "ItemRequirements"
     {
-      "01"                        "item_ogre_axe;item_staff_of_wizardry;item_ring_of_regen;item_sobi_mask"
+      "01"                                                "item_pers;item_rod_of_atos"
     }
   }
 
   //=================================================================================================================
   // Meteor Hammer 1
   //=================================================================================================================
-  "item_meteor_hammer" "REMOVED"
   "item_meteor_hammer_1"
   {
     // General
@@ -58,12 +59,12 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"              "600"
     "AbilitySharedCooldown"         "meteor"
-    "AbilityCooldown"               "28"
+    "AbilityCooldown"               "24"
     "AbilityManaCost"               "125"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "2450"
+    "ItemCost"                      "5400"
     "ItemQuality"                   "epic"
     "ItemAliases"                   "mh;meteor hammer"
     "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -72,75 +73,75 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilitySpecial"
     {
-      "01"
+      "01" // like Wind Waker
       {
-        "var_type"              "FIELD_INTEGER"
-        "bonus_strength"        "12 24 36 48 60"
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_intellect"                                 "35 45 60 80 105"
       }
-      "02"
+      "02" // better than Sheepstick (Scythe of Vyse)
       {
-        "var_type"              "FIELD_INTEGER"
-        "bonus_intellect"       "12 24 36 48 60"
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_strength"                                  "12 22 42 72 112"
       }
-      "03"
+      "03" // like Gleipnir
       {
-        "var_type"              "FIELD_FLOAT"
-        "bonus_health_regen"    "5.0 9.0 13.0 17.0 21.0"
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_agility"                                   "12 17 27 42 62"
       }
       "04"
       {
-        "var_type"              "FIELD_FLOAT"
-        "bonus_mana_regen"      "3.0 4.5 6.0 7.5 9.0"
+        "var_type"                                        "FIELD_FLOAT"
+        "bonus_health_regen"                              "6.5 9 12 15 18"
       }
-      "05"
+      "05" // like Wind Waker
       {
-        "var_type"              "FIELD_INTEGER"
-        "burn_dps_boss"         "180 360 540 720 900"
+        "var_type"                                        "FIELD_FLOAT"
+        "bonus_mana_regen"                                "6.0 6.25 6.75 7.5 8.5"
       }
       "06"
       {
-        "var_type"              "FIELD_INTEGER"
-        "burn_dps"              "90 180 270 360 450"
+        "var_type"                                        "FIELD_INTEGER"
+        "burn_dps_boss"                                   "180 360 540 720 900"
       }
       "07"
       {
-        "var_type"              "FIELD_INTEGER"
-        "burn_duration"         "6"
+        "var_type"                                        "FIELD_INTEGER"
+        "burn_dps"                                        "90 180 270 360 450"
       }
       "08"
       {
-        "var_type"              "FIELD_FLOAT"
-        "stun_duration"         "2.0"
+        "var_type"                                        "FIELD_INTEGER"
+        "burn_duration"                                   "6"
       }
       "09"
       {
-        "var_type"              "FIELD_FLOAT"
-        "burn_interval"         "1.0"
+        "var_type"                                        "FIELD_FLOAT"
+        "stun_duration"                                   "1.5 1.75 2.0 2.25 2.5"
       }
       "10"
       {
-        "var_type"              "FIELD_FLOAT"
-        "land_time"             "0.5"
+        "var_type"                                        "FIELD_FLOAT"
+        "burn_interval"                                   "1.0"
       }
       "11"
       {
-        "var_type"              "FIELD_INTEGER"
-        "impact_radius"         "315"
+        "var_type"                                        "FIELD_FLOAT"
+        "land_time"                                       "0.5"
       }
       "12"
       {
-        "var_type"              "FIELD_FLOAT"
-        "max_duration"          "2.5"
+        "var_type"                                        "FIELD_INTEGER"
+        "impact_radius"                                   "315"
       }
       "13"
       {
-        "var_type"              "FIELD_INTEGER"
-        "impact_damage_boss"    "150 300 450 600 750"
+        "var_type"                                        "FIELD_INTEGER"
+        "impact_damage_boss"                              "150 350 550 750 950"
       }
       "14"
       {
-        "var_type"              "FIELD_INTEGER"
-        "impact_damage"         "150 300 450 600 750"
+        "var_type"                                        "FIELD_INTEGER"
+        "impact_damage"                                   "150 350 550 750 950"
       }
     }
     "precache"

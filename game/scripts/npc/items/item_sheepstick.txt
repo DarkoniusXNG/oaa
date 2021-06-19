@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Guinsoos Scythe of Vyse
@@ -6,7 +6,7 @@
   "item_recipe_sheepstick"
   {
     "ID"                                                  "95"    // unique ID
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_1"
     "ItemCost"                                            "0"
     "ItemShopTags"                                        ""
@@ -33,7 +33,7 @@
     // Stats-------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0.0"
-    "AbilityCooldown"                                     "22.0"
+    "AbilityCooldown"                                     "25" //OAA
     "AbilitySharedCooldown"                               "hex"
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "1"
@@ -50,30 +50,30 @@
     // Special-----------------------------------------------------------------------------------------------------
     "AbilitySpecial"
     {
-      "01"
+      "01" // like Gleipnir
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "10 15 20 30 40"
+        "bonus_strength"                                  "12 17 27 42 62" //OAA
       }
-      "02"
+      "02" // like Gleipnir
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "10 15 20 30 40"
+        "bonus_agility"                                   "12 17 27 42 62" //OAA
       }
-      "03"
+      "03" // like Gleipnir
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "35 50 70 105 140"
+        "bonus_intellect"                                 "20 25 35 50 70" //OAA
       }
-      "04"
+      "04" // first 3 values must be the same as Wind Waker, 4th value same as vanilla Sheepstick
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "9.0 9.75 11.25 13.5 16.0"
+        "bonus_mana_regen"                                "6.0 6.25 6.75 9.0 10.0" //OAA
       }
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "sheep_duration"                                  "3.5 3.6 3.7 3.8 4.0"
+        "sheep_duration"                                  "2.5 2.75 3.0 3.25 3.5" //OAA
       }
       "06"
       {

@@ -38,6 +38,7 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "chill_duration"                                  "6"
+        "LinkedSpecialBonus"                              "special_bonus_unique_visage_7"
       }
       "02"
       {
@@ -47,7 +48,7 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "attackspeed_bonus"                               "34 46 58 70 82 94"
+        "attackspeed_bonus"                               "40 50 60 70 90 110" //OAA
       }
       "04"
       {

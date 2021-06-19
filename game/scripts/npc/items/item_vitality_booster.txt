@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   "item_vitality_booster"
   {
@@ -9,7 +9,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1100"
+    "ItemCost"                                            "1000"
     "ItemShopTags"                                        "health_pool"
     "ItemQuality"                                         "secret_shop"
     "ItemAliases"                                         "vitality booster"

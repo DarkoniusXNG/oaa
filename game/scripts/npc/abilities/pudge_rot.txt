@@ -12,11 +12,14 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
+
+    "HasScepterUpgrade"                                   "1"
+
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0"
-
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -35,14 +38,24 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "rot_slow"                                        "-11 -18 -25 -32 -36 -40"
+        "rot_slow"                                        "-14 -20 -26 -32 -38 -44"
         "LinkedSpecialBonus"                              "special_bonus_unique_pudge_4"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "rot_damage"                                      "30 60 90 120 270 420"
+        "rot_damage"                                      "30 60 90 120 240 480"
         "LinkedSpecialBonus"                              "special_bonus_unique_pudge_2"
+      }
+      "05"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "scepter_rot_damage_bonus"                        "100"
+      }
+      "06"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "scepter_rot_radius_bonus"                        "225"
       }
     }
   }

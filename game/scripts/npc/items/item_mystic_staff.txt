@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   "item_mystic_staff"
   {
@@ -9,7 +9,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "2700"
+    "ItemCost"                                            "2800"
     "ItemShopTags"                                        "int"
     "ItemQuality"                                         "secret_shop"
     "ItemAliases"                                         "mystic staff"

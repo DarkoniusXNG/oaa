@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Silver Edge 5
@@ -7,7 +7,7 @@
   {
     "ID"                                                  "3153"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "ItemCost"                                            "20000"
     "ItemShopTags"                                        ""
     "ItemRecipe"                                          "1"
@@ -33,7 +33,7 @@
     "AbilityTextureName"                                  "custom/silver_edge_5"
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "22.0"
+    "AbilityCooldown"                                     "25"
     "AbilitySharedCooldown"                               "shadow_blade"
 
     // Spicy Parameters
@@ -44,7 +44,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "38550"
+    "ItemCost"                                            "38600"
     "ItemShopTags"                                        "damage;attack_speed;movespeed;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
@@ -58,52 +58,52 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "45 55 75 105 145"
+        "bonus_damage"                                    "40 50 70 100 140"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "30 33 36 40 45"
+        "bonus_attack_speed"                              "45 55 65 75 85"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_all_stats"                                 "15 19 24 30 38"
+        "bonus_strength"                                  "0"
       }
       "04"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "windwalk_duration"                               "14.0"
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_intellect"                                 "15 20 30 45 65"
       }
       "05"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "windwalk_movement_speed"                         "25 30 35 40 45"
+        "var_type"                                        "FIELD_FLOAT"
+        "bonus_mana_regen"                                "4.0 4.25 4.75 5.5 6.5"
       }
       "06"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "windwalk_fade_time"                              "0.3"
+        "windwalk_duration"                               "14.0"
       }
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "windwalk_bonus_damage"                           "175 265 400 600 800"
+        "windwalk_movement_speed"                         "25 30 35 40 45"
       }
       "08"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "backstab_reduction"                              "-50"
+        "var_type"                                        "FIELD_FLOAT"
+        "windwalk_fade_time"                              "0.3"
       }
       "09"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "backstab_duration"                               "4"
+        "var_type"                                        "FIELD_INTEGER"
+        "windwalk_bonus_damage"                           "175 275 375 475 575"
       }
       "10"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "heal_reduction"                                  "50"
+        "var_type"                                        "FIELD_FLOAT"
+        "backstab_duration"                               "4"
       }
     }
   }

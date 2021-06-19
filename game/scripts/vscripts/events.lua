@@ -65,19 +65,39 @@ function GameMode:OnNPCSpawned(keys)
   local npc = EntIndexToHScript(keys.entindex)
   DecorateNPC(npc)
 
-  -- Replace Silencer's int steal with a custom modifier
-  if npc:GetUnitName() == "npc_dota_hero_silencer" then
-    LinkLuaModifier("modifier_oaa_int_steal", "modifiers/modifier_oaa_int_steal.lua", LUA_MODIFIER_MOTION_NONE)
-    Timers:CreateTimer(function()
-      npc:RemoveModifierByName("modifier_silencer_int_steal")
-      npc:AddNewModifier(npc, npc:FindAbilityByName("silencer_glaives_of_wisdom_oaa"), "modifier_oaa_int_steal", {})
-    end)
-  end
-
+  --[[ -- legacy armor formula
   if npc.GetPhysicalArmorValue then
     LinkLuaModifier("modifier_legacy_armor", "modifiers/modifier_legacy_armor.lua", LUA_MODIFIER_MOTION_NONE)
-    if npc:IsRealHero() or (npc:IsConsideredHero() and (not npc:IsIllusion())) then
+    if npc:IsRealHero() or (npc:IsConsideredHero() and (not npc:IsIllusion()) and npc:GetTeamNumber() ~= DOTA_TEAM_NEUTRALS) then
       npc:AddNewModifier(npc, nil, "modifier_legacy_armor", {})
+    end
+  end
+  ]]
+  if npc.GetUnitName then
+    if npc:GetUnitName() == "npc_dota_furion_treant_large" then
+      local playerID = UnitVarToPlayerID(npc)
+      local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+      if hero then
+        local force_of_nature_ability = hero:FindAbilityByName("furion_force_of_nature")
+        if force_of_nature_ability then
+          local ability_level = force_of_nature_ability:GetLevel()
+          if ability_level > 0 then
+            local correct_damage = force_of_nature_ability:GetLevelSpecialValueFor("treant_large_damage_bonus", ability_level-1)
+            local correct_hp = force_of_nature_ability:GetLevelSpecialValueFor("treant_large_hp_bonus", ability_level-1)
+            -- Fix DAMAGE
+            npc:SetBaseDamageMin(correct_damage)
+            npc:SetBaseDamageMax(correct_damage)
+            -- Fix HP
+            npc:SetBaseMaxHealth(correct_hp)
+            npc:SetMaxHealth(correct_hp)
+            npc:SetHealth(correct_hp)
+            -- Check for talent
+            if hero:HasLearnedAbility("special_bonus_unique_furion") then
+              npc:AddNewModifier(hero, force_of_nature_ability, "modifier_treant_bonus_oaa", {})
+            end
+          end
+        end
+      end
     end
   end
 end

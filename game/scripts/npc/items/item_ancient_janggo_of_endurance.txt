@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Drums Endurance
@@ -7,15 +7,15 @@
   {
     "ID"                                                  "184"    // unique ID
     "Model"                                               "models/props_gameplay/recipe.vmdl"
-    "ItemCost"                                            "800"
+    "ItemCost"                                            "550"
     "ItemShopTags"                                        ""
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_ancient_janggo"
     "AbilityTextureName"                                  "custom/recipe/recipe_1"
-    "ItemRequirements"
+    "ItemRequirements" //OAA
     {
-      "01"                                                "item_gloves;item_crown;item_wind_lace"
-      "02"                                                "item_ancient_janggo"
+      "01"                                                "item_belt_of_strength;item_robe;item_wind_lace"
+      "02"                                                "item_belt_of_strength;item_robe;item_wind_lace"
     }
   }
 
@@ -47,13 +47,13 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1900"
+    "ItemCost"                                            "1700"
     "ItemShopTags"                                        "str;agi;int;damage;move_speed;attack_speed;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "drum of endurance;drums"
     "ItemInitialCharges"                                  "322" //OAA
     "ItemDisplayCharges"                                  "1"
-    "ItemRequiresCharges"                                 "1"
+    //"ItemRequiresCharges"                                 "1"
     "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
@@ -63,52 +63,42 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_int"                                       "4 10 15 20 25"
+        "aura_movement_speed"                             "20 25 30 35 40"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_str"                                       "4 10 15 20 25"
+        "bonus_str"                                       "6 10 15 20 25"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_agi"                                       "4 10 15 20 25"
+        "bonus_int"                                       "6 10 15 20 25"
       }
       "04"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "0"
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_attack_speed_pct"                          "45 55 65 75 85"
       }
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "20 25 30 35 40"
+        "bonus_movement_speed_pct"                        "15 20 25 30 35" //OAA
       }
       "06"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "attack_speed_aura"                               "20 25 30 35 40"
+        "duration"                                        "6"
       }
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed_pct"                          "35 45 55 65 75"
+        "radius"                                          "1200"
       }
       "08"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed_pct"                        "13 16 19 22 25"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "6"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1200"
+        "charges_tooltip"                                 "322" //OAA
       }
     }
   }

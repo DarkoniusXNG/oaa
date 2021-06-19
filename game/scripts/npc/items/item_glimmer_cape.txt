@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Glimmer Cape
@@ -11,14 +11,14 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "0"
+    "ItemCost"            "450"
     "ItemShopTags"          ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
     "ItemRecipe"          "1"
     "ItemResult"          "item_glimmer_cape"
-    "ItemRequirements"
+    "ItemRequirements" //OAA
     {
       "01"            "item_shadow_amulet;item_cloak"
     }
@@ -40,7 +40,7 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"            "550 850 1150 1450 1750"
+    "AbilityCastRange"            "550 650 750 850 950"
     "AbilityCooldown"             "14.0"
     "AbilitySharedCooldown"                               "glimmer"
     "AbilityManaCost"             "90"
@@ -62,29 +62,24 @@
       "01"
       {
         "var_type"                "FIELD_INTEGER"
-        "bonus_attack_speed"      "20 25 30 35 40"
-      }
-      "02"
-      {
-        "var_type"                "FIELD_INTEGER"
         "bonus_magical_armor"     "15 16 17 18 20"
       }
-      "03"
+      "02"
       {
         "var_type"                "FIELD_FLOAT"
         "fade_delay"              "0.6 0.55 0.5 0.45 0.4"
       }
-      "04"
+      "03"
       {
         "var_type"                "FIELD_INTEGER"
         "active_magical_armor"    "45 48 51 55 60"
       }
-      "05"
+      "04"
       {
         "var_type"                "FIELD_FLOAT"
         "duration"                "5"
       }
-      "06"
+      "05"
       {
         "var_type"        "FIELD_FLOAT"
         "building_duration_limit"     "180"

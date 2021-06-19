@@ -1,7 +1,3 @@
--- Modifiers for problematic talents
-LinkLuaModifier("modifier_special_bonus_unique_monkey_king_armor", "abilities/oaa_wukongs_command.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_special_bonus_unique_monkey_king_ring", "abilities/oaa_wukongs_command.lua", LUA_MODIFIER_MOTION_NONE)
-
 -- Taken from bb template
 if AbilityLevels == nil then
     DebugPrint ( 'creating new ability level requirement object.' )
@@ -67,6 +63,24 @@ function AbilityLevels:CheckAbilityLevels (keys)
   })
 
   self:SetTalents(hero)
+
+  local leveled_up_ability = keys.abilityname
+  if leveled_up_ability then
+    local talent = hero:FindAbilityByName(leveled_up_ability)
+    if string.find(leveled_up_ability, "special_bonus_") and talent:IsAttributeBonus() then
+      -- Ability is a talent
+
+      -- Check for hero level
+      if level >= 27 then
+        -- Refund a skill point if a player wasted it on a talent that is not supposed to be levelled.
+        if talent:GetLevel() == 0 or talent.granted_with_oaa_scepter then
+          -- Talent wasn't learned or was granted by Aghanim Scepter
+          -- dota_player_learned_ability event doesn't happen for abilities that are lvled with Lua: ability:SetLevel(level)
+          hero:SetAbilityPoints(hero:GetAbilityPoints() + 1)
+        end
+      end
+    end
+  end
 end
 
 function AbilityLevels:SetTalents(hero)
@@ -134,14 +148,13 @@ function AbilityLevels:SetTalents(hero)
     )
 
     local problematic_talents ={
-      {"special_bonus_unique_monkey_king_4", "modifier_special_bonus_unique_monkey_king_armor"},
-      {"special_bonus_unique_monkey_king_6", "modifier_special_bonus_unique_monkey_king_ring"},
-      {"special_bonus_unique_hero_name", "modifier_special_bonus_unique_hero_name"}
+      {"special_bonus_unique_hero_name", "modifier_special_bonus_unique_hero_name"},
     }
 
     if claim then
       if leftLevel == 0 then
         leftAbility:SetLevel(1)
+        leftAbility.granted_with_oaa_scepter = true
         -- Check if this talent is on problematic list, add modifier if true
         for i = 1, #problematic_talents do
           local talent = problematic_talents[i]
@@ -158,6 +171,7 @@ function AbilityLevels:SetTalents(hero)
       end
       if rightLevel == 0 then
         rightAbility:SetLevel(1)
+        rightAbility.granted_with_oaa_scepter = true
         -- Check if this talent is on problematic list, add modifier if true
         for i = 1, #problematic_talents do
           local talent = problematic_talents[i]
@@ -177,11 +191,13 @@ function AbilityLevels:SetTalents(hero)
       if hero['talentChoice' .. level] == 'left' then
         if rightLevel ~= 0 then
           rightAbility:SetLevel(0)
+          rightAbility.granted_with_oaa_scepter = nil
           hero:RemoveModifierByName(AbilityLevels:GetTalentModifier(rightAbility:GetName()))
         end
       else
         if leftLevel ~= 0 then
           leftAbility:SetLevel(0)
+          leftAbility.granted_with_oaa_scepter = nil
           hero:RemoveModifierByName(AbilityLevels:GetTalentModifier(leftAbility:GetName()))
         end
       end
@@ -225,10 +241,7 @@ function AbilityLevels:GetTalentModifier(name)
     special_bonus_unique_warlock_1 = "modifier_special_bonus_unique_warlock_1",
     special_bonus_unique_warlock_2 = "modifier_special_bonus_unique_warlock_2",
     special_bonus_unique_undying_3 = "modifier_undying_tombstone_death_trigger",
-    special_bonus_sohei_wholeness_allycast = "modifier_special_bonus_sohei_wholeness_allycast",
-    special_bonus_unique_monkey_king_4 = "modifier_special_bonus_unique_monkey_king_armor",
-    special_bonus_unique_monkey_king_6 = "modifier_special_bonus_unique_monkey_king_ring",
-    special_bonus_unique_undying_reincarnation = "modifier_special_bonus_reincarnation"
+    special_bonus_unique_undying_reincarnation = "modifier_special_bonus_reincarnation",
   }
 
   if exceptionBonuses[name] then

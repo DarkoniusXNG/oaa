@@ -53,6 +53,19 @@ local function ResetState(hero)
       item:EndCooldown()
     end
   end
+
+  -- Special thing for Ward Stack - set counts to at least 1 ward
+  if hero.sentryCount then
+    if hero.sentryCount == 0 then
+      hero.sentryCount = 1
+    end
+  end
+
+  if hero.observerCount then
+    if hero.observerCount == 0 then
+      hero.observerCount = 1
+    end
+  end
 end
 
 local function SaveState(hero)
@@ -62,12 +75,12 @@ local function SaveState(hero)
     items = {},
     modifiers = {},
     offsidesStacks = 0,
-    hp = hero:GetHealth(),
-    mana = hero:GetMana(),
+    hpPercent = hero:GetHealth() / hero:GetMaxHealth(),
+    manaPercent = hero:GetMana() / hero:GetMaxMana(),
     assignable = true -- basically just for clearer code
   }
 
-  -- If hero is dead during start of the duel, make his saved location his foutain area
+  -- If hero is dead during start of the duel, make his saved location his fountain area
   if not hero:IsAlive() then
     local fountainTriggerZone = Entities:FindByName(nil, "fountain_" .. GetShortTeamName(hero:GetTeam()) .. "_trigger")
     if fountainTriggerZone then
@@ -107,8 +120,15 @@ end
 local function RestoreState(hero, state)
   SafeTeleportAll(hero, state.location, 150)
 
-  hero:SetHealth(math.max(1, state.hp))
-  hero:SetMana(state.mana)
+  local hp = state.hpPercent * hero:GetMaxHealth()
+  if hp <= 0 then
+    hp = hero:GetMaxHealth() -- restore to full hp if hp is 0, prevents Zeus ult abuse for example
+  end
+
+  local mana = state.manaPercent * hero:GetMaxMana()
+
+  hero:SetHealth(math.max(1, hp)) -- I left math.max just in case I forgot about some interaction to prevent SetHealth(0) aka permadeath
+  hero:SetMana(mana)
 
   -- Restore ability cooldowns
   for name, abilityState in pairs(state.abilities) do
@@ -126,6 +146,12 @@ local function RestoreState(hero, state)
       item:StartCooldown(itemState.cooldown)
     end
   end
+
+  -- Disjoint disjointable projectiles
+  ProjectileManager:ProjectileDodge(hero)
+
+  -- Absolute Purge (Strong Dispel + removing most undispellable buffs and debuffs)
+  hero:AbsolutePurge()
 
   -- Restore offside stacks if hero had any
   if state.offsidesStacks > 0 then

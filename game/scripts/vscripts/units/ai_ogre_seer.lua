@@ -1,6 +1,3 @@
-
---------------------------------------------------------------------------------
-
 function Spawn( entityKeyValues )
 	if not IsServer() then
 		return
@@ -32,34 +29,48 @@ end
 --------------------------------------------------------------------------------
 
 function OgreSeerThink()
-	if ( not IsValidEntity(thisEntity) ) or ( not thisEntity:IsAlive()) or (thisEntity:IsDominated()) then
-		return -1
-	end
+  if ( not IsValidEntity(thisEntity) ) or ( not thisEntity:IsAlive()) or (thisEntity:IsDominated()) then
+    return -1
+  end
 
-	if GameRules:IsGamePaused() == true then
-		return 1
+  if GameRules:IsGamePaused() == true then
+    return 1
   end
 
   if not thisEntity.bInitialized then
-		thisEntity.vInitialSpawnPos = thisEntity:GetOrigin()
-    thisEntity.bInitialized = true
+    thisEntity.vInitialSpawnPos = thisEntity:GetOrigin()
     thisEntity.bHasAgro = false
     thisEntity.fAgroRange = thisEntity:GetAcquisitionRange(  )
     thisEntity:SetIdleAcquire(false)
     thisEntity:SetAcquisitionRange(0)
     thisEntity.hOgreBoss = FindOgreBoss()
+    thisEntity.BossTier = thisEntity.BossTier or 3
+    thisEntity.bInitialized = true
   end
 
   if thisEntity.hOgreBoss == nil or not thisEntity.hOgreBoss:IsAlive() then
     thisEntity.hOgreBoss = FindOgreBoss()
   end
 
-	local enemies = FindUnitsInRadius( thisEntity:GetTeamNumber(), thisEntity:GetOrigin(), nil, thisEntity:GetCurrentVisionRange(), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, 0, false )
-  local fDistanceToOrigin = ( thisEntity:GetOrigin() - thisEntity.vInitialSpawnPos ):Length2D()
-
-  local hasDamageThreshold = thisEntity:GetMaxHealth() - thisEntity:GetHealth() > BOSS_AGRO_FACTOR;
+  local agro_center = thisEntity.vInitialSpawnPos
   if thisEntity.hOgreBoss then
-    hasDamageThreshold = thisEntity:GetMaxHealth() - thisEntity:GetHealth() > thisEntity.hOgreBoss.BossTier * BOSS_AGRO_FACTOR;
+    agro_center = thisEntity.hOgreBoss.vInitialSpawnPos
+  end
+  local enemies = FindUnitsInRadius(
+    thisEntity:GetTeamNumber(),
+    agro_center,
+    nil,
+    2*BOSS_LEASH_SIZE,
+    DOTA_UNIT_TARGET_TEAM_ENEMY,
+    DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+    DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+    0,
+    false
+  )
+  local fDistanceToOrigin = ( thisEntity:GetOrigin() - thisEntity.vInitialSpawnPos ):Length2D()
+  local hasDamageThreshold = thisEntity:GetHealth() / thisEntity:GetMaxHealth() < 99/100
+  if thisEntity.hOgreBoss then
+    hasDamageThreshold = thisEntity:GetHealth() / thisEntity:GetMaxHealth() < 98/100
   end
 
   --Agro

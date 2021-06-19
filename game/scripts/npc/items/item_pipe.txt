@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Pipe of Insight
@@ -13,7 +13,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "800"
+    "ItemCost"                                            "1550"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -21,7 +21,7 @@
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_pipe"
     "AbilityTextureName"                                  "item_recipe"
-    "ItemRequirements"
+    "ItemRequirements" //OAA
     {
       "01"                                                "item_hood_of_defiance;item_headdress"
     }
@@ -51,7 +51,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "2775"
+    "ItemCost"                                            "3475"
     "ItemShopTags"                                        "regen_health;boost_magic_resist"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "pipe of insight;pipe"
@@ -65,7 +65,7 @@
       "01"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "health_regen"                                    "8.5 10.0 13.0 16.0 18.0"
+        "health_regen"                                    "8.5 10 11 12 13"
       }
       "02"
       {
@@ -80,12 +80,12 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "tooltip_resist"                                  "30 32 34 37 40"
+        "tooltip_resist"                                  "30 32 34 36 38"
       }
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "aura_health_regen"                               "2.5 5 7.5 10 12.5"
+        "aura_health_regen"                               "2.5 4.0 6.0 8.0 10.0"
       }
       "06"
       {

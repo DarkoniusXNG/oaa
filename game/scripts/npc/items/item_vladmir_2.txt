@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Vladimir 2
@@ -10,7 +10,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3921"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_2"
 
     // Item Info
@@ -25,6 +25,7 @@
     "ItemRequirements"
     {
       "01"                                                "item_vladmir;item_upgrade_core"
+      "02"                                                "item_helm_of_the_dominator;item_upgrade_core"
     }
   }
   //=================================================================================================================
@@ -45,7 +46,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "3600"
+    "ItemCost"            "3850"
     "ItemShopTags"          "lifesteal;damage;armor;regen_mana"
     "ItemQuality"         "rare"
     "ItemAliases"         "vladmir's offering 2;vlads 2"
@@ -58,27 +59,27 @@
       "01"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "mana_regen_aura"                                 "1.5 2.5 4.0 6.0 7.5"
+        "armor_aura"                                      "3.0 4.0 6.0 9.0 13.0"
       }
       "02"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "armor_aura"                                      "3 4 6 9 13"
+        "var_type"                                        "FIELD_FLOAT"
+        "mana_regen_aura"                                 "1.75 2.0 2.5 3.25 4.25"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "vampiric_aura"                                   "20 25 30 35 40" //OAA
+        "lifesteal_aura"                                  "15 25 35 45 55"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "1200"
+        "damage_aura"                                     "18 28 38 48 58"
       }
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_all_stats"                                 "5 10 15 20 25"
+        "aura_radius"                                     "1200"
       }
     }
   }

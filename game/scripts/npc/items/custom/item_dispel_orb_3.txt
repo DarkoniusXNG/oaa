@@ -1,7 +1,7 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: dispel_orb_3
+  // Recipe: Dispel Orb 3
   //=================================================================================================================
   "item_recipe_dispel_orb_3"
   {
@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "8438"   // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
@@ -30,7 +30,7 @@
   }
 
   //=================================================================================================================
-  // dispel_orb_3
+  // Dispel Orb 3
   //=================================================================================================================
   "item_dispel_orb_3"
   {
@@ -55,7 +55,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "36950"
+    "ItemCost"                                            "36850"
     "ItemShopTags"                                        "regen_health;regen_mana;str;agi;int;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "Dispel orb 3;purge crystal 3"
@@ -75,17 +75,17 @@
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "11.0 16.0 30.0"
+        "bonus_health_regen"                              "13 16 19"
       }
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "5.75 7.25 9.75"
+        "bonus_mana_regen"                                "4.75 5.5 6.5"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "500 700 1000"
+        "bonus_mana"                                      "500 700 950"
       }
       "05"
       {

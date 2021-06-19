@@ -20,6 +20,8 @@
 
     "MaxLevel"                                            "5"
 
+    "HasScepterUpgrade"                                   "1"
+
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.5"
@@ -27,11 +29,11 @@
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "550"
-    "AbilityCooldown"                                     "120" //OAA
+    "AbilityCooldown"                                     "100" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "150 200 250 500 750"
+    "AbilityManaCost"                                     "150 200 250 300 350"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -41,17 +43,23 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "duration"                                        "16.0"
+        "LinkedSpecialBonus"                              "special_bonus_unique_doom_7"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "25 40 55 130 205"
+        "damage"                                          "30 60 90 180 330" //OAA
         "LinkedSpecialBonus"                              "special_bonus_unique_doom_5"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
         "deniable_pct"                                    "25"
+      }
+      "04" // unused
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "scepter_cooldown"                                "100.0"
       }
     }
   }

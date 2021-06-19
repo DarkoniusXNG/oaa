@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Refresher Orb
@@ -51,7 +51,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "375"
+    "AbilityManaCost"                                     "300"
     "ItemCost"                                            "5000"
     "ItemShopTags"                                        "regen_health;regen_mana;hard_to_tag"
     "ItemQuality"                                         "rare"
@@ -67,17 +67,17 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_health_regen"                              "13 19 27 42 62"
+        "bonus_health_regen"                              "13 16 19 22 25"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "250 500 750 1000 1500"
+        "bonus_health"                                    "425 850 1275 1700 2125"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "250 500 750 1000 1500"
+        "bonus_mana"                                      "725 825 975 1175 1425"
       }
     }
   }

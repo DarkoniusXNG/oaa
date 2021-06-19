@@ -22,19 +22,20 @@
     "Ability1"                                            "brewmaster_storm_dispel_magic"
     "Ability2"                                            "brewmaster_storm_cyclone"
     "Ability3"                                            "brewmaster_storm_wind_walk"
-    "Ability4"                                            "brewmaster_cinder_brew"
+    "Ability4"                                            "generic_hidden"
     "Ability5"                                            "generic_hidden"
-    "Ability6"                                            "generic_hidden"
+    "Ability6"                                            "brewmaster_primal_split_cancel"
 
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"                                       "4" //OAA
+    "MagicalResistance"                                   "30" //OAA
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_RANGED_ATTACK"
-    "AttackDamageMin"                                     "55" //OAA
-    "AttackDamageMax"                                     "65" //OAA
+    "AttackDamageMin"                                     "70" //OAA
+    "AttackDamageMax"                                     "70" //OAA
     "AttackRate"                                          "1.5"
     "AttackAnimationPoint"                                "0.4"
     "AttackAcquisitionRange"                              "600"
@@ -55,9 +56,9 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "1900" //OAA
-    "StatusHealthRegen"                                   "2"
-    "StatusMana"                                          "750"
+    "StatusHealth"                                        "1800" //OAA
+    "StatusHealthRegen"                                   "6" //OAA
+    "StatusMana"                                          "900"
     "StatusManaRegen"                                     "1.5"
 
     // Vision

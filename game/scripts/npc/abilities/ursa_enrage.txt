@@ -26,7 +26,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "50 40 30 30 30"
+    "AbilityCooldown"                                     "50 45 40 35 30" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -45,17 +45,18 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "status_resistance"                               "50"
+        "LinkedSpecialBonus"                              "special_bonus_unique_ursa_8"
       }
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4 4.5 5 5.25 5.5"
+        "duration"                                        "4.0 4.25 4.5 4.75 5.0" //OAA
         "LinkedSpecialBonus"                              "special_bonus_unique_ursa_3"
       }
       "04"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "cooldown_scepter"                                "26 24 22 20 18"  //OAA
+        "cooldown_scepter"                                "28 26 24 22 20" //OAA
         "RequiresScepter"                                 "1"
       }
     }

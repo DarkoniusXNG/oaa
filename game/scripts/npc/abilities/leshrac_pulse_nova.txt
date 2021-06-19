@@ -26,7 +26,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70 90 110 220 330" //OAA
+    "AbilityManaCost"                                     "70 80 90 100 110" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -35,23 +35,17 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "mana_cost_per_second"                            "20 40 60 120 240"
+        "mana_cost_per_second"                            "20 40 60 100 140"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "450"
+        "radius"                                          "525"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
         "damage"                                          "100 180 260 500 740" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_leshrac_3"
-      }
-      "04" // unused
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_scepter"                                  "160 190 220 450 680"
         "LinkedSpecialBonus"                              "special_bonus_unique_leshrac_3"
       }
     }

@@ -4,8 +4,6 @@
 LinkLuaModifier( "modifier_item_preemptive_damage_reduction", "items/reflex/preemptive_damage_block.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_bonus", "modifiers/modifier_generic_bonus.lua", LUA_MODIFIER_MOTION_NONE )
 
-require('libraries/timers')
-
 ------------------------------------------------------------------------
 
 item_reduction_orb_1 = class(ItemBaseClass)
@@ -19,27 +17,14 @@ end
 function item_reduction_orb_1:OnSpellStart()
   local caster = self:GetCaster()
   local duration = self:GetSpecialValueFor("duration")
-  local damageToHealPercent = self:GetSpecialValueFor("damage_as_healing")
-  local spell = self
 
   -- for damage-to-heal
-  spell.damageTaken = 0
-  local modifier caster:AddNewModifier(caster, spell, 'modifier_item_preemptive_damage_reduction', {
-    duration = duration
-  })
-
-  Timers:CreateTimer(duration, function ()
-    local amountToHeal = spell.damageTaken * damageToHealPercent / 100
-    caster:Heal(amountToHeal, spell)
-  end)
-
-  return true
+  caster:AddNewModifier(caster, self, 'modifier_item_preemptive_damage_reduction', { duration = duration })
 end
 
 function item_reduction_orb_1:ProcsMagicStick ()
   return false
 end
-
 
 ------------------------------------------------------------------------
 
@@ -57,14 +42,46 @@ function modifier_item_preemptive_damage_reduction:IsPurgable()
   return false
 end
 
+function modifier_item_preemptive_damage_reduction:OnCreated()
+  self.damageheal = 50
+  self.damageReduction = 100
+  self.endHeal = 0
+
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.damageheal = ability:GetSpecialValueFor("damage_as_healing")
+    self.damageReduction = ability:GetSpecialValueFor("damage_reduction")
+  end
+end
+
+function modifier_item_preemptive_damage_reduction:OnRefresh()
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.damageheal = ability:GetSpecialValueFor("damage_as_healing")
+    self.damageReduction = ability:GetSpecialValueFor("damage_reduction")
+  end
+end
+
+function modifier_item_preemptive_damage_reduction:OnDestroy()
+  if IsServer() then
+    local parent = self:GetParent()
+    local ability = self:GetAbility()
+    local amountToHeal = self.endHeal
+
+    parent:Heal(amountToHeal, ability)
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, parent, amountToHeal, nil)
+  end
+end
+
 function modifier_item_preemptive_damage_reduction:DeclareFunctions()
   return {
-    MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+    --MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+    MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK,
     MODIFIER_PROPERTY_MODEL_SCALE
   }
 end
 
-function modifier_item_preemptive_damage_reduction:GetModifierIncomingDamage_Percentage (event)
+--function modifier_item_preemptive_damage_reduction:GetModifierIncomingDamage_Percentage(event)
   --[[
     % reduction!
     process_procs: true
@@ -92,13 +109,29 @@ function modifier_item_preemptive_damage_reduction:GetModifierIncomingDamage_Per
     basher_tested: false
     fail_type: 0
   ]]
-  local spell = self:GetAbility()
 
-  spell.damageTaken = spell.damageTaken + event.damage
+  --self.endHeal = self.endHeal + event.original_damage * self.damageheal / 100
 
-  return spell:GetSpecialValueFor( "damage_reduction" ) * -1
+  --return self.damageReduction * -1
+--end
+
+function modifier_item_preemptive_damage_reduction:GetModifierTotal_ConstantBlock(keys)
+  local parent = self:GetParent()
+  local damage = keys.damage
+
+  self.endHeal = self.endHeal + damage * self.damageheal / 100
+
+  local block_amount = damage * self.damageReduction / 100
+
+  SendOverheadEventMessage(nil, OVERHEAD_ALERT_BLOCK, parent, block_amount, nil)
+
+  return block_amount
 end
 
 function modifier_item_preemptive_damage_reduction:GetModifierModelScale()
-  return -30
+  return -40
+end
+
+function modifier_item_preemptive_damage_reduction:GetTexture()
+  return "custom/reduction_orb_3"
 end

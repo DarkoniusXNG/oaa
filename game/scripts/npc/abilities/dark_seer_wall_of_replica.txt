@@ -18,7 +18,7 @@
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
+    "HasScepterUpgrade"                                   "0"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 250 375 625 1250"
+    "AbilityManaCost"                                     "125 250 375 500 625"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -51,16 +51,17 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "tooltip_outgoing"                                "70 100 130 190 250" //OAA
+        "LinkedSpecialBonus"                              "special_bonus_unique_dark_seer_7"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "replica_damage_incoming"                         "100"
+        "replica_damage_incoming"                         "100 100 100 75 25"
       }
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "tooltip_replica_total_damage_incoming"           "200"
+        "tooltip_replica_total_damage_incoming"           "200 200 200 175 125"
         "CalculateSpellDamageTooltip"                     "0"
       }
       "06"
@@ -81,7 +82,8 @@
       "09"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "0.75"
+        "slow_duration"                                   "1"
+        "LinkedSpecialBonus"                              "special_bonus_unique_dark_seer_12"
       }
       "10"
       {

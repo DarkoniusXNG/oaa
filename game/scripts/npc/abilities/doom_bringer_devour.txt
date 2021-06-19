@@ -29,7 +29,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "40 50 60 70 120 170"
+    "AbilityManaCost"                                     "40 50 60 70 80 90"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -38,18 +38,23 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_gold"                                      "50 100 150 200 600 1000" //OAA
+        "bonus_gold"                                      "100 200 300 400 600 1200" //OAA
         "LinkedSpecialBonus"                              "special_bonus_unique_doom_3"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "regen"                                           "5 10 20 30 60 120" //OAA
+        "regen"                                           "0"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
         "creep_level"                                     "6" //OAA
+      }
+      "04"
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "hero_ability_steal_time"                         "99999"
       }
     }
   }

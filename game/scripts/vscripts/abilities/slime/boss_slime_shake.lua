@@ -1,5 +1,5 @@
 LinkLuaModifier("modifier_boss_slime_shake_slow", "abilities/slime/boss_slime_shake.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_boss_slime_anti_stun", "abilities/slime/boss_slime_shake.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_anti_stun_oaa", "modifiers/modifier_anti_stun_oaa.lua", LUA_MODIFIER_MOTION_NONE)
 
 ------------------------------------------------------------------------------------
 
@@ -9,6 +9,11 @@ boss_slime_shake = class(AbilityBaseClass)
 
 function boss_slime_shake:GetPlaybackRateOverride()
 	return 2.0
+end
+
+function boss_slime_shake:Precache(context)
+  PrecacheResource("particle", "particles/units/heroes/heroes_underlord/abyssal_underlord_firestorm_wave.vpcf", context)
+  PrecacheResource("particle", "particles/darkmoon_creep_warning.vpcf", context)
 end
 
 ------------------------------------------------------------------------------------
@@ -58,7 +63,7 @@ end
 
 function boss_slime_shake:OnAbilityPhaseStart()
 	local caster = self:GetCaster()
-	caster:AddNewModifier(caster, self, "modifier_boss_slime_anti_stun", {duration = self:GetCastPoint() + self:GetChannelTime()})
+	caster:AddNewModifier(caster, self, "modifier_anti_stun_oaa", {duration = self:GetCastPoint() + self:GetChannelTime()})
 	return true
 end
 
@@ -73,41 +78,53 @@ function boss_slime_shake:FireProjectile(point)
 
 	local pos = GetGroundPosition(point, caster)
 
+  -- Warning particle
+  local indicator = ParticleManager:CreateParticle("particles/darkmoon_creep_warning.vpcf", PATTACH_CUSTOMORIGIN, caster)
+  ParticleManager:SetParticleControl(indicator, 0, pos)
+  ParticleManager:SetParticleControl(indicator, 1, Vector(size, size, size))
+  ParticleManager:SetParticleControl(indicator, 15, Vector(255, 26, 26))
+
 	DebugDrawCircle(pos + Vector(0,0,32), Vector(255,0,0), 55, size, false, delay)
 
-	Timers:CreateTimer(delay, function ()
-		local wave = ParticleManager:CreateParticle("particles/units/heroes/heroes_underlord/abyssal_underlord_firestorm_wave.vpcf", PATTACH_CUSTOMORIGIN, caster)
-		ParticleManager:SetParticleControl(wave, 0, pos)
+  Timers:CreateTimer(delay, function()
+    -- Removing warning particle
+    if indicator then
+      ParticleManager:DestroyParticle(indicator, true)
+      ParticleManager:ReleaseParticleIndex(indicator)
+    end
 
-		Timers:CreateTimer(0.6, function ()
-			local units = FindUnitsInRadius(
-				caster:GetTeamNumber(),
-				pos,
-				nil,
-				size,
-				DOTA_UNIT_TARGET_TEAM_ENEMY,
-				DOTA_UNIT_TARGET_ALL,
-				DOTA_UNIT_TARGET_FLAG_NONE,
-				FIND_CLOSEST,
-				false
-			)
+    -- Create Firestorm particle
+    local wave = ParticleManager:CreateParticle("particles/units/heroes/heroes_underlord/abyssal_underlord_firestorm_wave.vpcf", PATTACH_CUSTOMORIGIN, caster)
+    ParticleManager:SetParticleControl(wave, 0, pos)
+    ParticleManager:ReleaseParticleIndex(wave)
+  end)
 
-			for _,victim in pairs(units) do
-				victim:AddNewModifier( caster, self, "modifier_boss_slime_shake_slow", { duration = self:GetSpecialValueFor("slow_duration") })
+  Timers:CreateTimer(delay + 0.6, function()
+    local units = FindUnitsInRadius(
+      caster:GetTeamNumber(),
+      pos,
+      nil,
+      size,
+      DOTA_UNIT_TARGET_TEAM_ENEMY,
+      DOTA_UNIT_TARGET_ALL,
+      DOTA_UNIT_TARGET_FLAG_NONE,
+      FIND_CLOSEST,
+      false
+    )
 
-				local damageTable = {
-					victim = victim,
-					attacker = caster,
-					damage = self:GetSpecialValueFor("damage"),
-					damage_type = self:GetAbilityDamageType(),
-					ability = self
-				}
-				ApplyDamage(damageTable)
-			end
-		end)
-	end)
+    for _, victim in pairs(units) do
+      victim:AddNewModifier( caster, self, "modifier_boss_slime_shake_slow", { duration = self:GetSpecialValueFor("slow_duration") })
 
-	return true
+      local damageTable = {
+        victim = victim,
+        attacker = caster,
+        damage = self:GetSpecialValueFor("damage"),
+        damage_type = self:GetAbilityDamageType(),
+        ability = self
+      }
+      ApplyDamage(damageTable)
+    end
+  end)
 end
 
 ------------------------------------------------------------------------------------
@@ -157,31 +174,4 @@ end
 function modifier_boss_slime_shake_slow:GetModifierMoveSpeedBonus_Percentage()
 	if not self:GetAbility() then return end
 	return self:GetAbility():GetSpecialValueFor("slow")
-end
-
-------------------------------------------------------------------------------------
-
-modifier_boss_slime_anti_stun = class(ModifierBaseClass)
-
-------------------------------------------------------------------------------------
-
-function modifier_boss_slime_anti_stun:GetPriority()
-	return MODIFIER_PRIORITY_SUPER_ULTRA
-end
-
-------------------------------------------------------------------------------------
-
-function modifier_boss_slime_anti_stun:IsPurgable()
-	return false
-end
-
-------------------------------------------------------------------------------------
-
-function modifier_boss_slime_anti_stun:CheckState()
-	local state =
-	{
-		[MODIFIER_STATE_STUNNED] = false
-	}
-
-	return state
 end

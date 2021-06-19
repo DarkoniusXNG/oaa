@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Shiva's Guard
@@ -8,7 +8,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "118"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
@@ -37,17 +37,20 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "FightRecapLevel"                                     "1"
     "AbilityTextureName"                                  "custom/shivas_guard_1"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "30"
+    "AbilityCooldown"                                     "27"
     "AbilitySharedCooldown"                               "shivas"
+    "AbilityCastRange"                                    "900"
+
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "100"
-    "ItemCost"                                            "4750"
+    "ItemCost"                                            "4850"
     "ItemShopTags"                                        "int;armor;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "shiva's guard;shivas guard;shiva"
@@ -63,12 +66,12 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "30 45 70 100 150"
+        "bonus_intellect"                                 "30 40 55 75 100"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "15 17 20 24 29"
+        "bonus_armor"                                     "10 12 15 19 24" //OAA
       }
       "03"
       {
@@ -83,12 +86,12 @@
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "blast_damage"                                    "200 300 450 700 1000"
+        "blast_damage"                                    "200 400 600 800 1000"
       }
       "06"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "blast_movement_speed"                            "-40 -45 -50 -65 -85"
+        "blast_movement_speed"                            "-40 -45 -50 -55 -60"
       }
       "07"
       {
@@ -104,6 +107,11 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "blast_speed"                                     "350"
+      }
+      "10"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "hp_regen_degen_aura"                             "25"
       }
     }
   }

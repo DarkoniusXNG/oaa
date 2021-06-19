@@ -8,9 +8,9 @@ LinkLuaModifier("modifier_elixier_sustain_trigger", "items/elixier_sustain.lua",
 
 --------------------------------------------------------------------------------
 
-item_elixier_sustain_1 = class(ItemBaseClass)
+item_elixier_sustain = class(ItemBaseClass)
 
-function item_elixier_sustain_1:OnSpellStart()
+function item_elixier_sustain:OnSpellStart()
   if IsServer() then
     local caster = self:GetCaster()
 
@@ -32,17 +32,23 @@ end
 
 --------------------------------------------------------------------------------
 
-item_elixier_sustain_2 = item_elixier_sustain_1
-item_elixier_sustain_3 = item_elixier_sustain_1
-item_elixier_sustain_4 = item_elixier_sustain_1
-
---------------------------------------------------------------------------------
-
 modifier_elixier_sustain_active = class(ModifierBaseClass)
 
-function modifier_elixier_sustain_active:IsHidden() return false end
-function modifier_elixier_sustain_active:IsPurgable() return false end
-function modifier_elixier_sustain_active:IsDebuff() return false end
+function modifier_elixier_sustain_active:IsHidden()
+  return false
+end
+
+function modifier_elixier_sustain_active:IsPurgable()
+  return false
+end
+
+function modifier_elixier_sustain_active:IsDebuff()
+  return false
+end
+
+function modifier_elixier_sustain_active:RemoveOnDeath()
+  return false
+end
 
 function modifier_elixier_sustain_active:GetEffectName()
   return "particles/generic_gameplay/rune_regeneration_sparks.vpcf"
@@ -52,13 +58,13 @@ function modifier_elixier_sustain_active:GetEffectAttachType()
   return PATTACH_ABSORIGIN_FOLLOW
 end
 
-function modifier_elixier_sustain_active:GetAbilityTextureName()
-  return "custom/elixier_sustain_1"
+function modifier_elixier_sustain_active:GetTexture()
+  return "custom/elixier_sustain_2"
 end
 
 function modifier_elixier_sustain_active:OnCreated()
   if IsServer() then
-    self.regen = self:GetAbility():GetSpecialValueFor("bonus_regen")
+    self.regen = self:GetAbility():GetSpecialValueFor("bonus_hp_regen")
     self.dmg_reduction = self:GetAbility():GetSpecialValueFor("bonus_dmg_reduction")
     self:SetStackCount(self.regen)
     self:StartIntervalThink(0.03)
@@ -68,7 +74,7 @@ end
 function modifier_elixier_sustain_active:OnIntervalThink()
   if IsServer() then
     local caster = self:GetParent()
-    if caster:IsStunned() then
+    if caster:IsStunned() or caster:IsHexed() then
       if not caster:HasModifier("modifier_elixier_sustain_trigger") then
         caster:AddNewModifier(caster, self:GetAbility(), "modifier_elixier_sustain_trigger", {dmg_reduction = self.dmg_reduction})
       end
@@ -105,8 +111,8 @@ function modifier_elixier_sustain_trigger:GetEffectAttachType()
   return PATTACH_ABSORIGIN_FOLLOW
 end
 
-function modifier_elixier_sustain_trigger:GetAbilityTextureName()
-  return "custom/elixier_sustain_1"
+function modifier_elixier_sustain_trigger:GetTexture()
+  return "custom/elixier_sustain_2"
 end
 
 function modifier_elixier_sustain_trigger:OnCreated(keys)

@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Desolator 5
@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3603"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -26,6 +26,7 @@
       "01"                                                "item_desolator_4;item_upgrade_core_4"
       "02"                                                "item_bfury_4;item_upgrade_core_4"
       "03"                                                "item_devastator_4;item_upgrade_core_4"
+      "04"                                                "item_giant_form;item_upgrade_core_4"
     }
   }
 
@@ -60,7 +61,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "50 70 100 140 200"
+        "bonus_damage"                                    "50 70 100 140 190"
       }
       "02"
       {

@@ -32,12 +32,13 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "cleave_distance"                                 "650"
+        "cleave_distance"                                 "700"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
         "great_cleave_damage"                             "30 50 70 90 110 130"
+        "LinkedSpecialBonus"                              "special_bonus_unique_sven_8"
       }
     }
   }

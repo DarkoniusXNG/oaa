@@ -16,6 +16,8 @@
 
     "MaxLevel"                                            "6"
 
+    "HasScepterUpgrade"                                   "1"
+
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "3000"
@@ -23,7 +25,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "18 17 16 15 14 14"
+    "AbilityCooldown"                                     "19 18 17 16 15 14"
     "AbilityDuration"                                     "3.11"
 
     // Damage.
@@ -77,6 +79,12 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "arrow_vision"                                    "500"
+      }
+      "09" //OAA, for picking screen tooltip
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "arrow_pierce_count"                              "0 1 1 2 3 4"
+        "LinkedSpecialBonus"                              "special_bonus_mirana_arrow_pierce"
       }
     }
   }

@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Battlefury 4
@@ -7,7 +7,7 @@
   {
     "ID"                                                  "3076"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
     "ItemRecipe"                                          "1"
@@ -33,10 +33,12 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
+
     "AbilityCastRange"                                    "350"
     "AbilityCastPoint"                                    "0.0"
     "AbilityCooldown"                                     "4.0"
     "AbilityTextureName"                                  "custom/battle_fury_4"
+
     //Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
     "MaxUpgradeLevel"                                     "5"
@@ -58,22 +60,22 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "60 80 110 150 200"
+        "bonus_damage"                                    "55 75 115 175 255"
       }
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "7.5 14.0 20.0 25.0 32.0"
+        "bonus_health_regen"                              "7.5 11 14 17 20"
       }
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "3.75 4.5 6.25 8.0 10.5"
+        "bonus_mana_regen"                                "2.75 3.0 3.5 4.25 5.25"
       }
       "04" // Cleave against heroes
       {
         "var_type"                                        "FIELD_INTEGER"
-        "cleave_damage_percent"                           "50 70 90 110 130" //OAA
+        "cleave_damage_percent"                           "70 90 110 130 150"
       }
       "05"
       {

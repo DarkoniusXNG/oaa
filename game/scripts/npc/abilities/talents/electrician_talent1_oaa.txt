@@ -1,0 +1,26 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Electrician: Energy Absorption bonus mana absorbed
+  //=================================================================================================================
+  "special_bonus_electrician_energy_absorption_mana"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                                                  "8476"
+    "BaseClass"                                           "special_bonus_undefined"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "value"                                           "10"
+      }
+    }
+  }
+}

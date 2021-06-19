@@ -22,7 +22,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "100.0" //OAA
+    "AbilityCooldown"                                     "120 110 100 100 100" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -41,11 +41,12 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "duration"                                        "18.0"
+        "LinkedSpecialBonus"                              "special_bonus_unique_mirana_5"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "15"
+        "bonus_movement_speed"                            "9 12 15 18 21"
       }
     }
   }

@@ -42,9 +42,9 @@ function SparkSelection (table, key, args) {
   teamData.cleave = teamData.cleave || 0;
 
   if (!args.hasSpark[playerID]) {
-    $.Msg('Forcing picking this spark');
-    $('#SparkSelection').AddClass('show');
-    forcedPickSpark = true;
+    // $.Msg('Forcing picking this spark');
+    // $('#SparkSelection').AddClass('show');
+    // forcedPickSpark = true;
   }
 
   if (currentSpark) {
@@ -108,7 +108,7 @@ function SparkFinished () {
 }
 
 function OpenSparkSelection () {
-  $('#SparkSelection').AddClass('show');
+  $('#SparkSelection').ToggleClass('show');
   currentSpark = null;
   forcedPickSpark = false;
   ResetSparkDisplay();

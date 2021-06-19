@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Power Treads 2
@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3011"                            // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -40,12 +40,13 @@
     "ID"                                                  "3016"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/farming/greater_power_treads.lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    //"AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityTextureName"                                  "custom/greater_power_treads_2"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "5975"
+    "ItemCost"                                            "5925"
     "ItemShopTags"                                        "attack_speed;move_speed;int;agi;str"
     "ItemQuality"                                         "common"
     "ItemAliases"                                         "greater power treads 2;power treads 2;treads 2"
@@ -61,37 +62,42 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "20 25 30 35"
+        "bonus_movement_speed"                            "50 55 60 65"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_stat"                                      "20 30 45 65"
+        "primary_attribute_bonus"                         "25 40 55 70"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "30 40 50 60"
+        "bonus_all_stats"                                 "10 15 20 25"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "10 15 25 40"
+        "bonus_attack_speed"                              "30 35 40 45"
       }
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "all_stats"                                       "0"
+        "bonus_damage"                                    "10 20 40 70"
       }
       "06"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_magic_resistance"                          "10 12 14 16"
+        "bonus_magic_resistance"                          "6 7 8 9"
       }
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_spell_amp"                                 "9 12 15 18"
+        "bonus_spell_amp"                                 "7 8 9 10"
+      }
+      "08"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "primary_attribute_multiplier"                    "2"
       }
     }
   }

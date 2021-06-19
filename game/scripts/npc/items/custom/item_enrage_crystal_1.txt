@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: postactive Reflex
@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3562"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
 
     // Item Info
@@ -51,7 +51,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "100"
-    "ItemCost"                                            "8975"
+    "ItemCost"                                            "9000"
     "ItemShopTags"                                        "str;damage;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "enrage crystal"
@@ -62,15 +62,20 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilitySpecial"
     {
-      "01"
+      "01" // better than BKB 3-5
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "30 40 55"
+        "bonus_strength"                                  "40 60 85"
       }
-      "02"
+      "02" // better than BKB 3-5
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "72 96 120"
+        "bonus_damage"                                    "60 90 130"
+      }
+      "03"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_status_resist"                             "20 22 24"
       }
     }
 

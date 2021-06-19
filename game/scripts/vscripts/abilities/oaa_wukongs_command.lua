@@ -6,6 +6,8 @@ LinkLuaModifier("modifier_monkey_clone_oaa", "abilities/oaa_wukongs_command", LU
 LinkLuaModifier("modifier_monkey_clone_oaa_status_effect", "abilities/oaa_wukongs_command", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_monkey_clone_oaa_idle_effect", "abilities/oaa_wukongs_command", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_monkey_clone_oaa_hidden", "abilities/oaa_wukongs_command", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_special_bonus_unique_monkey_king_armor", "abilities/oaa_wukongs_command.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_special_bonus_unique_monkey_king_ring", "abilities/oaa_wukongs_command.lua", LUA_MODIFIER_MOTION_NONE)
 
 if IsServer() then
   -- For Rubick OnUpgrade never happens, that's why OnStolen is needed but then it will lag
@@ -46,7 +48,7 @@ if IsServer() then
     -- Do this only if Wukong's command is not active to prevent lag (Wukong's Command is active only if caster has a buff)
     if self.clones and (not caster:HasModifier("modifier_wukongs_command_oaa_buff")) and caster:IsRealHero() then
       local max_number_of_rings = 3
-      local max_number_of_monkeys_per_ring = math.max(9, self:GetSpecialValueFor("num_second_soldiers"))
+      local max_number_of_monkeys_per_ring = math.max(10, self:GetSpecialValueFor("num_second_soldiers_scepter"))
       -- Update items of the clones
       for i= 1, max_number_of_rings do
         self:CopyCasterItems(self.clones[i]["top"], caster)
@@ -57,9 +59,19 @@ if IsServer() then
     end
   end
   ]]
-else
-  -- AbilityKV is a table on the client
-  require("libraries/talents/talents_client")
+  function monkey_king_wukongs_command_oaa:OnHeroCalculateStatBonus()
+    local caster = self:GetCaster()
+    --print("[MONKEY KING WUKONGS COMMAND] OnHeroCalculateStatBonus on Server")
+    -- Check for talent that increases radius
+    local talent = caster:FindAbilityByName("special_bonus_unique_monkey_king_6")
+    if talent and talent:GetLevel() > 0 then
+      if not caster:HasModifier("modifier_special_bonus_unique_monkey_king_ring") then
+        caster:AddNewModifier(caster, talent, "modifier_special_bonus_unique_monkey_king_ring", {})
+      end
+    else
+      caster:RemoveModifierByName("modifier_special_bonus_unique_monkey_king_ring")
+    end
+  end
 end
 
 --[[
@@ -198,47 +210,39 @@ function monkey_king_wukongs_command_oaa:OnAbilityPhaseInterrupted()
   end
 end
 
+-- GetAOERadius is not called on a Server at all?
 function monkey_king_wukongs_command_oaa:GetAOERadius()
   local caster = self:GetCaster()
   local radius = self:GetSpecialValueFor("second_radius")
-  local talent_radius = 0 -- FindTalentValue from talents library doesnt work well with OAA Aghanims
-  -- HasTalent(...) will return true on the server or client only when OnPlayerLearnedAbility event happens, this event doesnt happen for talents gained with aghs
-  -- HasModifier(...) will return true on the server or client only if the talent is leveled up with aghs
-  if caster:HasTalent("special_bonus_unique_monkey_king_6") or caster:HasModifier("modifier_special_bonus_unique_monkey_king_ring") then
-    if IsServer() then
-      talent_radius = caster:FindAbilityByName("special_bonus_unique_monkey_king_6"):GetSpecialValueFor("value")
-    else
-      if AbilityKV["special_bonus_unique_monkey_king_6"] then
-        local special = AbilityKV["special_bonus_unique_monkey_king_6"]["AbilitySpecial"]
-        for l,m in pairs(special) do
-          if m["value"] then
-            talent_radius = m["value"]
-          end
-        end
-      end
-    end
+  local clone_attack_range = 300
+  local talent_radius = 0
+  if caster:HasModifier("modifier_special_bonus_unique_monkey_king_ring") and caster.special_bonus_unique_monkey_king_extra_ring then
+    talent_radius = caster.special_bonus_unique_monkey_king_extra_ring
   end
-  return math.max(talent_radius, radius)
+
+  return math.max(talent_radius + clone_attack_range, radius + clone_attack_range)
 end
 
 function monkey_king_wukongs_command_oaa:OnSpellStart()
   local caster = self:GetCaster()
   local center = self:GetCursorPosition()
+  local clone_attack_range = 300
 
   local first_ring_radius = self:GetSpecialValueFor("first_radius")
   local second_ring_radius = self:GetSpecialValueFor("second_radius")
   local third_ring_radius = 0
-  self.active_radius = second_ring_radius
+  self.active_radius = second_ring_radius + clone_attack_range
 
   -- How many monkeys on each ring
   local first_ring = self:GetSpecialValueFor("num_first_soldiers")
   local second_ring = self:GetSpecialValueFor("num_second_soldiers")
   local third_ring = 0
 
-  if caster:HasTalent("special_bonus_unique_monkey_king_6") then
-    third_ring_radius = caster:FindTalentValue("special_bonus_unique_monkey_king_6", "value")
-    third_ring = caster:FindTalentValue("special_bonus_unique_monkey_king_6", "value2")
-    self.active_radius = third_ring_radius
+  local talent = caster:FindAbilityByName("special_bonus_unique_monkey_king_6")
+  if talent and talent:GetLevel() > 0 then
+    third_ring_radius = talent:GetSpecialValueFor("value")
+    third_ring = talent:GetSpecialValueFor("value2")
+    self.active_radius = third_ring_radius + clone_attack_range
     if caster:HasScepter() then
       third_ring = self:GetSpecialValueFor("num_third_soldiers_scepter")
     end
@@ -290,15 +294,22 @@ function monkey_king_wukongs_command_oaa:OnSpellStart()
     Timers:CreateTimer(2*spawn_interval, function()
       self:CreateMonkeyRing(unit_name, third_ring, caster, center, third_ring_radius, 3, base_damage_percent)
     end)
+
+    -- Remove monkeys if they were created while caster was dead or out of the circle
+    Timers:CreateTimer(2*spawn_interval+0.01, function()
+      if not caster:IsAlive() or not caster:HasModifier("modifier_wukongs_command_oaa_buff") then
+        self:RemoveMonkeys(caster)
+      end
+    end)
   end
 end
 
 function monkey_king_wukongs_command_oaa:CreateMonkeyRing(unit_name, number, caster, center, radius, ringNumber, damage_pct)
-  if number == 0 or radius == 0 then
+  if number == 0 or radius <= 0 then
     return
   end
 
-  if not caster:HasModifier("modifier_wukongs_command_oaa_buff") and ringNumber ~= 1 then
+  if ringNumber ~= 1 and ((not caster:HasModifier("modifier_wukongs_command_oaa_buff")) or (not caster:IsAlive())) then
     return
   end
 
@@ -347,14 +358,14 @@ function monkey_king_wukongs_command_oaa:RemoveMonkeys(caster)
   local unit_name = "npc_dota_monkey_clone_oaa"
   -- Find all monkeys belonging to the caster on the map and hide them
   local allied_units = FindUnitsInRadius(caster:GetTeamNumber(), Vector(0, 0, 0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, bit.bor(DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD), FIND_ANY_ORDER, false)
-  for _,unit in pairs(allied_units) do
+  for _, unit in pairs(allied_units) do
     if unit:GetUnitName() == unit_name then
       if IsServer() then
         local handle = ParticleManager:CreateParticle("particles/units/heroes/hero_monkey_king/monkey_king_fur_army_destroy.vpcf", PATTACH_ABSORIGIN, caster)
         ParticleManager:SetParticleControl(handle, 0, unit:GetAbsOrigin())
         -- for some weid reason calling DestroyParticle(... , false) do destroy the particle immediatly
         -- thanks volvo
-        Timers:CreateTimer(3,function()
+        Timers:CreateTimer(3, function()
           ParticleManager:DestroyParticle(handle, false)
           ParticleManager:ReleaseParticleIndex(handle)
         end)
@@ -494,6 +505,30 @@ function modifier_wukongs_command_oaa_buff:IsPurgable()
   return false
 end
 
+function modifier_wukongs_command_oaa_buff:OnCreated()
+  local caster = self:GetCaster()
+  local armor = self:GetAbility():GetSpecialValueFor("bonus_armor")
+  if IsServer() then
+    local talent = caster:FindAbilityByName("special_bonus_unique_monkey_king_4")
+    if talent and talent:GetLevel() > 0 then
+      armor = armor + talent:GetSpecialValueFor("value")
+      caster:AddNewModifier(caster, talent, "modifier_special_bonus_unique_monkey_king_armor", {})
+    else
+      caster:RemoveModifierByName("modifier_special_bonus_unique_monkey_king_armor")
+    end
+  else
+    if caster:HasModifier("modifier_special_bonus_unique_monkey_king_armor") and caster.special_bonus_unique_monkey_king_armor then
+      armor = armor + caster.special_bonus_unique_monkey_king_armor
+    end
+  end
+
+  self.armor = armor
+end
+
+function modifier_wukongs_command_oaa_buff:OnRefresh()
+  self:OnCreated()
+end
+
 function modifier_wukongs_command_oaa_buff:DeclareFunctions()
   local funcs = {
     MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
@@ -502,31 +537,7 @@ function modifier_wukongs_command_oaa_buff:DeclareFunctions()
 end
 
 function modifier_wukongs_command_oaa_buff:GetModifierPhysicalArmorBonus()
-  local caster = self:GetCaster()
-  local ability = self:GetAbility()
-  local bonus_armor = ability:GetSpecialValueFor("bonus_armor")
-
-  -- HasTalent(...) will return true on the server or client only when OnPlayerLearnedAbility event happens, this event never happens for talents gained with aghs
-  -- HasModifier(...) will return true on the server or client only if the talent is leveled up with aghs
-  if caster:HasTalent("special_bonus_unique_monkey_king_4") or caster:HasModifier("modifier_special_bonus_unique_monkey_king_armor") then
-	-- Because functions from the talents library dont work well with OAA Aghanim's scepter -> we reuse the code from talents library for the client that will work every time
-	local talent_bonus
-	if IsServer() then
-	  talent_bonus = caster:FindAbilityByName("special_bonus_unique_monkey_king_4"):GetSpecialValueFor("value")
-	else
-	  if AbilityKV["special_bonus_unique_monkey_king_4"] then
-      local special = AbilityKV["special_bonus_unique_monkey_king_4"]["AbilitySpecial"]
-      for l,m in pairs(special) do
-        if m["value"] then
-          talent_bonus = m["value"]
-        end
-      end
-    end
-	end
-  bonus_armor = bonus_armor + talent_bonus
-  end
-
-  return bonus_armor
+  return self.armor
 end
 
 ---------------------------------------------------------------------------------------------------
@@ -795,10 +806,10 @@ function modifier_monkey_clone_oaa_hidden:CheckState()
   return state
 end
 
--- Empty modifiers used for talents that improve Wukong's command (bonus armor talent and bonus ring talent)
-if modifier_special_bonus_unique_monkey_king_armor == nil then
-  modifier_special_bonus_unique_monkey_king_armor = class({})
-end
+---------------------------------------------------------------------------------------------------
+
+-- Modifier on caster used for talent that improve Wukong's Command bonus armor
+modifier_special_bonus_unique_monkey_king_armor = class(ModifierBaseClass)
 
 function modifier_special_bonus_unique_monkey_king_armor:IsHidden()
   return true
@@ -816,10 +827,49 @@ function modifier_special_bonus_unique_monkey_king_armor:RemoveOnDeath()
   return false
 end
 
-if modifier_special_bonus_unique_monkey_king_ring == nil then
-  modifier_special_bonus_unique_monkey_king_ring = class(modifier_special_bonus_unique_monkey_king_armor)
+function modifier_special_bonus_unique_monkey_king_armor:OnCreated()
+  if not IsServer() then
+    local parent = self:GetParent()
+    local talent = self:GetAbility()
+    parent.special_bonus_unique_monkey_king_armor = talent:GetSpecialValueFor("value")
+  end
 end
+
+function modifier_special_bonus_unique_monkey_king_armor:OnDestroy()
+  local parent = self:GetParent()
+  if parent and parent.special_bonus_unique_monkey_king_armor then
+    parent.special_bonus_unique_monkey_king_armor = nil
+  end
+end
+
+---------------------------------------------------------------------------------------------------
+
+-- Modifier on caster used for talent that gives 1 extra Wukong's Command ring
+modifier_special_bonus_unique_monkey_king_ring = class(ModifierBaseClass)
 
 function modifier_special_bonus_unique_monkey_king_ring:IsHidden()
   return true
+end
+
+function modifier_special_bonus_unique_monkey_king_ring:IsPurgable()
+  return false
+end
+
+function modifier_special_bonus_unique_monkey_king_ring:RemoveOnDeath()
+  return false
+end
+
+function modifier_special_bonus_unique_monkey_king_ring:OnCreated()
+  if not IsServer() then
+    local parent = self:GetParent()
+    local talent = self:GetAbility()
+    parent.special_bonus_unique_monkey_king_extra_ring = talent:GetSpecialValueFor("value")
+  end
+end
+
+function modifier_special_bonus_unique_monkey_king_ring:OnDestroy()
+  local parent = self:GetParent()
+  if parent and parent.special_bonus_unique_monkey_king_extra_ring then
+    parent.special_bonus_unique_monkey_king_extra_ring = nil
+  end
 end

@@ -27,7 +27,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "35 40 45 50 60 75"
+    "AbilityManaCost"                                     "35 40 45 50 55 60"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -36,12 +36,18 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "90 115 140 165 190 215"  //OAA
+        "bonus_attack_speed"                              "120 130 140 150 160 170"  //OAA
       }
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
         "duration"                                        "2.0"
+      }
+      "03"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "abilitycastrange"                                ""
+        "LinkedSpecialBonus"                              "special_bonus_unique_phantom_assassin_6"
       }
     }
   }

@@ -10,7 +10,7 @@
 
     "MaxLevel"                                            "5"
 
-    "HasScepterUpgrade"                                   "1"
+    "HasScepterUpgrade"                                   "0"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60"  //OAA
+    "AbilityCooldown"                                     "90"  //OAA, for Picking Screen
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -28,15 +28,15 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilitySpecial"
     {
-      "01"  // level 5 familiar never spawns
+      "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "familiar_hp"                                     "500 600 700 1450 2200"
+        "familiar_hp"                                     "500 700 900 1500 2500" //OAA, for Picking Screen
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "familiar_armor"                                  "0 1 2 7 12"
+        "familiar_armor"                                  "1 2 3 6 9" //OAA, for Picking Screen
       }
       "03"
       {
@@ -47,13 +47,13 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "familiar_attack_damage"                          "20 40 60 140 230"
+        "familiar_attack_damage"                          "30 60 90 180 330" //OAA, for Picking Screen
         "CalculateSpellDamageTooltip"                     "0"
       }
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "tooltip_scepter_total_familiars"                 "3"
+        "tooltip_scepter_total_familiars"                 "2" //OAA, for Picking Screen
         "LinkedSpecialBonus"                              "special_bonus_unique_visage_6"
         "RequiresScepter"                                 "1"
       }

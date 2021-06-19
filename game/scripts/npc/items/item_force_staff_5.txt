@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Force Staff 5
@@ -24,7 +24,7 @@
     "ItemRequirements"
     {
       "01"                                                "item_force_staff_4;item_upgrade_core_4"
-      "02"                                                "item_pull_staff_3;item_upgrade_core_4"
+      "02"                                                "item_pull_staff_4;item_upgrade_core_4"
     }
   }
 
@@ -53,7 +53,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"       "100"
-    "ItemCost"            "35225"
+    "ItemCost"            "35200"
     "ItemShopTags"          "int;damage;attack_speed;hard_to_tag"
     "ItemQuality"         "rare"
     "ItemAliases"         "fs 5;force staff 5;force 5"
@@ -68,12 +68,12 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "10 25 40 55 70"
+        "bonus_intellect"                                 "10 25 45 70 100"
       }
       "02"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "2.5 10 20 30 40"
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_health"                                    "150 400 900 1650 2650"
       }
       "03"
       {

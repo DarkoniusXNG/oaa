@@ -27,6 +27,10 @@ function HeroKillXP:HeroDeathHandler(keys)
     return
   end
 
+  if Duels:IsActive() and Duels.allowExperienceGain ~= 1 then
+    return
+  end
+
   local killerEntity = keys.killer
   local killedHero = keys.killed
   -- killer is sometimes nil for some reason
@@ -55,7 +59,11 @@ function HeroKillXP:HeroDeathHandler(keys)
     return
   end
 
-  if killedHero:IsReincarnating() then
+  if killedHero:IsClone() then
+    killedHero = killedHero:GetCloneSource()
+  end
+
+  if killedHero:IsReincarnating() or killedHero:IsTempestDouble() then
     return
   end
 
@@ -72,13 +80,16 @@ function HeroKillXP:HeroDeathHandler(keys)
   local killerHero = PlayerResource:GetSelectedHeroEntity(killerPlayerID)
   local killedHeroXP = killedHero:GetCurrentXP()
   local killedHeroStreak = killedHero:GetStreak()
+  local killedHeroLevel = killedHero:GetLevel()
+
   local killedHeroStreakXP = 0
 
   if killedHeroStreak > 2 then
-    killedHeroStreakXP = HERO_XP_BOUNTY_STREAK_BASE + HERO_XP_BOUNTY_STREAK_INCREASE*(killedHeroStreak-3)
+    --killedHeroStreakXP = HERO_XP_BOUNTY_STREAK_BASE + HERO_XP_BOUNTY_STREAK_INCREASE * (killedHeroStreak - 3)
+    killedHeroStreakXP = killedHeroStreak * killedHeroLevel * HERO_XP_BOUNTY_STREAK_BASE / 3
   end
 
-  if killedHeroStreak > 10 then
+  if killedHeroStreakXP > HERO_XP_BOUNTY_STREAK_MAX then
     killedHeroStreakXP = HERO_XP_BOUNTY_STREAK_MAX
   end
 

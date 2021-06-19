@@ -13,6 +13,7 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -28,7 +29,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70 80 90 100 150 200"
+    "AbilityManaCost"                                     "70 80 90 100 110 120"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -48,6 +49,8 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "bonus_movement_speed"                            "-18 -24 -30 -36 -42 -48"
+        "LinkedSpecialBonus"                              "special_bonus_unique_chen_8"
+        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_SUBTRACT"
       }
       "04"
       {

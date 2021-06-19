@@ -7,10 +7,6 @@ function boss_resistance:GetIntrinsicModifierName()
   return "modifier_boss_resistance"
 end
 
-function boss_resistance:GetBehavior ()
-  return DOTA_ABILITY_BEHAVIOR_PASSIVE
-end
-
 -----------------------------------------------------------------------------------------
 
 modifier_boss_resistance = class(ModifierBaseClass)
@@ -26,19 +22,35 @@ end
 function modifier_boss_resistance:DeclareFunctions()
   return {
     MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK,
-    MODIFIER_EVENT_ON_TAKEDAMAGE
+    MODIFIER_EVENT_ON_TAKEDAMAGE,
+    MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+    MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
   }
 end
 
 function modifier_boss_resistance:GetModifierTotal_ConstantBlock(keys)
+  local parent = self:GetParent()
   local damageReduction = self:GetAbility():GetSpecialValueFor("percent_damage_reduce")
-  if keys.attacker == self:GetParent() then -- boss degen nonsense
+
+  if keys.attacker == parent then -- boss degen nonsense
     return 0
   end
+
+  local inflictor = keys.inflictor
+  if IsServer() then
+    if parent:CheckForAccidentalDamage(inflictor) then
+      -- Block all damage if it was accidental
+      return keys.damage
+    end
+  end
+
   return keys.damage * damageReduction / 100
 end
 
 function modifier_boss_resistance:OnTakeDamage(keys)
+  if not IsServer() then
+    return
+  end
   local parent = self:GetParent()
   if not keys.attacker or not keys.unit or keys.unit ~= parent then
     return
@@ -48,8 +60,32 @@ function modifier_boss_resistance:OnTakeDamage(keys)
   keys.attacker:AddNewModifier(parent, self:GetAbility(), "modifier_boss_truesight", {duration = revealDuration})
 end
 
--- function modifier_boss_resistance:GetModifierIncomingDamage_Percentage(keys)
---   --[[
+if IsServer() then
+  function modifier_boss_resistance:GetModifierPhysicalArmorBonus()
+    local parent = self:GetParent()
+    if self.checkArmor then
+      return 0
+    else
+      self.checkArmor = true
+      local base_armor = parent:GetPhysicalArmorBaseValue()
+      local current_armor = parent:GetPhysicalArmorValue(false)
+      self.checkArmor = false
+      local min_armor = base_armor - 25
+      if current_armor < min_armor then
+        return min_armor - current_armor
+      end
+    end
+    return 0
+  end
+end
+
+function modifier_boss_resistance:GetModifierIncomingDamage_Percentage(keys)
+  --print('--')
+  --for k, v in pairs(keys) do
+    --print(k .. ': ' .. tostring(v))
+  --end
+  --print('--')
+
 -- [   VScript              ]: process_procs: true
 -- [   VScript              ]: order_type: 0
 -- [   VScript              ]: issuer_player_index: 1982289334
@@ -76,34 +112,130 @@ end
 -- [   VScript              ]: basher_tested: false
 -- [   VScript              ]: target: table: 0x00524320
 
---   local percentBaseSpells = {
---     death_prophet_spirit_siphon = true,
---     life_stealer_feast = true
---   }
+-- [   VScript              ]: new_pos: Vector 00000000043FFC08 [0.000000 -28480297238528.000000 0.000000]
+-- [   VScript              ]: octarine_tested: false
+-- [   VScript              ]: stout_tested: false
+-- [   VScript              ]: locket_amp_applied: false
+-- [   VScript              ]: sange_amp_applied: false
+-- [   VScript              ]: mkb_tested: false
 
---   print('--')
---   for k,v in pairs(keys) do
---     print(k .. ': ' .. tostring(v))
---   end
---   print('--')
+  local percentDamageSpells = {
+    bloodseeker_bloodrage = true,           -- doesn't work on vanilla Roshan
+    death_prophet_spirit_siphon = true,     -- doesn't work on vanilla Roshan
+    doom_bringer_infernal_blade = true,     -- doesn't work on vanilla Roshan
+    huskar_life_break = true,               -- doesn't work on vanilla Roshan
+    jakiro_liquid_ice = false,
+    necrolyte_reapers_scythe = true,        -- doesn't work on vanilla Roshan
+    phantom_assassin_fan_of_knives = false,
+    tinker_shrink_ray = true,               -- doesn't work on vanilla Roshan
+    winter_wyvern_arctic_burn = true        -- doesn't work on vanilla Roshan
+  }
 
---   local hero = keys.attacker
+  local damageReduction = self:GetAbility():GetSpecialValueFor("percent_damage_reduce")
+  local attacker = keys.attacker
+  local inflictor = keys.inflictor
 
---   if hero and hero:IsRealHero and hero:IsRealHero() then
---     hero:
---   end
---   if not keys.inflictor then
---     return 0
---   end
+  if not inflictor then
+    -- Damage was not done with an ability
+    if IsServer() then
+      -- Lone Druid Bear Demolish bonus damage
+      if attacker:HasModifier("modifier_lone_druid_spirit_bear_demolish") then
+        local ability = attacker:FindAbilityByName("lone_druid_spirit_bear_demolish")
+        if ability then
+          local damage_increase_pct = ability:GetSpecialValueFor("bonus_building_damage")
+          if damage_increase_pct and damage_increase_pct > 0 then
+            return damage_increase_pct
+          end
+        end
+      end
 
---   local name = keys.inflictor:GetAbilityName()
---   if percentBaseSpells[name] then
---     print('Reducing incoming damage')
---     return 0 - self:GetAbility():GetSpecialValueFor("percent_damage_reduce")
---   end
--- ]]
---   local damageReduction = self:GetAbility():GetSpecialValueFor("percent_damage_reduce")
---   local parent = self:GetParent()
+      -- Tiny Tree Grab bonus damage
+      if attacker:HasModifier("modifier_tiny_tree_grab") then
+        local ability = attacker:FindAbilityByName("tiny_tree_grab")
+        if ability then
+          local damage_increase_pct = ability:GetSpecialValueFor("bonus_damage_buildings")
+          if damage_increase_pct and damage_increase_pct > 0 then
+            return damage_increase_pct
+          end
+        end
+      end
+
+      -- Brewmaster Earth Split Demolish
+      if attacker:HasModifier("modifier_brewmaster_earth_pulverize") then
+        local ability = attacker:FindAbilityByName("brewmaster_earth_pulverize")
+        if ability then
+          local damage_increase_pct = ability:GetSpecialValueFor("bonus_building_damage")
+          if damage_increase_pct and damage_increase_pct > 0 then
+            return damage_increase_pct
+          end
+        end
+      end
+
+      -- Greater Travels Boots affecting attack damage
+      if attacker:HasModifier("modifier_item_greater_travel_boots_unique_passive") then
+        local modifier = attacker:FindModifierByName("modifier_item_greater_travel_boots_unique_passive")
+        if modifier then
+          local ability = modifier:GetAbility()
+          if ability then
+            local damage_increase_pct = ability:GetSpecialValueFor("bonus_boss_damage")
+            if damage_increase_pct and damage_increase_pct > 0 then
+              return damage_increase_pct
+            end
+          end
+        end
+      end
+    end
+    return 0
+  end
+
+  -- We will not overcomplicate the interaction with damage amp from Veil:
+  -- if parent has Veil debuff, set damage reduction to 100%
+  local parent = self:GetParent()
+  local hasVeilDebuff = parent:HasModifier("modifier_item_veil_of_discord_debuff")
+
+  local name = inflictor:GetAbilityName()
+  if percentDamageSpells[name] then
+    if hasVeilDebuff then
+      return -100
+    else
+      return 0 - damageReduction
+    end
+  end
+
+   -- Special case for tinker with aghanim shard
+  if name == "tinker_laser" and attacker:HasShardOAA() then
+    if hasVeilDebuff then
+      return -100
+    else
+      return 0 - damageReduction
+    end
+  end
+
+  -- Leshrac Diabolic Edict bonus damage
+  if name == "leshrac_diabolic_edict" and IsServer() then
+    local ability = attacker:FindAbilityByName(name)
+    if ability then
+      local damage_increase_pct = ability:GetSpecialValueFor("tower_bonus")
+      if damage_increase_pct and damage_increase_pct > 0 then
+        return damage_increase_pct
+      end
+    end
+  end
+
+  -- Greater Travels Boots affecting spell damage
+  if attacker:HasModifier("modifier_item_greater_travel_boots_unique_passive") and IsServer() then
+    local modifier = attacker:FindModifierByName("modifier_item_greater_travel_boots_unique_passive")
+    if modifier then
+      local ability = modifier:GetAbility()
+      if ability then
+        local damage_increase_pct = ability:GetSpecialValueFor("bonus_boss_damage")
+        if damage_increase_pct and damage_increase_pct > 0 then
+          return damage_increase_pct
+        end
+      end
+    end
+  end
+
 --   -- List of modifiers with all damage amplification that need to stack multiplicatively with Boss Resistance
 --   local damageAmpModifiers = {
 --     "modifier_bloodseeker_bloodrage",
@@ -136,29 +268,41 @@ end
 
 --   local damageAmpReduction = sum(map(CalculateMultiplicativeAmpStack, zip(damageAmpModifiers, ampAbilitySpecialKeys)))
 --   return 0 - damageReduction + damageAmpReduction
--- end
+  return 0
+end
 
 -----------------------------------------------------------------------------------------
 
 modifier_boss_truesight = class(ModifierBaseClass)
 
 function modifier_boss_truesight:OnCreated()
-  self.maxRevealDist = self:GetAbility():GetSpecialValueFor("reveal_max_distance")
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.maxRevealDist = ability:GetSpecialValueFor("reveal_max_distance")
+  else
+    self.maxRevealDist = 1500
+  end
 end
+
+modifier_boss_truesight.OnRefresh = modifier_boss_truesight.OnCreated
 
 if IsServer() then
   function modifier_boss_truesight:CheckState()
     local parent = self:GetParent()
     local caster = self:GetCaster()
 
+    if not caster or caster:IsNull() or parent:HasModifier("modifier_slark_shadow_dance") then
+      return {}
+    end
+
     -- Only reveal when within reveal_max_distance of boss
     if (parent:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D() <= self.maxRevealDist then
       return {
         [MODIFIER_STATE_INVISIBLE] = false
       }
-    else
-      return {}
     end
+
+    return {}
   end
 end
 
@@ -177,7 +321,20 @@ end
 function modifier_boss_truesight:IsHidden()
   local parent = self:GetParent()
   local caster = self:GetCaster()
+
+  if not caster or caster:IsNull() or parent:HasModifier("modifier_slark_shadow_dance") then
+    return true
+  end
+
   return (parent:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D() > self.maxRevealDist
+end
+
+function modifier_boss_truesight:GetEffectName()
+  return "particles/items2_fx/true_sight_debuff.vpcf"
+end
+
+function modifier_boss_truesight:GetEffectAttachType()
+  return PATTACH_OVERHEAD_FOLLOW
 end
 
 function modifier_boss_truesight:GetPriority()

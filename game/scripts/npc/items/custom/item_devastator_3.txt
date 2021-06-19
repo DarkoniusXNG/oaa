@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Devastator
@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "4054"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
 
     // Item Info
@@ -47,11 +47,12 @@
 
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "AbilityTextureName"                                  "custom/devastator_3"
 
     "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0"
-    "AbilityCooldown"                                     "10"
+    "AbilityCooldown"                                     "7"
     "AbilityManaCost"                                     "75"
 
     // Stats
@@ -67,6 +68,10 @@
     "ItemAliases"                                         "devastator;devastator 3;"
     "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
+    "precache"
+    {
+      "particle"                                          "particles/items/devastator/devastator_active.vpcf"
+    }
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -83,7 +88,7 @@
         "var_type"                                        "FIELD_INTEGER"
         "corruption_armor"                                "-3 -5 -8 -12 -17"
       }
-      "03"
+      "03" // like Desolator
       {
         "var_type"                                        "FIELD_FLOAT"
         "corruption_duration"                             "7.0"
@@ -93,48 +98,45 @@
         "var_type"                                        "FIELD_INTEGER"
         "devastator_speed"                                "1200"
       }
-
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "devastator_width_initial"                        "275"
+        "devastator_width_initial"                        "200"
       }
       "06"
       {
         "var_type"                                        "FIELD_INTEGER"
         "devastator_width_end"                            "200"
       }
-
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "devastator_distance"                             "600"
+        "devastator_distance"                             "800"
       }
       "08"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "devastator_damage"                               "100 200 300 400 500"
-        "CalculateSpellDamageTooltip"                     "0"
+        "devastator_damage"                               "100 200 400 700 1000"
       }
-      "09"
+      "09" // like Solar Crest
       {
         "var_type"                                        "FIELD_INTEGER"
-        "devastator_movespeed_reduction"                  "-20"
+        "devastator_movespeed_reduction"                  "-10 -20 -30 -40 -50"
       }
-      "10"
+      "10" // like Desolator
       {
         "var_type"                                        "FIELD_FLOAT"
-        "devastator_movespeed_reduction_duration"         "5.0"
+        "devastator_movespeed_reduction_duration"         "7.0"
       }
-      "11" // better than desolator, similar to solar crest
+      "11" // better than desolator
       {
         "var_type"                                        "FIELD_INTEGER"
         "devastator_armor_reduction"                      "-7 -10 -14 -19 -25"
       }
-      "12"
+      "12" // like Desolator
       {
         "var_type"                                        "FIELD_FLOAT"
-        "devastator_armor_reduction_duration"             "5.0"
+        "devastator_armor_reduction_duration"             "7.0"
       }
     }
   }

@@ -31,7 +31,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 175 225 325 725"
+    "AbilityManaCost"                                     "125 175 225 325 425"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
@@ -45,11 +45,14 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "radius"                                          "500"
+        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_8"
       }
-      "02"
+      "02" // 1 second <=> 4 pulses
       {
         "var_type"                                        "FIELD_INTEGER"
-        "pulses"                                          "20"
+        "pulses"                                          "20 22 24 26 28" //OAA
+        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_7"
+        "LinkedSpecialBonusField"                         "value2"
       }
       "03"
       {
@@ -59,7 +62,8 @@
       "04"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5.0"
+        "duration"                                        "5.0 5.5 6.0 6.5 7.0" //OAA
+        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_7"
       }
     }
   }

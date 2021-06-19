@@ -1,6 +1,6 @@
 "DOTAAbilities"
 {
-"winter_wyvern_winters_curse"
+  "winter_wyvern_winters_curse"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -12,16 +12,17 @@
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "FightRecapLevel"                                     "2"
+
     "MaxLevel"                                            "5"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
-    "AbilityCastPoint"                                    "0.3 0.3 0.3 0.3"
+    "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "80"
+    "AbilityCooldown"                                     "90 85 80 75 70"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,12 +35,12 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "500"
+        "radius"                                          "525"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "100 100 100 100 80"
+        "damage_reduction"                                "100 100 100 90 80"
       }
       "03"
       {
@@ -49,13 +50,13 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "55 60 65 70 75" //OAA
+        "bonus_attack_speed"                              "65 70 75 80 85" //OAA
       }
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0 4.75 5.5 5.5 5.5"
-        "LinkedSpecialBonus"  "special_bonus_unique_winter_wyvern_3"
+        "duration"                                        "4.5 5 5.5 5.5 5.5"
+        "LinkedSpecialBonus"                              "special_bonus_unique_winter_wyvern_3"
       }
     }
   }

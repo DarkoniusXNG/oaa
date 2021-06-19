@@ -1,4 +1,4 @@
-"DOTAItems"
+"DOTAAbilities"
 {
   //=================================================================================================================
   // Recipe: Guinsoos Scythe of Vyse 5
@@ -7,7 +7,7 @@
   {
     "ID"                                                  "3069"      // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
     "ItemCost"                                            "20000"
     "ItemShopTags"                                        ""
@@ -16,9 +16,9 @@
     "ItemRequirements"
     {
       "01"                                                "item_sheepstick_4;item_upgrade_core_4"
-      "02"                                                "item_rod_of_atos_4;item_upgrade_core_4"
+      "02"                                                "item_gungir_4;item_upgrade_core_4"
       "03"                                                "item_meteor_hammer_4;item_upgrade_core_4"
-      "04"                                                "item_cyclone_4;item_upgrade_core_4"
+      "04"                                                "item_wind_waker_4;item_upgrade_core_4"
     }
   }
 
@@ -38,14 +38,14 @@
     // Stats-------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0.0"
-    "AbilityCooldown"                                     "22.0"
+    "AbilityCooldown"                                     "25"
     "AbilitySharedCooldown"                               "hex"
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "5"
 
     // Item Info---------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "250"
-    "ItemCost"                                            "35725"
+    "ItemCost"                                            "38400"
     "ItemShopTags"                                        "int;regen_mana;agi;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "hex 5;sheepstick 5;scythe of vyse 5"
@@ -57,27 +57,27 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "10 15 20 30 40"
+        "bonus_strength"                                  "12 17 27 42 62"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "10 15 20 30 40"
+        "bonus_agility"                                   "12 17 27 42 62"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "35 50 70 105 140"
+        "bonus_intellect"                                 "20 25 35 50 70"
       }
       "04"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "9.0 9.75 11.25 13.5 16.0"
+        "bonus_mana_regen"                                "6.0 6.25 6.75 9.0 10.0"
       }
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "sheep_duration"                                  "3.5 3.6 3.7 3.8 4.0"
+        "sheep_duration"                                  "2.5 2.75 3.0 3.25 3.5"
       }
       "06"
       {

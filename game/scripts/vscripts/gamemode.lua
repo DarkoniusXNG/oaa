@@ -40,7 +40,7 @@ require('libraries/containers')
 -- This library provides an automatic graph construction of path_corner entities within the map
 --require('libraries/pathgraph')
 -- This library (by Noya) provides player selection inspection and management from server lua
-require('libraries/selection')
+--require('libraries/selection')
 -- Helpful math functions from the internet
 require('libraries/math')
 -- chat command registry made easy
@@ -51,14 +51,12 @@ require('libraries/playerresource')
 require('libraries/basenpc')
 -- Extensions to CDOTA_BaseNPC_Hero
 require('libraries/basehero')
--- extension functions to GameRules
-require('libraries/gamerules')
 -- Pseudo-random distribution C constant calculator
 require('libraries/cfinder')
 -- Library for handling buildings (OAA custom or DOTA original)
 require('libraries/buildings')
--- Vector Targetting library
-require('libraries/vector_targeting')
+-- Vector Targeting library (requires VectorTarget module and vector_targeting.js)
+--require('libraries/vector_targeting')
 
 -- These internal libraries set up barebones's events and processes.  Feel free to inspect them/change them if you need to.
 require('internal/gamemode')
@@ -196,6 +194,7 @@ function GameMode:OnGameInProgress()
   --InitModule(StatusResistance)
   InitModule(SaveLoadState)
   InitModule(Runes)
+  InitModule(CustomRuneSystem)
 
   -- xpm stuff
   LinkLuaModifier( "modifier_xpm_thinker", "modifiers/modifier_xpm_thinker.lua", LUA_MODIFIER_MOTION_NONE )
@@ -204,8 +203,13 @@ end
 
 function InitModule(myModule)
   if myModule ~= nil then
+    if myModule.initialized == true then
+      print("Module is already initialized and there was an attempt to initialize it again -> preventing")
+      return
+    end
     local status, err = pcall(function ()
       myModule:Init()
+      myModule.initialized = true
     end)
     if err then
       local info = debug.getinfo(2, "Sl")
@@ -237,10 +241,11 @@ function GameMode:InitGameMode()
   InitModule(Bottlepass)
   InitModule(Courier)
   --InitModule(StartingItems)
+  InitModule(OAAOptions)
   InitModule(HeroSelection)
   InitModule(ChatCommand)
   InitModule(DevCheats)
-  InitModule(VectorTarget)
+  --InitModule(VectorTarget)
 
   -- Increase maximum owned item limit
   Convars:SetInt('dota_max_physical_items_purchase_limit', 64)

@@ -24,7 +24,7 @@ var stupidItemNames = [
 var itemsFound = {};
 var idsFound = {};
 var itemFileMap = {};
-var nextAvailableId = 8401;
+var nextAvailableId = 3500;
 var usedIDs = {};
 
 test('KV Values', function (t) {
@@ -95,6 +95,41 @@ test('KV Values', function (t) {
     }
     t.ok(nextAvailableId, 'found an available id');
     console.log('Next available ID is', nextAvailableId);
+    var iter = 0;
+    var idToCheck = 0;
+    var j = 0;
+    // short unsigned (0, 65535) 65536 is equivalent to 0; 65537 is equivalent to 1 etc.
+    console.log('items/abilities with potentially bad ID if unique ID is short unsigned type:');
+    for (iter = 8000; iter < 9999999; iter++) {
+      if (idsFound[iter] !== undefined) {
+        for (j = 1; j < 153; j++) {
+          idToCheck = iter - 65536 * j;
+          if (idToCheck >= 0 && idsFound[idToCheck] !== undefined) {
+            console.log('ID: ' + iter, idsFound[iter]);
+            console.log('is in a potential conflict with: ' + idToCheck, idsFound[idToCheck]);
+          }
+        }
+      }
+    }
+    /*
+    // short signed (-32767, 32767)
+    console.log('items/abilities with potentially bad ID if unique ID is short signed type:');
+    for (iter = 10000; iter < 9999999; iter++) {
+      if (idsFound[iter] !== undefined) {
+        for (j = 1; j < 306; j = j + 2) {
+          if (iter > 32767 * j && iter < 32768 * (j + 2)) {
+            idToCheck = iter - 32768 * (j + 1) + 1;
+            if (idToCheck < 0) {
+              console.log('potentially negative ID: ' + iter, idsFound[iter]);
+            }
+            if (idToCheck >= 0 && idsFound[idToCheck] !== undefined) {
+              console.log('ID: ' + iter, idsFound[iter]);
+              console.log('is in potential conflict with: ' + idToCheck, idsFound[idToCheck]);
+            }
+          }
+        }
+      }
+    } */
     t.end();
   });
 });
@@ -105,10 +140,6 @@ function checkKVData (t, name, data, isItem, cb) {
   t.test(name, function (t) {
     var root = data;
     var foundRoot = false;
-    if (root.DOTAItems) {
-      root = root.DOTAItems;
-      foundRoot = true;
-    }
     if (root.DOTAAbilities) {
       root = root.DOTAAbilities;
       foundRoot = true;
@@ -116,7 +147,7 @@ function checkKVData (t, name, data, isItem, cb) {
     if (!foundRoot) {
       console.log(root);
     }
-    t.ok(foundRoot, 'Starts with either DOTAItems or DOTAAbilities');
+    t.ok(foundRoot, 'Starts with DOTAAbilities');
 
     var keys = Object.keys(root).filter(a => a !== 'values');
     var done = after(keys.length, function (err) {
@@ -266,7 +297,10 @@ function checkInheritedValues (t, isItem, values, comments, parentValues) {
     'AbilityCastRange',
     'AbilityCastPoint',
     'AbilityChannelTime',
+    'AbilityCharges',
+    'AbilityChargeRestoreTime',
     'AbilityCooldown',
+    'AbilityDamage',
     'AbilityDuration',
     'AbilityManaCost',
     'AbilityUnitTargetType',
@@ -322,7 +356,8 @@ function testSpecialValues (t, isItem, specials, parentSpecials) {
     'abilitychanneltime',
     'abilityduration',
     'AbilityCharges',
-    'AbilityChargeRestoreTime'
+    'AbilityChargeRestoreTime',
+    'castpoint_scepter'
   ];
 
   if (parentSpecials) {
@@ -419,7 +454,10 @@ var keyWhiteList = [
   'LinkedSpecialBonusOperation',
   'CalculateSpellDamageTooltip',
   'levelkey',
-  'RequiresScepter'
+  'RequiresScepter',
+  'RequiresShard',
+  'ad_linked_ability',
+  'linked_ad_abilities'
 ];
 function filterExtraKeysFromSpecialValue (keyNames) {
   return keyNames.filter(a => keyWhiteList.indexOf(a) === -1);
@@ -434,9 +472,9 @@ function buildItemTree (t, data, cb) {
   var allRecipeNames = [];
   t.test('item upgrade paths', function (t) {
     Object.keys(data).forEach(function (fileName) {
-      var entry = data[fileName].DOTAItems;
+      var entry = data[fileName].DOTAAbilities;
       if (!entry) {
-        t.fail('Could not find the DOTAItems entry for ' + fileName);
+        t.fail('Could not find the DOTAAbilities entry for ' + fileName);
         return;
       }
       var itemNames = Object.keys(entry).filter(a => a !== 'values');

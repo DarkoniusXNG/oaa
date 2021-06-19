@@ -28,12 +28,13 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "mana_per_hit"                                    "28 40 52 64 88 112"
+        "mana_per_hit"                                    "28 40 52 64 76 88"
       }
       "03"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_per_hit_pct"                                "1 2 3 4 4 4"
+        "var_type"                                        "FIELD_FLOAT"
+        "mana_per_hit_pct"                                "1 1.5 2 2.5 3 3.5" //OAA
+        "LinkedSpecialBonus"                              "special_bonus_unique_antimage_7"
       }
       "04"
       {

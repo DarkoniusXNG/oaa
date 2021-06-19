@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=================================================================================================================
   // Magnataur: Empower
   //=================================================================================================================
@@ -30,7 +29,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "45 60 75 90 190 290"
+    "AbilityManaCost"                                     "45 60 75 90 105 120"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -43,12 +42,12 @@
       "01"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "empower_duration"                                "38 42 46 50 54 58"
+        "empower_duration"                                "40"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_pct"                                "10 15 20 25 35 65"
+        "bonus_damage_pct"                                "12 20 28 36 44 52"
         "LinkedSpecialBonus"                              "special_bonus_unique_magnus_2"
       }
       "03"
@@ -72,25 +71,15 @@
         "var_type"                                        "FIELD_INTEGER"
         "cleave_distance"                                 "650"
       }
-      "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "splash_damage_pct"                               "10 15 20 25 45 65"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "splash_radius"                                   "240"
-      }
-      "09"
+      "07" // unused
       {
         "var_type"                                        "FIELD_INTEGER"
         "aura_radius"                                     "900"
       }
-      "10"
+      "08"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "self_multiplier"                                 "2"
+        "self_multiplier"                                 "100" //OAA
       }
     }
   }

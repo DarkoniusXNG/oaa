@@ -1,0 +1,26 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Electrician: Cleansing Shock pierces Spell immunity
+  //=================================================================================================================
+  "special_bonus_electrician_cleansing_shock_pierce"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                                                  "9909"
+    "BaseClass"                                           "special_bonus_undefined"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "value"                                           "1"
+      }
+    }
+  }
+}

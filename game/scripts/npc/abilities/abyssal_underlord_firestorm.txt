@@ -13,8 +13,8 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
-    "AbilityCastRange"                                    "750"
-    "AbilityCastPoint"                                    "0.6"
+    "AbilityCastRange"                                    "600 625 650 675 700 725"
+    "AbilityCastPoint"                                    "0.5"
     "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
@@ -27,7 +27,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 110 120 130 180 230"
+    "AbilityManaCost"                                     "100 110 120 130 140 150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -36,23 +36,26 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "400"
+        "radius"                                          "425"
+        "LinkedSpecialBonus"                              "special_bonus_unique_underlord_8"
       }
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
         "wave_duration"                                   "7.0"
+        "LinkedSpecialBonus"                              "special_bonus_unique_underlord_7"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
         "wave_count"                                      "6"
+        "LinkedSpecialBonus"                              "special_bonus_unique_underlord_7"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "wave_damage"                                     "25 40 55 70 145 220"
-        "LinkedSpecialBonus"      "special_bonus_unique_underlord_2"
+        "wave_damage"                                     "25 40 55 70 140 280"
+        "LinkedSpecialBonus"                              "special_bonus_unique_underlord_2"
       }
       "05"
       {
@@ -82,8 +85,8 @@
       }
       "10"
       {
-        "var_type"            "FIELD_FLOAT"
-        "building_damage"       "33"
+        "var_type"                                        "FIELD_FLOAT"
+        "building_damage"                                 "33"
       }
     }
   }
