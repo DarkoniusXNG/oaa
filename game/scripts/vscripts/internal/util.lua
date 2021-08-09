@@ -331,7 +331,7 @@ function FindHeroesInRadius (...)
   local units = FindUnitsInRadius(...)
 
   local function isHero (hero)
-    if hero.IsRealHero and hero:IsRealHero() and not hero:IsTempestDouble() then
+    if hero.IsRealHero and hero:IsRealHero() and not hero:IsTempestDouble() and not hero:IsClone() then
       return true
     end
     return false
@@ -367,4 +367,58 @@ function MoveCameraToEntity(playerID, entity)
       PlayerResource:SetCameraTarget(playerID, nil)
     end)
   end
+end
+
+function IsLocationInOffside(location)
+  return IsLocationInRadiantOffside(location) or IsLocationInDireOffside(location)
+end
+
+function IsLocationInRadiantOffside(pos)
+  -- Radiant Offside trigger
+  local trigger = Entities:FindByName(nil, 'boss_good_zone_0')
+  if not trigger then
+    print("Radiant Offside trigger not found or referenced name is wrong.")
+    return false
+  end
+  local origin = trigger:GetAbsOrigin()
+  local bounds = trigger:GetBounds()
+  if pos.x < bounds.Mins.x + origin.x then
+    return false
+  end
+  if pos.y < bounds.Mins.y + origin.y then
+    return false
+  end
+  if pos.x > bounds.Maxs.x + origin.x then
+    return false
+  end
+  if pos.y > bounds.Maxs.y + origin.y then
+    return false
+  end
+
+  return true
+end
+
+function IsLocationInDireOffside(pos)
+  -- Dire Offside trigger
+  local trigger = Entities:FindByName(nil, 'boss_bad_zone_0')
+  if not trigger then
+    print("Dire Offside trigger not found or referenced name is wrong.")
+    return false
+  end
+  local origin = trigger:GetAbsOrigin()
+  local bounds = trigger:GetBounds()
+  if pos.x < bounds.Mins.x + origin.x then
+    return false
+  end
+  if pos.y < bounds.Mins.y + origin.y then
+    return false
+  end
+  if pos.x > bounds.Maxs.x + origin.x then
+    return false
+  end
+  if pos.y > bounds.Maxs.y + origin.y then
+    return false
+  end
+
+  return true
 end

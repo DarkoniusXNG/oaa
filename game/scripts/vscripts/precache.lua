@@ -15,11 +15,14 @@ g_ItemPrecache = {
   "item_reflection_shard_1",
   "item_regen_crystal_1",
   "item_sacred_skull",
+  --"item_siege_mode",
   "item_stoneskin",
   "item_trumps_fists",
   "item_vampire",
-  --"item_greater_tranquil_boots",
-  "item_dagon",
+  "item_greater_tranquil_boots",
+  --"item_travel_boots_oaa",
+  "item_dagon_oaa",
+  --"item_eternal_shroud_oaa",
 }
 
 g_UnitPrecache = {

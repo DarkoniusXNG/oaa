@@ -32,12 +32,12 @@
         {
             "item"      "item_satanic"
             "item"      "item_ultimate_scepter"
+	    "item"	"item_aghanims_shard"
         }
 
         "#DOTA_Item_Build_Luxury"
         {
             "item"      "item_monkey_king_bar"
-            "item"      "item_butterfly"
             "item"      "item_greater_crit"
             "item"      "item_rapier"
             "item"      "item_solar_crest"

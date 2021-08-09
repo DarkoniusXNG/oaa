@@ -43,7 +43,7 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "30" //OAA
+        "damage_reduction"                                "40" //OAA
         "RequiresScepter"                                 "1"
         "CalculateSpellDamageTooltip"                     "0"
       }
@@ -68,7 +68,7 @@
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "impale_burrow_cooldown_tooltip"                  "10" //OAA
+        "impale_burrow_cooldown_tooltip"                  "12" //OAA
         "RequiresScepter"                                 "1"
       }
       "08"

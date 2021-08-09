@@ -1,8 +1,8 @@
 "DOTAUnits"
 {
-//=================================================================================
-// Boss tier 1
-//=================================================================================
+  //=================================================================================
+  // Boss tier 2 - Shielder
+  //=================================================================================
   "npc_dota_boss_shielder"
   {
     // General
@@ -21,7 +21,7 @@
     "Ability1"                                            "boss_shielder_shield"
     "Ability2"                                            "boss_resistance"
     "Ability3"                                            "boss_cliffwalk"
-    "Ability4"          								  "boss_regen"
+    "Ability4"                                            "boss_regen"
 
     // Armor
     //----------------------------------------------------------------
@@ -32,7 +32,7 @@
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
     "AttackDamageMin"                                     "1300"       // Damage range min.
-    "AttackDamageMax"                                     "1350"       // Damage range max.
+    "AttackDamageMax"                                     "1300"       // Damage range max.
     "AttackDamageType"                                    "DAMAGE_TYPE_ArmorPhysical"
     "AttackRate"                                          "1.0"           // Speed of attack.
     "AttackAnimationPoint"                                "0.3"       // Normalized time in animation cycle to attack.
@@ -54,24 +54,22 @@
     // Movement
     //----------------------------------------------------------------
     "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"         // Type of locomotion - ground, air
-    "MovementSpeed"                                       "320"       // Speed
+    "MovementSpeed"                                       "420"       // Speed
     "MovementTurnRate"                                    "0.8"       // Turning rate.
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "3500"     // Base health
-    "StatusHealthRegen"                                   "8.5"        // Health regeneration rate.
+    "StatusHealth"                                        "5000"     // Base health
+    "StatusHealthRegen"                                   "0"        // Health regeneration rate.
     "StatusMana"                                          "0"     // Base mana.
     "StatusManaRegen"                                     "0"     // Mana regeneration rate.
 
     // Creature data
-
     "Creature"
     {
-      //Makes it only have 50% remaining of applied crowd control
+      // Makes it only have 50% remaining of applied crowd control
       "DisableResistance"                                 "50.0"
     }
-
 
     // Team
     //----------------------------------------------------------------

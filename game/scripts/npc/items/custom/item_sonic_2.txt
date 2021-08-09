@@ -7,9 +7,10 @@
   {
     "ID"                  "8515"
     "BaseClass"           "item_datadriven"
-    "Model"               "models/props_gameplay/recipe.mdl"
+    "Model"               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"  "custom/recipe/recipe_5"
-    "ItemCost"            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "20000"
     "ItemShopTags"        ""
     "ItemRecipe"          "1"
     "ItemResult"          "item_sonic_2"
@@ -29,22 +30,23 @@
   //=================================================================================================================
   "item_sonic_2"
   {
-    "ID"                    "8516"
-    "BaseClass"             "item_lua"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-    "AbilityTextureName"    "custom/sonic_3"
-    "AbilitySharedCooldown" "sonic"
-    "ScriptFile"            "items/transformation/sonic.lua"
+    "ID"                                                  "8516"
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/sonic.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityTextureName"                                  "custom/sonic_3"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "AbilityManaCost"                                     "0"
     "AbilityCooldown"                                     "16"
+    "AbilitySharedCooldown"                               "sonic"
     "AbilityCastPoint"      "0.0"
 
     "MaxUpgradeLevel"       "2"
     "ItemBaseLevel"         "2"
     "UpgradesItems"         "item_sonic_2"
 
-    "ItemCost"              "33925"
+    "ItemCost"              "33929"
     "ItemShopTags"          "sonic"
     "ItemQuality"           ""
     "ItemAliases"           "sonic"
@@ -60,12 +62,12 @@
       "02" // phase boots parameter
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_melee"                              "108 158"
+        "bonus_damage_melee"                              "140 220"
       }
       "03" // phase boots parameter
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_range"                              "108 158"
+        "bonus_damage_range"                              "140 220"
       }
       "04" // phase boots parameter
       {
@@ -87,6 +89,11 @@
         "var_type"                                        "FIELD_FLOAT"
         "duration"                                        "6.0"
       }
+    }
+
+    "precache"
+    {
+      "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_dark_seer.vsndevts"
     }
   }
 }

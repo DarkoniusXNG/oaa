@@ -9,11 +9,12 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3835"        // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
 
@@ -42,7 +43,7 @@
     "AbilityTextureName"                                  "custom/regen_crystal_1"
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "20.0"
+    "AbilityCooldown"                                     "25"
     "AbilityCastPoint"                                    "0.0"
     "AbilitySharedCooldown"                               "regen_crystal"
 
@@ -52,7 +53,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "8800"
+    "ItemCost"                                            "8702"
     "ItemShopTags"                                        "str;regen_health;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "regen crystal"
@@ -76,17 +77,17 @@
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "max_mana_to_hp_regen"                            "3"
+        "max_mana_to_hp_regen"                            "5"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "active_hp_regen"                                 "500"
+        "active_hp_regen"                                 "400 500 600"
       }
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "active_hp_regen_amp"                             "100"
+        "active_hp_regen_amp"                             "50"
       }
       "06"
       {

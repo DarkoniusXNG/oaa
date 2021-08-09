@@ -33,7 +33,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "130 110 90 80 70"
+    "AbilityCooldown"                                     "120 100 80 70 60"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@
         "base_damage_percent"                             "100"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "08"
+      "08" // its not higher because of Satanic
       {
         "var_type"                                        "FIELD_INTEGER"
         "proc_chance"                                     "50"
@@ -103,7 +103,7 @@
       "12"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "cooldown_scepter"                                "110 90 70 60 50"
+        "cooldown_scepter"                                "90 80 70 60 50"
         "RequiresScepter"                                 "1"
       }
       "13"
@@ -112,7 +112,6 @@
         "num_first_soldiers_scepter"                      "6"
         "RequiresScepter"                                 "1"
       }
-
       "14"
       {
         "var_type"                                        "FIELD_INTEGER"
@@ -122,7 +121,7 @@
       "15"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "num_third_soldiers_scepter"                      "10"
+        "num_third_soldiers_scepter"                      "12"
         "RequiresScepter"                                 "1"
       }
     }

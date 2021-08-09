@@ -59,7 +59,11 @@ function HeroKillXP:HeroDeathHandler(keys)
     return
   end
 
-  if killedHero:IsReincarnating() then
+  if killedHero:IsClone() then
+    killedHero = killedHero:GetCloneSource()
+  end
+
+  if killedHero:IsReincarnating() or killedHero:IsTempestDouble() then
     return
   end
 
@@ -76,13 +80,16 @@ function HeroKillXP:HeroDeathHandler(keys)
   local killerHero = PlayerResource:GetSelectedHeroEntity(killerPlayerID)
   local killedHeroXP = killedHero:GetCurrentXP()
   local killedHeroStreak = killedHero:GetStreak()
+  local killedHeroLevel = killedHero:GetLevel()
+
   local killedHeroStreakXP = 0
 
   if killedHeroStreak > 2 then
-    killedHeroStreakXP = HERO_XP_BOUNTY_STREAK_BASE + HERO_XP_BOUNTY_STREAK_INCREASE*(killedHeroStreak-3)
+    --killedHeroStreakXP = HERO_XP_BOUNTY_STREAK_BASE + HERO_XP_BOUNTY_STREAK_INCREASE * (killedHeroStreak - 3)
+    killedHeroStreakXP = killedHeroStreak * killedHeroLevel * HERO_XP_BOUNTY_STREAK_BASE / 3
   end
 
-  if killedHeroStreak > 10 then
+  if killedHeroStreakXP > HERO_XP_BOUNTY_STREAK_MAX then
     killedHeroStreakXP = HERO_XP_BOUNTY_STREAK_MAX
   end
 
@@ -139,7 +146,13 @@ function HeroKillXP:HeroDeathHandler(keys)
   if rewardHeroes then
     for _, hero in rewardHeroes:unwrap() do
       if hero then
-        hero:AddExperience(xp, DOTA_ModifyXP_RoshanKill, false, true)
+        -- Check for XP spark
+        local spark = hero:FindModifierByName("modifier_spark_xp")
+        local specific_hero_xp = xp
+        if spark then
+          specific_hero_xp = xp + xp * spark.hero_kill_bonus_xp
+        end
+        hero:AddExperience(specific_hero_xp, DOTA_ModifyXP_RoshanKill, false, true)
       end
     end
   end
@@ -147,7 +160,13 @@ function HeroKillXP:HeroDeathHandler(keys)
   -- Player kills: Give xp to the killer and to heroes around the killed hero
   for _, hero in ipairs(heroes) do
     if hero then
-      hero:AddExperience(xp, DOTA_ModifyXP_RoshanKill, false, true)
+      -- Check for XP spark
+      local spark = hero:FindModifierByName("modifier_spark_xp")
+      local specific_hero_xp = xp
+      if spark then
+        specific_hero_xp = math.floor(xp + xp * spark.hero_kill_bonus_xp)
+      end
+      hero:AddExperience(specific_hero_xp, DOTA_ModifyXP_RoshanKill, false, true)
     end
   end
 end

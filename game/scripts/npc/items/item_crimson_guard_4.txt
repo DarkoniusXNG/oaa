@@ -9,11 +9,12 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3888"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
 
@@ -52,7 +53,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "16800"
+    "ItemCost"                                            "16703"
     "ItemShopTags"                                        "armor;boost_armor;regen_health;block;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "crimson guard 4"
@@ -72,7 +73,7 @@
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "12 20 30 40 50"
+        "bonus_health_regen"                              "12 15 18 21 24"
       }
       "03"
       {
@@ -92,7 +93,7 @@
       "06"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "block_chance"                                    "50"
+        "block_chance"                                    "60"
       }
       "07"
       {
@@ -107,12 +108,12 @@
       "09"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "block_damage_melee_active"                       "60 90 140 180 275"
+        "block_damage_melee_active"                       "70 100 140 190 250"
       }
       "10"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "block_damage_ranged_active"                      "60 90 140 180 275"
+        "block_damage_ranged_active"                      "70 100 140 190 250"
       }
       "11"
       {

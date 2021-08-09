@@ -9,12 +9,13 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "3335"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
     "FightRecapLevel"                                     "1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
 
@@ -54,7 +55,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "25"
-    "ItemCost"                                            "10850"
+    "ItemCost"                                            "10926"
     "ItemShopTags"                                        "damage;armor;int;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "mm 2;martyrs mail 2;martyrsmail 2"
@@ -72,12 +73,12 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "9 13 18 24"
+        "bonus_armor"                                     "12 15 19 24"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "45 65 90 120"
+        "bonus_intellect"                                 "40 55 75 100"
       }
       "04"
       {
@@ -93,6 +94,16 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "martyr_heal_percent"                             "100"
+      }
+      "07"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "aura_attack_speed"                               "100"
+      }
+      "08"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "aura_radius"                                     "1200"
       }
     }
   }

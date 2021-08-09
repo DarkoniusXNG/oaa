@@ -1,5 +1,7 @@
 /* global Players $ GameEvents CustomNetTables FindDotaHudElement Game */
 
+'use strict';
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     SelectHero: SelectHero,
@@ -267,7 +269,7 @@ function onPlayerStatChange (table, key, data) {
         });
       }
       Object.keys(data).forEach(function (nkey) {
-        var currentplayer = FindDotaHudElement(data[nkey].steamid);
+        let currentplayer = FindDotaHudElement(data[nkey].steamid);
         currentplayer.heroname = data[nkey].selectedhero;
         currentplayer.RemoveClass('PreviewHero');
 
@@ -540,23 +542,53 @@ function FillTopBarPlayer (TeamContainer) {
 }
 
 function EnableChatWindow () {
-  var pregamePanel = FindDotaHudElement('PreGame');
+  let pregamePanel = FindDotaHudElement('PreGame');
   pregamePanel.style.zIndex = 10;
   pregamePanel.style.backgroundColor = 'transparent';
-  var contentPanel = pregamePanel.FindChildTraverse('MainContents');
-  contentPanel.style.visibility = 'collapse';
-  var backgroundPanel = pregamePanel.FindChildTraverse('PregameBGStatic');
-  backgroundPanel.style.visibility = 'collapse';
-  var backgroundDashboardPanel = pregamePanel.FindChildTraverse('PregameBG');
-  backgroundDashboardPanel.style.visibility = 'collapse';
-  var radiantTeamPanel = pregamePanel.FindChildTraverse('RadiantTeamPlayers');
-  radiantTeamPanel.style.visibility = 'collapse';
-  var direTeamPanel = pregamePanel.FindChildTraverse('DireTeamPlayers');
-  direTeamPanel.style.visibility = 'collapse';
-  var headerPanel = pregamePanel.FindChildTraverse('Header');
-  headerPanel.style.visibility = 'collapse';
-  var minimapPanel = pregamePanel.FindChildTraverse('PreMinimapContainer');
-  minimapPanel.style.visibility = 'collapse';
+  let contentPanel = pregamePanel.FindChildTraverse('MainContents');
+  if (contentPanel) {
+    contentPanel.style.visibility = 'collapse';
+  }
+  let backgroundPanel = pregamePanel.FindChildTraverse('PregameBGStatic');
+  if (backgroundPanel) {
+    backgroundPanel.style.visibility = 'collapse';
+  }
+  let backgroundDashboardPanel = pregamePanel.FindChildTraverse('PregameBG');
+  if (backgroundDashboardPanel) {
+    backgroundDashboardPanel.style.visibility = 'collapse';
+  }
+  let radiantTeamPanel = pregamePanel.FindChildTraverse('RadiantTeamPlayers');
+  if (radiantTeamPanel) {
+    radiantTeamPanel.style.visibility = 'collapse';
+  }
+  let direTeamPanel = pregamePanel.FindChildTraverse('DireTeamPlayers');
+  if (direTeamPanel) {
+    direTeamPanel.style.visibility = 'collapse';
+  }
+  let headerPanel = pregamePanel.FindChildTraverse('Header');
+  if (headerPanel) {
+    headerPanel.style.visibility = 'collapse';
+  }
+  let minimapPanel = pregamePanel.FindChildTraverse('PreMinimapContainer');
+  if (minimapPanel) {
+    minimapPanel.style.visibility = 'collapse';
+  }
+  let friendsAndFoesPanel = pregamePanel.FindChildTraverse('FriendsAndFoes');
+  if (friendsAndFoesPanel) {
+    friendsAndFoesPanel.style.visibility = 'collapse';
+  }
+  let panel2 = pregamePanel.FindChildTraverse('HeroPickingTeamComposition');
+  if (panel2) {
+    panel2.style.visibility = 'collapse';
+  }
+  let panel3 = pregamePanel.FindChildTraverse('PlusChallengeSelector');
+  if (panel3) {
+    panel3.style.visibility = 'collapse';
+  }
+  let panel4 = pregamePanel.FindChildTraverse('AvailableItemsContainer');
+  if (panel4) {
+    panel4.style.visibility = 'collapse';
+  }
 }
 
 function UpdatePreviews (data) {
@@ -595,7 +627,7 @@ function ReloadCMStatus (data) {
     return;
   }
   // reset all data for people, who lost it
-  var teamID = Players.GetTeam(Game.GetLocalPlayerID());
+  let teamID = Players.GetTeam(Game.GetLocalPlayerID());
   stepsCompleted = {
     2: 0,
     3: 0
@@ -742,8 +774,8 @@ function UpdateBottlePassArcana (heroName) {
   }
   $('#ArcanaPanel').SetHasClass('HasArcana', true);
 
-  var selectedArcanas = CustomNetTables.GetTableValue('bottlepass', 'selected_arcanas');
-  var selectedArcana = 'DefaultSet';
+  let selectedArcanas = CustomNetTables.GetTableValue('bottlepass', 'selected_arcanas');
+  let selectedArcana = 'DefaultSet';
 
   if (selectedArcanas !== undefined && selectedArcanas[playerID.toString()] !== undefined) {
     selectedArcana = selectedArcanas[playerID.toString()][heroName];
@@ -807,7 +839,7 @@ function UpdateBottlePassArcana (heroName) {
 function SelectArcana () {
   var arcanasList = $('#ArcanaSelection');
   if (arcanasList.GetChildCount() > 0) {
-    var selectedArcana = $('#ArcanaSelection').Children()[0].GetSelectedButton();
+    let selectedArcana = $('#ArcanaSelection').Children()[0].GetSelectedButton();
 
     var id = 'Scene' + ~~(Math.random() * 100);
     var preview = FindDotaHudElement('HeroPreview');
@@ -875,12 +907,12 @@ function CreateBottleRadioElement (id, isChecked) {
 }
 
 function SelectBottle () {
-  var bottleId = 0;
-  var btn = $('#Bottle0');
+  let bottleId = 0;
+  let btn = $('#Bottle0');
   if (btn != null) {
     bottleId = $('#Bottle0').GetSelectedButton().bottleId;
   }
-  var data = {
+  let data = {
     BottleId: bottleId
   };
   $.Msg('Selecting Bottle #' + data.BottleId + ' for Player #' + Game.GetLocalPlayerID());

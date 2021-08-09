@@ -13,6 +13,7 @@ local zoneNames = {
   "duel_3",
   "duel_4",
   "duel_5",
+  "duel_6",
 }
 
 local DuelPreparingEvent = Event()
@@ -144,7 +145,8 @@ function Duels:CountPlayerDeath (player)
       winningTeamId = DOTA_TEAM_GOODGUYS
     end
 
-    PointsManager:AddPoints(winningTeamId, 1)
+    -- Gaining a point for winning a duel -> not intuitive
+    --PointsManager:AddPoints(winningTeamId, 1)
 
     self:AllPlayers(self.currentDuel, function (otherPlayer)
       if player.duelNumber ~= otherPlayer.duelNumber then
@@ -391,12 +393,14 @@ function Duels:ActuallyStartDuel(options)
   DebugPrint("Duel Player Split")
   DebugPrint(split.PlayerSplitOffset)
 
-  local bigArenaIndex = RandomInt(3, 5)
+  local bigArenaIndex = RandomInt(3, 6)
   local smallArenaIndex = RandomInt(1, 2)
+
+  local gamemode = GameRules:GetGameModeEntity()
+  gamemode:SetCustomBackpackSwapCooldown(1.0)
 
   self:SpawnPlayersOnArenas(split, smallArenaIndex, bigArenaIndex)
   self:PreparePlayersToStartDuel(options, split)
-
 end
 
 function Duels:SpawnPlayerOnArena(playerSplit, arenaIndex, duelNumber)
@@ -459,6 +463,10 @@ function Duels:PreparePlayersToStartDuel(options, playerSplit)
     badPlayerIndex = playerSplit.BadPlayerIndex,
     goodPlayerIndex = playerSplit.GoodPlayerIndex
   }
+
+  Timers:CreateTimer(2, function()
+    GridNav:RegrowAllTrees()
+  end)
 
   DebugPrint("Duel Info")
   DebugPrintTable(self.currentDuel)
@@ -577,11 +585,16 @@ function Duels:EndDuel ()
     return
   end
 
-  for playerId = 0,19 do
-    for _, zone in ipairs(self.zones) do
-      zone.removePlayer(playerId, false)
+  for playerId = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+    if PlayerResource:IsValidPlayerID(playerId) then
+      for _, zone in ipairs(self.zones) do
+        zone.removePlayer(playerId, false)
+      end
     end
   end
+
+  local gamemode = GameRules:GetGameModeEntity()
+  gamemode:SetCustomBackpackSwapCooldown(3.0)
 
   local currentDuel = self.currentDuel
   self:CleanUpDuel()
@@ -610,16 +623,18 @@ function Duels:EndDuel ()
 
       HeroState.RestoreState(hero, state)
       MoveCameraToPlayer(hero)
-      HeroState.PurgeDuelHighgroundBuffs(hero)
+      HeroState.PurgeDuelHighgroundBuffs(hero) -- needed to remove undispellable Highground buffs
     end)
     -- Remove Modifier
-    for playerId = 0,19 do
-      local player = PlayerResource:GetPlayer(playerId)
-      if player then
-        local hero = PlayerResource:GetSelectedHeroEntity(playerId)
+    for playerId = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+      if PlayerResource:IsValidPlayerID(playerId) then
+        local player = PlayerResource:GetPlayer(playerId)
+        if player then
+          local hero = PlayerResource:GetSelectedHeroEntity(playerId)
 
-        if hero ~= nil then
-          hero:RemoveModifierByName("modifier_out_of_duel")
+          if hero ~= nil then
+            hero:RemoveModifierByName("modifier_out_of_duel")
+          end
         end
       end
     end
@@ -629,10 +644,12 @@ end
 
 function Duels:AllPlayers(state, cb)
   if state == nil then
-    for playerId = 0,19 do
-      local player = PlayerResource:GetPlayer(playerId)
-      if player ~= nil then
-        cb(player)
+    for playerId = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+      if PlayerResource:IsValidPlayerID(playerId) then
+        local player = PlayerResource:GetPlayer(playerId)
+        if player ~= nil then
+          cb(player)
+        end
       end
     end
   else

@@ -53,12 +53,12 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "move_slow"                                       "60"
+        "move_slow"                                       "50"
       }
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.25 2.5 3.25 4 4.5 5.0"
+        "duration"                                        "1.25 2.5 3.25 4 4.75 5.5"
       }
       "06"
       {

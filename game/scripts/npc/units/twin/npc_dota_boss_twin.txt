@@ -1,8 +1,8 @@
 "DOTAUnits"
 {
-//=================================================================================
-// Boss tier 2
-//=================================================================================
+  //=================================================================================
+  // Boss tier 2 - Twin (melee)
+  //=================================================================================
   "npc_dota_boss_twin"
   {
     // General
@@ -21,7 +21,7 @@
     "Ability1"                                            "boss_twin_twin_empathy"
     "Ability2"                                            "boss_resistance"
     "Ability3"                                            "boss_cliffwalk"
-    "Ability4"          								  "boss_regen"
+    "Ability4"                                            "boss_regen"
 
     // Armor
     //----------------------------------------------------------------
@@ -31,7 +31,7 @@
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"                                     "700"    // Damage range min.
+    "AttackDamageMin"                                     "750"    // Damage range min.
     "AttackDamageMax"                                     "750"    // Damage range max.
     "AttackDamageType"                                    "DAMAGE_TYPE_ArmorPhysical"
     "AttackRate"                                          "0.75"      // Speed of attack.
@@ -59,19 +59,17 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "3500"    // Base health
-    "StatusHealthRegen"                                   "3.5"    // Health regeneration rate.
+    "StatusHealth"                                        "3750"    // Base health
+    "StatusHealthRegen"                                   "0"    // Health regeneration rate.
     "StatusMana"                                          "0"    // Base mana.
     "StatusManaRegen"                                     "0"    // Mana regeneration rate.
 
     // Creature data
-
     "Creature"
     {
-      //Makes it only have 50% remaining of applied crowd control
+      // Makes it only have 50% remaining of applied crowd control
       "DisableResistance"                                 "50.0"
     }
-
 
     // Team
     //----------------------------------------------------------------

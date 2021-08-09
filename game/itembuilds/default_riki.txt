@@ -30,9 +30,10 @@
         "#DOTA_Item_Build_Late_Items"
         {
             "item"      "item_sange_and_yasha"
-            "item"      "item_butterfly"
+            "item"      "item_butterfly_oaa"
             "item"      "item_abyssal_blade_3"
             "item"      "item_nullifier"
+	    "item"	"item_aghanims_shard"
         }
 
         "#DOTA_Item_Build_Luxury"
@@ -45,6 +46,8 @@
             "item"      "item_mjollnir"
             "item"      "item_greater_crit"
             "item"      "item_black_king_bar_1"
+            "item"      "item_giant_form"
+            "item"      "item_meteor_hammer_1"
         }
     }
 }

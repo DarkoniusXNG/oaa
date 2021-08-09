@@ -17,7 +17,7 @@ function CreepPower:GetBasePowerForMinute (minute)
       (30 * ((minute/100) ^ 2) + 3 * (minute/100)) + 1,                                                                 -- mana
       (48 * ((minute/100) ^ 2) + 4.5 * (minute/100)) + 1,                                                               -- damage
       (minute / 6) + 1,                                                                                                 -- armor
-      (9 * (minute/100)) + 1,                                                                                           -- gold
+      (10 * (minute/100)) + 1,                                                                                          -- gold
       ((9 * minute ^ 2 + 17 * minute + 607)/607) * 2/3                                                                  -- xp
     }
   end
@@ -58,10 +58,10 @@ function CreepPower:Init ()
   if HeroSelection.is10v10 then
     maxTeamPlayerCount = 20
   end
-  self.numPlayersXPFactor = 1 -- PlayerResource:GetTeamPlayerCount() / maxTeamPlayerCount
-  self.numPlayersStatsFactor = (PlayerResource:GetTeamPlayerCount() + 5) / (maxTeamPlayerCount + 5)
+  self.numPlayersXPFactor = 1 -- PlayerResource:SafeGetTeamPlayerCount() / maxTeamPlayerCount
+  self.numPlayersStatsFactor = (PlayerResource:SafeGetTeamPlayerCount() + 5) / (maxTeamPlayerCount + 5)
 
-  if PlayerResource:GetTeamPlayerCount() == 1 then
+  if PlayerResource:SafeGetTeamPlayerCount() == 1 then
     self.numPlayersStatsFactor = 1
   end
 

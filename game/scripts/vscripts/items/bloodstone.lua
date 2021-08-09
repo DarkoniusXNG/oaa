@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_intrinsic_multiplexer", "modifiers/modifier_intrinsic_multiplexer.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_bloodstone_stacking_stats", "items/bloodstone.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_bloodstone_non_stacking_stats", "items/bloodstone.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_spell_lifesteal_oaa", "modifiers/modifier_item_spell_lifesteal_oaa.lua", LUA_MODIFIER_MOTION_NONE)
 --LinkLuaModifier("modifier_item_bloodstone_charge_collector", "items/bloodstone.lua", LUA_MODIFIER_MOTION_NONE)
 
 item_bloodstone_1 = class(ItemBaseClass)
@@ -12,7 +13,8 @@ end
 function item_bloodstone_1:GetIntrinsicModifierNames()
   return {
     "modifier_item_bloodstone_stacking_stats",
-    "modifier_item_bloodstone_non_stacking_stats"
+    "modifier_item_bloodstone_non_stacking_stats",
+    "modifier_item_spell_lifesteal_oaa"
   }
 end
 
@@ -218,7 +220,7 @@ function modifier_item_bloodstone_stacking_stats:OnDeath(keys)
   -- someone else died or owner is reincarnating
   if caster ~= dead or caster:IsReincarnating() then
     -- Dead unit is an actually dead real enemy hero unit
-    if caster:GetTeamNumber() ~= dead:GetTeamNumber() and dead:IsRealHero() and not dead:IsTempestDouble() and not dead:IsReincarnating() then
+    if caster:GetTeamNumber() ~= dead:GetTeamNumber() and dead:IsRealHero() and (not dead:IsTempestDouble()) and (not dead:IsReincarnating()) and (not dead:IsClone()) then
       -- Charge gain
 
       local function IsItemBloodstone(item)
@@ -289,18 +291,28 @@ function modifier_item_bloodstone_non_stacking_stats:IsPurgable()
   return false
 end
 
+function modifier_item_bloodstone_non_stacking_stats:OnCreated()
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.mana_regen_amp = ability:GetSpecialValueFor("mana_regen_multiplier")
+    --self.manacost_reduction = ability:GetSpecialValueFor("manacost_reduction")
+  end
+end
+
+modifier_item_bloodstone_non_stacking_stats.OnRefresh = modifier_item_bloodstone_non_stacking_stats.OnCreated
+
 function modifier_item_bloodstone_non_stacking_stats:DeclareFunctions()
   return {
     MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE, -- GetModifierMPRegenAmplify_Percentage
     MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,    -- GetModifierSpellAmplify_Percentage
-    MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING -- GetModifierPercentageManacostStacking
+    --MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING -- GetModifierPercentageManacostStacking
   }
 end
 
 function modifier_item_bloodstone_non_stacking_stats:GetModifierMPRegenAmplify_Percentage()
   local parent = self:GetParent()
   if not parent:HasModifier("modifier_item_kaya") and not parent:HasModifier("modifier_item_yasha_and_kaya") and not parent:HasModifier("modifier_item_kaya_and_sange") then
-    return self:GetAbility():GetSpecialValueFor("mana_regen_multiplier")
+    return self.mana_regen_amp or self:GetAbility():GetSpecialValueFor("mana_regen_multiplier")
   end
   return 0
 end
@@ -308,19 +320,22 @@ end
 function modifier_item_bloodstone_non_stacking_stats:GetModifierSpellAmplify_Percentage()
   local ability = self:GetAbility()
   local parent = self:GetParent()
+  if not ability or ability:IsNull() then
+    return 0
+  end
   if not parent:HasModifier("modifier_item_kaya") and not parent:HasModifier("modifier_item_yasha_and_kaya") and not parent:HasModifier("modifier_item_kaya_and_sange") then
     return ability:GetSpecialValueFor("spell_amp") + (ability:GetCurrentCharges() * ability:GetSpecialValueFor("amp_per_charge"))
   end
   return 0
 end
 
-function modifier_item_bloodstone_non_stacking_stats:GetModifierPercentageManacostStacking()
+--function modifier_item_bloodstone_non_stacking_stats:GetModifierPercentageManacostStacking()
   --local parent = self:GetParent()
   --if not parent:HasModifier("modifier_item_kaya") and not parent:HasModifier("modifier_item_yasha_and_kaya") and not parent:HasModifier("modifier_item_kaya_and_sange") then
-  return self:GetAbility():GetSpecialValueFor("manacost_reduction")
+  --return self.manacost_reduction or self:GetAbility():GetSpecialValueFor("manacost_reduction")
   --end
   --return 0
-end
+--end
 
 --------------------------------------------------------------------------
 -- aura stuff

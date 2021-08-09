@@ -1,8 +1,8 @@
 "DOTAUnits"
 {
-//=================================================================================
-// Simple Boss 1
-//=================================================================================
+  //=================================================================================
+  // Simple Geostrike Boss Tier 1
+  //=================================================================================
   "npc_dota_boss_simple_1"
   {
     // General
@@ -27,16 +27,16 @@
 
     // Armor
     //----------------------------------------------------------------
-    "ArmorPhysical"                                       "25"      // Physical protection.
-    "MagicalResistance"                                   "-50"      // Magical protection (percentage).
+    "ArmorPhysical"                                       "25"     // Physical protection.
+    "MagicalResistance"                                   "-50"    // Magical protection (percentage).
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"                                     "1000"    // Damage range min.
-    "AttackDamageMax"                                     "1250"    // Damage range max.
-    "AttackDamageType"                                    "DAMAGE_TYPE_ArmorPhysical"
-    "AttackRate"                                          "1.0"    // Speed of attack.
+    "AttackDamageMin"                                     "1000"   // Damage range min.
+    "AttackDamageMax"                                     "1000"   // Damage range max.
+    "AttackRate"                                          "1.0"    // BAT
+    "BaseAttackSpeed"                                     "100"    // Attack Speed
     "AttackAnimationPoint"                                "0.6"    // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "150"    // Range within a target can be acquired.
     "AttackRange"                                         "128"    // Range within a target can be attacked.
@@ -62,18 +62,16 @@
     // Status
     //----------------------------------------------------------------
     "StatusHealth"                                        "2500" // Base health
-    "StatusHealthRegen"                                   "3.5"  // Health regeneration rate.
+    "StatusHealthRegen"                                   "0"  // Health regeneration rate.
     "StatusMana"                                          "0"    // Base mana.
     "StatusManaRegen"                                     "0"    // Mana regeneration rate.
 
     // Creature data
-
     "Creature"
     {
-      //Makes it only have 50% remaining of applied crowd control
+      // Makes it only have 50% remaining of applied crowd control
       "DisableResistance"                                 "50.0"
     }
-
 
     // Team
     //----------------------------------------------------------------

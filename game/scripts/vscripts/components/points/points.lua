@@ -17,14 +17,15 @@ function PointsManager:Init ()
   DebugPrint ( 'Initializing.' )
 
   self.hasGameEnded = false
+  self.extend_counter = 0
 
   local scoreLimit = NORMAL_KILL_LIMIT
-  local scoreLimitIncrease = 10 -- if you want to change put: PlayerResource:GetTeamPlayerCount() * KILL_LIMIT_INCREASE
+  local scoreLimitIncrease = KILL_LIMIT_INCREASE
   if HeroSelection.is10v10 then
     scoreLimit = TEN_V_TEN_KILL_LIMIT
-    scoreLimitIncrease = scoreLimitIncrease/2
+    --scoreLimitIncrease = scoreLimitIncrease/2
   end
-  scoreLimit = scoreLimit * PlayerResource:GetTeamPlayerCount() + scoreLimitIncrease
+  scoreLimit = 10 + (scoreLimit + scoreLimitIncrease) * PlayerResource:SafeGetTeamPlayerCount()
   CustomNetTables:SetTableValue( 'team_scores', 'limit', { value = scoreLimit, name = 'normal' } )
 
   CustomNetTables:SetTableValue( 'team_scores', 'score', {
@@ -37,23 +38,27 @@ function PointsManager:Init ()
     if not keys.killer or not keys.killed then
       return
     end
-    if keys.killer:GetTeam() ~= keys.killed:GetTeam() and not keys.killed:IsReincarnating() and keys.killed:GetTeam() ~= DOTA_TEAM_NEUTRALS then
+    if keys.killer:GetTeam() ~= keys.killed:GetTeam() and not keys.killed:IsReincarnating() and not keys.killed:IsTempestDouble() and keys.killed:GetTeam() ~= DOTA_TEAM_NEUTRALS then
       self:AddPoints(keys.killer:GetTeam())
     end
   end)
 
   GameEvents:OnPlayerAbandon(function (keys)
-    local limit = self:GetLimit()
-    local maxPoints = math.max(self:GetPoints(DOTA_TEAM_GOODGUYS), self:GetPoints(DOTA_TEAM_BADGUYS))
-    limit = math.min(limit, math.max(maxPoints + 10, limit - 10))
-
-    self:SetLimit(limit)
+    -- Reduce the score limit when player abandons but only if game time is after MIN_MATCH_TIME
+    if HudTimer and HudTimer:GetGameTime() > MIN_MATCH_TIME then
+      PointsManager:RefreshLimit()
+    end
   end)
 
+  GameEvents:OnPlayerReconnect(function (keys)
+    -- Try to refresh the score limit to the correct value if player reconnected
+    Timers:CreateTimer(1, function()
+      PointsManager:RefreshLimit()
+    end)
+  end)
   -- Register chat commands
   ChatCommand:LinkDevCommand("-addpoints", Dynamic_Wrap(PointsManager, "AddPointsCommand"), self)
   ChatCommand:LinkDevCommand("-add_enemy_points", Dynamic_Wrap(PointsManager, "AddEnemyPointsCommand"), self)
-  ChatCommand:LinkDevCommand("-kill_limit", Dynamic_Wrap(PointsManager, "SetLimitCommand"), self)
   ChatCommand:LinkDevCommand("-kill_limit", Dynamic_Wrap(PointsManager, "SetLimitCommand"), self)
 
   local position = Vector(-5200, 200, 512)
@@ -78,7 +83,8 @@ function PointsManager:GetState ()
   return {
     limit = self:GetLimit(),
     goodScore = self:GetPoints(DOTA_TEAM_GOODGUYS),
-    badScore = self:GetPoints(DOTA_TEAM_BADGUYS)
+    badScore = self:GetPoints(DOTA_TEAM_BADGUYS),
+    extend_counter = self.extend_counter
   }
 end
 
@@ -86,6 +92,7 @@ function PointsManager:LoadState (state)
   self:SetLimit(state.limit)
   self:SetPoints(DOTA_TEAM_GOODGUYS, state.goodScore)
   self:SetPoints(DOTA_TEAM_BADGUYS, state.badScore)
+  self.extend_counter = state.extend_counter
 end
 
 function PointsManager:CheckWinCondition(teamID, points)
@@ -165,7 +172,16 @@ function PointsManager:SetLimit(killLimit)
   LimitChangedEvent.broadcast(true)
 end
 
-function PointsManager:IncreaseLimit(extend_amount)
+function PointsManager:IncreaseLimit(limit_increase)
+  local extend_amount = 0
+  if not limit_increase then
+    extend_amount = PlayerResource:SafeGetTeamPlayerCount() * KILL_LIMIT_INCREASE
+  else
+    extend_amount = limit_increase
+  end
+
+  self.extend_counter = self.extend_counter + 1
+
   PointsManager:SetLimit(PointsManager:GetLimit() + extend_amount)
   Notifications:TopToAll({text="#duel_final_duel_objective_extended", duration=5.0, replacement_map={extend_amount=extend_amount}})
 end
@@ -201,4 +217,23 @@ function PointsManager:SetLimitCommand(keys)
   else
     GameRules:SendCustomMessage("Usage is -kill_limit X, where X is the kill limit to set", 0, 0)
   end
+end
+
+function PointsManager:RefreshLimit()
+  -- Current limit:
+  local limit = self:GetLimit()
+  local maxPoints = math.max(self:GetPoints(DOTA_TEAM_GOODGUYS), self:GetPoints(DOTA_TEAM_BADGUYS))
+  local base_limit = NORMAL_KILL_LIMIT
+  if HeroSelection.is10v10 then
+    base_limit = TEN_V_TEN_KILL_LIMIT
+  end
+  -- Expected score limit with changed number of players connected:
+  -- Expected behavior: Disconnects should reduce player_count and reconnects should increase player_count.
+  local newLimit = 10 + (base_limit + (self.extend_counter + 1) * KILL_LIMIT_INCREASE) * PlayerResource:SafeGetTeamPlayerCount()
+  if newLimit < limit then
+    local limitChange = limit - newLimit -- this used to be constant 10 and not dependent on number of players
+    newLimit = math.min(limit, math.max(maxPoints + limitChange, limit - limitChange))
+  end
+
+  self:SetLimit(newLimit)
 end

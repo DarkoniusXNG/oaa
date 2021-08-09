@@ -70,13 +70,17 @@ end
 ]]
 
 function BossAI:GiveItemToWholeTeam (item, teamId)
-  PlayerResource:GetPlayerIDsForTeam(teamId):each(function (playerId)
-    local hero = PlayerResource:GetSelectedHeroEntity(playerId)
+  if CorePointsManager then
+    CorePointsManager:GiveCorePointsToWholeTeam(CorePointsManager:GetCorePointValueOfUpdgradeCore(item), teamId)
+  else
+    PlayerResource:GetPlayerIDsForTeam(teamId):each(function (playerId)
+      local hero = PlayerResource:GetSelectedHeroEntity(playerId)
 
-    if hero then
-      hero:AddItemByName(item)
-    end
-  end)
+      if hero then
+        hero:AddItemByName(item)
+      end
+    end)
+  end
 end
 
 function BossAI:RewardBossKill(state, deathEventData, teamId)
@@ -113,8 +117,8 @@ function BossAI:RewardBossKill(state, deathEventData, teamId)
     elseif not self.hasSecondBoss[team] then
       self.hasSecondBoss[team] = true
 
-      BossSpawner[team .. "Zone1"].disable()
-      BossSpawner[team .. "Zone2"].disable()
+      --BossSpawner[team .. "Zone1"].disable()
+      --BossSpawner[team .. "Zone2"].disable()
     end
   elseif tier == 2 then
     -- NGP:GiveItemToTeam(BossItems["item_upgrade_core_2"], team)
