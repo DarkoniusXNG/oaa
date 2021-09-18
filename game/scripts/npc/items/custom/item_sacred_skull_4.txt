@@ -39,6 +39,7 @@
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.0"
+    "AbilityCastRange"                                    "700"
     "AbilityCooldown"                                     "15"
     "AbilityManaCost"                                     "75"
     "AbilitySharedCooldown"                               "sacred_skull"
@@ -90,7 +91,7 @@
       "06"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_magic_resistance"                          "10 12 14 16"
+        "bonus_magic_resistance"                          "10 11 12 13"
       }
       "07"
       {

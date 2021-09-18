@@ -27,6 +27,7 @@
       "01"                                                "item_greater_crit_2;item_upgrade_core_2"
       "02"                                                "item_bloodthorn_2;item_upgrade_core_2"
       "03"                                                "item_nullifier_2;item_upgrade_core_2"
+      "04"                                                "item_silver_edge_2;item_upgrade_core_2"
     }
   }
 
@@ -48,7 +49,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "9727"
+    "ItemCost"                                            "9702"
     "ItemShopTags"                                        "damage;crit"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "daedalus 3;crit 3"

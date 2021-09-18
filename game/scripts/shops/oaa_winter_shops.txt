@@ -122,6 +122,7 @@
     "item"                                                "item_reduction_orb_3"
     "item"                                                "item_ultimate_scepter"
     "item"                                                "item_ultimate_scepter_2"
+    "item"                                                "item_core_info"
   }
 
   "support"
@@ -138,9 +139,9 @@
     "item"                                                "item_satanic_core"
     "item"                                                "item_pull_staff"
     "item"                                                "item_solar_crest"
-    "item"                                                ""
     "item"                                                "item_far_sight"
     "item"                                                "item_holy_locket"
+    "item"                                                "item_helm_of_the_overlord"
   }
 
   "magics"

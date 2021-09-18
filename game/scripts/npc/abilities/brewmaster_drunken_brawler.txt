@@ -15,7 +15,7 @@
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "AbilityCooldown"                                     "23 21 19 17 16 15" //OAA
+    "AbilityCooldown"                                     "26 23 20 17 16 15" //OAA
 
     "AbilityManaCost"                                     "35 40 45 50 100 200"
 
@@ -26,7 +26,7 @@
       "01" // passive evasion chance
       {
         "var_type"                                        "FIELD_INTEGER"
-        "dodge_chance"                                    "10 15 20 25 30 35"
+        "dodge_chance"                                    "10 15 20 25 30 33" //OAA
       }
       "02" // passive crit chance
       {

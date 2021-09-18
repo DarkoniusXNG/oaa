@@ -86,7 +86,7 @@
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "2.25 2.5 3.0 3.75 4.75"
+        "bonus_mana_regen"                                "1.75 2.0 2.5 3.25 4.25"
       }
       "06"
       {
@@ -102,6 +102,11 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "slow_duration"                                   "0.8"
+      }
+      "10" //OAA
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "cooldown_tooltip"                                "5.0 4.0 2.5 1.8 1.6"
       }
     }
   }

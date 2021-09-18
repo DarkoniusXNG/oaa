@@ -25,7 +25,8 @@
     "ItemRequirements"
     {
       "01"                                                "item_hurricane_pike_4;item_upgrade_core_4"
-      //"02"                                                "item_siege_mode;item_upgrade_core_4"
+      "02"                                                "item_siege_mode;item_upgrade_core_4"
+      "03"                                                "item_shield_staff_4;item_upgrade_core_4"
     }
   }
 
@@ -105,7 +106,7 @@
       "08"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "range_duration"                                  "5"
+        "range_duration"                                  "6"
       }
       "09"
       {
@@ -115,7 +116,7 @@
       "10"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "max_attacks"                                     "4 5 6 7 8"
+        "max_attacks"                                     "5 6 7 8 9"
       }
       "11"
       {

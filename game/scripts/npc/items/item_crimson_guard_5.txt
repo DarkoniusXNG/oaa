@@ -54,7 +54,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "36704"
+    "ItemCost"                                            "36654"
     "ItemShopTags"                                        "armor;boost_armor;regen_health;block;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "crimson guard 5"
@@ -68,7 +68,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "400 1000 1500 2000 2500"
+        "bonus_health"                                    "350 700 1050 1400 1750"
       }
       "02"
       {
