@@ -72,24 +72,30 @@ function item_shield_staff:OnSpellStart()
     return
   end
 
-  -- Check if target has spell block
-  if target:TriggerSpellAbsorb(self) then
+  -- Check if target is something weird
+  if target.TriggerSpellAbsorb == nil then
     return
   end
 
-  -- Interrupt enemies only
+  -- Interrupt and damage enemies, apply barrier/shield to allies
   if target:GetTeamNumber() ~= caster:GetTeamNumber() then
-    if not target:IsMagicImmune() then
-      target:Stop()
-      -- Damage table
-      local damage_table = {}
-      damage_table.attacker = caster
-      damage_table.damage_type = DAMAGE_TYPE_MAGICAL
-      damage_table.ability = self
-      damage_table.damage = self:GetSpecialValueFor("damage_to_enemies")
-      damage_table.victim = target
-      ApplyDamage(damage_table)
+    -- Don't do anything if target has Linken's effect or it's spell-immune
+    if target:TriggerSpellAbsorb(self) or target:IsMagicImmune() then
+      return
     end
+
+    -- Interrupt
+    target:Stop()
+
+    -- Damage table
+    local damage_table = {}
+    damage_table.attacker = caster
+    damage_table.damage_type = DAMAGE_TYPE_MAGICAL
+    damage_table.ability = self
+    damage_table.damage = self:GetSpecialValueFor("damage_to_enemies")
+    damage_table.victim = target
+
+    ApplyDamage(damage_table)
   else
     -- Apply barrier buff to the target
     target:AddNewModifier(caster, self, "modifier_shield_staff_barrier_buff", {
@@ -254,11 +260,24 @@ function modifier_item_shield_staff_non_stacking_stats:IsPurgable()
 end
 
 function modifier_item_shield_staff_non_stacking_stats:OnCreated()
+  if not IsServer() then
+    return
+  end
 
+  -- Initialize fail counters
+  self.damage_block_failures = 0
+  self:SetStackCount(0)
 end
 
 function modifier_item_shield_staff_non_stacking_stats:OnRefresh()
+  if not IsServer() then
+    return
+  end
 
+  -- Refresh fail counters
+  self.damage_block_failures = self.damage_block_failures or 0
+  local spell_damage_block_failures = self:GetStackCount() or 0
+  self:SetStackCount(spell_damage_block_failures)
 end
 
 function modifier_item_shield_staff_non_stacking_stats:DeclareFunctions()
@@ -286,14 +305,27 @@ function modifier_item_shield_staff_non_stacking_stats:GetModifierPhysical_Const
     return 0
   end
 
-  local chance = ability:GetSpecialValueFor("passive_attack_damage_block_chance")
+  local chance = ability:GetSpecialValueFor("passive_attack_damage_block_chance") / 100
 
-  if RollPseudoRandomPercentage(chance, DOTA_PSEUDO_RANDOM_CUSTOM_GAME_1, parent) == true then
+  if not self.damage_block_failures then
+    self.damage_block_failures = 0
+  end
+
+  -- Get number of failures
+  local prngMult = self.damage_block_failures + 1
+
+  if RandomFloat(0.0, 1.0) <= (PrdCFinder:GetCForP(chance) * prngMult) then
+    -- Reset failure count
+    self.damage_block_failures = 0
+
     if parent:IsRangedAttacker() then
       return ability:GetSpecialValueFor("passive_attack_damage_block_ranged")
     else
       return ability:GetSpecialValueFor("passive_attack_damage_block_melee")
     end
+  else
+    -- Increment number of failures
+    self.damage_block_failures = prngMult
   end
 
   return 0
@@ -311,7 +343,13 @@ function modifier_item_shield_staff_non_stacking_stats:GetModifierTotal_Constant
     return 0
   end
 
+  -- Don't react on attacks
   if event.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
+    return 0
+  end
+
+  -- Don't react on self damage
+  if event.attacker == parent then
     return 0
   end
 
@@ -319,15 +357,23 @@ function modifier_item_shield_staff_non_stacking_stats:GetModifierTotal_Constant
     return 0
   end
 
-  local chance = ability:GetSpecialValueFor("passive_spell_damage_block_chance")
+  local chance = ability:GetSpecialValueFor("passive_spell_damage_block_chance") / 100
 
-  if RollPseudoRandomPercentage(chance, DOTA_PSEUDO_RANDOM_CUSTOM_GAME_1, parent) == true then
+  -- Get number of failures
+  local prngMult = self:GetStackCount() + 1
+
+  if RandomFloat(0.0, 1.0) <= (PrdCFinder:GetCForP(chance) * prngMult) then
+    -- Reset failure count
+    self:SetStackCount(0)
 
     local block_amount = ability:GetSpecialValueFor("passive_spell_damage_block")
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_MAGICAL_BLOCK, parent, block_amount, nil)
 
     return block_amount
+  else
+    -- Increment number of failures
+    self:SetStackCount(prngMult)
   end
 
   return 0
@@ -356,13 +402,14 @@ function modifier_shield_staff_barrier_buff:OnCreated(event)
     if event.barrierHP then
       self:SetStackCount(event.barrierHP)
     end
+
+    -- Sound
+    parent:EmitSound("Hero_Abaddon.AphoticShield.Cast")
   end
+
   -- Particle
   --self.particle = ParticleManager:CreateParticle("", PATTACH_ABSORIGIN_FOLLOW, parent)
   --ParticleManager:SetParticleControlEnt(self.particle, 1, parent, PATTACH_ABSORIGIN_FOLLOW, nil, parent:GetAbsOrigin(), true)
-
-  -- Sound
-  parent:EmitSound("Hero_Abaddon.AphoticShield.Cast")
 end
 
 function modifier_shield_staff_barrier_buff:OnRefresh(event)
@@ -388,7 +435,7 @@ function modifier_shield_staff_barrier_buff:GetModifierTotal_ConstantBlock(event
   local parent = self:GetParent()
   local block_amount = event.damage
   local barrier_hp = self:GetStackCount()
-  
+
   -- Don't react on self damage
   if event.attacker == parent then
     return 0

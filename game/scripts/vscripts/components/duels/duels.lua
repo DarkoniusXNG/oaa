@@ -25,7 +25,7 @@ Duels.onPreparing = DuelPreparingEvent.listen
 Duels.onEnd = DuelEndEvent.listen
 
 function Duels:Init ()
-  DebugPrint('Init duels')
+  self.moduleName = "Duels"
   self.currentDuel = nil
   self.allowExperienceGain = 0 -- 0 is no; 1 is yes; 2 is first duel (special no)
   iter(zoneNames):foreach(partial(self.RegisterZone, self))
@@ -120,15 +120,18 @@ end
 
 function Duels:RegisterZone(zoneName)
   self.zones = self.zones or {}
-  table.insert(
-    self.zones,
-    ZoneControl:CreateZone(zoneName, {
-      mode = ZONE_CONTROL_INCLUSIVE,
-      margin = 500,
-      padding = 200,
-      players = {}
-    })
-  )
+  local zoneExists = Entities:FindAllByName(zoneName)
+  if zoneExists and #zoneExists > 0  then
+    table.insert(
+      self.zones,
+      ZoneControl:CreateZone(zoneName, {
+        mode = ZONE_CONTROL_INCLUSIVE,
+        margin = 500,
+        padding = 200,
+        players = {}
+      })
+    )
+  end
 end
 
 function Duels:CountPlayerDeath (player)
@@ -393,7 +396,11 @@ function Duels:ActuallyStartDuel(options)
   DebugPrint("Duel Player Split")
   DebugPrint(split.PlayerSplitOffset)
 
-  local bigArenaIndex = RandomInt(3, 6)
+  if #self.zones < 3 then
+    return
+  end
+
+  local bigArenaIndex = RandomInt(3, #self.zones)
   local smallArenaIndex = RandomInt(1, 2)
 
   local gamemode = GameRules:GetGameModeEntity()

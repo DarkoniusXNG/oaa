@@ -45,8 +45,14 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "active_lifesteal_percent"                        "100"
+        "active_lifesteal_percent"                        "300"
       }
+    }
+
+    "precache"
+    {
+      "particle"                                          "particles/items3_fx/iron_talon_active.vpcf"
+      "particle"                                          "particles/generic_gameplay/generic_lifesteal.vpcf"
     }
   }
 }

@@ -44,7 +44,7 @@
     "AbilityTextureName"                                  "custom/force_staff_5"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
-    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_OTHER"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "37554"
+    "ItemCost"                                            "37204"
     "ItemShopTags"                                        "int;regen_health;block;health_pool;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "shield staff 5;shield 5;force 5"
@@ -111,12 +111,12 @@
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "passive_attack_damage_block_melee"               "70 100 140 190 250"
+        "passive_attack_damage_block_melee"               "70 120 170 220 270"
       }
       "08"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "passive_attack_damage_block_ranged"              "35 50 70 95 125"
+        "passive_attack_damage_block_ranged"              "35 70 105 140 175"
       }
       "09"
       {

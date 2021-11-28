@@ -90,9 +90,9 @@ BOSS_LEASH_SIZE = 1200                  -- number of units a boss will walk befo
 BOSS_AGRO_FACTOR = 15                   -- boss must take (tier * n) damage before agro
 BOSS_WANDERER_MIN_SPAWN_TIME = 12       -- min time at which first Wanderer can spawn (in minutes)
 BOSS_WANDERER_MAX_SPAWN_TIME = 15       -- max time at which first Wanderer can spawn (in minutes)
-BOSS_WANDERER_MIN_RESPAWN_TIME = 3      -- min respawn time of the Wanderer (in minutes)
+BOSS_WANDERER_MIN_RESPAWN_TIME = 4      -- min respawn time of the Wanderer (in minutes)
 BOSS_WANDERER_MAX_RESPAWN_TIME = 6      -- min respawn time of the Wanderer (in minutes)
-BOSS_WANDERER_BUFF_DURATION = 3         -- max duration of the Wanderer buff (in minutes)
+BOSS_WANDERER_BUFF_DURATION = 2.5       -- max duration of the Wanderer buff (in minutes)
 
 -- Creeps
 CREEP_SPAWN_INTERVAL = 60               -- number of seconds between each creep spawn
@@ -138,6 +138,7 @@ HERO_XP_BOUNTY_STREAK_INCREASE = 100 -- not used for now
 HERO_XP_BOUNTY_STREAK_MAX = 3000     -- Max amount of streak XP bonus (lvl * streak * 10 in normal dota where lvl <= 25)
 HERO_XP_BONUS_FACTOR = 0.13          -- Multiplier for the XP of the killed hero (0.13 in normal dota)
 HERO_KILL_XP_RADIUS = 1500           -- XP range for killing heroes (1500 in normal dota)
+HERO_KILL_GOLD_RADIUS = 1500         -- Gold assist range for killing heroes (1500 in normal dota)
 
 -- Runes
 USE_DEFAULT_RUNE_SYSTEM = false      -- Should we use the default dota rune spawn timings and the same runes as dota have?

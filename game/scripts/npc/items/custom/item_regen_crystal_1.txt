@@ -53,7 +53,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "8652"
+    "ItemCost"                                            "8602"
     "ItemShopTags"                                        "str;regen_health;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "regen crystal"
@@ -101,6 +101,7 @@
     "precache"
     {
       "particle"                                          "particles/items/regen_crystal/regen_ambient.vpcf"
+      "particle"                                          "particles/items5_fx/essence_ring.vpcf"
     }
   }
 }

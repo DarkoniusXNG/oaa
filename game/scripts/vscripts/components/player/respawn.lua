@@ -1,6 +1,7 @@
-RespawnManager = RespawnManager or {}
+RespawnManager = RespawnManager or class({})
 
 function RespawnManager:Init()
+  self.moduleName = "Player RespawnManager"
   GameEvents:OnHeroKilled(partial(self.OnHeroKilled, self))
 end
 
@@ -14,7 +15,9 @@ function RespawnManager:OnHeroKilled(keys)
 
   -- For Meepo when a clone dies and not a primary meepo
   if killed:IsClone() then
-    killed = killed:GetCloneSource()
+    -- Do everything again for the primary Meepo
+    keys.killed = killed:GetCloneSource()
+    self:OnHeroKilled(keys)
   end
 
   local respawnTime = RESPAWN_TIME_TABLE[killed:GetLevel()]

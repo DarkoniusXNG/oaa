@@ -3,19 +3,26 @@ LinkLuaModifier('modifier_is_in_offside', 'modifiers/modifier_offside.lua', LUA_
 if ProtectionAura == nil then
   DebugPrint ( 'Creating new ProtectionAura object.' )
   ProtectionAura = class({})
-  Debug.EnabledModules['cave:protection'] = true
+  Debug.EnabledModules['cave:protection'] = false
 end
 
-local MAX_ROOMS = 0
-
 function ProtectionAura:Init ()
-  ProtectionAura.zones = {
+  self.moduleName = "ProtectionAura (Offside protection and cave/base locking)"
+
+  self.max_rooms = 0
+  local legacy = GetMapName() == "oaa_legacy"
+  if legacy then
+    self.max_rooms = 4
+  end
+
+  self.zones = {
     [DOTA_TEAM_GOODGUYS] = {},
     [DOTA_TEAM_BADGUYS] = {},
   }
 
   local allGoodPlayers = {}
   local allBadPlayers = {}
+
   local function addToList (list, id)
     list[id] = true
   end
@@ -40,26 +47,28 @@ function ProtectionAura:Init ()
     ProtectionAura.zones[DOTA_TEAM_BADGUYS][0].disable()
   end)
 
-  for roomID = 0,MAX_ROOMS do
+  for roomID = 0, self.max_rooms do
+	local lockedPlayers = {}
+    if not legacy then lockedPlayers = allGoodPlayers end
     ProtectionAura.zones[DOTA_TEAM_GOODGUYS][roomID] = ZoneControl:CreateZone('boss_good_zone_' .. roomID, {
       mode = ZONE_CONTROL_EXCLUSIVE_IN,
       margin = 0,
       padding = 50,
-      players = allGoodPlayers
-      -- players = {}
+      players = lockedPlayers
     })
 
     ProtectionAura.zones[DOTA_TEAM_GOODGUYS][roomID].onStartTouch(ProtectionAura.StartTouch)
     ProtectionAura.zones[DOTA_TEAM_GOODGUYS][roomID].onEndTouch(ProtectionAura.EndTouch)
   end
 
-  for roomID = 0,MAX_ROOMS do
+  for roomID = 0, self.max_rooms do
+    local lockedPlayers = {}
+    if not legacy then lockedPlayers = allBadPlayers end
     ProtectionAura.zones[DOTA_TEAM_BADGUYS][roomID] = ZoneControl:CreateZone('boss_bad_zone_' .. roomID, {
       mode = ZONE_CONTROL_EXCLUSIVE_IN,
       margin = 0,
       padding = 0,
-      players = allBadPlayers
-      -- players = {}
+      players = lockedPlayers
     })
 
     ProtectionAura.zones[DOTA_TEAM_BADGUYS][roomID].onStartTouch(ProtectionAura.StartTouch)
@@ -67,11 +76,10 @@ function ProtectionAura:Init ()
   end
 
   ProtectionAura.active = true
-
 end
 
 function ProtectionAura:IsInEnemyZone(teamID, entity)
-  for roomID = 0, MAX_ROOMS do
+  for roomID = 0, self.max_rooms do
     if ProtectionAura:IsInSpecificZone(teamID, roomID, entity) then
       return true
     end

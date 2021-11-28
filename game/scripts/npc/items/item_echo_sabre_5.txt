@@ -26,6 +26,7 @@
     {
       "01"                                                "item_echo_sabre_4;item_upgrade_core_4"
       "02"                                                "item_heavens_halberd_4;item_upgrade_core_4"
+      "03"                                                "item_pull_staff_4;item_upgrade_core_4"
     }
   }
 
@@ -41,10 +42,11 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "FightRecapLevel"                                     "1"
     "AbilityTextureName"                                  "custom/echo_sabre_5"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.0"
-    "AbilityCooldown"                                     "5.0 4.0 2.5 1.8 1.6"
+    "AbilityCooldown"                                     "6.0 4.0 2.5 1.8 1.6"
     "AbilitySharedCooldown"                               "echo"
 
     // Item Info

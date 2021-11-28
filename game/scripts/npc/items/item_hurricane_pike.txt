@@ -13,7 +13,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "450"
+    "ItemCost"                                            "100" //OAA
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -44,13 +44,13 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "550"
     "AbilityCastPoint"                                    "0.0"
-    "AbilityCooldown"                                     "23.0"
+    "AbilityCooldown"                                     "23 20 17 14 11" //OAA
     "AbilitySharedCooldown"                               "force"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "100"
-    "ItemCost"                                            "4550"
+    "ItemCost"                                            "4200" //OAA
     "ItemShopTags"                                        "int;damage;attack_speed;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "fs;force staff;hurricane pike;pike"
@@ -76,7 +76,7 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "20 25 35 50 70"
+        "bonus_agility"                                   "20 30 45 65 90"
       }
       "04"
       {
@@ -117,6 +117,11 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "bonus_attack_speed"                              "100 110 120 130 140"
+      }
+      "20" //OAA
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "cooldown_tooltip"                                "23 20 17 14 11"
       }
     }
   }

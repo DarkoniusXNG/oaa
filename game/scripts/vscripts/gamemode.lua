@@ -152,7 +152,6 @@ function GameMode:OnPreGame()
   InitModule(ZoneControl)
   InitModule(AbilityLevels)
   InitModule(HeroProgression)
-  InitModule(SellBlackList)
   InitModule(Glyph)
   InitModule(BubbleOrbFilter)
   InitModule(BossProtectionFilter)
@@ -164,12 +163,13 @@ function GameMode:OnPreGame()
   InitModule(EntityStatProvider)
   InitModule(RespawnManager)
   InitModule(BountyRunePick)
-  --InitModule(WispProjectileFilter)
+  InitModule(ModifyAbilitiesFilter)
   InitModule(HudTimer)
   InitModule(Duels)
   InitModule(DuelRunes)
   InitModule(PlayerConnection)
   InitModule(ProtectionAura)
+  InitModule(CustomRuneSystem)
 
   CheckCheatMode()
 end
@@ -193,22 +193,16 @@ function GameMode:OnGameInProgress()
   InitModule(FinalDuel)
   --InitModule(StatusResistance)
   InitModule(SaveLoadState)
-  InitModule(Runes)
-  InitModule(CustomRuneSystem)
+  InitModule(PassiveExperience)
 
-  -- xpm stuff
-  LinkLuaModifier("modifier_oaa_thinker", "modifiers/modifier_oaa_thinker.lua", LUA_MODIFIER_MOTION_NONE)
-  LinkLuaModifier("modifier_xpm_thinker", "modifiers/modifier_xpm_thinker.lua", LUA_MODIFIER_MOTION_NONE)
-  --CreateModifierThinker( nil, nil, "modifier_xpm_thinker", {}, Vector( 0, 0, 0 ), DOTA_TEAM_NEUTRALS, false )
-  local xpm_thinker = CreateUnitByName("npc_dota_custom_dummy_unit", Vector(0, 0, 0), false, nil, nil, DOTA_TEAM_NEUTRALS)
-  xpm_thinker:AddNewModifier(xpm_thinker, nil, "modifier_oaa_thinker", {})
-  xpm_thinker:AddNewModifier(xpm_thinker, nil, "modifier_xpm_thinker", {})
+  -- valve is a really great company that totally cares about custom game mode creators and it's a breath of fresh air
+  GameRules:SetTimeOfDay( 0.251 )
 end
 
 function InitModule(myModule)
   if myModule ~= nil then
     if myModule.initialized == true then
-      print("Module is already initialized and there was an attempt to initialize it again -> preventing")
+      print("Module "..tostring(myModule.moduleName).." is already initialized and there was an attempt to initialize it again -> preventing")
       return
     end
     local status, err = pcall(function ()
