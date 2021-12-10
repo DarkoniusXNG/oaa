@@ -25,8 +25,8 @@
     "ItemRequirements"
     {
       "01"                                                "item_regen_crystal_1;item_upgrade_core_3"
-      "02"                                                "item_heart_3;item_upgrade_core_3"
-      "03"                                                "item_crimson_guard_3;item_upgrade_core_3"
+      //"02"                                                "item_heart_3;item_upgrade_core_3"
+      //"03"                                                "item_crimson_guard_3;item_upgrade_core_3"
     }
   }
 
@@ -54,7 +54,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "16603"
+    "ItemCost"                                            "17303"
     "ItemShopTags"                                        "str;regen_health;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "regen crystal 2"

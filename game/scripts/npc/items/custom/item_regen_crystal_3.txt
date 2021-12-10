@@ -25,9 +25,9 @@
     "ItemRequirements"
     {
       "01"                                                "item_regen_crystal_2;item_upgrade_core_4"
-      "02"                                                "item_heart_4;item_upgrade_core_4"
-      "03"                                                "item_crimson_guard_4;item_upgrade_core_4"
-      "04"                                                "item_heart_transplant;item_upgrade_core_4"
+      //"02"                                                "item_heart_4;item_upgrade_core_4"
+      //"03"                                                "item_crimson_guard_4;item_upgrade_core_4"
+      //"04"                                                "item_heart_transplant;item_upgrade_core_4"
     }
   }
 
@@ -55,7 +55,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "36604"
+    "ItemCost"                                            "37304"
     "ItemShopTags"                                        "str;regen_health;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "regen crystal 3"
