@@ -151,12 +151,16 @@ function HeroSelection:Init ()
     -- [VScript] [components\duels\duels:64] userid: 3
     -- [VScript] [components\duels\duels:64] xuid: 76561198014183519
     local playerid = keys.PlayerID or keys.player_id
+    if not playerid then
+      print("HeroSelection module - player_reconnected event has no PlayerID or player_id key. Gj Valve.")
+      return
+    end
     if not lockedHeroes[playerid] then
       -- we don't care if they haven't locked in yet
       return
     end
     local hero = PlayerResource:GetSelectedHeroEntity(playerid)
-    if not hero or hero:GetUnitName() == FORCE_PICKED_HERO and loadedHeroes[lockedHeroes[playerid]] then
+    if (not hero or hero:GetUnitName() == FORCE_PICKED_HERO) and loadedHeroes[lockedHeroes[playerid]] then
       DebugPrint('PlayerReconnected - Giving player '..tostring(playerid)..' a hero: '..lockedHeroes[playerid]..' after reconnecting.')
       HeroSelection:GiveStartingHero(playerid, lockedHeroes[playerid])
     end
@@ -202,6 +206,15 @@ function HeroSelection:StartSelection ()
     if OAAOptions.settings.GAME_MODE == "ARDM" then
       --DebugPrint("OAAOptions ARDM option selected")
       local herolistFile = 'scripts/npc/herolist_ardm.txt'
+      local herolistTable = LoadKeyValues(herolistFile)
+      for key, value in pairs(herolistTable) do
+        if value == 0 then
+          table.insert(rankedpickorder.bans, key)
+        end
+      end
+    end
+    if OAAOptions.settings.HEROES_MODS == "HM03" or OAAOptions.settings.HEROES_MODS_2 == "HM03" then
+      local herolistFile = 'scripts/npc/herolist_blood_magic.txt'
       local herolistTable = LoadKeyValues(herolistFile)
       for key, value in pairs(herolistTable) do
         if value == 0 then
@@ -363,8 +376,13 @@ function HeroSelection:RankedManager (event)
     end
     if choice == 'forcerandom' then
       choice = self:ForceRandomHero(event.PlayerID)
+      local previewHero = self:GetPreviewHero(event.PlayerID)
       local name = string.gsub(choice, "npc_dota_hero_", "") -- Cuts the npc_dota_hero_ prefix
-      GameRules:SendCustomMessage(tostring(PlayerResource:GetPlayerName(event.PlayerID)).." was forced to random "..name, 0, 0)
+      if choice == previewHero then
+        GameRules:SendCustomMessage(tostring(PlayerResource:GetPlayerName(event.PlayerID)).." was forced to pick "..name, 0, 0)
+      else
+        GameRules:SendCustomMessage(tostring(PlayerResource:GetPlayerName(event.PlayerID)).." was forced to random "..name, 0, 0)
+      end
     end
     DebugPrint('Picking step ' .. rankedpickorder.currentOrder)
     if rankedpickorder.order[rankedpickorder.currentOrder].team ~= PlayerResource:GetTeam(event.PlayerID) then
@@ -848,17 +866,25 @@ function HeroSelection:ForceRandomHero (playerId)
     DebugPrint("ForceRandomHero - Doing normal random for AR or ARDM")
     return HeroSelection:RandomHero()
   end
+  local previewHero = HeroSelection:GetPreviewHero(playerId)
+  local team = tostring(PlayerResource:GetTeam(playerId))
+  DebugPrint("GetPreviewHero - Started force random for player " .. playerId .. " on team " .. team)
+  if previewHero and not HeroSelection:IsHeroDisabled(previewHero) then
+    DebugPrint("GetPreviewHero - Force picking highlighted hero")
+    return previewHero
+  end
+  DebugPrint("ForceRandomHero - Bad preview hero, falling back to normal random")
+  return HeroSelection:RandomHero()
+end
+
+function HeroSelection:GetPreviewHero (playerId)
   local previewTable = CustomNetTables:GetTableValue('hero_selection', 'preview_table') or {}
   local team = tostring(PlayerResource:GetTeam(playerId))
   local steamid = HeroSelection:GetSteamAccountID(playerId)
-  DebugPrint("ForceRandomHero - Started force random for player " .. playerId .. " on team " .. team)
-  if previewTable[team] and previewTable[team][steamid] and not HeroSelection:IsHeroDisabled(previewTable[team][steamid]) then
-    DebugPrint("ForceRandomHero - Force picking highlighted hero")
+  if previewTable[team] and previewTable[team][steamid] then
     return previewTable[team][steamid]
   end
-
-  DebugPrint("ForceRandomHero - Bad preview hero, falling back to normal random")
-  return HeroSelection:RandomHero()
+  return nil
 end
 
 function HeroSelection:RandomHero ()

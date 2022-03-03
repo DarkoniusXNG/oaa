@@ -25,7 +25,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_satanic_3;item_upgrade_core_3"
-      "02"                                                "item_mask_of_madness_3;item_upgrade_core_3"
     }
   }
 
@@ -60,7 +59,7 @@
     "ItemShopTags"                                        "damage;unique;hard_to_tag"
     "ItemQuality"                                         "artifact"
     "ItemAliases"                                         "vampire;vamp;vampire tooth;vampires tooth;satanic"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
