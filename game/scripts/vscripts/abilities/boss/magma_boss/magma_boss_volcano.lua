@@ -47,7 +47,8 @@ function magma_boss_volcano:OnSpellStart()
   end
 
   for _, vLoc in ipairs(vTargetPositions) do
-    local hUnit = CreateUnitByName("npc_dota_magma_boss_volcano", vLoc, false, caster, caster, caster:GetTeamNumber())
+    local position = GetGroundPosition(vLoc, nil)
+    local hUnit = CreateUnitByName("npc_dota_magma_boss_volcano", position, false, caster, caster, caster:GetTeamNumber())
     hUnit:AddNewModifier(caster, self, "modifier_magma_boss_volcano_thinker", {duration = self:GetSpecialValueFor("totem_duration_max")})
     hUnit:SetModelScale(0.01)
     local nMaxHealth = self:GetSpecialValueFor("totem_health")
@@ -361,19 +362,19 @@ function modifier_magma_boss_volcano_thinker:OnDestroy()
   end
 
   if self.warning_particle then
-    ParticleManager:DestroyParticle(self.warning_particle, false)
+    ParticleManager:DestroyParticle(self.warning_particle, true)
     ParticleManager:ReleaseParticleIndex(self.warning_particle)
   end
   if self.ember_particle then
-    ParticleManager:DestroyParticle(self.ember_particle, false)
+    ParticleManager:DestroyParticle(self.ember_particle, true)
     ParticleManager:ReleaseParticleIndex(self.ember_particle)
   end
   if self.eruption_particle then
-    ParticleManager:DestroyParticle(self.eruption_particle, false)
+    ParticleManager:DestroyParticle(self.eruption_particle, true)
     ParticleManager:ReleaseParticleIndex(self.eruption_particle)
   end
   if self.lava_bits then
-    ParticleManager:DestroyParticle(self.lava_bits, false)
+    ParticleManager:DestroyParticle(self.lava_bits, true)
     ParticleManager:ReleaseParticleIndex(self.lava_bits)
   end
   if self.volcano_crater then
@@ -398,12 +399,20 @@ function modifier_magma_boss_volcano_thinker:OnDestroy()
 end
 
 function modifier_magma_boss_volcano_thinker:OnIntervalThink()
+  if not IsServer() then
+    return
+  end
+  local parent = self:GetParent()
+  if not parent or parent:IsNull() or not parent:IsAlive() then
+    self:StartIntervalThink(-1)
+    self:Destroy()
+    return
+  end
   if self.bErupted == true then
     local aoe_per_interval = self.aoe_per_second*self.interval
     --local heal_per_interval = self.heal_per_second*self.interval
     local damage_per_interval = self.damage_per_second*self.interval
 
-    local parent = self:GetParent()
     local ability = self:GetAbility()
     local damage_table = {
         attacker = self:GetCaster(),
@@ -411,7 +420,17 @@ function modifier_magma_boss_volcano_thinker:OnIntervalThink()
         damage_type = self.damage_type,
         ability = ability,
     }
-    local units = FindUnitsInRadius(parent:GetTeamNumber(), parent:GetAbsOrigin(), parent, self.magma_radius, DOTA_UNIT_TARGET_TEAM_BOTH, bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC), DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local units = FindUnitsInRadius(
+      parent:GetTeamNumber(),
+      parent:GetAbsOrigin(),
+      nil,
+      self.magma_radius,
+      DOTA_UNIT_TARGET_TEAM_ENEMY,
+      bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
+      DOTA_UNIT_TARGET_FLAG_NONE,
+      FIND_ANY_ORDER,
+      false
+    )
 
     for _, unit in pairs(units) do
       if unit and not unit:IsNull() then
@@ -419,17 +438,13 @@ function modifier_magma_boss_volcano_thinker:OnIntervalThink()
         local ground_origin = GetGroundPosition(unit_origin, unit)
         local unit_z = unit_origin.z
         local ground_z = ground_origin.z
-        if not unit:HasFlyMovementCapability() and unit_z - ground_z < 10 then
-          -- Heals allies, damages enemies only if touching the magma on the ground or underground
-          if unit:GetTeamNumber() == parent:GetTeamNumber() then
-            --unit:Heal(heal_per_interval, ability)
-          elseif not unit:HasModifier("modifier_magma_boss_volcano") then
-            -- Visual Effect
-            unit:AddNewModifier(damage_table.attacker, ability, "modifier_magma_boss_volcano_burning_effect", {duration = self.interval+0.1})
-            -- Damage
-            damage_table.victim = unit
-            ApplyDamage(damage_table)
-          end
+        if not unit:HasFlyMovementCapability() and unit_z - ground_z < 10 and not unit:HasModifier("modifier_magma_boss_volcano") then
+          -- Damage enemies only if touching the magma on the ground or underground
+          -- Visual Effect
+          unit:AddNewModifier(damage_table.attacker, ability, "modifier_magma_boss_volcano_burning_effect", {duration = self.interval+0.1})
+          -- Damage
+          damage_table.victim = unit
+          ApplyDamage(damage_table)
         end
       end
     end
@@ -537,28 +552,42 @@ function modifier_magma_boss_volcano_thinker:MagmaErupt()
   GridNav:DestroyTreesAroundPoint(center, self.radius, false)
 end
 
-function modifier_magma_boss_volcano_thinker:OnAttackLanded(params)
-  if IsServer() then
+if IsServer() then
+  function modifier_magma_boss_volcano_thinker:OnAttackLanded(event)
     local parent = self:GetParent()
-    if params.target == parent and not parent:IsNull() then
-      local ability = self:GetAbility()
-      local attacker = params.attacker
-      if attacker and not attacker:IsNull() then
-        local damage_dealt = 1
-        if attacker:IsRealHero() then
-          if ability and not ability:IsNull() then
-            damage_dealt = math.ceil(ability:GetSpecialValueFor("totem_health") / ability:GetSpecialValueFor("totem_hero_attacks_to_destroy"))
-          else
-            damage_dealt = 8
-          end
-        end
-        -- To prevent dead staying in memory (preventing SetHealth(0) or SetHealth(-value) )
-        if parent:GetHealth() - damage_dealt <= 0 then
-          parent:Kill(ability, attacker)
-        else
-          parent:SetHealth(parent:GetHealth() - damage_dealt)
-        end
+    local attacker = event.attacker
+    local target = event.target
+
+    -- Check if attacker exists
+    if not attacker or attacker:IsNull() then
+      return
+    end
+
+    -- Check if attacked unit exists
+    if not target or target:IsNull() then
+      return
+    end
+
+    -- Check if attacked unit is the parent
+    if target ~= parent then
+      return
+    end
+
+    local ability = self:GetAbility()
+    local damage_dealt = 1
+    if attacker:IsRealHero() then
+      if ability and not ability:IsNull() then
+        damage_dealt = math.ceil(ability:GetSpecialValueFor("totem_health") / ability:GetSpecialValueFor("totem_hero_attacks_to_destroy"))
+      else
+        damage_dealt = 4
       end
+    end
+
+    -- To prevent dead staying in memory (preventing SetHealth(0) or SetHealth(-value) )
+    if parent:GetHealth() - damage_dealt <= 0 then
+      parent:Kill(ability, attacker)
+    else
+      parent:SetHealth(parent:GetHealth() - damage_dealt)
     end
   end
 end

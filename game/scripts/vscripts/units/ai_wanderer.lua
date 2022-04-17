@@ -43,6 +43,7 @@ function WandererThink ()
   if not thisEntity.hasSpawned then
     thisEntity.hasSpawned = true
     StartWandering()
+    return 1
   end
 
   if thisEntity.walking then
@@ -211,24 +212,28 @@ function WandererThink ()
         thisEntity:CastAbilityOnTarget(nearestEnemy, thisEntity.netAbility, thisEntity:entindex())
       end
       if thisEntity:GetHealth() / thisEntity:GetMaxHealth() <= 0.5 then
-        local enemiesToCleanse = FindUnitsInRadius(
-          thisEntity:GetTeamNumber(),
-          thisEntity:GetAbsOrigin(),
-          nil,
-          1000,
-          DOTA_UNIT_TARGET_TEAM_ENEMY,
-          DOTA_UNIT_TARGET_ALL,
-          DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-          FIND_ANY_ORDER,
-          false
-        )
-        if thisEntity.cleanseAbility and thisEntity.cleanseAbility:IsFullyCastable() and #enemiesToCleanse > 1 then
-          ExecuteOrderFromTable({
-            UnitIndex = thisEntity:entindex(),
-            OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET,
-            AbilityIndex = thisEntity.cleanseAbility:entindex(),
-            Queue = false,
-          })
+        if thisEntity.cleanseAbility and thisEntity.cleanseAbility:IsFullyCastable() then
+          local ability = thisEntity.cleanseAbility
+          local radius = ability:GetSpecialValueFor("radius")
+          local enemiesToCleanse = FindUnitsInRadius(
+            thisEntity:GetTeamNumber(),
+            thisEntity:GetAbsOrigin(),
+            nil,
+            radius,
+            DOTA_UNIT_TARGET_TEAM_ENEMY,
+            DOTA_UNIT_TARGET_ALL,
+            DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+            FIND_ANY_ORDER,
+            false
+          )
+          if #enemiesToCleanse > 1 then
+            ExecuteOrderFromTable({
+              UnitIndex = thisEntity:entindex(),
+              OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET,
+              AbilityIndex = ability:entindex(),
+              Queue = false,
+            })
+          end
         end
       end
     end
@@ -300,8 +305,10 @@ function GetNextWanderLocation (startPosition)
 
   local nextPosition = Vector(0, 0, 0)
   local isValidPosition = false
+  local loopCount = 0
 
   while not isValidPosition do
+    loopCount = loopCount + 1
     --if nextPosition then
       --print('Got a bad position option ' .. tostring(nextPosition))
     --end
@@ -314,7 +321,9 @@ function GetNextWanderLocation (startPosition)
     end
     isValidPosition = true
     if (scoreDiff > 5 and (nextPosition - startPosition):Length2D() < 800) or (IsNearRadiantFountain(nextPosition) or IsNearDireFountain(nextPosition)) then
-      isValidPosition = false
+      if loopCount < 7 then
+        isValidPosition = false
+      end
     end
   end
 
