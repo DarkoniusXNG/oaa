@@ -8,7 +8,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "5188"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT" //OAA
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT" //OAA, Valve has extra empty space
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
@@ -35,7 +35,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1600"
+        "radius"                                          "1400"
       }
       "02"
       {

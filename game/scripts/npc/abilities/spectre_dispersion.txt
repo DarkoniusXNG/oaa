@@ -28,17 +28,17 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "min_radius"                                      "300"
+        "min_radius"                                      "400"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "max_radius"                                      "700"
+        "max_radius"                                      "800"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "shard_dagger_damage"                             "300"
+        "shard_dagger_damage"                             "400" //OAA
         "RequiresShard"                                   "1"
       }
       "05"

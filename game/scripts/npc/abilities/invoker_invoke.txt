@@ -7,7 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5375"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5375"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
 
@@ -23,18 +23,10 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_invoked_spells"                              "2"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "cooldown_reduction_per_orb"                      "0.16" // OAA, so it doesn't bug out at OAA levels
-      }
+      "max_invoked_spells"      "2"
+      "cooldown_reduction_per_orb"  "0.16" // OAA, so it doesn't bug out at OAA levels
     }
   }
 }

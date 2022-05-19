@@ -73,12 +73,20 @@ function GameMode:OnNPCSpawned(keys)
       local playerID = UnitVarToPlayerID(npc)
       local hero = PlayerResource:GetSelectedHeroEntity(playerID)
       if hero then
-        local force_of_nature_ability = hero:FindAbilityByName("furion_force_of_nature")
+        local force_of_nature_ability = hero:FindAbilityByName("furion_force_of_nature_oaa")
         if force_of_nature_ability then
           local ability_level = force_of_nature_ability:GetLevel()
           if ability_level > 0 then
-            local correct_damage = force_of_nature_ability:GetLevelSpecialValueFor("treant_large_damage_bonus", ability_level-1)
-            local correct_hp = force_of_nature_ability:GetLevelSpecialValueFor("treant_large_hp_bonus", ability_level-1)
+            local correct_damage = force_of_nature_ability:GetLevelSpecialValueFor("treant_large_damage", ability_level-1)
+            local correct_hp = force_of_nature_ability:GetLevelSpecialValueFor("treant_large_health", ability_level-1)
+            local correct_speed = force_of_nature_ability:GetLevelSpecialValueFor("treant_move_speed", ability_level-1)
+            local correct_armor = force_of_nature_ability:GetLevelSpecialValueFor("treant_armor", ability_level-1)
+            -- Talent that increases health and damage of treants with a multiplier
+            local talent1 = hero:FindAbilityByName("special_bonus_unique_furion")
+            if talent1 and talent1:GetLevel() > 0 then
+              correct_hp = correct_hp * talent1:GetSpecialValueFor("value")
+              correct_damage = correct_damage * talent1:GetSpecialValueFor("value")
+            end
             -- Fix DAMAGE
             npc:SetBaseDamageMin(correct_damage)
             npc:SetBaseDamageMax(correct_damage)
@@ -86,10 +94,10 @@ function GameMode:OnNPCSpawned(keys)
             npc:SetBaseMaxHealth(correct_hp)
             npc:SetMaxHealth(correct_hp)
             npc:SetHealth(correct_hp)
-            -- Check for talent
-            if hero:HasLearnedAbility("special_bonus_unique_furion") then
-              npc:AddNewModifier(hero, force_of_nature_ability, "modifier_treant_bonus_oaa", {})
-            end
+            -- Fix ARMOR
+            npc:SetPhysicalArmorBaseValue(correct_armor)
+            -- Fix Movement speed
+            npc:SetBaseMoveSpeed(correct_speed)
           end
         end
       end
@@ -109,8 +117,7 @@ function GameMode:OnEntityHurt(keys)
   --DebugPrint("[BAREBONES] Entity Hurt")
   --DebugPrintTable(keys)
 
-  local damagebits = keys.damagebits -- This might always be 0 and therefore useless
-  if keys.entindex_attacker ~= nil and keys.entindex_killed ~= nil then
+  if keys.entindex_attacker and keys.entindex_killed then
     local entCause = EntIndexToHScript(keys.entindex_attacker)
     local entVictim = EntIndexToHScript(keys.entindex_killed)
 
@@ -119,9 +126,8 @@ function GameMode:OnEntityHurt(keys)
     end
 
     -- The ability/item used to damage, or nil if not damaged by an item/ability
-    local damagingAbility = nil
-
-    if keys.entindex_inflictor ~= nil then
+    local damagingAbility
+    if keys.entindex_inflictor then
       damagingAbility = EntIndexToHScript( keys.entindex_inflictor )
     end
 
@@ -139,114 +145,17 @@ function GameMode:OnItemPickedUp(keys)
   DebugPrint( '[BAREBONES] OnItemPickedUp' )
   DebugPrintTable(keys)
 
-  local unitEntity = nil
+  local unitEntity
   if keys.UnitEntitIndex then
     unitEntity = EntIndexToHScript(keys.UnitEntitIndex)
   elseif keys.HeroEntityIndex then
     unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
   end
 
-  local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local playerID = keys.PlayerID
-  local itemname = keys.itemname
-end
-
--- An item was picked up off the ground
--- game event object for OnItemGifted
-local OnItemGiftedEvent = CreateGameEvent('OnItemGifted')
-function GameMode:OnItemGifted(keys)
-  OnItemGiftedEvent(keys)
-  DebugPrint( '[BAREBONES] OnItemGifted' )
-  DebugPrintTable(keys)
-
-  -- itemname ( string )
-  -- PlayerID ( short )
-  -- ItemEntityIndex( short )
-  -- HeroEntityIndex( short )
-
-  local unitEntity = nil
-  if keys.UnitEntitIndex then
-    unitEntity = EntIndexToHScript(keys.UnitEntitIndex)
-  elseif keys.HeroEntityIndex then
-    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
+  local itemEntity
+  if keys.ItemEntityIndex then
+    itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
   end
-
-  local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local playerID = keys.PlayerID
-  local itemname = keys.itemname
-end
-
--- An item was picked up off the ground
--- game event object for OnPlayerGotItem
-local OnPlayerGotItemEvent = CreateGameEvent('OnPlayerGotItem')
-function GameMode:OnPlayerGotItem(keys)
-  OnPlayerGotItemEvent(keys)
-  DebugPrint( '[BAREBONES] OnPlayerGotItem' )
-  DebugPrintTable(keys)
-
-  -- itemname ( string )
-  -- PlayerID ( short )
-  -- ItemEntityIndex( short )
-  -- HeroEntityIndex( short )
-
-  local unitEntity = nil
-  if keys.UnitEntitIndex then
-    unitEntity = EntIndexToHScript(keys.UnitEntitIndex)
-  elseif keys.HeroEntityIndex then
-    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
-  end
-
-  local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local playerID = keys.PlayerID
-  local itemname = keys.itemname
-end
-
--- An item was picked up off the ground
--- game event object for OnInventoryItemChanged
-local OnInventoryItemChangedEvent = CreateGameEvent('OnInventoryItemChanged')
-function GameMode:OnInventoryItemChanged(keys)
-  OnInventoryItemChangedEvent(keys)
-  DebugPrint( '[BAREBONES] OnInventoryItemChanged' )
-  DebugPrintTable(keys)
-
-  -- itemname ( string )
-  -- PlayerID ( short )
-  -- ItemEntityIndex( short )
-  -- HeroEntityIndex( short )
-
-  local unitEntity = nil
-  if keys.UnitEntitIndex then
-    unitEntity = EntIndexToHScript(keys.UnitEntitIndex)
-  elseif keys.HeroEntityIndex then
-    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
-  end
-
-  local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local playerID = keys.PlayerID
-  local itemname = keys.itemname
-end
-
--- An item was picked up off the ground
--- game event object for OnInventoryChanged
-local OnInventoryChangedEvent = CreateGameEvent('OnInventoryChanged')
-function GameMode:OnInventoryChanged(keys)
-  OnInventoryChangedEvent(keys)
-  DebugPrint( '[BAREBONES] OnInventoryChanged' )
-  DebugPrintTable(keys)
-
-  -- itemname ( string )
-  -- PlayerID ( short )
-  -- ItemEntityIndex( short )
-  -- HeroEntityIndex( short )
-
-  local unitEntity = nil
-  if keys.UnitEntitIndex then
-    unitEntity = EntIndexToHScript(keys.UnitEntitIndex)
-  elseif keys.HeroEntityIndex then
-    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
-  end
-
-  local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
   local playerID = keys.PlayerID
   local itemname = keys.itemname
 end
@@ -384,18 +293,6 @@ function GameMode:OnRuneActivated(keys)
 
   local playerID = keys.PlayerID
   local rune = keys.rune
-end
-
--- A player took damage from a tower
--- game event object for OnPlayerTakeTowerDamage
-local OnPlayerTakeTowerDamageEvent = CreateGameEvent('OnPlayerTakeTowerDamage')
-function GameMode:OnPlayerTakeTowerDamage(keys)
-  OnPlayerTakeTowerDamageEvent(keys)
-  DebugPrint('[BAREBONES] OnPlayerTakeTowerDamage')
-  DebugPrintTable(keys)
-
-  local playerID = keys.PlayerID
-  local damage = keys.damage
 end
 
 -- A player picked a hero

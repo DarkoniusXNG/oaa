@@ -7,13 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5585"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5585"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES_ENEMIES_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -34,29 +33,24 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "self_damage"                                       "50"
+      "missile_speed"                                     "1300"
+      "target_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "self_damage"                                     "50"
+        "value"                                           "110 160 210 260 520 780"
+        "special_bonus_unique_abaddon_2"                  "+50"
       }
-      "02"
+      "heal_amount"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "target_damage"                                   "110 160 210 260 520 780"
-        "LinkedSpecialBonus"                              "special_bonus_unique_abaddon_2"
+        "value"                                           "110 160 210 260 520 780"
+        "special_bonus_unique_abaddon_2"                  "+50"
       }
-      "03"
+      "effect_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "heal_amount"                                     "110 160 210 260 520 780"
-        "LinkedSpecialBonus"                              "special_bonus_unique_abaddon_2"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "missile_speed"                                   "1300"
+        "value"                                           "0"
+        "special_bonus_unique_abaddon_4"                  "+400"
       }
     }
   }

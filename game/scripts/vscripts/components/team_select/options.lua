@@ -8,9 +8,9 @@ end
 
 local hero_mods = {
   HMN  = false,
-  HM01 = "modifier_any_damage_lifesteal_oaa",
+  --HM01 = "modifier_any_damage_lifesteal_oaa",
   HM02 = "modifier_aoe_radius_increase_oaa",
-  HM03 = "modifier_blood_magic_oaa",
+  --HM03 = "modifier_blood_magic_oaa",
   HM04 = "modifier_debuff_duration_oaa",
   HM05 = "modifier_echo_strike_oaa",
   HM06 = "modifier_ham_oaa",
@@ -23,11 +23,16 @@ local hero_mods = {
   HM13 = "modifier_diarrhetic_oaa",
   HM14 = "modifier_rend_oaa",
   HM15 = "modifier_range_increase_oaa",
-  HM16 = "modifier_healer_oaa",
+  --HM16 = "modifier_healer_oaa",
   HM17 = "modifier_explosive_death_oaa",
   --HM18 = "modifier_no_health_bar_oaa",
-  HM19 = "modifier_brute_oaa",
+  --HM19 = "modifier_brute_oaa",
   HM20 = "modifier_wisdom_oaa",
+  HM21 = "modifier_aghanim_oaa",
+  HM22 = "modifier_nimble_oaa",
+  HM23 = "modifier_sorcerer_oaa",
+  HM24 = "modifier_any_damage_crit_oaa",
+  HM25 = "modifier_hp_mana_switch_oaa",
 }
 local boss_mods = {
   BMN  = false,
@@ -89,6 +94,7 @@ function OAAOptions:Init ()
   GameEvents:OnHeroSelection(partial(OAAOptions.AdjustGameMode, OAAOptions))
   GameEvents:OnCustomGameSetup(partial(OAAOptions.ChangeDefaultSettings, OAAOptions))
   GameEvents:OnGameInProgress(partial(OAAOptions.SetupGame, OAAOptions))
+  --FilterManager:AddFilter(FilterManager.Damage, self, Dynamic_Wrap(OAAOptions, "DamageFilter"))
 
   ListenToGameEvent("npc_spawned", Dynamic_Wrap(OAAOptions, 'OnUnitSpawn'), OAAOptions)
 
@@ -113,6 +119,11 @@ function OAAOptions:Init ()
   LinkLuaModifier("modifier_boss_aggresive_oaa", "modifiers/funmodifiers/modifier_boss_aggresive_oaa.lua", LUA_MODIFIER_MOTION_NONE)
   LinkLuaModifier("modifier_brute_oaa", "modifiers/funmodifiers/modifier_brute_oaa.lua", LUA_MODIFIER_MOTION_NONE)
   LinkLuaModifier("modifier_wisdom_oaa", "modifiers/funmodifiers/modifier_wisdom_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+  LinkLuaModifier("modifier_aghanim_oaa", "modifiers/funmodifiers/modifier_aghanim_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+  LinkLuaModifier("modifier_nimble_oaa", "modifiers/funmodifiers/modifier_nimble_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+  LinkLuaModifier("modifier_sorcerer_oaa", "modifiers/funmodifiers/modifier_sorcerer_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+  LinkLuaModifier("modifier_any_damage_crit_oaa", "modifiers/funmodifiers/modifier_any_damage_crit_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+  LinkLuaModifier("modifier_hp_mana_switch_oaa", "modifiers/funmodifiers/modifier_hp_mana_switch_oaa.lua", LUA_MODIFIER_MOTION_NONE)
 
   DebugPrint('OAAOptions module Initialization finished!')
 end
@@ -213,7 +224,9 @@ end
 function OAAOptions:GetRandomModifier(mod_list)
   local options = {}
   for k, v in pairs(mod_list) do
-    table.insert(options, k)
+    if v ~= false then
+      table.insert(options, k)
+    end
   end
   return self:GetRandomModifierFromOptions(options)
 end
@@ -291,4 +304,28 @@ function OAAOptions:ChangeDefaultSettings()
 
   self:RestoreDefaults()
   self:SaveSettings()
+end
+
+function OAAOptions:DamageFilter(filter_table)
+  local attacker
+  local victim
+  local damage_type = filter_table.damagetype_const
+  local inflictor = filter_table.entindex_inflictor_const	-- entindex_inflictor_const is nil if damage is not caused by an ability
+  local damage_after_reductions = filter_table.damage 	-- damage is damage after reductions without spell amplifications
+
+  if filter_table.entindex_attacker_const and filter_table.entindex_victim_const then
+    attacker = EntIndexToHScript(filter_table.entindex_attacker_const)
+    victim = EntIndexToHScript(filter_table.entindex_victim_const)
+  end
+
+  local damaging_ability
+  if inflictor then
+    damaging_ability = EntIndexToHScript(inflictor)
+  end
+
+  -- if attacker and victim and not attacker:IsNull() and not victim:IsNull() then
+
+  -- end
+
+  return true
 end

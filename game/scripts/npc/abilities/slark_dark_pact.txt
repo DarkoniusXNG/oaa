@@ -7,11 +7,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5494"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5494"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -28,7 +27,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "75"
+    "AbilityManaCost"                                     "65"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -52,7 +51,7 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "total_damage"                                    "75 150 225 300 600 1200"
+        "total_damage"                                    "90 160 230 300 600 1200"
         "LinkedSpecialBonus"                              "special_bonus_unique_slark_2"
       }
       "05"
@@ -64,6 +63,11 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "pulse_interval"                                  "0.1"
+      }
+      "07"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "self_damage_pct"                                 "30"
       }
     }
   }

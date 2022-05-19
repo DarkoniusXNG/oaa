@@ -1,0 +1,85 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Furion: Force of Nature, Nature's Call (OAA Rework)
+  // OAA version that spawns stronger treants
+  //=================================================================================================================
+  "furion_force_of_nature_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                                                  "85247"
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "furion_force_of_nature"
+    "ScriptFile"                                          "abilities/oaa_force_of_nature.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+
+    "MaxLevel"                                            "6"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "750"
+    "AbilityCastPoint"                                    "0.5"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_3"
+
+    "AbilityCooldown"                                     "30"
+    "AbilityManaCost"                                     "150"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "area_of_effect"                                  "150 225 300 375 450 525"
+      }
+      "02"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "max_treants"                                     "2 3 4 5 6 7"
+        "LinkedSpecialBonus"                              "special_bonus_unique_furion_2"
+      }
+      "03"
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "duration"                                        "60"
+      }
+      "04"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "treant_health"                                   "550 650 750 850 1700 2550"
+        "LinkedSpecialBonus"                              "special_bonus_unique_furion"
+        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_MULTIPLY"
+      }
+      "05"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "treant_damage"                                   "24 32 40 48 148 248"
+        "LinkedSpecialBonus"                              "special_bonus_unique_furion"
+        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_MULTIPLY"
+        "CalculateSpellDamageTooltip"                     "0"
+      }
+      "06"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "treant_armor"                                    "0"
+      }
+      "07"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "treant_move_speed"                               "300 320 340 360 380 400"
+      }
+      "08" // treant_health x 2
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "treant_large_health"                             "1100 1300 1500 1700 3400 5100"
+      }
+      "09" // treant_damage x 2.5
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "treant_large_damage"                             "60 80 100 120 370 620"
+      }
+    }
+  }
+}
