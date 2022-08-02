@@ -15,7 +15,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCorePointCost"                                   "0"
-    "ItemCost"                                            "20000"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -45,12 +45,12 @@
     "AbilityTextureName"                                  "custom/linkens_sphere_5"
 
     "AbilityCastRange"                                    "700"
-    "AbilityCooldown"                                     "12.0 11.0 10.0 9.0 8.0"
+    "AbilityCooldown"                                     "14.0 13.0 12.0 11.0 10.0"
     "AbilitySharedCooldown"                               "linkens"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "37604"
+    "ItemCost"                                            "34604"
     "ItemShopTags"                                        "regen_health;regen_mana;str;agi;int;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "ls 5;linken's sphere 5;linkens 5"
@@ -83,7 +83,7 @@
       "04"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "block_cooldown"                                  "12.0 11.0 10.0 9.0 8.0"
+        "block_cooldown"                                  "14.0 13.0 12.0 11.0 10.0"
       }
       "05"
       {

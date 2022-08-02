@@ -12,6 +12,7 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
     "HasScepterUpgrade"                                   "1"
 
     "MaxLevel"                                            "5"
@@ -62,7 +63,7 @@
       "outer_damage"        "50"
       "min_distance"        "150"
       "placement_radius"      "350"
-      "mres_reduction"      "10 15 20 25 30"
+      "mres_reduction"      "15 20 25 30 35"
       "burn_duration"       "5"
     }
   }

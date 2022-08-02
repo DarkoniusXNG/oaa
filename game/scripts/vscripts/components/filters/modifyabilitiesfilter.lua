@@ -42,19 +42,13 @@ function ModifyAbilitiesFilter:ModifierFilter(keys)
       if talent and talent:GetLevel() > 0 then
         max_duration = max_duration + talent:GetSpecialValueFor("value2")
       end
-      victim:AddNewModifier(caster, ability, "modifier_oaa_requiem_allowed", {duration = math.min(max_duration, 6.5), immune_time = 3})
+      victim:AddNewModifier(caster, ability, "modifier_oaa_requiem_allowed", {duration = math.min(max_duration, 6.5), immune_time = 2})
     end
   elseif ability_name == "faceless_void_time_dilation" and modifier_name == "modifier_faceless_void_time_dilation_slow" then
     victim:AddNewModifier(caster, ability, "modifier_faceless_void_time_dilation_degen_oaa", {duration = modifier_duration})
   elseif (ability_name == "elder_titan_natural_order" or ability_name == "elder_titan_natural_order_spirit") and modifier_name == "modifier_elder_titan_natural_order_magic_resistance" then
     if not victim:HasModifier("modifier_elder_titan_natural_order_correction_oaa") and ability:GetLevel() > 4 and not victim:IsOAABoss() then
       victim:AddNewModifier(caster, ability, "modifier_elder_titan_natural_order_correction_oaa", {})
-    end
-  elseif ability_name == "mirana_leap" and modifier_name == "modifier_mirana_leap_buff" then
-    local duration = ability:GetSpecialValueFor("leap_bonus_duration")
-    local talent = caster:FindAbilityByName("special_bonus_unique_mirana_3_oaa")
-    if talent and talent:GetLevel() > 0 then
-      keys.duration = duration + talent:GetSpecialValueFor("value")
     end
   end
 

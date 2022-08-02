@@ -15,7 +15,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCorePointCost"                                   "0"
-    "ItemCost"                                            "20000"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -56,7 +56,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "36304"
+    "ItemCost"                                            "33554"
     "ItemShopTags"                                        "regen_health;magic_resist"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "eternal shroud 5;es 5"
@@ -70,7 +70,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_spell_resist"                              "20 21 22 23 24"
+        "bonus_spell_resist"                              "24 25 26 27 28"
       }
       "02"
       {
@@ -85,7 +85,7 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "barrier_block"                                   "400 800 1200 1600 2000"
+        "barrier_block"                                   "600 950 1300 1650 2000"
       }
       "05"
       {
@@ -100,7 +100,7 @@
       "07"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "creep_spell_lifesteal"                           "4 6 8 10 12"
+        "creep_spell_lifesteal"                           "4 5 6 7 8"
       }
     }
   }

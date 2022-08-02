@@ -1,20 +1,21 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: Power Treads 4
+  // Recipe: Greater Power Treads 4
   //=================================================================================================================
   "item_recipe_greater_power_treads_4"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3013"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "3013"
     "BaseClass"                                           "item_datadriven"
     "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCorePointCost"                                   "0"
-    "ItemCost"                                            "20000"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -33,13 +34,13 @@
   }
 
   //=================================================================================================================
-  // Power Treads 4
+  // Greater Power Treads 4
   //=================================================================================================================
   "item_greater_power_treads_4"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3018"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "3018"
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/farming/greater_power_treads.lua"
     //"AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -48,7 +49,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "34404"
+    "ItemCost"                                            "31404"
     "ItemShopTags"                                        "attack_speed;move_speed;int;agi;str"
     "ItemQuality"                                         "common"
     "ItemAliases"                                         "greater power treads 4;power treads 4;treads 4"
@@ -94,7 +95,7 @@
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_spell_amp"                                 "7 8 9 10"
+        "bonus_spell_amp"                                 "6 8 10 12"
       }
       "08"
       {

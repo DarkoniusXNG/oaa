@@ -43,7 +43,7 @@ ONE_V_ONE_LIMIT_INCREASE = 2              -- Extend amount = ONE_V_ONE_LIMIT_INC
 
 -- poop wards
 POOP_WARD_DURATION = 360
-POOP_WARD_COOLDOWN = 120
+POOP_WARD_COOLDOWN = 240
 POOP_WARD_RADIUS = 150
 
 -- scan reveal
@@ -184,8 +184,8 @@ MINIMAP_ICON_SIZE = 1                   -- What icon size should we use for our 
 MINIMAP_CREEP_ICON_SIZE = 1             -- What icon size should we use for creeps?
 MINIMAP_RUNE_ICON_SIZE = 1              -- What icon size should we use for runes?
 
-CUSTOM_BUYBACK_COST_ENABLED = true      -- Should we use a custom buyback cost setting?
-CUSTOM_BUYBACK_COOLDOWN_ENABLED = true  -- Should we use a custom buyback time?
+CUSTOM_BUYBACK_COST_ENABLED = false      -- Should we use a custom buyback cost setting?
+CUSTOM_BUYBACK_COOLDOWN_ENABLED = false  -- Should we use a custom buyback time?
 BUYBACK_ENABLED = false                 -- Should we allow people to buyback when they die?
 
 DISABLE_FOG_OF_WAR_ENTIRELY = false     -- Should we disable fog of war entirely for both teams?

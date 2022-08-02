@@ -1,4 +1,3 @@
-
 LinkLuaModifier("modifier_visage_gravekeepers_cloak_oaa", "abilities/visage_gravekeepers_cloak.lua", LUA_MODIFIER_MOTION_NONE) --- PETH WEFY INPARFANT
 LinkLuaModifier("modifier_visage_gravekeepers_cloak_oaa_aura", "abilities/visage_gravekeepers_cloak.lua", LUA_MODIFIER_MOTION_NONE) --- PETH WEFY INPARFANT
 
@@ -165,10 +164,8 @@ if IsServer() then
     local max_layers = ability:GetSpecialValueFor("max_layers")
     -- Talent that increases number of layers
     local talent = parent:FindAbilityByName("special_bonus_unique_visage_oaa_6")
-    if talent then
-      if talent:GetLevel() > 0 then
-        max_layers = max_layers + talent:GetSpecialValueFor("value")
-      end
+    if talent and talent:GetLevel() > 0 then
+      max_layers = max_layers + talent:GetSpecialValueFor("value")
     end
     if stackCount < max_layers then
       self:SetStackCount(stackCount + 1)
@@ -201,6 +198,12 @@ if IsServer() then
     local talent3 = parent:FindAbilityByName("special_bonus_unique_visage_oaa_5")
     if talent3 and talent3:GetLevel() > 0 then
       recovery_time = recovery_time - math.abs(talent3:GetSpecialValueFor("value"))
+    end
+
+    -- Talent that increases damage threshold
+    local talent4 = parent:FindAbilityByName("special_bonus_unique_visage_oaa_1")
+    if talent4 and talent4:GetLevel() > 0 then
+      damageThreshold = damageThreshold + talent4:GetSpecialValueFor("value")
     end
 
     -- Does not interact at all with damage instances lower than the threshold.
