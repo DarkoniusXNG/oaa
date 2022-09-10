@@ -7,13 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5391"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5391"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL" //OAA, for picking screen tooltip
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
 
@@ -22,22 +21,21 @@
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "0" // old: "80 120 160 200 400 600"
-    "AbilityCooldown"                                     "0" //OAA, for picking screen tooltip
+    "AbilityCooldown"                                     "3 2 1 0 0 0" //OAA, for picking screen tooltip
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "mana_pool_damage_pct"  //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "mana_pool_damage_pct"                            "11 12 13 14 15 16" //OAA, for picking screen tooltip
-        "LinkedSpecialBonus"                              "special_bonus_unique_outworld_devourer"
+        "value"                   "11 12 13 14 15 16"
+        "special_bonus_unique_outworld_devourer"  "+2"
       }
-      "02"
+      "mana_cost_percentage"              "20"
+      "bounce_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_cost_percentage"                            "20"
+        "value"                   "0"
       }
     }
   }

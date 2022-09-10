@@ -10,7 +10,7 @@ local hero_mods = {
   HMN  = false,
   HM01 = "modifier_any_damage_lifesteal_oaa",
   HM02 = "modifier_aoe_radius_increase_oaa",
-  --HM03 = "modifier_blood_magic_oaa",
+  HM03 = "modifier_blood_magic_oaa",
   HM04 = "modifier_debuff_duration_oaa",
   HM05 = "modifier_echo_strike_oaa",
   HM06 = "modifier_ham_oaa",
@@ -148,8 +148,8 @@ end
 function OAAOptions:SetupGame()
   if self.settings.HEROES_MODS == "HM13" or self.settings.HEROES_MODS_2 == "HM13" then
     POOP_WARD_COOLDOWN = 30
-    Glyph.ward.cooldown = 30
-    Glyph:ResetWardCooldowns()
+    CustomWardButtons.obs_cooldown = 30
+    CustomWardButtons.sentry_cooldown = 30
   end
   if self.settings.GLOBAL_MODS == "GM12" then
     local mode = GameRules:GetGameModeEntity()
@@ -226,7 +226,7 @@ function OAAOptions:AdjustGameMode()
         global_thinker:AddNewModifier(global_thinker, nil, "modifier_oaa_thinker", {})
         global_thinker:AddNewModifier(global_thinker, nil, global_event_mod, {isGlobal = 1})
       end
-    -- elseif global_setting == "GM12" then
+    -- elseif global_setting == "GM13" then
       -- self.heroes_extra_mod =
     end
   end
@@ -278,6 +278,10 @@ function OAAOptions:OnUnitSpawn(event)
       if not npc:HasModifier(self.heroes_mod_2) then
         npc:AddNewModifier(npc, nil, self.heroes_mod_2, {})
       end
+    end
+
+    if self.settings.GLOBAL_MODS == "GM12" then
+      PlayerResource:SetCustomBuybackCooldown(npc:GetPlayerID(), FINAL_DUEL_TIMEOUT)
     end
 
     -- if self.heroes_extra_mod then

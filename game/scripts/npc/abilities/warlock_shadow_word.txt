@@ -4,24 +4,19 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5163"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5163"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.4"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -39,10 +34,10 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "damage"
+      "damage" //OAA
       {
-        "value"                                           "18 27 36 45 145 245"
-        "LinkedSpecialBonus"                              "special_bonus_unique_warlock_7"
+        "value"                                           "15 25 35 45 145 245"
+        "special_bonus_unique_warlock_7"                  "+75"
       }
       "duration"
       {
@@ -57,8 +52,13 @@
       }
       "shard_movement_speed_pct"
       {
-        "value"                                           "10"
+        "value"                                           "0"
         "RequiresShard"                                   "1"
+      }
+      "AbilityCooldown"
+      {
+        "value"                                           "14"
+        "special_bonus_unique_warlock_3"                  "-4"
       }
     }
   }

@@ -14,7 +14,7 @@
 
     "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
     "MovementTurnRate"          "1.5"
-    "MovementSpeed"             "290"
+    "MovementSpeed"             "305"
 
     "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
     "AttackDamageMin"           "25"
@@ -85,11 +85,18 @@
     "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_HERO"
     "HasInventory"              "1"
 
-    "VisionDaytimeRange"        "1800"                            // Range of vision during day light.
-    "VisionNighttimeRange"      "800"                            // Range of vision at night time.
+    "VisionDaytimeRange"        "1800"
+    "VisionNighttimeRange"      "800"
 
     "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
 
+    "precache"
+    {
+      "model"                   "models/heroes/sohei/sohei_arcana/sohei_arcana.vmdl"
+      "model"                   "models/heroes/sohei/bepis_sohei/bepis_sohei_base.vmdl"
+      "particle"                "particles/hero/sohei/arcana/dbz/dbz_flare_core.vpcf"
+      "particle"                "particles/hero/sohei/arcana/pepsi/pepsi_flare_core.vpcf"
+    }
     "particle_folder"           "particles/hero/sohei"
     "GameSoundsFile"            "soundevents/units/game_sounds_sohei.vsndevts"
     "SoundSet"                  "Sohei"

@@ -54,7 +54,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "12752"
+    "ItemCost"                                            "12552"
     "ItemShopTags"                                        "damage;str;armor;unique;hard_to_tag"
     "ItemQuality"                                         "artifact"
     "ItemAliases"                                         "satanic core 3"
@@ -112,7 +112,7 @@
       "10"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_status_resist"                             "18 20 22 24 26"
+        "bonus_status_resist"                             "0"
       }
       "11"
       {
@@ -122,7 +122,7 @@
       "12"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "hp_regen_amp"                                    "20 22 24 26 28"
+        "hp_regen_amp"                                    "0"
       }
     }
   }

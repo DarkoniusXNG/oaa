@@ -36,7 +36,6 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "911"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-    //"AbilityTextureName"                                  "item_revenants_brooch"
     "AbilityTextureName"                                  "custom/revenants_brooch"
 
     // Stats
@@ -67,14 +66,14 @@
       "bonus_attack_speed"                                "40 45 50 55 60"
       "bonus_armor"                                       "6 8 10 12 14" //OAA
       "projectile_speed"                                  "300 400 500 600 700"
-      "int_damage_multiplier"                             "1"
+      "int_damage_multiplier"                             "0.75" //OAA
       "slow"                                              "25 30 35 40 45"
       "slow_duration"                                     "4"
       "mana_cost"                                         "100" // what is this Valve?
       "damage_penalty"                                    "0"
       "passive_cooldown"                                  "8.0" //OAA
       "number_of_attacks"                                 "69" //OAA
-      "active_duration"                                   "3.5" //OAA
+      "active_duration"                                   "4" //OAA
     }
   }
 }

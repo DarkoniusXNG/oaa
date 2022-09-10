@@ -7,7 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5687"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5687"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
@@ -43,7 +43,7 @@
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.4 1.8 2.2 2.6 2.7 2.8" //OAA, Valve has it wrong
+        "duration"                                        "1.1 1.6 2.1 2.6 2.7 2.8"
       }
       "04"
       {

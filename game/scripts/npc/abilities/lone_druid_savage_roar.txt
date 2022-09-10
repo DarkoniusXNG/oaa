@@ -43,37 +43,37 @@
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.4 1.8 2.2 2.6 2.7 2.8"
+        "duration"                                        "1.1 1.6 2.1 2.6 2.7 2.8"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
         "only_affects_player_units"                       "1"
       }
-	  "05"
-	  {
-		"var_type"                                        "FIELD_INTEGER"
-		"shard_radius"                                    "700"
-		"RequiresShard"                                   "1"
-	  }
-	  "06"
-	  {
-		"var_type"                                        "FIELD_INTEGER"
-		"shard_movement_speed_pct"                        "20"
-		"RequiresShard"                                   "1"
-	  }
-	  "07"
-	  {
-		"var_type"                                        "FIELD_INTEGER"
-		"shard_attack_speed"                              "60"
-		"RequiresShard"                                   "1"
-	  }
-	  "08"
-	  {
-		"var_type"                                        "FIELD_FLOAT"
-		"shard_duration"                                  "5.0"
-		"RequiresShard"                                   "1"
-	  }
+      "05"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "shard_radius"                                    "700"
+        "RequiresShard"                                   "1"
+      }
+      "06"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "shard_movement_speed_pct"                        "20"
+        "RequiresShard"                                   "1"
+      }
+      "07"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "shard_attack_speed"                              "60"
+        "RequiresShard"                                   "1"
+      }
+      "08"
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "shard_duration"                                  "5.0"
+        "RequiresShard"                                   "1"
+      }
     }
   }
 

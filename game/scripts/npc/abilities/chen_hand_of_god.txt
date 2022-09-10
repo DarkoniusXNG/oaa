@@ -11,6 +11,7 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES" // OAA, Valve forgot about this
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -37,7 +38,7 @@
         "value"                                           "200 400 600 1200 2200"
         "special_bonus_unique_chen_2"                     "+400"
       }
-      "hot_duration"                                      "10"
+      "hot_duration"                                      "8"
       "heal_per_second" //OAA
       {
         "value"                                           "20 40 60 120 220"
@@ -47,6 +48,11 @@
       {
         "value"                                           "1 2 3 4 5"
         "RequiresShard"                                   "1"
+      }
+      "does_purge"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_chen_12"                    "+1"
       }
     }
   }

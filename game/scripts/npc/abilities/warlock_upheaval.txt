@@ -4,8 +4,9 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5164"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5164"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
@@ -18,7 +19,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "30" //OAA
+    "AbilityCooldown"                                     "30 29 28 27 26 25" //OAA
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -30,36 +31,27 @@
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1200"
+    "AbilityCastRange"                                    "900"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "aoe"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "aoe"                                             "500 550 600 650 700 750"
+        "value"                                           "500 550 600 650 700 750"
+        "special_bonus_unique_warlock_upheaval_aoe"       "+75"
       }
-      "02"
+      "slow_per_second"                                   "10 15 20 25 30 35"
+      "duration"                                          "3.0"
+      "max_slow"                                          "75 80 85 90 95 100" //OAA
+      "aspd_per_second"                                   "10"
+      "damage_per_second"                                 "10" // min dps
+      "max_damage"                                        "30 50 70 90 180 360" // max dps
+      "damage_tick_interval"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_per_second"                                 "12 17 22 27 32 37"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "max_slow"                                        "75 80 85 90 95 100" //OAA
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aspd_per_second"                                 "10"
+        "value"                                           "1"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
     }
   }

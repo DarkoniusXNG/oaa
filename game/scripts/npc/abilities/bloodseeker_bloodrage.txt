@@ -20,7 +20,7 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.2"
+    "AbilityCastPoint"                                    "0.2" // DOTA_ABILITY_BEHAVIOR_IMMEDIATE overrides this afaik
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -62,12 +62,13 @@
       "04"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "damage_pct"                                      "2" // there is no need to scale this Valve...
+        "damage_pct"                                      "2"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PURE"
       }
       "05"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shard_max_health_dmg_pct"                        "2"
+        "var_type"                                        "FIELD_FLOAT"
+        "shard_max_health_dmg_pct"                        "1.8"
         "RequiresShard"                                   "1"
       }
     }

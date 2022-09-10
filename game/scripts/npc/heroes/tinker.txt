@@ -15,10 +15,10 @@
     "Ability10"                                           "special_bonus_unique_tinkerer_5" // replaces special_bonus_unique_tinker_4
     "Ability11"                                           "special_bonus_unique_tinkerer_2" // replaces special_bonus_mana_reduction_8
 
-    "Ability12"                                           "special_bonus_unique_tinker_7"
+    "Ability12"                                           "special_bonus_unique_tinkerer_3" // replaces special_bonus_unique_tinker_7
     "Ability13"                                           "special_bonus_unique_tinkerer_6" // replaces special_bonus_unique_tinker_6
 
-    "Ability14"                                           "special_bonus_unique_tinkerer_3" // replaces special_bonus_spell_amplify_10
+    "Ability14"                                           "special_bonus_unique_tinker_defense_matrix_cdr"
     "Ability15"                                           "special_bonus_unique_tinkerer_4" // replaces special_bonus_unique_tinker_5
 
     "Ability16"                                           "special_bonus_unique_tinkerer_1" // replaces special_bonus_unique_tinker
@@ -61,5 +61,14 @@
 
     "VisionDaytimeRange"                                  "1800"
     "VisionNighttimeRange"                                "800"
+
+    "precache"
+    {
+      "model"                                             "models/items/rattletrap/warmachine_cog_dc/warmachine_cog_dc.vmdl"
+      "particle"                                          "particles/econ/items/tinker/tinker_ti10_immortal_laser/tinker_ti10_immortal_laser.vpcf"
+      "particle"                                          "particles/hero/tinkerer/ground_splatter.vpcf"
+      "particle"                                          "particles/hero/tinkerer/rocket_model.vpcf"
+      "particle"                                          "particles/hero/tinkerer/rocket_projectile_linear.vpcf"
+    }
   }
 }

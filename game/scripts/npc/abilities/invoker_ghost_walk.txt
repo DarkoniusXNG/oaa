@@ -7,7 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5381"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5381"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
@@ -16,20 +16,19 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "200"
+    "AbilityManaCost"                                     "175"
     "AbilityCastPoint"                                    "0.05"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityValues"  
+    "AbilityValues"
     {
       "AbilityCooldown"
       {
-        "value"         "45"
-        "special_bonus_unique_invoker_10" "-25"
+        "value"         "35"
       }
-      "duration"        "100.0"
-      "area_of_effect"    "400"
+      "duration"        "60"
+      "area_of_effect"    "450"
       "enemy_slow"
       {
         "value"         "-20 -25 -30 -35 -40 -45 -50 -55 -57 -59 -61 -63 -65 -67 -69"
@@ -39,7 +38,7 @@
       {
         "value"         "-15 -10 -5 0 5 10 15 20 25 30 35 40 45 50 55"
         "levelkey"        "wexlevel"
-      }   
+      }
       "aura_fade_time"      "2.0"
     }
   }

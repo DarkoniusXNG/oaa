@@ -7,7 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5274"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5274"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -16,7 +16,6 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
 
@@ -74,6 +73,7 @@
         "var_type"                                        "FIELD_INTEGER"
         "tooltip_health_cost_percent"                     "32 38 44 50 56"
         "CalculateSpellDamageTooltip"                     "1"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
       "06"
       {
@@ -84,7 +84,6 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "slow_durtion_tooltip"                            "3 4 5 6 7"
-        "LinkedSpecialBonus"                              "special_bonus_unique_huskar_4"
       }
       "08"
       {
@@ -95,7 +94,7 @@
       "09"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "cast_range_bonus"                                "300"
+        "cast_range_bonus"                                "250"
         "RequiresScepter"                                 "1"
       }
     }

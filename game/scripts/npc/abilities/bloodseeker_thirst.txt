@@ -7,7 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5017"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5017"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
@@ -27,7 +27,7 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "14 24 34 44 54 64"
+        "bonus_movement_speed"                            "16 24 32 40 48 56"
         "LinkedSpecialBonus"                              "special_bonus_unique_bloodseeker_4"
       }
       "03"

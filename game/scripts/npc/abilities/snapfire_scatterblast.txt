@@ -13,6 +13,7 @@
     "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES" //OAA, Valve forgot about this
 
     "MaxLevel"                                            "6"
 
@@ -60,7 +61,6 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "debuff_duration"                                 "1.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_snapfire_2"
       }
       "06"
       {

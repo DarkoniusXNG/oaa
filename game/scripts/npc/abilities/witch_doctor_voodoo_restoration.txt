@@ -4,8 +4,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5139"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5139"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES_ENEMIES_NO" //OAA, Valve forgot about this
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
@@ -33,17 +35,23 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "500"
+        "radius"                                          "500 550 600 650 700 750"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "heal"                                            "16 24 32 40 80 160"
+        "heal"                                            "10 20 30 40 80 160"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
       "04"
       {
         "var_type"                                        "FIELD_FLOAT"
         "heal_interval"                                   "0.33"
+      }
+      "05"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "enemy_damage_pct"                                "100"
       }
     }
   }

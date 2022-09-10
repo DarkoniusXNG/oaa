@@ -5,8 +5,8 @@
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_Description"                        "Beastmaster calls forth a Boar to aid in the battlefield."
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_Lore"                               "After befriending the strange beast of his childhood, Beastmaster has learned to call to animals in times of need."
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_duration"                           "SUMMON DURATION:"
-// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_boar_hp_tooltip"                    "BOAR HEALTH:"
-// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_boar_damage_tooltip"                "BOAR ATTACK DAMAGE:"
+// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_boar_base_max_health"               "BOAR HEALTH:"
+// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_boar_base_damage"                   "BOAR ATTACK DAMAGE:"
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_boar_moveslow_tooltip"              "%BOAR SLOW:"
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_boar_poison_duration_tooltip"       "BOAR POISON DURATION:"
 
@@ -15,9 +15,9 @@
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_shard_description"                  "Reduces Hawk cooldown and Hawks gain Dive Bomb."
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_Lore"                               "After befriending the strange beast of his childhood, Beastmaster has learned to call to animals in times of need."
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_duration"                           "SUMMON DURATION:"
-// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_hp_tooltip"                    "HAWK HEALTH:"
-// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_speed_tooltip"                 "HAWK SPEED:"
-// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_vision_tooltip"                "HAWK VISION:"
+// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_base_max_health"               "HAWK HEALTH:"
+// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_base_movespeed"                "HAWK SPEED:"
+// "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_base_vision_range"             "HAWK VISION:"
 // "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_shard_cooldown_reduction"           "COOLDOWN REDUCTION:"
 
 "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar_oaa"                                "#{DOTA_Tooltip_ability_beastmaster_call_of_the_wild_boar}"
@@ -40,6 +40,6 @@
 "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_oaa_hawk_speed"                     "#{DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_base_movespeed}"
 "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_oaa_hawk_vision"                    "#{DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_hawk_base_vision_range}"
 "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_oaa_hawk_armor"                     "HAWK ARMOR:"
-"DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_oaa_shard_description"              "Increases Hawk's magic resistance to 100%% and Hawks gain True Sight and Dive Bomb: Hawk explodes on target enemy, dealing 400 pure damage and stunning them for 2 seconds, killing itself. Cast Range: 1200."
+"DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_oaa_shard_description"              "Increases Hawk's magic resistance to 100%% and Hawks gain True Sight and Dive Bomb: Hawk explodes on target enemy, dealing 400 pure damage and rooting them for 2.5 seconds, killing itself. Cast Range: 900."
 
 "DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_Description"                        "#{DOTA_Tooltip_ability_beastmaster_call_of_the_wild_hawk_oaa_Description}"

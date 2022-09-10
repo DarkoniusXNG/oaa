@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_kill", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_ward_invisibility", "modifiers/modifier_ward_invisibility.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_ui_custom_observer_ward_charges", "components/glyph/customwardbuttons.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_ui_custom_sentry_ward_charges", "components/glyph/customwardbuttons.lua", LUA_MODIFIER_MOTION_NONE)
@@ -61,6 +60,11 @@ function CustomWardButtons:CastWard(event)
   if current_charges == 0 then
     CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "custom_dota_hud_error_message", {reason = 61, message = ""})
     return
+  elseif not hero:IsAlive() then
+    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "custom_dota_hud_error_message", {reason = 80, message = "Dead"})
+    return
+  elseif GameRules:IsGamePaused() then
+    return
   end
 
   modifier:DecrementStackCount()
@@ -95,8 +99,8 @@ function modifier_ui_custom_observer_ward_charges:RemoveOnDeath()
   return false
 end
 
-function modifier_ui_custom_observer_ward_charges:OnCreated(kv)
-  if IsServer() then
+if IsServer() then
+  function modifier_ui_custom_observer_ward_charges:OnCreated(kv)
     local parent = self:GetParent()
     if parent:IsTempestDouble() or parent:IsClone() then
       self:Destroy()
@@ -109,13 +113,16 @@ function modifier_ui_custom_observer_ward_charges:OnCreated(kv)
     self:StartIntervalThink(0.1)
     self:SetDuration(self.cd, false)
   end
-end
 
-function modifier_ui_custom_observer_ward_charges:OnIntervalThink()
-  local remaining = self:GetRemainingTime()
-  if remaining < 1 then
-    self:IncrementStackCount()
-    self:SetDuration(self.cd, false)
+  function modifier_ui_custom_observer_ward_charges:OnIntervalThink()
+    if CustomWardButtons and self.cd ~= CustomWardButtons.obs_cooldown then
+      self.cd = CustomWardButtons.obs_cooldown
+    end
+    local remaining = self:GetRemainingTime()
+    if remaining < 1 then
+      self:IncrementStackCount()
+      self:SetDuration(self.cd, false)
+    end
   end
 end
 
@@ -135,8 +142,8 @@ function modifier_ui_custom_sentry_ward_charges:RemoveOnDeath()
   return false
 end
 
-function modifier_ui_custom_sentry_ward_charges:OnCreated(kv)
-  if IsServer() then
+if IsServer() then
+  function modifier_ui_custom_sentry_ward_charges:OnCreated(kv)
     local parent = self:GetParent()
     if parent:IsTempestDouble() or parent:IsClone() then
       self:Destroy()
@@ -149,12 +156,15 @@ function modifier_ui_custom_sentry_ward_charges:OnCreated(kv)
     self:StartIntervalThink(0.1)
     self:SetDuration(self.cd, false)
   end
-end
 
-function modifier_ui_custom_sentry_ward_charges:OnIntervalThink()
-  local remaining = self:GetRemainingTime()
-  if remaining < 1 then
-    self:IncrementStackCount()
-    self:SetDuration(self.cd, false)
+  function modifier_ui_custom_sentry_ward_charges:OnIntervalThink()
+    if CustomWardButtons and self.cd ~= CustomWardButtons.sentry_cooldown then
+      self.cd = CustomWardButtons.sentry_cooldown
+    end
+    local remaining = self:GetRemainingTime()
+    if remaining < 1 then
+      self:IncrementStackCount()
+      self:SetDuration(self.cd, false)
+    end
   end
 end

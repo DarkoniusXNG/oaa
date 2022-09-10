@@ -7,14 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5146"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "ID"                                                  "5146"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
 
@@ -25,7 +24,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14"
+    "AbilityCooldown"                                     "14" //OAA, Valve has it wrong
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -37,36 +36,28 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "tick_rate"       "2.0"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_rate"                                       "2.0"
+        "value"                                           "0.4 0.6 0.8 1.0 1.1 1.2"
+        "special_bonus_shard"                             "+0.35"
       }
-      "02"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "0.4 0.6 0.8 1.0 1.1 1.2"
-        "LinkedSpecialBonus"                              "special_bonus_unique_enigma_6"
+        "value"               "40 60 80 100 200 300"
+        "special_bonus_unique_enigma_5"   "+30"
       }
-      "03"
+      "stun_instances"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "40 60 80 100 200 300"
-        "LinkedSpecialBonus"                              "special_bonus_unique_enigma_5"
+        "value"                 "3"
+        "special_bonus_unique_enigma_2"     "+4"
       }
-      "04"
+      "eidolon_spawns_per_tick"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tooltip_stuns"                                   "3"
-        "LinkedSpecialBonus"                              "special_bonus_unique_enigma_2"
-        "LinkedSpecialBonusField"                         "value2"
+        "value"                   "0"
+        "special_bonus_shard"           "+1"
       }
     }
   }

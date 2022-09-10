@@ -464,10 +464,9 @@ function modifier_furion_wrath_of_nature_hit_debuff:IsPurgable()
 end
 
 function modifier_furion_wrath_of_nature_hit_debuff:DeclareFunctions()
-  local funcs = {
+  return {
     MODIFIER_EVENT_ON_DEATH,
   }
-  return funcs
 end
 
 if IsServer() then
@@ -588,11 +587,9 @@ function modifier_furion_wrath_of_nature_scepter_root_oaa:OnCreated()
 end
 
 function modifier_furion_wrath_of_nature_scepter_root_oaa:CheckState()
-  local state = {
+  return {
     [MODIFIER_STATE_ROOTED] = true,
   }
-
-  return state
 end
 
 function modifier_furion_wrath_of_nature_scepter_root_oaa:GetEffectName()

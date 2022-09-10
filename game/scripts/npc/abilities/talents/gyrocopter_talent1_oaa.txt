@@ -1,26 +1,21 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Bonus Poison Touch DPS
+  // Custom Gyrocopter talent: Flak Cannon bonus range
   //=================================================================================================================
-  "special_bonus_unique_dazzle_3"
+  "special_bonus_unique_gyrocopter_1_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "6528"
+    "ID"                                                  "3621"
+    "BaseClass"                                           "special_bonus_base"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilitySpecial" // Don't delete this even if it's empty
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "value"                                           "80" //OAA
-        "ad_linked_abilities"                             "dazzle_poison_touch"
-      }
     }
   }
 }

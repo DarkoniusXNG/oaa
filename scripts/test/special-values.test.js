@@ -59,6 +59,7 @@ test('KV Values', function (t) {
     dotaAbilities.ability_lua = true;
     dotaItems.item_datadriven = true;
     dotaAbilities.ability_datadriven = true;
+    dotaAbilities.special_bonus_base = true;
     Lib.items(function (err, data) {
       if (err) {
         t.notOk(err, 'no err while item reading kvs');
@@ -568,7 +569,7 @@ function testAbilityValues (t, isItem, abvalues, parentAbvalues) {
       if (abvalues.comments && abvalues.comments[keyName] && abvalues.comments[keyName].includes('OAA')) {
         // do nothing
       } else if (!parentData[keyName]) {
-        t.fail('Extra keyname found in AbilityValues: ' + keyName);
+        t.fail('Extra {keyname} found in AbilityValues: ' + keyName);
       } else if (!parentAbvalues[keyName]) {
         t.fail('Unexpected block AbilityValue: ' + keyName);
       }
@@ -579,22 +580,23 @@ function testAbilityValues (t, isItem, abvalues, parentAbvalues) {
       actualValues.forEach(function (v, i) {
         let expectedValue = expectedValues[i];
         const actualValue = v;
+        const actualKey = Object.keys(actualData[keyName]).find(key => actualData[keyName][key] === actualValue);
+        // if (actualKey === 'value') {
+        // actualKey = keyName;
+        // }
+        const parentKey = Object.keys(parentData[keyName]).find(key => parentData[keyName][key] === expectedValue);
         if (actualValue && expectedValue && actualValue !== expectedValue) {
           if (!abvalues.comments[keyName] || !abvalues.comments[keyName].includes('OAA')) {
-            let actualKey = Object.keys(actualData[keyName]).find(key => actualData[keyName][key] === actualValue);
-            if (actualKey === 'value') {
-              actualKey = keyName;
-            }
             if (actualValue.length !== expectedValue.length) {
               const actualValueToken = actualValue.split(' ');
               const expectedValueToken = expectedValue.split(' ');
               if (actualValueToken.length < expectedValueToken.length) {
                 if (actualValueToken.length === 1) {
                   if ((expectedValueToken[0] !== expectedValueToken[1]) || (actualValueToken[0] !== expectedValueToken[0])) {
-                    t.equal(actualValue, expectedValue, actualKey + ' should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')');
+                    t.equal(actualValue, expectedValue, actualKey + ' in {' + keyName + '} should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')');
                   }
                 } else {
-                  t.equal(actualValue, expectedValue, actualKey + ' should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')');
+                  t.equal(actualValue, expectedValue, actualKey + ' in {' + keyName + '} should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')');
                 }
               } else {
                 if (actualValueToken.length !== expectedValueToken.length) {
@@ -612,15 +614,27 @@ function testAbilityValues (t, isItem, abvalues, parentAbvalues) {
 
                   const valueToCheck = actualValue.substr(0, expectedValue.length);
                   if (valueToCheck !== expectedValue) {
-                    t.equal(valueToCheck, expectedValue, actualKey + ' should inherit vanilla dota values (' + expectedValue + ' vs ' + valueToCheck + ')');
+                    t.equal(valueToCheck, expectedValue, actualKey + ' in {' + keyName + '} should inherit vanilla dota values (' + expectedValue + ' vs ' + valueToCheck + ')');
                   }
                 } else {
-                  t.equal(actualValue, expectedValue, actualKey + ' should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')'); // probably not needed
+                  t.equal(actualValue, expectedValue, actualKey + ' in {' + keyName + '} should have values: (' + expectedValue + ' vs ' + actualValue + ')');
                 }
               }
             } else {
-              t.equal(actualValue, expectedValue, actualKey + ' should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')');
+              t.equal(actualKey, parentKey, 'keyname: ' + actualKey + ' in {' + keyName + '} should be: ' + parentKey);
+              if (actualKey === parentKey) {
+                t.equal(actualValue, expectedValue, actualKey + ' in {' + keyName + '} should inherit vanilla dota values (' + expectedValue + ' vs ' + actualValue + ')');
+              }
             }
+          }
+        }
+        if (actualKey !== parentKey && (!abvalues.comments[keyName] || !abvalues.comments[keyName].includes('OAA'))) {
+          if (parentKey === keyName) {
+            t.fail('keyname: ' + actualKey + ' in {' + keyName + '} should be: value');
+          } else if (actualKey === keyName) {
+            t.fail('keyname: value in {' + keyName + '} should be: ' + parentKey);
+          } else {
+            t.fail('keyname: ' + actualKey + ' in {' + keyName + '} should be: ' + parentKey);
           }
         }
       });

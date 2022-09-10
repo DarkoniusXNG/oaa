@@ -23,7 +23,6 @@ g_ItemPrecache = {
   "item_martyrs_mail_4",
   --"item_meteor_hammer_1",
   "item_pull_staff",
-  --"item_reflection_shard_1",
   --"item_reflex_core",
   "item_regen_crystal_1",
   --"item_rune_breaker_oaa",
@@ -111,7 +110,6 @@ g_ParticlePrecache = {
   "particles/units/heroes/hero_crystalmaiden/maiden_base_attack_trail_c.vpcf",
   "particles/units/heroes/hero_crystalmaiden/maiden_base_attack_trail.vpcf",
   "particles/econ/items/crystal_maiden/crystal_maiden_cowl_of_ice/maiden_crystal_nova_cowlofice.vpcf",
-  "particles/econ/items/tinker/tinker_ti10_immortal_laser/tinker_ti10_immortal_laser.vpcf", -- Tinkerer
 }
 
 g_ParticleFolderPrecache = {
@@ -129,8 +127,6 @@ g_ParticleFolderPrecache = {
   "particles/items/sacred_skull",
   "particles/items/trumps_fists",
   "particles/items/vampire",
-  "particles/hero/electrician",
-  "particles/hero/tinkerer",
 }
 
 g_SoundPrecache = {

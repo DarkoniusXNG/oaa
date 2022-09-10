@@ -13,7 +13,7 @@
 
     "MaxLevel"                                            "1"
 
-    "HasScepterUpgrade"                                   "1"
+    "HasScepterUpgrade"                                   "0"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,6 @@
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "0.0"
-    "AbilityCharges"                                      "10" //OAA
     "AbilityChargeRestoreTime"                            "20"
 
     // Cost
@@ -32,25 +31,24 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "120" //OAA
+      "polarization_distance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "120" //OAA
+        "value"                                           "0"
       }
-      "02"
+      "vision_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shard_bonus_charges"                             "4"
-        "RequiresShard"                                   "1"
+        "value"                                           "0"
+        "special_bonus_shard"                             "+325"
       }
-      "03"
+      "AbilityCharges" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shard_vision_radius"                             "375"
-        "RequiresShard"                                   "1"
+        "value"                                           "10"
+        "special_bonus_shard"                             "+4"
       }
+      "shard_tooltip"                                     "4"
     }
   }
 }

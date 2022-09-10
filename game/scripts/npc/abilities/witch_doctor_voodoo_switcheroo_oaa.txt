@@ -16,6 +16,7 @@
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES" // only with dispels that pierce invulnerability
 
     "MaxLevel"                                            "5"
 
@@ -67,7 +68,7 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "2"
+        "duration"                                        "3"
       }
       "05"
       {
