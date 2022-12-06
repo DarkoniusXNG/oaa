@@ -12,8 +12,6 @@
 
     "MaxLevel"                                            "5"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.5"
@@ -76,6 +74,11 @@
       "bonus_armor"
       {
         "value"                                           "0"
+        "special_bonus_unique_warlock_2"                  "+20"
+      }
+      "tooltip_golem_armor" //OAA
+      {
+        "value"                                           "10 20 30 40 50"
         "special_bonus_unique_warlock_2"                  "+20"
       }
     }

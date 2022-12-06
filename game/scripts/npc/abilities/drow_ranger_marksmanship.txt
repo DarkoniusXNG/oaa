@@ -17,16 +17,14 @@
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "chance"
+      "chance" //OAA
       {
         "value"                                           "20 30 40 45 50"
-        "special_bonus_unique_drow_ranger_3"              "+12"
+        "special_bonus_unique_drow_ranger_3"              "+10"
       }
       "bonus_damage"
       {

@@ -17,8 +17,6 @@
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
@@ -36,7 +34,11 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "damage"                                            "90 160 230 300 600 900"
+      "damage"
+      {
+        "value"                                           "90 160 230 300 600 900"
+        "CalculateSpellDamageTooltip"                     "1"
+      }
       "hero_stacks"
       {
         "value"                                           "20"
@@ -52,7 +54,7 @@
       "rolling_thunder_cooldown"
       {
         "value"                                           "0"
-        "special_bonus_unique_pangolier_2"                "+2.5"
+        "special_bonus_unique_pangolier_2"                "+3.0"
       }
       "slow"                                              "20 25 30 35 40 45"
       "slow_duration"                                     "3"

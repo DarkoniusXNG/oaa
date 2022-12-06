@@ -11,8 +11,10 @@ function GameMode:_InitGameMode()
   GameRules:SetSameHeroSelectionEnabled( ALLOW_SAME_HERO_SELECTION )
   GameRules:SetCustomGameSetupTimeout( CUSTOM_GAME_SETUP_TIME )
   -- SetHeroSelectionTime is ignored because "EnablePickRules"   "1" on addoninfo
-  GameRules:SetHeroSelectionTime( RANKED_PICK_TIME )
-  GameRules:SetHeroSelectPenaltyTime( 10 )
+  GameRules:SetHeroSelectionTime(RANKED_PICK_TIME * 24)
+  GameRules:SetHeroSelectPenaltyTime(10)
+  GameRules:SetStrategyTime(1)
+  --GameRules:SetShowcaseTime(0)
   GameRules:SetPostGameTime( POST_GAME_TIME )
   GameRules:SetTreeRegrowTime( TREE_REGROW_TIME )
   if USE_CUSTOM_HERO_LEVELS then
@@ -35,15 +37,10 @@ function GameMode:_InitGameMode()
   GameRules:SetCustomVictoryMessageDuration( VICTORY_MESSAGE_DURATION )
   GameRules:SetStartingGold( STARTING_GOLD )
 
-  GameRules:SetStrategyTime( 0 )
   if SKIP_TEAM_SETUP then
     GameRules:SetCustomGameSetupAutoLaunchDelay( 0 )
     GameRules:LockCustomGameSetupTeamAssignment( true )
     GameRules:EnableCustomGameSetupAutoLaunch( true )
-    GameRules:SetStrategyTime( 0 )
-    GameRules:SetShowcaseTime( 0 )
-    RANKED_PREGAME_TIME = 1
-    RANKED_BAN_TIME = 1
   else
     GameRules:SetCustomGameSetupAutoLaunchDelay( AUTO_LAUNCH_DELAY )
     GameRules:LockCustomGameSetupTeamAssignment( LOCK_TEAM_SETUP )
@@ -151,13 +148,8 @@ function GameMode:_CaptureGameMode()
   if mode == nil then
     -- Set GameMode parameters
     mode = GameRules:GetGameModeEntity()
-    if GetMapName() ~= "unranked" then
-      mode:SetDraftingBanningTimeOverride(0)
-      mode:SetDraftingHeroPickSelectTimeOverride(99999)
-    else
-      mode:SetDraftingBanningTimeOverride(RANKED_BAN_TIME)
-      mode:SetDraftingHeroPickSelectTimeOverride(RANKED_PICK_TIME)
-    end
+    mode:SetDraftingBanningTimeOverride(0)
+    mode:SetDraftingHeroPickSelectTimeOverride(99999)
     mode:SetRecommendedItemsDisabled( RECOMMENDED_BUILDS_DISABLED )
     mode:SetCameraDistanceOverride( CAMERA_DISTANCE_OVERRIDE )
     mode:SetCustomBuybackCostEnabled( CUSTOM_BUYBACK_COST_ENABLED )
@@ -173,14 +165,13 @@ function GameMode:_CaptureGameMode()
 
     mode:SetFogOfWarDisabled(DISABLE_FOG_OF_WAR_ENTIRELY)
     mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
-    mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
 
     mode:SetAlwaysShowPlayerInventory( SHOW_ONLY_PLAYER_INVENTORY )
     mode:SetAnnouncerDisabled( DISABLE_ANNOUNCER )
-    if FORCE_PICKED_HERO ~= nil then
+    --if FORCE_PICKED_HERO then
       --mode:SetCustomGameForceHero( FORCE_PICKED_HERO )
-    end
-    --mode:SetFixedRespawnTime( FIXED_RESPAWN_TIME )
+    --end
+
     mode:SetFountainConstantManaRegen( FOUNTAIN_CONSTANT_MANA_REGEN )
     mode:SetFountainPercentageHealthRegen( FOUNTAIN_PERCENTAGE_HEALTH_REGEN )
     mode:SetFountainPercentageManaRegen( FOUNTAIN_PERCENTAGE_MANA_REGEN )
@@ -191,7 +182,7 @@ function GameMode:_CaptureGameMode()
 
     if USE_DEFAULT_RUNE_SYSTEM then
       mode:SetUseDefaultDOTARuneSpawnLogic(USE_DEFAULT_RUNE_SYSTEM)
-    else
+    --else
       -- Arcane runes are broken by Valve, if they don't fix them: use RuneSpawnFilter
       -- RuneSpawnFilter is currently broken too
       --for rune, spawn in pairs(ENABLED_RUNES) do

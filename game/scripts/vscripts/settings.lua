@@ -43,8 +43,9 @@ ONE_V_ONE_LIMIT_INCREASE = 2              -- Extend amount = ONE_V_ONE_LIMIT_INC
 
 -- poop wards
 POOP_WARD_DURATION = 360
+POOP_WARD_DURATION_SENTRY = 180
 POOP_WARD_COOLDOWN = 240
-POOP_WARD_RADIUS = 150
+POOP_WARD_RADIUS = 250
 
 -- scan reveal
 SCAN_REVEAL_COOLDOWN = 60
@@ -66,6 +67,10 @@ CAPTAINS_MODE_RESERVE_TIME = 130          -- total bonus time that can be used t
 RANKED_PREGAME_TIME = 0
 RANKED_BAN_TIME = 30
 RANKED_PICK_TIME = 30
+if IsInToolsMode() then
+  RANKED_BAN_TIME = 5
+  RANKED_PICK_TIME = 5
+end
 
 -- Game timings
 PREGAME_TIME = 35
@@ -204,7 +209,6 @@ TOP_BAR_VISIBLE = true                  -- Should we display the top bar score/c
 SHOW_KILLS_ON_TOPBAR = true             -- Should we display kills only on the top bar? (No denies, suicides, kills by neutrals)  Requires USE_CUSTOM_TOP_BAR_VALUES
 
 ENABLE_TOWER_BACKDOOR_PROTECTION = false-- Should we enable backdoor protection for our towers?
-REMOVE_ILLUSIONS_ON_DEATH = false       -- Should we remove all illusions if the main hero dies?
 DISABLE_GOLD_SOUNDS = false             -- Should we disable the gold sound when players get gold?
 
 MAX_LEVEL = 50                          -- What level should we let heroes get to?
