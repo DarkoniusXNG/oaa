@@ -46,39 +46,58 @@ function HeroSelection:Init ()
     self.isBanning = true
   end
 
-  local allheroes = LoadKeyValues('scripts/npc/npc_heroes.txt')
   local heroAbilities = {}
   for key, value in pairs(LoadKeyValues(herolistFile)) do
     --DebugPrint("Heroes: ".. key)
-    if allheroes[key] == nil then -- Cookies: If the hero is not in vanilla file, load custom KV's
-      DebugPrint(key .. " is not in vanilla file!")
+    local hero_data = GetUnitKeyValuesByName(key)
+    if not hero_data then
+      DebugPrint("Couldn't find keyvalues for hero "..key)
       local data = {}
       if key == "npc_dota_hero_electrician" then
         data = LoadKeyValues('scripts/npc/heroes/chatterjee.txt')
       elseif key == "npc_dota_hero_sohei" then
         data = LoadKeyValues('scripts/npc/heroes/sohei.txt')
+      else
+        data = LoadKeyValues('scripts/npc/npc_heroes.txt')
       end
 
       if data and data[key] then
-        allheroes[key] = data[key]
+        hero_data = data[key]
       end
     end
     if value == 1 then
-      if not heroAbilities[allheroes[key].AttributePrimary] then
-        heroAbilities[allheroes[key].AttributePrimary] = {}
+      if not heroAbilities[hero_data.AttributePrimary] then
+        heroAbilities[hero_data.AttributePrimary] = {}
       end
-      heroAbilities[allheroes[key].AttributePrimary][key] = {
-        allheroes[key].Ability1,
-        allheroes[key].Ability2,
-        allheroes[key].Ability3,
-        allheroes[key].Ability4,
-        allheroes[key].Ability5,
-        allheroes[key].Ability6,
-        allheroes[key].Ability7,
-        allheroes[key].Ability8,
-        allheroes[key].Ability9
+      local function FilterOutHiddenAbilities(ability_name)
+        if not ability_name or ability_name == "" then
+          return "generic_hidden"
+        end
+        local ability_data = GetAbilityKeyValuesByName(ability_name)
+        if not ability_data then
+          return "generic_hidden"
+        end
+        local ability_behaviour = ability_data.AbilityBehavior
+        if not ability_behaviour then
+          return "generic_hidden"
+        end
+        if string.find(ability_behaviour, "DOTA_ABILITY_BEHAVIOR_HIDDEN") then
+          return "generic_hidden"
+        end
+        return ability_name
+      end
+      heroAbilities[hero_data.AttributePrimary][key] = {
+        FilterOutHiddenAbilities(hero_data.Ability1),
+        FilterOutHiddenAbilities(hero_data.Ability2),
+        FilterOutHiddenAbilities(hero_data.Ability3),
+        FilterOutHiddenAbilities(hero_data.Ability4),
+        FilterOutHiddenAbilities(hero_data.Ability5),
+        FilterOutHiddenAbilities(hero_data.Ability6),
+        FilterOutHiddenAbilities(hero_data.Ability7),
+        FilterOutHiddenAbilities(hero_data.Ability8),
+        FilterOutHiddenAbilities(hero_data.Ability9)
       }
-      herolist[key] = allheroes[key].AttributePrimary
+      herolist[key] = hero_data.AttributePrimary
       totalheroes = totalheroes + 1
       assert(key ~= FORCE_PICKED_HERO, "FORCE_PICKED_HERO cannot be a pickable hero")
     end
@@ -112,14 +131,11 @@ function HeroSelection:Init ()
     end
 
     if HeroSelection.isARDM and ARDMMode then
-      if ARDMMode.hasBanPhase then
-        HeroSelection:StartSelection()
-      else
-        PlayerResource:GetAllTeamPlayerIDs():each(function(playerID)
-          HeroSelection:UpdateTable(playerID, "empty")
-        end)
-        HeroSelection:APTimer(-1, "ALL RANDOM")
-      end
+      PlayerResource:GetAllTeamPlayerIDs():each(function(playerID)
+        HeroSelection:UpdateTable(playerID, "empty")
+      end)
+      HeroSelection:APTimer(-1, "ALL RANDOM")
+      HeroSelection:BuildBottlePass()
     else
       print("START HERO SELECTION")
       HeroSelection:StartSelection()
@@ -188,10 +204,10 @@ function HeroSelection:Init ()
   end)
 
   GameEvents:OnPreGame(function (keys)
-    -- Pause the game at the start (not during strategy time) if Captain's mode or ARDM
-    if HeroSelection.isCM or HeroSelection.isARDM then
-      PauseGame(true)
-    end
+    -- Pause the game at the start (not during strategy time)
+    --if HeroSelection.isCM or HeroSelection.isARDM then
+    PauseGame(true)
+    --end
   end)
 end
 
@@ -565,19 +581,6 @@ function HeroSelection:ChooseBans ()
       PlayerResource:GetAllTeamPlayerIDs():each(function(playerID)
         table.insert(rankedpickorder.bans, rankedpickorder.banChoices[playerID])
       end)
-    elseif OAAOptions.settings.GAME_MODE == "ARDM" then
-      -- 100% chance bans (this will happen only if ban phase wasn't skipped)
-      PlayerResource:GetAllTeamPlayerIDs():each(function(playerID)
-        table.insert(rankedpickorder.bans, rankedpickorder.banChoices[playerID])
-      end)
-      if ARDMMode then
-        -- Remove all bans from the ARDM hero pool
-        for _, v in pairs(rankedpickorder.bans) do
-          if v ~= nil then
-            table.insert(ARDMMode.playedHeroes, v)
-          end
-        end
-      end
     end
   end
 end
@@ -797,7 +800,7 @@ function HeroSelection:APTimer (time, message)
         else
           local hero = HeroSelection:ForceRandomHero(playerId)
           HeroSelection:UpdateTable(playerId, hero)
-          --HeroSelection:SelectHero(playerId, hero)
+          HeroSelection:SelectHero(playerId, hero)
         end
       end
     end)
@@ -1090,7 +1093,7 @@ end
 local playerToSteamMap = {}
 function HeroSelection:GetSteamAccountID(playerID)
   local steamid = PlayerResource:GetSteamAccountID(playerID)
-  if steamid == 0 then
+  if steamid == 0 then -- for black box players steamid is probably 0
     if playerToSteamMap[playerID] then
       return playerToSteamMap[playerID]
     else
@@ -1108,7 +1111,7 @@ function HeroSelection:HeroRerandom(event)
     return
   end
 
-  local player_name = tostring(event.player_name) or tostring(PlayerResource:GetPlayerName(playerId))
+  local player_name = tostring(event.player_name) --or tostring(PlayerResource:GetPlayerName(playerId))
 
   -- Get old randomed hero (SelectHero/assigning lockedHeroes happens after UpdateTable and after picking phase)
   local locked_hero = lockedHeroes[playerId] -- so this is probably nil
@@ -1116,11 +1119,11 @@ function HeroSelection:HeroRerandom(event)
     locked_hero = selectedtable[playerId].selectedhero
   end
 
-  -- Add old random hero to banned heroes
+  -- Add old randomed hero to banned heroes
   table.insert(rankedpickorder.bans, locked_hero)
   CustomNetTables:SetTableValue('hero_selection', 'rankedData', rankedpickorder)
 
-  -- Rerandom new hero
+  -- Re-random new hero
   local new_hero = HeroSelection:RandomHero()
 
   -- Nullify hero tables
@@ -1131,8 +1134,7 @@ function HeroSelection:HeroRerandom(event)
   -- Update hero table
   HeroSelection:UpdateTable(playerId, new_hero)
 
-  -- 'Rerandom' message
-  --GameRules:SendCustomMessage(player_name.." rerandomed!", 0, 0)
+  -- 'Re-random' message
   local player = PlayerResource:GetPlayer(playerId) or PlayerResource:FindFirstValidPlayer()
   CustomGameEventManager:Send_ServerToPlayer(player, 'oaa_random_hero_message', {
     player_name = player_name,
