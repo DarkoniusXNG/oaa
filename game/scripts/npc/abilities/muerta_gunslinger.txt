@@ -1,26 +1,28 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Decreases Scorched Earth cooldown
+  // MUERTA: Gunslinger
   //=================================================================================================================
-  "special_bonus_unique_doom_9"
+  "muerta_gunslinger"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "733"
-    "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
+    "ID"                                                  "5753"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+
+    "MaxLevel"                                            "6"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "double_shot_chance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "value"                                           "18" //OAA
-        "ad_linked_abilities"                             "doom_bringer_scorched_earth"
+        "value"                                           "20 30 40 50 55 60"
+        "special_bonus_unique_muerta_gunslinger_double_shot_chance"  "+20"
       }
+      "target_search_bonus_range"                         "150"
     }
   }
 }

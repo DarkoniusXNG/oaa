@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "132"
     "Model"                                               "models/props_gameplay/recipe.vmdl"
-    "AbilityTextureName"                                  "item_recipe"
+    "AbilityTextureName"                                  "custom/recipe/recipe_farming_6"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -41,14 +41,14 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCorePointCost"                                   "30"
-    "ItemCost"                                            "45951" // OAA
+    "ItemCost"                                            "45601" // OAA
     "ItemShopTags"                                        "damage"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "divine rapier"
     "ItemShareability"                                    "ITEM_NOT_SHAREABLE"
     "ItemSellable"                                        "0"
     "ItemKillable"                                        "0"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
     "ItemContributesToNetWorthWhenDropped"                "0"
     "AllowedInBackpack"                                   "0"
     "IsTempestDoubleClonable"                             "0"

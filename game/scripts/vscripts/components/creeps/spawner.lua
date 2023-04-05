@@ -1,8 +1,8 @@
 -- Taken from bb template
 if CreepCamps == nil then
-    Debug.EnabledModules['creeps:*'] = false
-    DebugPrint ( 'creating new CreepCamps object.' )
-    CreepCamps = class({})
+  Debug.EnabledModules['creeps:*'] = false
+  DebugPrint ( 'creating new CreepCamps object.' )
+  CreepCamps = class({})
 end
 
 LinkLuaModifier("modifier_creep_loot", "modifiers/modifier_creep_loot.lua", LUA_MODIFIER_MOTION_NONE)
@@ -172,7 +172,9 @@ function CreepCamps:SpawnCreepInCamp (location, creepProperties, maximumUnits)
 
   if creepHandle ~= nil then
     self:SetCreepPropertiesOnHandle(creepHandle, newCreepProperties)
-    creepHandle:AddNewModifier(creepHandle, nil, "modifier_creep_loot", {locationString = locationString})
+    if GetMapName() ~= "10v10" or HudTimer:GetGameTime() < DUEL_INTERVAL then
+      creepHandle:AddNewModifier(creepHandle, nil, "modifier_creep_loot", {locationString = locationString})
+    end
   end
 
   return true

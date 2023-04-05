@@ -20,7 +20,7 @@ function modifier_hybrid_oaa:RemoveOnDeath()
 end
 
 function modifier_hybrid_oaa:OnCreated()
-  self.duration = 5
+  self.duration = 6
 end
 
 function modifier_hybrid_oaa:DeclareFunctions()
@@ -95,7 +95,42 @@ if IsServer() then
       return
     end
 
-    parent:AddNewModifier(parent, nil, "modifier_hybrid_dmg_stack_oaa", {duration = self.duration})
+    local level = ability:GetLevel()
+
+    -- Check mana cost
+    if ability:GetManaCost(level) <= 0 then
+      return
+    end
+
+    -- Check cooldown
+    local cd = ability:GetCooldown(level) -- it does consider cdr
+    if cd <= 0 then
+      return
+    end
+
+    -- Check behavior
+    local behavior = ability:GetBehavior()
+    if type(behavior) == 'userdata' then
+      behavior = tonumber(tostring(behavior))
+    end
+    if bit.band(behavior, DOTA_ABILITY_BEHAVIOR_TOGGLE) > 0 then
+      return
+    end
+
+    local modifier = parent:FindModifierByName("modifier_hybrid_dmg_stack_oaa")
+    if modifier then
+      if cd < self.duration then
+        modifier:SetDuration(math.min(modifier:GetRemainingTime() + 2, self.duration), true)
+      else
+        modifier:SetDuration(self.duration, true)
+      end
+      modifier:SetStackCount(modifier:GetStackCount() + cd)
+    else
+      modifier = parent:AddNewModifier(parent, nil, "modifier_hybrid_dmg_stack_oaa", {duration = self.duration})
+      if modifier then
+        modifier:SetStackCount(cd)
+      end
+    end
   end
 end
 
@@ -108,7 +143,7 @@ end
 modifier_hybrid_dmg_stack_oaa = class(ModifierBaseClass)
 
 function modifier_hybrid_dmg_stack_oaa:IsHidden()
-  return true
+  return false
 end
 
 function modifier_hybrid_dmg_stack_oaa:IsDebuff()
@@ -124,19 +159,7 @@ function modifier_hybrid_dmg_stack_oaa:RemoveOnDeath()
 end
 
 function modifier_hybrid_dmg_stack_oaa:OnCreated()
-  self.dmg_per_stack = 40
-
-  if IsServer() then
-    self:SetStackCount(1)
-  end
-end
-
-function modifier_hybrid_dmg_stack_oaa:OnRefresh()
-  self.dmg_per_stack = 40
-
-  if IsServer() then
-    self:IncrementStackCount()
-  end
+  self.dmg_per_cooldow_second = 1
 end
 
 function modifier_hybrid_dmg_stack_oaa:DeclareFunctions()
@@ -146,7 +169,7 @@ function modifier_hybrid_dmg_stack_oaa:DeclareFunctions()
 end
 
 function modifier_hybrid_dmg_stack_oaa:GetModifierPreAttack_BonusDamage()
-  return self:GetStackCount() * self.dmg_per_stack
+  return self:GetStackCount() * self.dmg_per_cooldow_second
 end
 
 ---------------------------------------------------------------------------------------------------
@@ -154,7 +177,7 @@ end
 modifier_hybrid_spell_amp_stack_oaa = class(ModifierBaseClass)
 
 function modifier_hybrid_spell_amp_stack_oaa:IsHidden()
-  return true
+  return false
 end
 
 function modifier_hybrid_spell_amp_stack_oaa:IsDebuff()
@@ -170,7 +193,7 @@ function modifier_hybrid_spell_amp_stack_oaa:RemoveOnDeath()
 end
 
 function modifier_hybrid_spell_amp_stack_oaa:OnCreated()
-  self.spell_amp_per_stack = 2
+  self.spell_amp_per_stack = 3
 
   if IsServer() then
     self:SetStackCount(1)
@@ -178,7 +201,7 @@ function modifier_hybrid_spell_amp_stack_oaa:OnCreated()
 end
 
 function modifier_hybrid_spell_amp_stack_oaa:OnRefresh()
-  self.spell_amp_per_stack = 2
+  self.spell_amp_per_stack = 3
 
   if IsServer() then
     self:IncrementStackCount()

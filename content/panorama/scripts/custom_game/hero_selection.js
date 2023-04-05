@@ -13,12 +13,8 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
-// for testing
-const neverHideStrategy = false;
-
 const heroAbilities = {};
 const currentMap = Game.GetMapInfo().map_display_name;
-let hasGoneToStrategy = false;
 let selectedhero = 'empty';
 let disabledheroes = [];
 let herolocked = false;
@@ -209,7 +205,9 @@ function handleOAASettingsChange (n, key, settings) {
     HM27: '#game_option_brawler',
     HM28: '#game_option_chaos',
     HM29: '#game_option_double_multiplier',
-    HM30: '#game_option_hybrid'
+    HM30: '#game_option_hybrid',
+    HM31: '#game_option_drunk',
+    HM32: '#game_option_splasher'
   };
 
   if (settings.HEROES_MODS !== 'HMN' || settings.HEROES_MODS_2 !== 'HMN') {
@@ -525,16 +523,11 @@ function onPlayerStatChange (table, key, data) {
     if (data.mode === 'STRATEGY' || data.mode === 'PREPARING' || data.mode === 'PRE-STRATEGY') {
       FindDotaHudElement('TimeLeft').text = 'VS';
       FindDotaHudElement('GameMode').text = $.Localize(data.mode);
-      if (data.mode === 'PRE-STRATEGY' || data.mode === 'STRATEGY') {
-        GoToStrategy();
-      }
     } else if (data.time > -1) {
       $('#TimeLeft').text = data.time;
       $('#GameMode').text = $.Localize(data.mode);
       // spammy
       // $.Msg('Timer mode ' + data.mode);
-    } else {
-      HideStrategy();
     }
   }
 }
@@ -687,6 +680,10 @@ function EnableChatWindow () {
   if (contentPanel) {
     contentPanel.style.visibility = 'collapse';
   }
+  const vanillaPickingScreen = pregamePanel.FindChildTraverse('HeroPickScreenContents');
+  if (vanillaPickingScreen) {
+    vanillaPickingScreen.style.visibility = 'collapse';
+  }
   const backgroundPanel = pregamePanel.FindChildTraverse('PregameBGStatic');
   if (backgroundPanel) {
     backgroundPanel.style.visibility = 'collapse';
@@ -726,6 +723,43 @@ function EnableChatWindow () {
   const panel4 = pregamePanel.FindChildTraverse('AvailableItemsContainer');
   if (panel4) {
     panel4.style.visibility = 'collapse';
+  }
+  // Hide vanilla Strategy Time stuff that is not relevant
+  const strategyMapPanel = pregamePanel.FindChildTraverse('StrategyMap');
+  if (strategyMapPanel) {
+    strategyMapPanel.style.visibility = 'collapse';
+  }
+  const strategyFriendsAndFoesPanel = pregamePanel.FindChildTraverse('StrategyFriendsAndFoes');
+  if (strategyFriendsAndFoesPanel) {
+    strategyFriendsAndFoesPanel.style.visibility = 'collapse';
+  }
+  const strategyTeamCompPanel = pregamePanel.FindChildTraverse('StrategyTeamCompPanel');
+  if (strategyTeamCompPanel) {
+    strategyTeamCompPanel.style.visibility = 'collapse';
+  }
+  // const startingItemsPanel = pregamePanel.FindChildTraverse('StartingItems');
+  // if (startingItemsPanel) {
+  // startingItemsPanel.style.visibility = 'collapse';
+  // }
+  const strategyHeroRelics = pregamePanel.FindChildTraverse('StrategyHeroRelicsThumbnail');
+  const strategyHeroRelics2 = pregamePanel.FindChildTraverse('StrategyHeroRelicsThumbnailTooltips');
+  const strategyHeroRelics3 = pregamePanel.FindChildTraverse('HeroRelicsContainer');
+  if (strategyHeroRelics) {
+    strategyHeroRelics.style.visibility = 'collapse';
+  }
+  if (strategyHeroRelics2) {
+    strategyHeroRelics2.style.visibility = 'collapse';
+  }
+  if (strategyHeroRelics3) {
+    strategyHeroRelics3.style.visibility = 'collapse';
+  }
+  const strategyHeroBadgePanel = pregamePanel.FindChildTraverse('StrategyHeroBadge');
+  if (strategyHeroBadgePanel) {
+    strategyHeroBadgePanel.style.visibility = 'collapse';
+  }
+  const strategyBacktoHeroGridButton = pregamePanel.FindChildTraverse('BacktoHeroGrid');
+  if (strategyBacktoHeroGridButton) {
+    strategyBacktoHeroGridButton.style.visibility = 'collapse';
   }
 }
 
@@ -1163,33 +1197,6 @@ function CaptainSelectHero () {
     GameEvents.SendCustomGameEventToServer('cm_hero_selected', {
       hero: selectedherocm
     });
-  }
-}
-
-function HideStrategy () {
-  // var bossMarkers = ['Boss1r', 'Boss1d', 'Boss2r', 'Boss2d', 'Boss3r', 'Boss3d', 'Boss4r', 'Boss4d', 'Boss5r', 'Boss5d', 'Duel1', 'Duel2', 'Cave1r', 'Cave1d', 'Cave2r', 'Cave2d', 'Cave3r', 'Cave3d'];
-
-  // bossMarkers.forEach(function (element) {
-  //   FindDotaHudElement(element).style.transform = 'translateY(0)';
-  //   FindDotaHudElement(element).style.opacity = '1';
-  // });
-  if (neverHideStrategy) {
-    return;
-  }
-
-  FindDotaHudElement('MainContent').GetParent().style.opacity = '0';
-  FindDotaHudElement('MainContent').GetParent().style.transform = 'scaleX(3) scaleY(3) translateY(25%)';
-}
-
-function GoToStrategy () {
-  // FindDotaHudElement('MainContent').style.transform = 'translateX(0) translateY(100%)';
-  // FindDotaHudElement('MainContent').style.opacity = '0';
-
-  if (!hasGoneToStrategy) {
-    hasGoneToStrategy = true;
-    // $.Schedule(6, function () {
-    $('#ARDMLoading').style.opacity = 1;
-    // });
   }
 }
 

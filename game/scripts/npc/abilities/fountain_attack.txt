@@ -5,7 +5,7 @@
     "ID"                                                  "9001"
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/fountain_attack.lua"
-    "AbilityTextureName"                                  "nothing"
+    "AbilityTextureName"                                  "rubick_empty2"
     "MaxLevel"                                            "1"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
 
@@ -15,8 +15,6 @@
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
-    "AbilityCastPoint"                                    "0"
-    "AbilityCastAnimation"                                "ACT_DOTA_ATTACK"
 
     "AbilitySpecial"
     {
