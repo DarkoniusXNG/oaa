@@ -1,7 +1,7 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Trusty Shovel (OAA Rework) - neutral tier 1 item
+  // Trusty Shovel (OAA Rework) - custom neutral tier 1 item
   //=================================================================================================================
   "item_trusty_shovel_oaa"
   {
@@ -21,7 +21,7 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                                            "0"
-
+    "ItemSellable"                                        "0"
     "ItemIsNeutralDrop"                                   "1"
     "ItemPurchasable"                                     "0"
     "ItemShareability"                                    "ITEM_FULLY_SHAREABLE"

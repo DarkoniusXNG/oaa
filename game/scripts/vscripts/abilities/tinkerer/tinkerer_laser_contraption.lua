@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_tinkerer_laser_contraption_thinker", "abilities/tinkerer/tinkerer_laser_contraption.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_tinkerer_laser_contraption_debuff", "abilities/tinkerer/tinkerer_laser_contraption.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_tinkerer_laser_contraption_node", "abilities/tinkerer/tinkerer_laser_contraption.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_dead_tracker_oaa", "modifiers/modifier_generic_dead_tracker_oaa.lua", LUA_MODIFIER_MOTION_NONE)
 
 local square_shape = false
 
@@ -135,6 +136,7 @@ function tinkerer_laser_contraption:OnSpellStart()
     local node = CreateUnitByName("npc_dota_tinkerer_keen_node", pos, false, caster, caster, team)
     node:AddNewModifier(caster, self, "modifier_tinkerer_laser_contraption_node", {duration = total_duration})
     node:AddNewModifier(caster, self, 'modifier_kill', {duration = total_duration})
+    node:AddNewModifier(caster, self, 'modifier_generic_dead_tracker_oaa', {duration = total_duration + MANUAL_GARBAGE_CLEANING_TIME})
     node:SetNeverMoveToClearSpace(true)
     node:MakePhantomBlocker()
   end
@@ -273,6 +275,26 @@ function modifier_tinkerer_laser_contraption_thinker:OnCreated(kv)
   self:StartIntervalThink(delay)
 end
 
+function modifier_tinkerer_laser_contraption_thinker:ApplyTarSpill()
+  if not IsServer() then
+    return
+  end
+
+  local caster = self:GetCaster()
+  if not caster or caster:IsNull() then
+    return
+  end
+
+  local tar_spill = caster:FindAbilityByName("tinkerer_oil_spill")
+  if tar_spill and tar_spill:GetLevel() > 0 then
+    -- Laser Contraption applies Tar Spill
+    local talent = caster:FindAbilityByName("special_bonus_unique_tinkerer_8")
+    if talent and talent:GetLevel() > 0 then
+      tar_spill:OnProjectileHit(nil, self.center)
+    end
+  end
+end
+
 function modifier_tinkerer_laser_contraption_thinker:OnIntervalThink()
   if not IsServer() then
     return
@@ -350,6 +372,9 @@ function modifier_tinkerer_laser_contraption_thinker:OnIntervalThink()
     end
   end
 
+  -- Talent that applies Tar Spill
+  self:ApplyTarSpill()
+
   -- Damage enemies
   for _, enemy in pairs(enemies) do
     if enemy and not enemy:IsNull() then
@@ -375,7 +400,7 @@ function modifier_tinkerer_laser_contraption_thinker:OnDestroy()
   end
   local parent = self:GetParent()
   if parent and not parent:IsNull() then
-    parent:ForceKill(false)
+    parent:ForceKillOAA(false)
   end
 end
 
@@ -521,7 +546,8 @@ if IsServer() then
       damage = 1
     end
 
-    if attacker == self:GetCaster() then
+    -- Allies and the caster destroy the node with 1 hit
+    if attacker:GetTeamNumber() == self:GetCaster():GetTeamNumber() then
       damage = parent:GetMaxHealth()
     end
 

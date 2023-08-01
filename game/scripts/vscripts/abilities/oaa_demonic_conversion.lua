@@ -46,7 +46,7 @@ function enigma_demonic_conversion_oaa:OnSpellStart()
 
   -- Kill the target and spawn Eidolons
   target:Kill(self, caster)
-  for i = 1,spawnCount do
+  for i = 1, spawnCount do
     local eidolon = CreateUnitByName(unitNames[abilityLevel], targetOrigin, true, caster, caster:GetOwner(), caster:GetTeam())
     eidolon:SetControllableByPlayer(playerID, false)
     eidolon:SetOwner(caster)
@@ -72,4 +72,25 @@ end
 
 function enigma_demonic_conversion_oaa:GetCustomCastErrorTarget(target)
   return "#dota_hud_error_cant_cast_creep_level"
+end
+
+function enigma_demonic_conversion_oaa:OnStolen(hSourceAbility)
+  local caster = self:GetCaster()
+  if caster:HasModifier("modifier_morphling_replicate_manager") then
+    local vanilla_ability = caster:FindAbilityByName("enigma_demonic_conversion")
+    if not vanilla_ability then
+      print("MORPHLING MORPH: vanilla Demonic Conversion not found")
+      Timers:CreateTimer(FrameTime(), function()
+        vanilla_ability = caster:FindAbilityByName("pugna_nether_ward")
+        if not vanilla_ability then
+          print("MORPHLING MORPH: vanilla Demonic Conversion not found")
+          return FrameTime() -- repeat until found
+        else
+          vanilla_ability:SetHidden(true)
+        end
+      end)
+    else
+      vanilla_ability:SetHidden(true)
+    end
+  end
 end

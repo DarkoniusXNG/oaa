@@ -92,9 +92,11 @@ function tinkerer_oil_spill:OnProjectileHit(target, location)
     end
   end
 
-  target:EmitSound("Hero_Grimstroke.InkOver.Target")
+  if target then
+    target:EmitSound("Hero_Grimstroke.InkOver.Target")
 
-  target:ForceKill(false)
+    target:ForceKillOAA(false)
+  end
 
   return true
 end
@@ -121,7 +123,7 @@ function modifier_tinkerer_oil_spill_thinker:OnDestroy()
   end
   local parent = self:GetParent()
   if parent and not parent:IsNull() then
-    parent:ForceKill(false)
+    parent:ForceKillOAA(false)
   end
 end
 

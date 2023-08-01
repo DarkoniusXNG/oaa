@@ -25,7 +25,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14 13 12 11 10 9" //OAA
+    "AbilityCooldown"                                     "15 14 13 12 11 10" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -64,13 +64,13 @@
       "06"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "scepter_cooldown"                                "7"
+        "scepter_cooldown"                                "8"
         "RequiresScepter"                                 "1"
       }
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "scepter_speed"                                   "0" // OAA, Valve has it wrong
+        "scepter_speed"                                   "0" // OAA, Valve has it wrong, luckily it's unused
         "RequiresScepter"                                 "1"
       }
       "08"
