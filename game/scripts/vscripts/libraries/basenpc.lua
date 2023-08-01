@@ -7,6 +7,9 @@
 
 -- This file is also loaded on client
 -- but client doesn't have FindAbilityByName
+
+LinkLuaModifier("modifier_generic_dead_tracker_oaa", "modifiers/modifier_generic_dead_tracker_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+
 if IsServer() then
   function CDOTA_BaseNPC:HasLearnedAbility(abilityName)
     local ability = self:FindAbilityByName(abilityName)
@@ -261,6 +264,12 @@ if IsServer() then
 
     return false
   end
+
+  function CDOTA_BaseNPC:ForceKillOAA(param)
+    --self:AbsolutePurge()
+    self:AddNewModifier(self, nil, "modifier_generic_dead_tracker_oaa", {duration = MANUAL_GARBAGE_CLEANING_TIME})
+    self:ForceKill(param)
+  end
 end
 
 -- On Server:
@@ -284,7 +293,7 @@ if CDOTA_BaseNPC then
   end
 
   function CDOTA_BaseNPC:IsOAABoss()
-    return self:HasModifier("modifier_boss_resistance")
+    return self:HasModifier("modifier_boss_basic_properties_oaa")
   end
 
   function CDOTA_BaseNPC:HasShardOAA()
@@ -353,7 +362,7 @@ if C_DOTA_BaseNPC then
   end
 
   function C_DOTA_BaseNPC:IsOAABoss()
-    return self:HasModifier("modifier_boss_resistance")
+    return self:HasModifier("modifier_boss_basic_properties_oaa")
   end
 
   function C_DOTA_BaseNPC:HasShardOAA()

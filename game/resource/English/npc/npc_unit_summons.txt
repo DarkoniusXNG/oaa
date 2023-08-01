@@ -60,6 +60,7 @@
 "npc_dota_lone_druid_bear5"                                                     "Spirit Bear"
 "npc_dota_lone_druid_bear6"                                                     "Spirit Bear"
 
+"npc_dota_lycan_wolf1"                                                          "Lycan Wolf"
 "npc_dota_lycan_wolf2"                                                          "Lycan Wolf"
 "npc_dota_lycan_wolf3"                                                          "Lycan Wolf"
 "npc_dota_lycan_wolf4"                                                          "Lycan Wolf"
@@ -97,9 +98,6 @@
 "npc_dota_warlock_golem_scepter_3"                                              "Warlock Golem"
 "npc_dota_warlock_golem_scepter_4"                                              "Warlock Golem"
 "npc_dota_warlock_golem_scepter_5"                                              "Warlock Golem"
-
-"npc_dota_pugna_nether_ward_5"                                                  "Nether Ward"
-"npc_dota_pugna_nether_ward_6"                                                  "Nether Ward"
 
 "npc_dota_wraith_king_skeleton_warrior"                                         "Wraith King Skeleton"
 

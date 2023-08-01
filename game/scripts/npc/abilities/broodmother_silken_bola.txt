@@ -38,10 +38,10 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "movement_speed"
+      "movement_speed" //OAA
       {
-        "value"                                           "25 35 45 55 65 75"
-        "special_bonus_unique_broodmother_4"              "+35"
+        "value"                                           "10 25 40 55 60 65"
+        "special_bonus_unique_broodmother_4"              "+25"
       }
       "aoe"
       {
@@ -52,7 +52,7 @@
       "projectile_speed"                                  "1200"
       "impact_damage" //OAA
       {
-        "value"                                           "100 175 250 325 650 975"
+        "value"                                           "120 180 240 300 600 1200"
       }
       "attack_damage"
       {
