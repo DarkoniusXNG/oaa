@@ -24,9 +24,9 @@ local hero_mods = {
   --HM14 = "modifier_rend_oaa",
   HM15 = "modifier_range_increase_oaa",
   --HM16 = "modifier_healer_oaa",
-  --HM17 = "modifier_explosive_death_oaa",
+  HM17 = "modifier_explosive_death_oaa",
   --HM18 = "modifier_no_health_bar_oaa",
-  --HM19 = "modifier_brute_oaa",
+  HM19 = "modifier_brute_oaa",
   HM20 = "modifier_wisdom_oaa",
   HM21 = "modifier_aghanim_oaa",
   HM22 = "modifier_nimble_oaa",
@@ -39,11 +39,14 @@ local hero_mods = {
   --HM29 = "modifier_double_multiplier_oaa",
   --HM30 = "modifier_hybrid_oaa",
   --HM31 = "modifier_drunk_oaa",
-  --HM32 = "modifier_any_damage_splash_oaa",
+  HM32 = "modifier_any_damage_splash_oaa",
   HM33 = "modifier_titan_soul_oaa",
-  HM34 = "modifier_hero_anti_stun_oaa",
+  --HM34 = "modifier_hero_anti_stun_oaa",
   HM35 = "modifier_octarine_soul_oaa",
-  HM36 = "modifier_smurf_oaa",
+  --HM36 = "modifier_smurf_oaa",
+  HM37 = "modifier_speedster_oaa",
+  HM38 = "modifier_universal_oaa",
+  HM39 = "modifier_rich_man_oaa",
 }
 local boss_mods = {
   BMN  = false,
@@ -140,7 +143,7 @@ end
 
 function OAAOptions:InitializeSettingsTable()
   self.settings = {
-    GAME_MODE = "AP",                   -- "RD", "AR", "AP", "ARDM", "LP"
+    GAME_MODE = "AP",                   -- "RD", "AR", "AP", "ARDM", "LP", "SD"
     small_player_pool = 0,              -- 1 - some heroes that are strong when there are 2-6 players are disabled; 0 - normal;
     HEROES_MODS = "HMN",
     HEROES_MODS_2 = "HMN",

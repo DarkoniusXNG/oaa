@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3012"
     "BaseClass"                                           "item_datadriven"
     "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
@@ -35,7 +34,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3017"
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/farming/greater_power_treads.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -63,7 +61,7 @@
       "bonus_spell_amp"                                   "6 8 10 12"
       "bonus_damage"                                      "10 25 45 70"
       "primary_attribute_multiplier"                      "2"
-      "bonus_all_stats"                                   "5 10 15 20"
+      "bonus_secondary_stats"                             "10 15 20 25"
     }
   }
 }
