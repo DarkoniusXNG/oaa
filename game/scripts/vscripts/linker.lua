@@ -68,6 +68,9 @@ LinkLuaModifier("modifier_item_revenants_brooch_active_oaa", "modifiers/modifyab
 LinkLuaModifier("modifier_muerta_pierce_the_veil_penalty_oaa", "modifiers/modifyabilitiesfilter/muerta_ult_penalties.lua", LUA_MODIFIER_MOTION_NONE)
 -- Wraith Form penalty modifier
 LinkLuaModifier("modifier_wraith_form_penalty_oaa", "modifiers/modifyabilitiesfilter/wraith_form_penalties.lua", LUA_MODIFIER_MOTION_NONE)
+-- Legion Commander aghs additional effects
+LinkLuaModifier("modifier_legion_duel_buff_oaa", "modifiers/modifyabilitiesfilter/duel_scepter_addition.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_legion_duel_debuff_oaa", "modifiers/modifyabilitiesfilter/duel_scepter_addition.lua", LUA_MODIFIER_MOTION_NONE)
 
 -- Custom Wards Buttons
 LinkLuaModifier("modifier_ward_invisibility", "modifiers/modifier_ward_invisibility.lua", LUA_MODIFIER_MOTION_NONE)
@@ -180,3 +183,6 @@ LinkLuaModifier("modifier_change_to_str_oaa", "modifiers/funmodifiers/modifier_c
 LinkLuaModifier("modifier_change_to_int_oaa", "modifiers/funmodifiers/modifier_change_to_int_oaa.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sangromancer_oaa", "modifiers/funmodifiers/modifier_sangromancer_oaa.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_bottle_collector_oaa", "modifiers/funmodifiers/modifier_bottle_collector_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_crimson_magic_oaa", "modifiers/funmodifiers/modifier_crimson_magic_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_ludo_oaa", "modifiers/funmodifiers/modifier_ludo_oaa.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_battlemage_oaa", "modifiers/funmodifiers/modifier_battlemage_oaa.lua", LUA_MODIFIER_MOTION_NONE)
