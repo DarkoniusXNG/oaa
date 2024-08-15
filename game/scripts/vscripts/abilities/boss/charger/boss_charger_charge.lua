@@ -121,7 +121,7 @@ function modifier_boss_charger_charge:OnIntervalThink()
             attacker = caster,
             damage = self.glancing_damage,
             damage_type = DAMAGE_TYPE_PHYSICAL,
-            damage_flags = DOTA_DAMAGE_FLAG_BYPASSES_BLOCK,
+            damage_flags = DOTA_DAMAGE_FLAG_BYPASSES_PHYSICAL_BLOCK,
             ability = ability
           })
         end
@@ -192,7 +192,7 @@ function modifier_boss_charger_charge:OnIntervalThink()
             attacker = caster,
             damage = self.hero_pillar_damage,
             damage_type = DAMAGE_TYPE_PHYSICAL,
-            damage_flags = DOTA_DAMAGE_FLAG_BYPASSES_BLOCK,
+            damage_flags = DOTA_DAMAGE_FLAG_BYPASSES_PHYSICAL_BLOCK,
             ability = ability
           })
         end
@@ -209,7 +209,7 @@ end
 function modifier_boss_charger_charge:EndCharge()
   local caster = self:GetCaster()
 
-  --caster:InterruptMotionControllers(true) -- Charges is immune to motion controllers so this is not needed
+  --caster:InterruptMotionControllers(true) -- Charger boss is immune to motion controllers so this is not needed
   FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), true)
   self:StartIntervalThink(-1)
   self:Destroy()
@@ -218,6 +218,10 @@ end
 ---------------------------------------------------------------------------------------------------
 
 modifier_boss_charger_glanced = class(ModifierBaseClass)
+
+function modifier_boss_charger_glanced:IsHidden()
+  return false
+end
 
 function modifier_boss_charger_glanced:IsDebuff()
   return true

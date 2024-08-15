@@ -16,6 +16,7 @@
 #base "units/boss/charger/charger.txt"
 #base "units/boss/swiper.txt"
 #base "units/boss/carapace.txt"
+#base "units/boss/tormentor.txt"
 
 #base "units/boss/ogre_tank_boss/ogre_tank_boss.txt"
 #base "units/boss/ogre_tank_boss/ogre_seer.txt"
@@ -27,6 +28,10 @@
 #base "units/boss/alchemist/alchemist_boss_explosive.txt"
 #base "units/boss/magma_boss/magma_boss.txt"
 #base "units/boss/magma_boss/magma_boss_volcano.txt"
+#base "units/boss/dire_tower_boss/dire_tower_boss.txt"
+#base "units/boss/dire_tower_boss/melee_wave_creep.txt"
+#base "units/boss/dire_tower_boss/ranged_wave_creep.txt"
+#base "units/boss/dire_tower_boss/siege_wave_creep.txt"
 
 #base "units/boss/wanderer.txt"
 #base "units/boss/grendel.txt"
@@ -134,6 +139,8 @@
 #base "units/npc_dota_lycan_wolf4.txt"
 #base "units/npc_dota_lycan_wolf5.txt"
 #base "units/npc_dota_lycan_wolf6.txt"
+#base "units/npc_dota_lycan_wolf7.txt"
+#base "units/npc_dota_lycan_wolf8.txt"
 //#base "units/npc_dota_necronomicon_archer_4.txt"
 //#base "units/npc_dota_necronomicon_archer_5.txt"
 //#base "units/npc_dota_necronomicon_archer_6.txt"

@@ -255,7 +255,6 @@ if IsServer() then
     -- grab ability specials
     local damageInterval = spell:GetSpecialValueFor("aura_interval")
     local damage_per_second = spell:GetSpecialValueFor("aura_damage")
-    -- Bonus damage talent
 
     self.shieldRate = spell:GetSpecialValueFor("shield_damage_block") * 0.01
     self.damageRadius =  spell:GetSpecialValueFor("aura_radius")
@@ -304,11 +303,14 @@ if IsServer() then
 
       local manaRefundPercent = ability:GetSpecialValueFor("mana_pct_refund") / 100
 
+      local firstCost = ability:GetManaCost(-1)
+      local effectiveCost = ability:GetEffectiveManaCost(-1)
+
       if manaRefundPercent > 0 then
         local remainingShieldHP = 0 - self:GetStackCount()
         if remainingShieldHP > 0 then
           local shieldPerMana = ability:GetSpecialValueFor("shield_per_mana")
-          local manaCost = remainingShieldHP / shieldPerMana
+          local manaCost = (remainingShieldHP / shieldPerMana) * (effectiveCost / firstCost)
           parent:GiveMana(manaCost * manaRefundPercent)
         end
       end

@@ -33,7 +33,7 @@ function lycan_boss_summon_wolves:OnSpellStart()
   local nWerewolves = self:GetSpecialValueFor("num_werewolf_spawn")
   local summon_duration = self:GetSpecialValueFor("wolf_duration")
 
-  if caster:FindModifierByName( "modifier_lycan_boss_shapeshift" ) ~= nil then
+  if caster:HasModifier("modifier_lycan_boss_shapeshift") then
     nHoundSpawns = self:GetSpecialValueFor("num_ss_hound_spawn")
     nHoundBossSpawns = self:GetSpecialValueFor("num_ss_hound_boss_spawn")
     nWerewolves = self:GetSpecialValueFor("num_ss_werewolf_spawn")
@@ -54,7 +54,7 @@ function lycan_boss_summon_wolves:OnSpellStart()
   ParticleManager:SetParticleControlEnt( nFXIndex, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster_loc, true )
   ParticleManager:ReleaseParticleIndex( nFXIndex )
 
-  for i = 0, nHoundSpawns do
+  for i = 1, nHoundSpawns do
     if #caster.LYCAN_BOSS_SUMMONED_UNITS + 1 < caster.LYCAN_BOSS_MAX_SUMMONS then
       local hHound = CreateUnitByName( "npc_dota_creature_dire_hound", caster_loc, true, caster, caster, caster:GetTeamNumber() )
       if hHound then
@@ -62,9 +62,6 @@ function lycan_boss_summon_wolves:OnSpellStart()
         hHound:AddNewModifier(caster, self, "modifier_generic_dead_tracker_oaa", {duration = summon_duration + MANUAL_GARBAGE_CLEANING_TIME})
         hHound:SetInitialGoalEntity( caster:GetInitialGoalEntity() )
         table.insert( caster.LYCAN_BOSS_SUMMONED_UNITS, hHound )
-        if caster.zone then
-          caster.zone:AddEnemyToZone( hHound )
-        end
 
         local vRandomOffset = Vector( RandomInt( -300, 300 ), RandomInt( -300, 300 ), 0 )
         local vSpawnPoint = caster_loc + vRandomOffset
@@ -75,7 +72,7 @@ function lycan_boss_summon_wolves:OnSpellStart()
     end
   end
 
-  for i = 0, nHoundBossSpawns do
+  for i = 1, nHoundBossSpawns do
     if #caster.LYCAN_BOSS_SUMMONED_UNITS + 1 < caster.LYCAN_BOSS_MAX_SUMMONS then
       local hHoundBoss = CreateUnitByName( "npc_dota_creature_dire_hound_boss", caster_loc, true, caster, caster, caster:GetTeamNumber() )
       if hHoundBoss then
@@ -83,9 +80,6 @@ function lycan_boss_summon_wolves:OnSpellStart()
         hHoundBoss:AddNewModifier(caster, self, "modifier_generic_dead_tracker_oaa", {duration = summon_duration + MANUAL_GARBAGE_CLEANING_TIME})
         hHoundBoss:SetInitialGoalEntity( caster:GetInitialGoalEntity() )
         table.insert( caster.LYCAN_BOSS_SUMMONED_UNITS, hHoundBoss )
-        if caster.zone then
-          caster.zone:AddEnemyToZone( hHoundBoss )
-        end
 
         local vRandomOffset = Vector( RandomInt( -300, 300 ), RandomInt( -300, 300 ), 0 )
         local vSpawnPoint = caster_loc + vRandomOffset
@@ -96,7 +90,7 @@ function lycan_boss_summon_wolves:OnSpellStart()
     end
   end
 
-  for i = 0, nWerewolves do
+  for i = 1, nWerewolves do
     if #caster.LYCAN_BOSS_SUMMONED_UNITS + 1 < caster.LYCAN_BOSS_MAX_SUMMONS then
       local hWerewolf = CreateUnitByName( "npc_dota_creature_werewolf", caster_loc, true, caster, caster, caster:GetTeamNumber() )
       if hWerewolf then
@@ -104,9 +98,6 @@ function lycan_boss_summon_wolves:OnSpellStart()
         hWerewolf:AddNewModifier(caster, self, "modifier_generic_dead_tracker_oaa", {duration = summon_duration + MANUAL_GARBAGE_CLEANING_TIME})
         hWerewolf:SetInitialGoalEntity( caster:GetInitialGoalEntity() )
         table.insert( caster.LYCAN_BOSS_SUMMONED_UNITS, hWerewolf )
-        if caster.zone then
-          caster.zone:AddEnemyToZone( hWerewolf )
-        end
 
         local vRandomOffset = Vector( RandomInt( -300, 300 ), RandomInt( -300, 300 ), 0 )
         local vSpawnPoint = caster_loc + vRandomOffset
