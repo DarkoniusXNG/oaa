@@ -7,16 +7,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5149"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -26,7 +24,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "160 155 150 140 130" //OAA
+    "AbilityCooldown"                                     "130 125 120 115 110" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,62 +32,48 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "far_damage"                                      "100 150 200 400 650"
+        "value"                                           "100 150 200 300 400"
+        "special_bonus_unique_enigma_6"                   "+50"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "far_radius"                                      "420"
+        "value"                                           "420"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "pull_speed"                                        "30"
+      "tick_rate"                                         "0.1"
+      "duration"                                          "4.0"
+      "vision_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_radius"                                     "420"
+        "value"                                           "800"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "pull_rotate_speed"                                 "0.25"
+      "animation_rate"                                    "0.2"
+      "scepter_pct_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_speed"                                      "30"
+        "value"                                           "2.0 2.5 3.0 3.5 4.0"
+        "RequiresScepter"                                 "1"
       }
-      "05"
+      "scepter_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "near_radius"                                     "200"
+        "value"                                           "1200"
+        "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "scepter_drag_speed" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "near_damage"                                     "100 150 200 400 650" //OAA, same as far_damage
+        "value"                                           "125"
+        "RequiresScepter"                                 "1"
       }
-      "07"
+      "scepter_pull_rotate_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_rate"                                       "0.1"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "vision_radius"                                   "800"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "pull_rotate_speed"                               "0.25"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "animation_rate"                                  "0.2"
+        "value"                                           "0.1"
+        "RequiresScepter"                                 "1"
       }
     }
   }

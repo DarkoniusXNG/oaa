@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_minimap", "modifiers/modifier_minimap", LUA_MODIFIER_MOTION_NONE)
 
 -- -- Drop out of self-include
 -- if not Entities or not Entities.CreateByClassname then return end
@@ -6,13 +5,13 @@ LinkLuaModifier("modifier_minimap", "modifiers/modifier_minimap", LUA_MODIFIER_M
 -----------------------------------------------------------------
 
 if not Minimap then
-    Minimap = class({})
+  Minimap = class({})
 end
 
 -- Called when game starts
 function Minimap:InitializeCampIcons()
   self.Minimap_Camps = {}
-  local minimap_camps = {'minimap_small_camp', 'minimap_medium_camp', 'minimap_hard_camp', 'minimap_ancient_camp', 'minimap_ancient_camp'}
+  local minimap_camps = {'minimap_small_camp', 'minimap_medium_camp', 'minimap_hard_camp', 'minimap_ancient_camp', 'minimap_ancient_camp', 'minimap_ancient_camp', 'minimap_ancient_camp'}
 
   local camps = Entities:FindAllByName('creep_camp')
   for _,camp in pairs(camps) do
@@ -60,7 +59,7 @@ end
 function Minimap:SpawnCaptureIcon(location)
   for _,teamID in pairs({DOTA_TEAM_GOODGUYS, DOTA_TEAM_BADGUYS}) do
     local capture_point_minimap = CreateUnitByName('minimap_capture_point', location, false, nil, nil, teamID)
-    capture_point_minimap:AddNewModifier(capture_point_minimap, nil, "modifier_minimap", {IsCapture = true })
+    capture_point_minimap:AddNewModifier(capture_point_minimap, nil, "modifier_minimap", {IsCapture = true})
     capture_point_minimap.Respawn = true
   end
 end

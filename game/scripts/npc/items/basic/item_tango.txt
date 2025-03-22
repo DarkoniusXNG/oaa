@@ -1,0 +1,19 @@
+"DOTAAbilities"
+{
+  // Tango
+  "item_tango"
+  {
+
+    "ItemCost"                                            "60" //OAA
+    "ItemStockTime"                                       "1" //OAA
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "health_regen"                                      "8.0" //OAA
+      "buff_duration"                                     "20.0" //OAA
+      "tooltip_charges"                                   "3"
+    }
+  }
+}

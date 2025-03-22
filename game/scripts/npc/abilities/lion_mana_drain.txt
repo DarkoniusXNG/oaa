@@ -7,15 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5046"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE" // OAA, Valve added DOTA_UNIT_TARGET_FLAG_NO_INVIS for some reason
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -25,47 +26,50 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16 12 8 4 4 4"
+    "AbilityCooldown"                                     "9 8 7 6 6 6" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "10"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "5.0"  // better then the mana cost implies
+    "AbilityManaCost"                                     "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "5.0"
+      "mana_per_second" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5.0"
+        "value"                                           "20 55 90 125 250 375"
       }
-      "02"
+      "break_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_per_second"                                 "20 60 100 140 240 340" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_lion_5"
+        "value"                                           "1100"
+        "special_bonus_shard"                             "+200"
       }
-      "03"
+      "tick_interval"                                     "0.1"
+      "movespeed" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "break_distance"                                  "1200"
+        "value"                                           "15 20 25 30 35 40"
+        "special_bonus_unique_lion_6"                     "+15"
       }
-      "04"
+      "movespeed_bonus_when_empty_pct"                    "15"
+      "shard_bonus_targets"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.1"
+        "value"                                           "2"
+        "RequiresShard"                                   "1"
       }
-      "05"
+      "damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed"                                       "20 25 30 35 40 45"
-        "LinkedSpecialBonus"                              "special_bonus_unique_lion_6"
+        "value"                                           "0"
+        "special_bonus_facet_lion_essence_eater"          "+100"
+        "RequiresFacet"                                   "lion_essence_eater"
       }
+      "magic_resist" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+25"
+      }
+      "ally_pct"                                          "50"
     }
   }
 }

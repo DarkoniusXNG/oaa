@@ -7,25 +7,23 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5297"                // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "750"
-    "AbilityCastPoint"                                    "0.55"
+    "AbilityCastPoint"                                    "0.35"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "10.0"
     "AbilityDuration"                                     "5.0"
 
     // Damage.
@@ -34,63 +32,48 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "140 150 160 170 180 190"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.25"  // Applies two modifiers
+    "AbilityManaCost"                                     "80 110 140 170 200 230" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "start_radius"                                    "225"
+        "value"                                           "10.0"
+        "special_bonus_unique_jakiro_dualbreath_cooldown"  "-2"
       }
-      "02"
+      "start_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "end_radius"                                      "275"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "end_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "range"                                           "750"
-        "LinkedSpecialBonus"                              "special_bonus_unique_jakiro_5"
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "1050"
+        "value"                                           "850"
+        "special_bonus_unique_jakiro_2"                   "+100%"
       }
-      "05"
+      "speed"                                             "1050"
+      "fire_delay"                                        "0.2"
+      "burn_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "fire_delay"                                      "0.3"
+        "value"                                           "20 40 60 80 160 240"
+        "special_bonus_unique_jakiro_2"                   "+100%"
       }
-      "06"
+      "slow_movement_speed_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_damage"                                     "20 40 60 80 180 280"
-        "LinkedSpecialBonus"                              "special_bonus_unique_jakiro_2"
+        "value"                                           "-25 -30 -35 -40 -45 -50"
       }
-      "07"
+      "slow_attack_speed_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_movement_speed_pct"                         "-28 -32 -36 -40 -60 -80"
+        "value"                                           "-25 -30 -35 -40 -60 -80"
       }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_attack_speed_pct"                           "-28 -32 -36 -40 -60 -80"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed_fire"                                      "1050"
-      }
+      "speed_fire"                                        "1050"
     }
   }
 }

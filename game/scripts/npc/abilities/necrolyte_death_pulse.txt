@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5158"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES_ENEMIES_NO"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -22,36 +22,31 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "8 7 6 5 5 5"
+    "AbilityCooldown"                                     "8 7 6 5 4.75 4.5"
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "100 150 225 300 600 900" //OAA
+    "AbilityDamage"                                       "100 160 220 280 560 840"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 130 160 190 380 570"
+    "AbilityManaCost"                                     "115 130 145 160 190 210"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "area_of_effect"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "area_of_effect"                                  "500"
+        "value"                                           "500"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "heal"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "heal"                                            "60 120 180 240 480 720" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_necrophos_4"
+        "value"                                           "55 80 105 130 260 520"
+        "special_bonus_unique_necrophos_4"                "+50"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "400"
-      }
+      "projectile_speed"                                  "400"
     }
   }
 }

@@ -1,60 +1,52 @@
 "itembuilds"
 {
-	"author"		"Valve"
-	"hero"			"npc_dota_hero_leshrac"
-	"Title"			"Recommended Items for Leshrac"
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_leshrac"
+  "Title"         "Recommended Items for Leshrac"
 
-	"Items"
-	{
-		"#DOTA_Item_Build_Starting_Items"
-		{
-			"item"		"item_null_talisman"
-      "item"    "item_flask"
-		}
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_null_talisman"
+      "item"      "item_flask"
+    }
 
-		"#DOTA_Item_Build_Early_Game"
-		{
-			"item"		""
-			"item"		"item_magic_wand"
-			"item"		"item_boots"
-			"item"		"item_wind_lace"
-		}
+    "#DOTA_Item_Build_Core_Items"
+    {
+      "item"      "item_kaya"
+      "item"      "item_bloodstone_1"
+      "item"      "item_gungir"
+      "item"      "item_shivas_guard"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_wind_waker"
+    }
 
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		""
-			"item"		""
-			"item"		"item_cyclone"
-			"item"		"item_bloodstone_1"
-		}
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_aether_lens"
+      "item"      "item_shield_staff"
+      "item"      "item_guardian_greaves"
+      "item"      "item_octarine_core"
+      "item"      "item_sheepstick_4"
+    }
 
-		"#DOTA_Item_Build_Late_Items"
-		{
-			"item"		"item_shivas_guard"
-			"item"		"item_octarine_core"
-      "item"    "item_satanic_core"
-		}
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
 
-		"#DOTA_Item_Build_Luxury"
-		{
-			"item"		""
-			"item"		"item_veil_of_discord"
-			"item"		""
-			"item"		""
-			"item"		"item_ultimate_scepter"
-			"item"		"item_rod_of_atos"
-			"item"		""
-			"item"		""
-			"item"		""
-			"item"		""
-			"item"		""
-			"item"		""
-			"item"		""
-			"item"		""
-			"item"		"item_sphere"
-			"item"		"item_lotus_orb"
-			"item"		""
-			"item"		""
-		}
-	}
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_black_king_bar_1"
+      "item"      "item_blink"
+      "item"      "item_eternal_shroud"
+      "item"      "item_ethereal_blade"
+      "item"      "item_glimmer_cape"
+      "item"      "item_lotus_orb"
+      "item"      "item_sphere"
+      "item"      "item_greater_travel_boots"
+      "item"      "item_dagger_of_moriah_1"
+    }
+  }
 }

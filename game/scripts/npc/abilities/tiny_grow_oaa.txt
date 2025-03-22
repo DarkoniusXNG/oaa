@@ -1,44 +1,49 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Tiny: Grow (OAA rework)
+  // Tiny: Grow (OAA levels)
+  // Notes: Not breakable
   //=================================================================================================================
   "tiny_grow_oaa"
   {
-    "ID"                                                  "9109"
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/tiny_grow.lua"
     "AbilityTextureName"                                  "tiny_grow"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilitySound"                                        "Tiny.Grow"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "0"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_armor"                                       "5 10 15 25 35" // for the tooltip
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "10 16 22 28 34"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "25 50 75 150 300"
+        "value"                                           "60 120 180 240 300" // for the tooltip
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "attack_speed_reduction" // for the tooltip
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_speed_reduction"                          "20 35 50 55 60"
+        "value"                                           "-30"
+        "special_bonus_unique_tiny_6"                     "+8"
       }
+      "toss_bonus_damage" // for the tooltip
+      {
+        "value"                                           "75 300 525 1200 1875"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
+      }
+      "move_speed"                                        "10 20 30 40 50" // for the tooltip
+
+      "bonus_armor_oaa"                                   "0 0 0 10 20" // bonus_armor - bonus_armor(at lvl 3)
+      "bonus_damage_oaa"                                  "0 0 0 60 120" // bonus_damage - bonus_damage(at lvl 3)
+      //"attack_speed_reduction_oaa"                        "0 0 0 10 20" // attack_speed_reduction - attack_speed_reduction(at lvl 3)
+      "model_scale_oaa"                                   "0 0 0 20 40"
+      "bonus_toss_damage_oaa"                             "0 0 0 675 1350" // toss_bonus_damage - toss_bonus_damage(at lvl 3)
+      "bonus_move_speed_oaa"                              "0 0 0 10 20" // move_speed - move_speed(at lvl 3)
     }
   }
 }

@@ -1,0 +1,45 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Slime Boss: Slam
+  //=================================================================================================================
+  "boss_slime_slam"
+  {
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "earthshaker_fissure"
+    "ScriptFile"                                          "abilities/boss/slime/boss_slime_slam.lua"
+    "AbilityCastAnimation"                                "ACT_DOTA_ATTACK"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "800"
+    "AbilityCastPoint"                                    "2.0"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "10"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage"                                            "2000" // pure
+      "knockback"                                         "200"
+      "slow"                                              "-80"
+      "attack_slow"                                       "120"
+      "slow_duration"                                     "2.5"
+      "width"                                             "110"
+      "self_stun"                                         "2.5" // also 'fissure' duration
+    }
+  }
+}

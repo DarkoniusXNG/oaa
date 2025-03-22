@@ -1,0 +1,70 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Greater Power Treads
+  //=================================================================================================================
+  "item_recipe_greater_power_treads"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_2"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "1500"
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_greater_power_treads"
+    "ItemRequirements"
+    {
+      "01"                                                "item_power_treads;item_upgrade_core"
+    }
+  }
+
+  //=================================================================================================================
+  // Greater Power Treads
+  //=================================================================================================================
+  "item_greater_power_treads"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/greater_power_treads.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"                                  "custom/greater_power_treads"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "2901"
+    "ItemShopTags"                                        "attack_speed;move_speed;int;agi;str"
+    "ItemQuality"                                         "common"
+    "ItemAliases"                                         "greater power treads;power treads;treads"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
+
+    "SpeciallyBannedFromNeutralSlot"                      "1"
+
+    "MaxUpgradeLevel"                                     "4"
+    "ItemBaseLevel"                                       "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_movement_speed"                              "55 60 65 70" // +5 per level
+      "primary_attribute_bonus"                           "15 25 40 60" // Universal heroes get 1/3 of this as all stats
+      "bonus_magic_resistance"                            "7 8 9 10" // double for STR heroes
+      "bonus_attack_speed"                                "30 35 40 45" // +5 per level, double for AGI heroes
+      "bonus_spell_amp"                                   "6 7 8 9" // double for INT heroes
+      "bonus_damage"                                      "10 30 60 100" // double for Universal heroes
+      "primary_attribute_multiplier"                      "2"
+      "bonus_secondary_stats"                             "10 15 20 25" // +5 per level, Universal heroes get 1/2 of this as all stats
+    }
+  }
+}

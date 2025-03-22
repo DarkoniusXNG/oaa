@@ -66,7 +66,7 @@ end
 
 if IsServer() then
   function modifier_boss_capture_point:OnCreated(keys)
-    self.radius = keys.radius or 300
+    self.radius = keys.radius or CAPTURE_POINT_RADIUS
     self.captureTime = keys.captureTime or 10
     self.captureProgress = 0
     self.thinkInterval = 0.02
@@ -90,7 +90,7 @@ function modifier_boss_capture_point:OnIntervalThink()
     self.radius,
     DOTA_UNIT_TARGET_TEAM_FRIENDLY,
     DOTA_UNIT_TARGET_HERO,
-    bit.bor(DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO),
+    bit.bor(DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO),
     FIND_ANY_ORDER,
     false
   )
@@ -101,24 +101,28 @@ function modifier_boss_capture_point:OnIntervalThink()
     self.radius,
     DOTA_UNIT_TARGET_TEAM_FRIENDLY,
     DOTA_UNIT_TARGET_HERO,
-    bit.bor(DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO),
+    bit.bor(DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO),
     FIND_ANY_ORDER,
     false
   )
 
-  local function remove_wraith_heroes_from_table(table1)
-    for k,v in pairs(table1) do
-      local hero_to_test = table1[k]
-      if hero_to_test then
-        if hero_to_test:HasModifier("modifier_skeleton_king_reincarnation_scepter_active") then
-          table.remove(table1, k)
+  -- Remove heroes with Wraith King buff, Meepo Clones and Arc Warden Tempest Doubles
+  local function filter_heroes(heroes)
+    local new_heroes = {}
+    for _, h in pairs(heroes) do
+      if h and not h:IsNull() then
+        if not h:HasModifier("modifier_skeleton_king_reincarnation_scepter_active") and not h:IsClone() and not h:IsTempestDouble() and not h:IsSpiritBearOAA() then
+          table.insert(new_heroes, h)
         end
       end
     end
+    return new_heroes
   end
 
-  remove_wraith_heroes_from_table(radiantUnits)
-  remove_wraith_heroes_from_table(direUnits)
+  local radiantValidHeroes = filter_heroes(radiantUnits)
+  local direValidHeroes = filter_heroes(direUnits)
+  radiantUnits = radiantValidHeroes
+  direUnits = direValidHeroes
 
   local captureTick
   local heroMultiplierTable = {
@@ -161,7 +165,7 @@ function modifier_boss_capture_point:OnIntervalThink()
     end
   end
   captureTick = captureTick * heroMultiplierTable[math.min(#heroMultiplierTable, numHeroes)]
-  self.captureProgress = min(self.captureTime, max(0, self.captureProgress + captureTick))
+  self.captureProgress = math.min(self.captureTime, math.max(0, self.captureProgress + captureTick))
 
   if self.captureProgress == 0 then
     self.capturingTeam = nil
@@ -194,12 +198,16 @@ end
 
 if IsServer() then
   function modifier_boss_capture_point:OnDestroy()
+    local parent = self:GetParent()
     local particles = {
       "captureRingEffect",
       "captureInProgressEffect",
       "captureClockEffect"
     }
     foreach(partial(self.DestroyParticleByName, self), particles)
-    UTIL_Remove(self:GetParent())
+
+    if parent and not parent:IsNull() then
+      parent:ForceKillOAA(false)
+    end
   end
 end

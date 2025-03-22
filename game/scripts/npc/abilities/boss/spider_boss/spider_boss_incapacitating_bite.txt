@@ -1,0 +1,29 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Spider Boss: Incapacitating Bite passive
+  //=================================================================================================================
+  "spider_boss_incapacitating_bite"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/spider_boss/spider_boss_incapacitating_bite.lua"
+    "AbilityTextureName"                                  "broodmother_incapacitating_bite"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "miss_chance"                                       "60"
+      "move_speed_slow"                                   "-30"
+      "attack_speed_slow"                                 "-60"
+      "duration"                                          "2"
+    }
+  }
+}

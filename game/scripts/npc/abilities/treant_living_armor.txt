@@ -7,16 +7,15 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5436"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
-    //"AbilityCastRange"                                    "700"
-    "AbilityCastPoint"                                    "0.4"
-    "FightRecapLevel"                                     "1"
+    "AbilityCastRange"                                    "0" //OAA
+    "AbilityCastPoint"                                    "0.3"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -24,30 +23,25 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "20 18 16 14 12 12" //OAA
+    "AbilityCooldown"                                     "18 17 16 15 14 13" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
+    "AbilityManaCost"                                     "40 45 50 55 60 65"
 
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "heal_per_second" //OAA, total heal can be big because there are no towers here
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "total_heal"                                      "60 100 140 180 360 720"
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_8"
+        "value"                                           "10 18 26 34 68 104"
+        "special_bonus_unique_treant_8"                   "+30"
       }
-      "02"
+      "bonus_armor" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "5 6 7 8 10 16"
+        "value"                                           "4 6 8 10 12 14"
+        "special_bonus_unique_treant_13"                  "+4"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "12.0"
-      }
+      "duration"                                          "15" //OAA
     }
   }
 }

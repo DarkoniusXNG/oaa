@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3258"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
 
@@ -23,9 +23,8 @@
     "ItemResult"                                          "item_heart_transplant"
     "ItemRequirements"
     {
-      "01"                                                "item_heart_3;item_upgrade_core_3"
-      "02"                                                "item_crimson_guard_3;item_upgrade_core_3"
-      "03"                                                "item_regen_crystal_1;item_upgrade_core_3"
+      "01"                                                "item_heart_oaa_3;item_upgrade_core_3"
+      "02"                                                "item_regen_crystal_1;item_upgrade_core_3"
     }
   }
 
@@ -36,99 +35,57 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3260"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/heart_transplant.lua"
     "AbilityTextureName"                                  "custom/heart_transplant"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "FightRecapLevel"                                     "1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "700"
+    "AbilityCastRange"                                    "800"
     "AbilityCooldown"                                     "0.1"
     "AbilitySharedCooldown"                               "transplant"
     //"AbilityChannelTime"                                  "7.0"
-
-    // "IsTempestDoubleClonable"                          "0"
+    "AbilityManaCost"                                     "0"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "200"
-    "ItemCost"                                            "16800"
-    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemShopTags"                                        "armor;regen_mana;hard_to_tag"
+    "ItemCost"                                            "18603"
+    "ItemShopTags"                                        "str;regen_health;health_pool"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "transplant;heart transplant"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
     "MaxUpgradeLevel"                                     "2"
     "ItemBaseLevel"                                       "1"
     "UpgradesItems"                                       "item_heart_transplant"
 
-    "Precache"
+    // "IsTempestDoubleClonable"                          "0"
+
+    "precache"
     {
       "particle"                                          "particles/items/heart_transplant/heart_transplant.vpcf"
       "particle"                                          "particles/items/heart_transplant/heart_transplant_d.vpcf"
       "particle"                                          "particles/items/heart_transplant/heart_transplant_end.vpcf"
-      "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
     }
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01" // same as Heart lvls 4-5
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "85 115"
-      }
-      "02" // same as Heart lvls 4-5
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "1600 2000"
-      }
-      "03" // same as Heart lvls 4-5
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "health_regen_pct"                                "2.5 3"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cooldown_melee"                                  "5"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cooldown_ranged"                                 "7"
-      }
-      "06" // same as Heart lvls 3-4
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "transplant_bonus_strength"                       "60 85"
-      }
-      "07" // same as Heart lvls 3-4
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "transplant_bonus_health"                         "1200 1600"
-      }
-      "08" // same as Heart lvls 3-4
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "transplant_health_regen_pct"                     "2 2.5"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "transplant_max_range"                            "1000"
-      }
-      "10" // same as Solar Crest
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "transplant_max_duration"                         "7"
-      }
+      "bonus_strength"                                    "55 75" // same as Heart lvls 4-5
+      "bonus_health"                                      "950 1250"
+      "health_regen_pct"                                  "1.4" // same as Heart lvls 4-5
+      "cooldown_melee"                                    "5"
+      "cooldown_ranged"                                   "7"
+      "transplant_bonus_strength"                         "50 70"
+      "transplant_bonus_health"                           "700 950" // same as Heart lvls 4-5
+      "transplant_health_regen_pct"                       "1.3"
+      "transplant_max_range"                              "1000" // this is affected by cast range bonuses, not aoe increase
+      "transplant_max_duration"                           "12"
     }
   }
 }

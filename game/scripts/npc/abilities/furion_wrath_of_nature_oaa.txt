@@ -1,30 +1,27 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Furion: Wrath of Nature (OAA rework)
+  // Furion: Wrath of Nature (OAA rework) - unused
   //=================================================================================================================
   "furion_wrath_of_nature_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85248"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/furion_wrath_of_nature_oaa.lua"
     "AbilityTextureName"                                  "furion_wrath_of_nature"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
-
-    "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
-
-    // Unit Targeting
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
+
+    "HasScepterUpgrade"                                   "1"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -32,54 +29,57 @@
     "AbilityCastPoint"                                    "0.5"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
 
-    "AbilityCooldown"                                     "85"
-    "AbilityManaCost"                                     "175 225 275 325 375"
+    "AbilityManaCost"                                     "130 160 190 220 250"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_targets"                                     "18"
+        "value"                                           "85"
+        "special_bonus_unique_furion_7"                   "-15"
       }
-      "02"
+      "max_targets"                                       "18"
+      "damage"                                            "125 165 205 325 445"
+      "jump_delay"                                        "0.15"
+      "damage_percent_add"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "110 170 230 410 710"
+        "value"                                           "10"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "03"
+      "kill_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_percent_add"                              "11"
+        "value"                                           "0"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
       }
-      "04"
+      "kill_damage_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "jump_delay"                                      "0.25"
+        "value"                                           "0"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "05"
+      "damage_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_scepter"                                  "135 230 325 610 895"
+        "value"                                           "200 300 400 600 1000"
         "RequiresScepter"                                 "1"
       }
-      "06"
+      "scepter_buffer"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_buffer"                                  "4"
+        "value"                                           "4"
         "RequiresScepter"                                 "1"
       }
-      "07"
+      "scepter_min_root_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "kill_damage"                                     "4 5 6 7 8"
+        "value"                                           "1.5"
+        "RequiresScepter"                                 "1"
       }
-      "08"
+      "scepter_max_root_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "kill_damage_duration"                            "50"
+        "value"                                           "3.0"
+        "RequiresScepter"                                 "1"
       }
     }
   }

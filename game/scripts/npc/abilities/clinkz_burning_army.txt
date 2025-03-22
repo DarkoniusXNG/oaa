@@ -7,21 +7,20 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "7319"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
-    "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC" //OAA
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
 
     "MaxLevel"                                            "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1200"
+    "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90"
+    "AbilityCooldown"                                     "80"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -29,38 +28,11 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "range"                                           "1300"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "20"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "count"                                           "8" //OAA
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "attack_rate"                                     "1.6"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_percent"                                  "30"
-      }
-      "07" // 06
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "spawn_interval"                                  "0.7"
-      }
+      "range"                                             "900"
+      "count"                                             "5"
+      "spawn_interval"                                    "0.15"
     }
   }
 }

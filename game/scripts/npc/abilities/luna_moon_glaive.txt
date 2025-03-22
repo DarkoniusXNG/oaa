@@ -7,30 +7,27 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5223"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "range"                                           "500"
+        "value"                                           "500"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "bounces"                                           "3 4 5 6 7 8"
+      "damage_reduction_percent"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bounces"                                         "3 4 5 6 7 8" //OAA
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction_percent"                        "40 35 30 25 20 15" //OAA
+        "value"                                           "50 45 40 35 30 25"
+        "special_bonus_unique_luna_7"                     "-5"
       }
     }
   }

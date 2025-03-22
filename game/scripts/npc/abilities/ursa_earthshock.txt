@@ -7,12 +7,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5357"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -21,11 +19,10 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
-    "AbilityCastPoint"                                    "0"
+    //"AbilityCastPoint"                                    "0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "11 10 9 8 7 7"
     "AbilityDuration"                                     "4.0"
 
     // Damage.
@@ -34,37 +31,48 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "85"
+    "AbilityManaCost"                                     "95"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "shock_radius"
       {
-        "var_type"                                         "FIELD_INTEGER"
-        "shock_radius"                                     "385"
-        "LinkedSpecialBonus"                               "special_bonus_unique_ursa_5"
+        "value"                                           "385"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_unique_ursa_2"                     "+400"
       }
-      "02"
+      "movement_slow"                                     "-22 -28 -34 -40 -45 -50"
+      "hop_distance"
       {
-        "var_type"                                         "FIELD_INTEGER"
-        "movement_slow"                                    "-10 -20 -30 -40 -50 -60"
+        "value"                                           "250"
       }
-      "03"
+      "hop_duration"                                      "0.25"
+      "hop_height"                                        "83"
+      "shard_enrage_duration"
       {
-        "var_type"                                         "FIELD_INTEGER"
-        "hop_distance"                                     "250"
+        "value"                                           "1.4"
+        "RequiresShard"                                   "1"
       }
-      "04"
+      "fury_swipe_stacks_on_hit"
       {
-        "var_type"                                         "FIELD_FLOAT"
-        "hop_duration"                                     "0.25"
+        "value"                                           "0"
+        "special_bonus_unique_ursa_earthshock_furyswipes"  "+2"
       }
-      "05"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                         "FIELD_INTEGER"
-        "hop_height"                                       "83"
+        "value"                                           "12 11 10 9 8 7"
+        "special_bonus_unique_ursa_3"                     "=0.25"
+      }
+      "AbilityCharges"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_ursa_3"                     "+2"
+      }
+      "AbilityChargeRestoreTime" //OAA, same as AbilityCooldown
+      {
+        "value"                                           "11 10 9 8 8 8"
       }
     }
   }

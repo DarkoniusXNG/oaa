@@ -1,27 +1,23 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Shredder: Chakram 2
+  // Timbersaw: Chakram 2
   //=================================================================================================================
   "shredder_chakram_2"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5645"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO" //OAA, Valve forgot about this
 
     "MaxLevel"                                            "5"
-
-    "IsGrantedByScepter"                                  "1"
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "1200"
-    "AbilityCastPoint"                                    "0.3"
+    "AbilityCastPoint"                                    "0.15"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -29,71 +25,65 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80 140 200 260 320"
+    "AbilityManaCost"                                     "100 140 180 220 260"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "speed" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "speed"                                           "900.0"
-        "RequiresScepter"                                 "1"
+        "value"                                           "900.0"
       }
-      "02"
+      "radius" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "radius"                                          "200.0"
-        "RequiresScepter"                                 "1"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "pass_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pass_damage"                                     "100 180 260 420 740" //OAA
-        "RequiresScepter"                                 "1"
+        "value"                                           "100 165 230 360 490"
+        "special_bonus_facet_shredder_second_chakram"     "-30%"
       }
-      "04"
+      "damage_per_second" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "50 100 150 250 400" //OAA
-        "RequiresScepter"                                 "1"
+        "value"                                           "50 75 100 175 250"
+        "special_bonus_facet_shredder_second_chakram"     "-30%"
       }
-      "05"
+      "damage_penalty_tooltip"                            "30" //OAA
+      "slow" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow"                                            "5"
-        "RequiresScepter"                                 "1"
+        "value"                                           "5"
+        "special_bonus_unique_timbersaw_4"                "+4"
       }
-      "06"
+      "damage_interval" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_interval"                                 "0.5"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0.5"
       }
-      "07"
+      "break_distance" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "break_distance"                                  "2000.0"
-        "RequiresScepter"                                 "1"
+        "value"                                           "2000.0"
+        "affected_by_aoe_increase"                        "1"
       }
-      "08"
+      "mana_per_second" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "mana_per_second"                                 "16 23 30 37 44"
-        "RequiresScepter"                                 "1"
+        "value"                                           "14 22 30 38 46"
       }
-      "09"
+      "pass_slow_duration" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "pass_slow_duration"                              "0.5"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0.5"
       }
-      "10"
+      "slow_health_percentage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_health_percentage"                          "5"
-        "RequiresScepter"                                 "1"
+        "value"                                           "5"
+      }
+      "scepter_bonus_damage"
+      {
+        "value"                                           "20"
+      }
+      "second_chakram"
+      {
+        "value"                                           "0"
       }
     }
   }

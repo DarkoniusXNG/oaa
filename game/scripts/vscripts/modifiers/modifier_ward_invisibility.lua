@@ -1,4 +1,3 @@
-LinkLuaModifier('modifier_ward_invisibility_enemy', 'modifiers/modifier_ward_invisibility.lua', LUA_MODIFIER_MOTION_NONE)
 
 modifier_ward_invisibility = class(ModifierBaseClass)
 modifier_ward_invisibility_enemy = class(ModifierBaseClass)
@@ -44,6 +43,10 @@ function modifier_ward_invisibility:GetAuraSearchTeam()
   return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 
+function modifier_ward_invisibility:GetAuraSearchFlags()
+  return bit.bor(DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED)
+end
+
 function modifier_ward_invisibility:GetAuraRadius()
   return POOP_WARD_RADIUS
 end
@@ -53,18 +56,21 @@ function modifier_ward_invisibility:GetModifierAura()
 end
 
 function modifier_ward_invisibility:GetAuraEntityReject(entity)
-  if self.isInvis then
-    DebugPrint(self.id .. ': showing self')
+  if entity:IsOAABoss() then
+    return true
   end
+
+  -- Reveal the ward every time an enemy walks into range
   self.isInvis = false
 
   Timers:RemoveTimer(self.id)
   Timers:CreateTimer(self.id, {
     endTime = 3,
     callback = function()
-      DebugPrint(self.id .. ': hiding self')
+      -- Hide the ward
       self.isInvis = true
     end
   })
+
   return false
 end

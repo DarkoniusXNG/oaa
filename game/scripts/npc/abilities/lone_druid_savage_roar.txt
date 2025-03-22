@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=================================================================================================================
   // Lone Druid: Savage Roar
   //=================================================================================================================
@@ -8,48 +7,60 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5414"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.1"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "38 32 26 20 20 20"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
+    "AbilityManaCost"                                     "50 60 70 80 90 100" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "375"
+        "value"                                           "350"
+        "special_bonus_unique_lone_druid_savage_roar_aoe"  "+150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "bonus_speed"                                       "20"
+      "duration"                                          "0.8 1.2 1.6 2.0 2.1 2.2"
+      "only_affects_player_units"                         "1"
+      "shard_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_speed"                                     "20"
+        "value"                                           "700"
+        "RequiresShard"                                   "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "shard_movement_speed_pct" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.2 1.6 2.0 2.4 3.0 3.6"
+        "value"                                           "9 11 13 15 17 19"
+        "RequiresShard"                                   "1"
       }
-      "04"
+      "shard_attack_speed" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "only_affects_player_units"                       "1"
+        "value"                                           "25 30 35 40 45 50"
+        "RequiresShard"                                   "1"
+      }
+      "shard_duration"
+      {
+        "value"                                           "5.0"
+        "RequiresShard"                                   "1"
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "23 22 21 20 19 18"
+        "special_bonus_unique_lone_druid_4"               "-3"
       }
     }
   }

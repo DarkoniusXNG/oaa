@@ -1,20 +1,20 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: stoneskin
+  // Recipe: Stoneskin Armor 2
   //=================================================================================================================
   "item_recipe_stoneskin_2"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3245"      // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -24,42 +24,41 @@
     "ItemRequirements"
     {
       "01"                                                "item_stoneskin;item_upgrade_core_4"
-      "02"                                                "item_shivas_guard_4;item_upgrade_core_4"
-      "03"                                                "item_blade_mail_4;item_upgrade_core_4"
     }
   }
 
   //=================================================================================================================
-  // stoneskin
+  // Stoneskin Armor 2
   //=================================================================================================================
   "item_stoneskin_2"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3247"      // unique ID
     "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/transformation/stoneskin.lua"
+    "ScriptFile"                                          "items/stoneskin.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/stoneskin_2"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "75"
+    "AbilitySharedCooldown"                               "stoneskin"
+    "AbilityCooldown"                                     "20"
+    "AbilityManaCost"                                     "0"
 
     // Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySharedCooldown"                               "stoneskin"
-    "AbilityCooldown"                                     "16"
-
     "MaxUpgradeLevel"                                     "2"
     "ItemBaseLevel"                                       "2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "35050"
-    "ItemShopTags"                                        "damage;attack_speed;armor;regen_health;hard_to_tag"
+    "ItemCost"                                            "33779"
+    "ItemShopTags"                                        "armor;regen_health;hard_to_tag"
     "ItemQuality"                                         "epic"
-    "ItemAliases"                                         "stoneskin of mordiggian 2;stoneskin 2"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemAliases"                                         "stoneskin of mordiggian 2;stoneskin armor 2"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -69,48 +68,16 @@
       "particle"                                          "particles/status_fx/status_effect_earth_spirit_petrify.vpcf"
     }
 
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "25 30"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "90 120"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "hp_regen_amp"                                    "25"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "stone_armor"                                     "75 90"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "stone_magic_resist"                              "20"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "stone_status_resist"                             "30"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "stone_block_chance"                              "50"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
+      "bonus_armor"                                       "18 22"
+      "bonus_health_regen"                                "15 18"
+      "bonus_status_resist"                               "20 22"
+      // Active stuff
+      "stone_armor"                                       "100"
+      "stone_deflect_chance"                              "25"
+      //"stone_move_speed"                                  "100"
+      "duration"                                          "5.5"
     }
   }
 }

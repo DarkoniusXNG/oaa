@@ -1,7 +1,7 @@
-black_dragon_dragonhide_aura_oaa = class(AbilityBaseClass)
+LinkLuaModifier("modifier_dragonhide_aura_oaa_applier", "abilities/neutrals/oaa_black_dragon_dragonhide_aura.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_dragonhide_aura_oaa_effect", "abilities/neutrals/oaa_black_dragon_dragonhide_aura.lua", LUA_MODIFIER_MOTION_NONE)
 
-LinkLuaModifier("modifier_dragonhide_aura_oaa_applier", "abilities/neutrals/oaa_black_dragon_dragonhide_aura.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_dragonhide_aura_oaa_effect", "abilities/neutrals/oaa_black_dragon_dragonhide_aura.lua", LUA_MODIFIER_MOTION_NONE )
+black_dragon_dragonhide_aura_oaa = class(AbilityBaseClass)
 
 function black_dragon_dragonhide_aura_oaa:GetIntrinsicModifierName()
   return "modifier_dragonhide_aura_oaa_applier"
@@ -9,7 +9,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_dragonhide_aura_oaa_applier = class(ModifierBaseClass)
+modifier_dragonhide_aura_oaa_applier = class({})
 
 function modifier_dragonhide_aura_oaa_applier:IsHidden()
   return true
@@ -62,7 +62,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_dragonhide_aura_oaa_effect = class(ModifierBaseClass)
+modifier_dragonhide_aura_oaa_effect = class({})
 
 function modifier_dragonhide_aura_oaa_effect:IsHidden()
   return false
@@ -91,10 +91,9 @@ function modifier_dragonhide_aura_oaa_effect:OnRefresh()
 end
 
 function modifier_dragonhide_aura_oaa_effect:DeclareFunctions()
-  local funcs = {
+  return {
     MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
   }
-  return funcs
 end
 
 function modifier_dragonhide_aura_oaa_effect:GetModifierPhysicalArmorBonus()

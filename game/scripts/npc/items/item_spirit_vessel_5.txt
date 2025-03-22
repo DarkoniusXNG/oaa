@@ -7,24 +7,23 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"              "8429"                           // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
-    "ItemRecipe"                                          "1"
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
-    "ItemResult"          "item_spirit_vessel_5"
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_spirit_vessel_5"
     "ItemRequirements"
     {
       "01"                                                "item_spirit_vessel_4;item_upgrade_core_4"
-      "02"                                                "item_silver_staff;item_upgrade_core_4"
     }
   }
 
@@ -35,93 +34,53 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"              "8430"                           // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"       "item_spirit_vessel"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_BOTH"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/spirit_vessel.lua"
+    "AbilityTextureName"                                  "custom/spirit_vessel_5"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
-    "AbilitySharedCooldown"           "urn"
-    "AbilityCooldown"                 "7.0"
-    "AbilityTextureName"              "custom/spirit_vessel_5"
-
-	"AbilityCastRange"                                    "950"
+    "AbilityCastRange"                                    "750 850 950 1050 1150"
+    "AbilityCooldown"                                     "10"
+    "AbilitySharedCooldown"                               "urn"
 
     // Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
-    "MaxUpgradeLevel"                 "5"
-    "ItemBaseLevel"                   "5"
+    "MaxUpgradeLevel"                                     "5"
+    "ItemBaseLevel"                                       "5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                        "35940"
-    "ItemAliases"                     "sv 5;spirit vessel 5"
-    "ItemDisassembleRule"             "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemCost"                                            "32784"
+    "ItemShopTags"                                        "regen_mana;armor;boost_health"
+    "ItemQuality"                                         "rare"
+    "ItemAliases"                                         "sv 5;spirit vessel 5"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_health"                                      "375 475 625 825 1075"
+      "bonus_mana_regen"                                  "1.75 2.0 2.5 3.25 4.25"
+      "bonus_all_stats"                                   "0"
+      "bonus_armor"                                       "2 3 5 8 12"
+      "soul_radius"
       {
-        "var_type"                    "FIELD_INTEGER"
-        "bonus_health"                "250 500 1000 1750 2750"
+        "value"                                           "1400"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
-      {
-        "var_type"                    "FIELD_FLOAT"
-        "bonus_mana_regen"            "1.5 1.75 2.25 3.0 4.0"
-      }
-      "03"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "bonus_all_stats"             "2 10 15 20 25"
-      }
-      "04"
-      {
-        "var_type"                    "FIELD_FLOAT"
-        "bonus_armor"                 "2 3 5 8 12"
-      }
-      "05"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "soul_radius"                 "1400"
-      }
-      "06"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "soul_initial_charge"         "2"
-      }
-      "07"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "soul_additional_charges"     "1"
-      }
-      "08"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "soul_heal_amount"            "40 55 75 100 130"
-      }
-      "09"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "soul_damage_amount"          "35 50 70 95 125"
-      }
-      "10"
-      {
-        "var_type"                    "FIELD_FLOAT"
-        "duration"                    "8.0"
-      }
-      "11"
-      {
-        "var_type"                    "FIELD_INTEGER"
-        "hp_regen_reduction_enemy"    "45 50 55 60 65"
-      }
-      "12"
-      {
-        "var_type"                    "FIELD_FLOAT"
-        "enemy_hp_drain"              "4"
-      }
+      "kill_charges"                                      "1"
+      "soul_heal_amount"                                  "45 60 85 120 165"
+      "soul_damage_amount"                                "25 35 55 85 125"
+      "duration"                                          "8.0"
+      "heal_reduction_with_charge"                        "50 54 58 62 66"
+      "heal_reduction_no_charge"                          "24 28 32 36 40"
+      "current_hp_as_dmg"                                 "4 4.5 5 5.5 6"
     }
   }
 }

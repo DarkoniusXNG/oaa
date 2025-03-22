@@ -7,15 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5227"              // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -24,35 +25,36 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "12 11 10 9 9 9"
-
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "25 50 75 100 200 400"
+    "AbilityCooldown"                                     "16 14 12 10 9 9"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 105 110 115 120 125" //OAA
+    "AbilityManaCost"                                     "70 80 90 100 110 120"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "2.5 2.75 3.0 3.25 3.5 3.75"
-        "LinkedSpecialBonus"                              "special_bonus_unique_dragon_knight_2"
+        "value"                                           "1.8 2.0 2.2 2.4 2.5 2.6"
+        "special_bonus_unique_dragon_knight_2"            "+0.4"
       }
-      "02"
+      "damage"                                            "60 90 120 150 300 600"
+      "damage_pct"                                        "0"
+      "dragon_cast_range"                                 "450"
+      "projectile_speed"                                  "1600"
+      "dragon_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "dragon_cast_range"                               "400"
+        "value"                                           "=0"
+        "special_bonus_facet_dragon_knight_fire_dragon"   "=100"
+        "RequiresFacet"                                   "dragon_knight_fire_dragon"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "physical_damage_type"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "1600"
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_corrosive_dragon"  "+1"
       }
     }
   }

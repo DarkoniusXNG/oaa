@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "6582"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
 
     "MaxLevel"                                            "6"
@@ -16,42 +15,75 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "physical_damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "physical_damage_reduction"                       "40 45 50 55 65 85" //OAA
+        "value"                                           "40 50 60 70 75 80"
+        "special_bonus_unique_mars_bulwark_damage_reduction"  "+10"
       }
-      "02"
+      "forward_angle"                                     "140"
+      "physical_damage_reduction_side"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "forward_angle"                                   "140"
+        "value"                                           "20 25 30 35 40 45"
+        "special_bonus_unique_mars_bulwark_damage_reduction"  "+5"
       }
-      "03"
+      "side_angle"                                        "240"
+      "redirect_chance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "physical_damage_reduction_side"                  "20 25 30 35 40 45"
+        "value"                                           "70"
+        "special_bonus_unique_mars_bulwark_redirect_chance"  "+30"
       }
-      "04"
+      "redirect_range"                                    "900"
+      "redirect_speed_penatly" //OAA penatly x)
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "side_angle"                                      "240"
+        "value"                                           "0"
       }
-      "05"
+      "redirect_close_range" //OAA, same as Mars attack range
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "redirect_chance"                                 "70"
+        "value"                                           "250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "attack_redirection_grace_distance"                 "0"
+      "soldier_count"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "redirect_range"                                  "800"
+        "value"                                           "4"
+        "RequiresScepter"                                 "1"
       }
-      "07"
+      "soldier_offset"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "redirect_speed_penatly"                          "20"
+        "value"                                           "150"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_movement_slow_pct" //OAA
+      {
+        "value"                                           "20 25 30 35 40 45"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_movement_slow_duration"
+      {
+        "value"                                           "1.0"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_bonus_damage" //OAA
+      {
+        "value"                                           "60 65 70 75 150 225"
+        "RequiresScepter"                                 "1"
+      }
+      "stationary_attack_delay"
+      {
+        "value"                                           "0.0"
+        "RequiresScepter"                                 "1"
+      }
+      "knockback_distance"
+      {
+        "value"                                           "325"
+        "RequiresScepter"                                 "1"
+      }
+      "soldier_attack_range"
+      {
+        "value"                                           "275"
+        "RequiresScepter"                                 "1"
       }
     }
   }

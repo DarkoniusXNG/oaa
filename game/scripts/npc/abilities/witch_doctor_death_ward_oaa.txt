@@ -1,0 +1,88 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Witch Doctor: Death Ward (OAA rework)
+  //=================================================================================================================
+  "witch_doctor_death_ward_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/oaa_witch_doctor_death_ward.lua"
+    "AbilityTextureName"                                  "witch_doctor_death_ward"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
+
+    "HasScepterUpgrade"                                   "1"
+    "HasShardUpgrade"                                     "1"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "600"
+    "AbilityCastPoint"                                    "0.35"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
+    "AbilityChannelAnimation"                             "ACT_DOTA_CHANNEL_ABILITY_4"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "90 85 80 75 70"
+    "AbilityChannelTime"                                  "8.0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "200"
+
+    // "precache"
+    // {
+      // "model"                                             "models/heroes/witchdoctor/witchdoctor_ward.vmdl"
+      // "model"                                             "models/heroes/witchdoctor/witchdoctor_skull.vmdl"
+      // "particle"                                          "particles/units/heroes/hero_witchdoctor/witchdoctor_deathward_glow.vpcf"
+      // "particle"                                          "particles/units/heroes/hero_witchdoctor/witchdoctor_ward_attack.vpcf"
+      // "particle"                                          "particles/units/heroes/hero_witchdoctor/witchdoctor_ward_skull.vpcf"
+      // "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_witchdoctor.vsndevts"
+    // }
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage"
+      {
+        "value"                                           "75 100 125 175 225"
+        "special_bonus_unique_witch_doctor_5"             "+45"
+        "special_bonus_facet_witch_doctor_cleft_death"    "=45 =70 =95 =145 =195"
+        "CalculateSpellDamageTooltip"                     "0"
+      }
+      "attack_range_tooltip"
+      {
+        "value"                                           "600"
+        "special_bonus_unique_witch_doctor_1"             "+75"
+      }
+      "bonus_attack_range"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_witch_doctor_1"             "+75"
+      }
+      "bounce_radius"
+      {
+        "value"                                           "650"
+        "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "initial_target_count"
+      {
+        "value"                                           "1"
+        "special_bonus_facet_witch_doctor_cleft_death"    "+1"
+      }
+      "duration_tooltip"                                  "8" // same as AbilityChannelTime
+    }
+  }
+}

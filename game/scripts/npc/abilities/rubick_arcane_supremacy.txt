@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "7320"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "MaxLevel"                                            "6"
@@ -16,17 +15,19 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "cast_range"                                        "60 120 180 240 290 340"
+      "spell_amp"                                         "11 16 21 26 31 36"
+      "aoe_bonus"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spell_amp"                                       "14 18 22 26 36 50"
+        "value"                                           "0"
+        "special_bonus_facet_rubick_arcane_accumulation"  "+25"
       }
-      "02"
+      "aoe_bonus_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "status_resistance"                               "16 24 32 40 48 56"
+        "value"                                           "0"
+        "special_bonus_facet_rubick_arcane_accumulation"  "+20"
       }
     }
   }

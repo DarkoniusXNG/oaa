@@ -1,6 +1,6 @@
 -- This is the entry-point to your game mode and should be used primarily to precache models/particles/sounds/etc
 
-GAME_VERSION = "7.26.0"
+GAME_VERSION = "7.38.0"
 
 -- Setup the main logger
 require('internal/logging')
@@ -16,6 +16,7 @@ end
 CustomNetTables:SetTableValue("info", "mode", { value = mode })
 CustomNetTables:SetTableValue("info", "datetime", { value = GetSystemDate() .. " " .. GetSystemTime() })
 
+require('libraries/gamerules')
 require('internal/vconsole')
 require('internal/eventwrapper')
 require('internal/util')
@@ -24,10 +25,6 @@ require("components")
 
 require('gamemode')
 require('precache')
-
-require('libraries/keyvalues')
--- DotaStats
---require("statcollection/init")
 
 function Precache( context )
 --[[

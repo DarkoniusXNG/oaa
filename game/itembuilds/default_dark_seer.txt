@@ -1,56 +1,59 @@
 "itembuilds"
 {
-  "author"          "Valve"
-  "hero"            "npc_dota_hero_dark_seer"
-  "Title"           "Recommended items for Dark Seer"
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_dark_seer"
+  "Title"         "Recommended items for Dark Seer"
 
   "Items"
   {
     "#DOTA_Item_Build_Starting_Items"
     {
-      "item"        "item_boots"
-      "item"        "item_ward_stack"
-      "item"        "item_enchanted_mango"
-      "item"        "item_flask"
+      "item"      "item_boots"
+      "item"      "item_enchanted_mango"
+      "item"      "item_flask"
     }
 
-    "#DOTA_Item_Build_Early_Game"
+    "#DOTA_Item_Build_Core_Items"
     {
-      "item"        "item_magic_wand"
-      "item"        "item_guardian_greaves"
-      "item"        "item_ancient_janggo"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_harpoon"
+      "item"      "item_blink"
+      "item"      "item_gungir"
     }
 
-    "#DOTA_Item_Build_Mid_Items"
+    "#DOTA_Item_Build_Support_Core" // standard tank-support
     {
-      "item"        "item_ultimate_scepter"
-      "item"        "item_octarine_core"
-      "item"        "item_lotus_orb"
-      "item"        "item_heart"
+      "item"      "item_guardian_greaves"
+      "item"      "item_shield_staff"
+      "item"      "item_octarine_core"
+      "item"      "item_sheepstick_4"
     }
 
-    "#DOTA_Item_Build_Late_Items"
+    "#DOTA_Item_Build_Illusions_Core" // Illusion oriented
     {
-      "item"        "item_helm_of_the_dominator_2"
-      "item"        "item_regen_crystal"
-      "item"        "item_refresher_4"
-      "item"        "item_sheepstick_4"
+      "item"      "item_heart_oaa_1"
+      "item"      "item_bloodthorn"
+      "item"      "item_refresher_4"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
     }
 
     "#DOTA_Item_Build_Luxury"
     {
-      "item"        "item_pull_staff"
-      "item"        "item_lucience"
-      "item"        "item_spirit_vessel"
-      "item"        "item_radiance"
-      "item"        "item_shivas_guard"
-      "item"        "item_crimson_guard"
-      "item"        "item_pipe"
-      "item"        "item_sphere"
-      "item"        "item_black_king_bar_1"
-      "item"        "item_ethereal_blade"
-      "item"        "item_assault"
-      "item"        "item_aeon_disk_2"
+      "item"      "item_black_king_bar_1"
+      "item"      "item_heavens_halberd"
+      "item"      "item_helm_of_the_overlord"
+      "item"      "item_lotus_orb"
+      "item"      "item_pipe"
+      "item"      "item_shivas_guard"
+      "item"      "item_sphere"
+      "item"      "item_vladmirs_grimoire_1"
+      "item"      "item_wind_waker"
+      "item"      "item_lucience"
+      "item"      "item_elixier_hybrid"
     }
   }
 }

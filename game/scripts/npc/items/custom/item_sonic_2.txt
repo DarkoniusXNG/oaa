@@ -5,22 +5,17 @@
   //=================================================================================================================
   "item_recipe_sonic_2"
   {
-    "ID"                  "8515"
-    "BaseClass"           "item_datadriven"
-    "Model"               "models/props_gameplay/recipe.mdl"
-    "AbilityTextureName"  "custom/recipe/recipe_5"
-    "ItemCost"            "20000"
-    "ItemShopTags"        ""
-    "ItemRecipe"          "1"
-    "ItemResult"          "item_sonic_2"
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_5"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
+    "ItemShopTags"                                        ""
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_sonic_2"
     "ItemRequirements"
     {
       "01"                                                "item_sonic;item_upgrade_core_4"
-      "02"                                                "item_greater_phase_boots_3;item_upgrade_core_4"
-      "03"                                                "item_greater_power_treads_3;item_upgrade_core_4"
-      "04"                                                "item_greater_tranquil_boots_3;item_upgrade_core_4"
-      "05"                                                "item_greater_travel_boots_3;item_upgrade_core_4"
-      "06"                                                "item_greater_guardian_greaves_3;item_upgrade_core_4"
     }
   }
 
@@ -29,65 +24,38 @@
   //=================================================================================================================
   "item_sonic_2"
   {
-    "ID"                    "8516"
-    "BaseClass"             "item_lua"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-    "AbilityTextureName"    "custom/sonic_3"
-    "AbilitySharedCooldown" "sonic"
-    "ScriptFile"            "items/transformation/sonic.lua"
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/sonic.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityTextureName"                                  "custom/sonic_3"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
-    "AbilityManaCost"                                     "0"
-    "AbilityCooldown"                                     "16"
-    "AbilityCastPoint"      "0.0"
+    "AbilityManaCost"                                     "50"
+    "AbilityCooldown"                                     "15"
+    "AbilitySharedCooldown"                               "sonic"
 
-    "MaxUpgradeLevel"       "2"
-    "ItemBaseLevel"         "2"
-    "UpgradesItems"         "item_sonic_2"
+    "MaxUpgradeLevel"                                     "2"
+    "ItemBaseLevel"                                       "2"
+    "UpgradesItems"                                       "item_sonic_2"
 
-    "ItemCost"              "33925"
-    "ItemShopTags"          "sonic"
-    "ItemQuality"           ""
-    "ItemAliases"           "sonic"
-    "ItemDeclarations"      "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemCost"                                            "31004"
+    "ItemShopTags"                                        "agi;attack_speed;move_speed"
+    "ItemQuality"                                         "epic"
+    "ItemAliases"                                         "sonic"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
-    "AbilitySpecial"
+    "SpeciallyBannedFromNeutralSlot"                      "1"
+
+    "AbilityValues"
     {
-      "01" // phase boots parameter
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "60 65"
-      }
-      "02" // phase boots parameter
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_melee"                              "108 158"
-      }
-      "03" // phase boots parameter
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_range"                              "108 158"
-      }
-      "04" // phase boots parameter
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "10 14"
-      }
-      "05" // sonic active percentage movement speed bonus
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed_bonus"                                     "35 40"
-      }
-      "06" // sonic active percentage vision bonus
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "vision_bonus"                                    "50"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
+      "bonus_movement_speed"                              "75 80"
+      "bonus_attack_speed"                                "40 45"
+      "bonus_agility"                                     "55 75"
+      "bonus_damage"                                      "80 120"
+      "active_speed_bonus"                                "35 40"
+      "active_cast_speed"                                 "20 25"
+      "duration"                                          "5"
     }
   }
 }
-

@@ -1,12 +1,12 @@
-/* global Players $ GameEvents CustomNetTables Game */
+/* global $, Players, GameEvents, CustomNetTables, is10v10 */
 
-var musicPlaying = true;
+let musicPlaying = true;
 $.GetContextPanel().FindChildTraverse('ToggleMusic').AddClass('MusicOn');
 CustomNetTables.SubscribeNetTableListener('music', SetMusic);
 SetMusic(null, 'info', CustomNetTables.GetTableValue('music', 'info'));
 SetMute(CustomNetTables.GetTableValue('music', 'mute'));
 
-$.GetContextPanel().SetHasClass('TenVTen', Game.GetMapInfo().map_display_name === 'oaa_10v10');
+$.GetContextPanel().SetHasClass('TenVTen', is10v10());
 
 function ToggleMusic () {
   if (musicPlaying) {
@@ -40,7 +40,7 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 function SetMute (data) {
-  var mute = data[Players.GetLocalPlayer()];
+  const mute = data[Players.GetLocalPlayer()];
   if (!mute || mute === 1) {
     return;
   }

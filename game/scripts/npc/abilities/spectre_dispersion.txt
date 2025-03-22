@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5336"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
@@ -17,23 +16,42 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage_reflection_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reflection_pct"                           "7 12 17 20 23 25" // OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_spectre_5"
+        "value"                                           "7 11 15 19 20 21"
+        "special_bonus_unique_spectre_5"                  "+5"
       }
-      "02"
+      "min_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "min_radius"                                      "300"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "max_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_radius"                                      "700"
+        "value"                                           "800"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "activation_cooldown"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+25"
+      }
+      "activation_manacost"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+50"
+      }
+      "activation_bonus_pct"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+50"
+      }
+      "activation_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+5"
       }
     }
   }

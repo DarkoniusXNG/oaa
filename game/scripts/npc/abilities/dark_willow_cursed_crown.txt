@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "6342"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -15,39 +14,64 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
+    "AbilityCastRange"                                    "600 625 650 675 700 725"
     "AbilityCastPoint"                                    "0.2"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "18 16 14 12 12 12"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80 100 120 140 160 180"
+    "AbilityManaCost"                                     "80 90 100 110 120 130"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "delay"                                             "4"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "delay"                                           "4"
+        "value"                                           "1.2 1.6 2.0 2.4 2.6 2.8"
       }
-      "02"
+      "stun_radius" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.75 2.25 2.75 3.25 3.75 4.25"
-        "LinkedSpecialBonus"                              "special_bonus_unique_dark_willow_6"
+        "value"                                           "360"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_unique_dark_willow_7"              "+100"
       }
-      "03"
+      "shard_delay_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "stun_radius"                                     "360"
+        "value"                                           "0"
+        "RequiresShard"                                   "1"
+      }
+      "shard_bramble_amount"
+      {
+        "value"                                           "4"
+        "RequiresShard"                                   "1"
+      }
+      "shard_spawn_radius"
+      {
+        "value"                                           "175"
+        "RequiresShard"                                   "1"
+      }
+      "accumulated_damage_pct"
+      {
+        "value"                                           "0"
+        "RequiresFacet"                                   "dark_willow_shattering_crown"
+        "special_bonus_facet_dark_willow_shattering_crown"  "=35"
+      }
+      "accumulated_damage_pct_ally"
+      {
+        "value"                                           "0"
+        "RequiresFacet"                                   "dark_willow_shattering_crown"
+        "special_bonus_facet_dark_willow_shattering_crown"  "=15"
+      }
+      "AbilityCooldown"  //OAA, Calculated with values: 2.8s max stun duration (no talent), shard 3s delay
+      {
+        "value"                                           "15 14 13 12 11 10"
+        "special_bonus_shard"                             "-1.5"
       }
     }
   }

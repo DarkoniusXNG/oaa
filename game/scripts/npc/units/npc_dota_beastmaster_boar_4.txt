@@ -17,7 +17,7 @@
 
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                                            "beastmaster_boar_poison"      // Ability 1
+    "Ability1"                                            "beastmaster_boar_poison_oaa"      // Ability 1
     "Ability2"                                            ""      // Ability 2
     "Ability3"                                            ""      // Ability 3
     "Ability4"                                            ""      // Ability 4
@@ -25,12 +25,13 @@
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"                                       "0"      // Physical protection.
+    "MagicalResistance"                                   "25"    // Magical protection.
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_RANGED_ATTACK"
-    "AttackDamageMin"                                     "65"    // Damage range min.
-    "AttackDamageMax"                                     "65"    // Damage range max.
+    "AttackDamageMin"                                     "80"    // Damage range min.
+    "AttackDamageMax"                                     "80"    // Damage range max.
     "AttackRate"                                          "1.25"    // Speed of attack.
     "AttackAnimationPoint"                                "0.5"    // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "600"    // Range within a target can be acquired.
@@ -56,7 +57,7 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "900"    // Base health.
+    "StatusHealth"                                        "1350"    // Base health.
     "StatusHealthRegen"                                   "1.5"    // Health regeneration rate.
 
     // Vision
@@ -67,8 +68,6 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"              // Team name.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_BASIC"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
   }
 }

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5177"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -16,93 +15,60 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "0"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.5"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90.0 80.0 70.0 60.0 50.0"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "150 175 200 300 400"
+    "AbilityManaCost"                                     "100 125 150 175 200"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "600"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.6"  // Applies multiple modifiers
-
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "3 3.5 4 4.5 5"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.0 3.5 4.0 4.5 5.0"
+        "value"                                           "150 300 450 900 1650"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "side_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "150 300 450 900 1650" //OAA
+        "value"                                           "150 300 450 900 1650"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "damage_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "side_damage"                                     "150 300 450 900 1650" //OAA
+        "value"                                           "300"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
+        "CalculateSpellDamageTooltip"                     "0"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "slow_movement_speed_pct"                           "-60 -65 -70 -75 -80" //OAA
+      "slow_attack_speed_pct"                             "-60 -70 -80 -90 -100" //OAA
+      "push_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_radius"                                   "300"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "push_duration"                                     "1.0"
+      "slow_duration"                                     "3 3.5 4 4.5 5"
+      "movement_speed"                                    "40 45 50 55 60" //OAA
+      "movement_speed_duration"                           "3.0 3.5 4 4.5 5.0"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_movement_speed_pct"                         "-60"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_attack_speed_pct"                           "-60 -80 -100 -120 -140" //OAA
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "push_distance"                                   "450"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "push_duration"                                   "1.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "3 3.5 4 4.5 5"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "40"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "movement_speed_duration"                         "3.0 3.5 4.0 4.5 5.0" //OAA
+        "value"                                           "70 65 60 55 50"
+        "special_bonus_unique_beastmaster_7"              "-30"
       }
     }
   }

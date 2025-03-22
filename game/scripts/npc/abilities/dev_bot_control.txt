@@ -4,10 +4,9 @@
   // Bot controller ability used to coordinate bots
   //=================================================================================================================
   "dev_bot_control" {
-    "ID"                                                  "8999"
     "BaseClass"                                           "ability_datadriven"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityTextureName"                                  "nothing"
+    "AbilityTextureName"                                  "rubick_empty1"
     "MaxLevel"                                            "1"
     "AbilitySharedWithTeammates"                          "1"
     "AbilityCastRange"                                    "1500"

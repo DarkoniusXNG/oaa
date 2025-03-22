@@ -7,19 +7,15 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5461"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -27,11 +23,11 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60" //OAA
+    "AbilityCooldown"                                     "80 75 70 70 70" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 175 225 325 725"
+    "AbilityManaCost"                                     "125 175 225 325 425"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
@@ -39,30 +35,24 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "500"
+        "value"                                           "550"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_unique_disruptor_8"                "+100"
       }
-      "02" // 1 second <=> 4 pulses
+      "pulses" // OAA, 1 second <=> 4 pulses, Valve bad at math or forgot about it
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pulses"                                          "20 22 24 26 28" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_7"
-        "LinkedSpecialBonusField"                         "value2"
+        "value"                                           "24"
+        "special_bonus_unique_disruptor_7"                "+6"
       }
-      "03"
+      "damage_max"                                        "200 350 500 950 1400" //OAA
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_max"                                      "200 350 500 950 1400" //OAA
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5.0 5.5 6.0 6.5 7.0" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_7"
+        "value"                                           "6.0"
+        "special_bonus_unique_disruptor_7"                "+1.5"
       }
     }
   }

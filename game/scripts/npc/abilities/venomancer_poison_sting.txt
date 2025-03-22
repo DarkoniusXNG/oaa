@@ -4,7 +4,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5179"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
@@ -12,26 +11,28 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "6 9 12 15 15 15"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0 9.0 12.0 15.0 15.0 15.0"
+        "value"                                           "10 20 30 40 80 120"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "10 20 30 40 80 120" //OAA
+        "value"                                           "-8 -10 -12 -14 -16 -18"
+        "special_bonus_unique_venomancer_2"               "-5"
       }
-      "03"
+      "hp_regen_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "-9 -11 -13 -15 -17 -19"
-        "LinkedSpecialBonus"                              "special_bonus_unique_venomancer_2"
+        "value"                                           "0"
+        "special_bonus_unique_venomancer_poisonsting_regen_reduction"  "+15"
       }
     }
   }

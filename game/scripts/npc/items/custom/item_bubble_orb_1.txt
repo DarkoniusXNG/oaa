@@ -1,19 +1,19 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: bubble_orb_1
+  // Recipe: Bubble Orb 1
   //=================================================================================================================
   "item_recipe_bubble_orb_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3823"   // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
 
@@ -24,23 +24,22 @@
     "ItemRequirements"
     {
       "01"                                                "item_lotus_orb_3;item_upgrade_core_3"
-      "02"                                                "item_dispel_orb_1;item_upgrade_core_3"
     }
   }
 
   //=================================================================================================================
-  // bubble_orb_1
+  // Bubble Orb 1
   //=================================================================================================================
   "item_bubble_orb_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3824"  // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/bubble_orb.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"                                  "custom/bubble_orb_1"
-    "ScriptFile"                                          "items/reflex/preemptive_bubble.lua"
-    "FightRecapLevel"                                     "1"
 
     "MaxUpgradeLevel"                                     "2"
     "ItemBaseLevel"                                       "1"
@@ -48,63 +47,35 @@
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "200"
-    "AbilityCooldown"                                     "40"
+    "AbilityCooldown"                                     "22"
     "AbilitySharedCooldown"                               "bubble"
-    "AbilityCastPoint"                                    "0.0"
+    "AbilityCastRange"                                    "300"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "16950"
-    "ItemShopTags"                                        "regen_health;regen_mana;str;agi;int;hard_to_tag"
+    "ItemCost"                                            "16853"
+    "ItemShopTags"                                        "armor;regen_health;regen_mana;mana_pool;hard_to_tag"
     "ItemQuality"                                         "epic"
-    "ItemAliases"                                         "bubble orb"
+    "ItemAliases"                                         "bubble; bubble orb"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
-    // Modifiers
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "19 24"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "16.0 30.0"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "7.0 9.0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "700 950"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0 7.0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "150"
-      }
-      "07"
-      {
-        // The time that the buff effect lingers after exiting the bubble
-        "var_type"                                        "FIELD_FLOAT"
-        "aura_stickiness"                                 "0.1"
-      }
+      "bonus_armor"                                       "16 20"
+      "bonus_health_regen"                                "16 19"
+      "bonus_mana_regen"                                  "5.5 6.5"
+      "bonus_mana"                                        "700 950"
+      "duration"                                          "5"
+      "radius"                                            "225"
+      "aura_stickiness"                                   "0.1" // The time that the buff effect lingers after exiting the bubble
     }
 
-    "Precache"
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
     {
       "particle"                                          "particles/items/bubble_orb_base.vpcf"
       "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_arc_warden.vsndevts"

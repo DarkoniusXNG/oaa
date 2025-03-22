@@ -1,46 +1,57 @@
 "itembuilds"
 {
-    "author"        "Valve"
-    "hero"          "npc_dota_hero_obsidian_destroyer"
-    "Title"         "Recommended items for Outworld Devourer"
+  "author"        "OAA 7.37e + Frost"
+  "hero"          "npc_dota_hero_obsidian_destroyer"
+  "Title"         "Recommended items for Outworld Destroyer"
 
-    "Items"
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
     {
-        "#DOTA_Item_Build_Starting_Items"
-        {
-            "item"      "item_null_talisman"
-            "item"      "item_clarity"
-            "item"      "item_flask"
-            "item"      "item_mango"
-            "item"      "item_mango"
-        }
-
-        "#DOTA_Item_Build_Early_Game"
-        {
-            "item"      "item_arcane_boots"
-            "item"      "item_ultimate_scepter"
-        }
-
-        "#DOTA_Item_Build_Mid_Items"
-        {
-            "item"      "item_rod_of_atos"
-            "item"      "item_bloodstone_1"
-        }
-
-        "#DOTA_Item_Build_Late_Items"
-        {
-            "item"      "item_guardian_greaves"
-            "item"      "item_octarine_core"
-            "item"      "item_shivas_guard"
-            "item"      "item_sheepstick_4"
-        }
-
-        "#DOTA_Item_Build_Luxury"
-        {
-            "item"      "item_black_king_bar_1"
-            "item"      "item_blink"
-            "item"      "item_aether_lens"
-            "item"      "item_satanic_core"
-        }
+      "item"      "item_null_talisman"
+      "item"      "item_boots"
     }
+
+    "#DOTA_Item_Build_For_Farming"
+    {
+      "item"      "item_hand_of_midas_1"
+      "item"      "item_meteor_hammer_1"
+    }
+
+    "#DOTA_Item_Build_Physical_Core"
+    {
+      "item"      "item_devastator"
+      "item"      "item_hurricane_pike"
+      "item"      "item_greater_power_treads"
+      "item"      "item_dagger_of_moriah_1"
+      "item"      "item_sheepstick_4"
+    }
+
+    "#DOTA_Item_Build_Utility_Initiation" // mana items mostly
+    {
+      "item"      "item_far_sight"
+      "item"      "item_octarine_core"
+      "item"      "item_bloodstone_1"
+      "item"      "item_arcane_blink"
+      "item"      "item_ultimate_scepter"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_angels_demise"
+      "item"      "item_black_king_bar_1"
+      "item"      "item_shivas_guard"
+      "item"      "item_skadi"
+      "item"      "item_sphere"
+      "item"      "item_vladmirs_grimoire_1"
+      "item"      "item_wind_waker"
+      "item"      "item_regen_crystal_1"
+      "item"      "item_moon_shard_oaa"
+    }
+  }
 }

@@ -7,83 +7,75 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5115"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
-    "AbilityCastPoint"                                    "0.35"
+    "AbilityCastPoint"                                    "0.25"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "8"
-
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "80 140 200 260 520 780"
+    "AbilityCooldown"                                     "7"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80 95 105 115 125 135"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Applies multiple modifiers
+    "AbilityManaCost"                                     "100"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "crush_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "crush_radius"                                    "350"
+        "value"                                           "325"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "crush_extra_slow"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "crush_extra_slow"                                "-20 -25 -30 -35 -45 -55"
+        "value"                                           "-20 -25 -30 -35 -40 -45"
+        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_SUBTRACT"
       }
-      "03"
+      "crush_attack_slow_tooltip"                         "-20 -25 -30 -35 -40 -45"
+      "crush_extra_slow_duration"                         "3 4 5 6 6 6"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "crush_attack_slow_tooltip"                       "-20 -25 -30 -35 -45 -55"
+        "value"                                           "0.8"
+        "special_bonus_unique_slardar_slithereen_crush_stun"  "+0.2"
       }
-      "04"
+      "puddle_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "crush_extra_slow_duration"                       "3 4 5 6 7 8"
+        "value"                                           "7"
+        "special_bonus_scepter"                           "+5"
       }
-      "05"
+      "puddle_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1"
-        "LinkedSpecialBonus"                              "special_bonus_unique_slardar"
+        "value"                                           "250"
+        "special_bonus_scepter"                           "x1.8"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "crush_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "puddle_duration"                                 "25"
-        "RequiresScepter"                                 "1"
+        "value"                                           "75 150 225 300 600 1200"
+        "special_bonus_unique_slardar"                    "+300"
       }
-      "07"
+      "shard_amp_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "puddle_radius"                                   "600"
-        "RequiresScepter"                                 "1"
+        "value"                                           "5.0"
+        "RequiresShard"                                   "1"
+      }
+      "shard_bonus_radius"
+      {
+        "value"                                           "0"
+        "RequiresShard"                                   "1"
       }
     }
   }
-
 }

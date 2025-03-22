@@ -1,5 +1,3 @@
-LinkLuaModifier('modifier_duel_rune_hill', 'modifiers/modifier_duel_rune_hill.lua', LUA_MODIFIER_MOTION_NONE)
-
 -- Taken from bb template
 if DuelRunes == nil then
   DebugPrint ( 'Creating new DuelRunes object.' )
@@ -8,16 +6,15 @@ if DuelRunes == nil then
 end
 
 function DuelRunes:Init ()
-
-  for index,key in pairs(Duels.zones) do
+  self.moduleName = "DuelRunes"
+  for index, key in pairs(Duels.zones) do
     DebugPrint("Init rune hill for arena #" .. tostring(index))
 
     local runeHill = ZoneControl:CreateZone('duel_' .. tostring(index) .. '_rune_hill', {
       mode = ZONE_CONTROL_EXCLUSIVE_OUT,
       margin = 0,
       padding = 0,
-      players = {
-      }
+      players = {}
     })
 
     runeHill.onStartTouch(DuelRunes.StartTouch)
@@ -25,20 +22,20 @@ function DuelRunes:Init ()
   end
 
   Duels.onEnd(function()
+    DuelRunes.active = false
     Timers:RemoveTimer('DuelRunes')
   end)
 
   Duels.onStart(function()
     DuelRunes.active = false
-
     Timers:RemoveTimer('DuelRunes')
     Timers:CreateTimer('DuelRunes', {
       endTime = DUEL_RUNE_TIMER,
       callback = function()
-        if not Duels.currentDuel then
+        if not Duels:IsActive() then
           return
         end
-        Notifications:TopToAll({text="#duel_highground_active", duration=10.0, style={color="red", ["font-size"]="86px"}})
+        Notifications:TopToAll({text="#duel_highground_active", duration=10.0, style={color="red", ["font-size"]="80px"}})
         DuelRunes.active = true
       end
     })
@@ -57,8 +54,12 @@ function DuelRunes:StartTouch(event)
 [   VScript  ]:     triggerHandler: function: 0x002d1300
 [   VScript  ]: outputid: 0
 ]]
-  local modifier = event.activator:AddNewModifier(event.activator, nil, "modifier_duel_rune_hill", {})
-  -- No idea how this can be nil if the previous line doesn't have an error, but it happens for some reason
+  local modifier
+  local activator = event.activator
+  if not activator:IsClone() and not activator:IsTempestDouble() and Duels:IsActive() and (not activator:HasModifier("modifier_out_of_duel")) then
+    modifier = activator:AddNewModifier(activator, nil, "modifier_duel_rune_hill", {})
+  end
+
   if modifier then
     modifier.zone = event.caller
   end

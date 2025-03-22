@@ -1,0 +1,36 @@
+"DOTAHeroes"
+{
+  //=================================================================================================================
+  // HERO: Invoker
+  //=================================================================================================================
+  "npc_dota_hero_invoker"
+  {
+    //"Ability17"                                           "special_bonus_unique_invoker_ice_wall_dps"
+    //"Ability18"                                           "special_bonus_unique_invoker_3"
+
+    //"Ability19"                                           "replaces special_bonus_unique_invoker_11"
+    //"Ability20"                                           "special_bonus_unique_invoker_9"
+
+    //"Ability21"                                           "special_bonus_unique_invoker_additional_chaos_meteors"
+    //"Ability22"                                           "special_bonus_unique_invoker_5"
+
+    //"Ability23"                                           "special_bonus_unique_invoker_2"
+    //"Ability24"                                           "special_bonus_unique_invoker_13"
+
+    // special_bonus_unique_invoker_1 - Forged Spirits Summoned                                              - unused
+    // special_bonus_unique_invoker_2 - Radial Deafening Blast
+    // special_bonus_unique_invoker_3 - Tornado Cooldown
+    // special_bonus_unique_invoker_4 - Cataclysm                                                            - unused, scepter
+    // special_bonus_unique_invoker_5 - Alacrity Damage/Speed
+    // special_bonus_unique_invoker_6 - Chaos Meteor Damage                                                  - unused
+    // special_bonus_unique_invoker_7 - Cold Snap Duration                                                   - unused
+    // special_bonus_unique_invoker_8 - Tornado Lift Time                                                    - unused
+    // special_bonus_unique_invoker_9 - Cold Snap Cooldown
+    // special_bonus_unique_invoker_10 - EMP Mana Burnt                                                      - unused
+    // special_bonus_unique_invoker_11 - Sun Strike Cooldown
+    // special_bonus_unique_invoker_12 - Vector Target Ice Wall                                              - unused
+    // special_bonus_unique_invoker_13 - Quas/Wex/Exort passive effects                                      - overpowered
+    // special_bonus_unique_invoker_ice_wall_dps
+    // special_bonus_unique_invoker_additional_chaos_meteors - bonus Chaos Meteors
+  }
+}

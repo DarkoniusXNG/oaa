@@ -23,21 +23,12 @@ function modifier_arcana_rockelec:GetAttributes()
 	return MODIFIER_ATTRIBUTE_PERMANENT
 end
 
-------------------------------------------------------------------------------------
-
-function modifier_arcana_rockelec:GetModifierModelChange( params )
-	return "models/heroes/electrician/electrician_arcana/electrician_arcana_base.vmdl"
-end
-
-------------------------------------------------------------------------------------
-
 function modifier_arcana_rockelec:DeclareFunctions()
-	return
-    {
-      MODIFIER_PROPERTY_MODEL_CHANGE
-    }
+  return {
+    MODIFIER_PROPERTY_MODEL_CHANGE,
+  }
 end
 
-function modifier_arcana_rockelec:OnCreated()
-
+function modifier_arcana_rockelec:GetModifierModelChange()
+  return "models/heroes/electrician/electrician_arcana/electrician_arcana_base.vmdl"
 end

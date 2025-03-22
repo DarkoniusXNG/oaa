@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5191"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
@@ -15,15 +14,16 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600 700 800 900 1000 1100" //OAA
     "AbilityCastPoint"                                    "0.25"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15 13 11 9 7 5" //OAA
+    "AbilityCooldown"                                     "12 11 10 9 7 5" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -31,24 +31,24 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_attack_speed" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "90 115 140 165 190 215"  //OAA
+        "value"                                           "140 150 160 170 180 190"
+        "special_bonus_unique_phantom_assassin_strike_aspd"  "+60"
       }
-      "02"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2.0"
+        "value"                                           "2.5"
+        "special_bonus_unique_phantom_assassin_4"         "+0.5"
       }
-      "03"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "abilitycastrange"                                ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_phantom_assassin_6"
+        "value"                                           "1000"
+        "special_bonus_unique_phantom_assassin_6"         "+200"
       }
+      "creep_lifesteal_penalty"                           "40" // unused
     }
   }
 }

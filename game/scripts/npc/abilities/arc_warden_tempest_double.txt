@@ -7,38 +7,58 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5683"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.15"
+    "AbilityCastRange"                                    "700"
 
-    // Time
+    // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60 50 40 40 40"
+    "AbilityManaCost"                                     "0" //OAA, change if Tempest Double doesnt spawn with Arc Warden's current health and mana
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "18 22 26 30 34"
+        "value"                                           "60 55 50 45 40"
       }
-      "02"
+      "duration"                                          "18 21 24 27 30"
+      "bounty"                                            "180 240 300 480 780"
+      "max_blind_chance"                                  "35.0"
+      "max_slow"                                          "35.0"
+      "has_debuff"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bounty"                                          "180 240 300 750 1500"
+        "value"                                           "1"
+        "special_bonus_unique_arc_warden_8"               "=0"
+      }
+      "rune_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_arc_warden_runed_replica"    "=12"
+      }
+      "invis_rune"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_arc_warden_runed_replica"    "=1 =1 =1 =1 =1"
+      }
+      "arcane_rune"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_arc_warden_runed_replica"    "=0 =1 =1 =1 =1"
+      }
+      "haste_rune"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_arc_warden_runed_replica"    "=0 =0 =1 =1 =1"
       }
     }
   }

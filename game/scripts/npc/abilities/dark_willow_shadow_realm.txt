@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "6341"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
@@ -17,47 +16,52 @@
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
-
-    // Time
+    // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "20 18 16 14 14 14" //OAA
+    "AbilityCastPoint"                                    "0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70 80 90 100 200 300"
+    "AbilityManaCost"                                     "70 80 90 100 140 180"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5"
+        "value"                                           "22 20 18 16 15 14"
+        "special_bonus_unique_dark_willow_5"              "-2"
       }
-      "02"
+      "duration" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "90 180 270 360 450 540"
-        "LinkedSpecialBonus"                              "special_bonus_unique_dark_willow_1"
+        "value"                                           "5"
+        "special_bonus_unique_dark_willow_1"              "+0.5"
       }
-      "03"
+      "fade_time"                                         "0.3"
+      "damage"                                            "120 200 280 360 440 520"
+      "attack_range_bonus"                                "600"
+      "max_damage_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_range_bonus"                              "600"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "max_damage_duration"                             "3.5"
+        "value"                                           "3.0"
         "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "05"
+      "aura_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_radius"                                  "900"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_facet_dark_willow_throwing_shade"  "=700"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "aura_linger"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_dark_willow_throwing_shade"  "=0.75"
+      }
+      "aura_damage_pct"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_dark_willow_throwing_shade"  "=30"
       }
     }
   }

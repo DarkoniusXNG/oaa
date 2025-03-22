@@ -2,21 +2,21 @@ modifier_generic_projectile = class(ModifierBaseClass)
 
 ------------------------------------------------------------------------------------
 
+function modifier_generic_projectile:DeclareFunctions()
+  return {
+    MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
+    MODIFIER_EVENT_ON_DEATH,
+  }
+end
+
+
 function modifier_generic_projectile:GetOverrideAnimation(projectileTable)
     if self.projectileTable and self.projectileTable.flail then
         return ACT_DOTA_FLAIL
     else
-        return nil
+        return
     end
 end
-
-------------------------------------------------------------------------------------
-
-function modifier_generic_projectile:DeclareFunctions()
-    return { MODIFIER_PROPERTY_OVERRIDE_ANIMATION }
-end
-
-------------------------------------------------------------------------------------
 
 function modifier_generic_projectile:InitProjectile(projectileTable)
     if projectileTable then
@@ -39,46 +39,32 @@ function modifier_generic_projectile:GetPriority()
     return MODIFIER_PRIORITY_SUPER_ULTRA
 end
 
-------------------------------------------------------------------------------------
-
-function modifier_generic_projectile:DeclareFunctions()
-    local funcs =
-    {
-        MODIFIER_EVENT_ON_DEATH,
-    }
-
-    return funcs
-end
-
-------------------------------------------------------------------------------------
-
-function modifier_generic_projectile:OnDeath(keys)
-    if IsServer() then
-        local caster = self:GetParent()
-        if keys.unit:entindex() == caster:entindex() then
-            if self.projectileTable and self.projectileTable.onDiedCallback then
-                self.projectileTable.onDiedCallback()
-            end
-        end
+if IsServer() then
+  function modifier_generic_projectile:OnDeath(keys)
+    local caster = self:GetParent()
+    if keys.unit:entindex() == caster:entindex() then
+      if self.projectileTable and self.projectileTable.onDiedCallback then
+        self.projectileTable.onDiedCallback()
+      end
     end
+  end
 end
 
 ------------------------------------------------------------------------------------
 
 function modifier_generic_projectile:CheckState()
-    if self.projectileTable then
-        local state = {
-            [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
-            [MODIFIER_STATE_UNSELECTABLE] = not self.projectileTable.selectable,
-            [MODIFIER_STATE_NO_HEALTH_BAR] = not self.projectileTable.selectable,
-            [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-            [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
-            [MODIFIER_STATE_INVULNERABLE] = not self.projectileTable.noInvul,
-            [MODIFIER_STATE_STUNNED] = false,
-        }
-
-        return state
-    end
+  if self.projectileTable then
+    return {
+      [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+      [MODIFIER_STATE_UNSELECTABLE] = not self.projectileTable.selectable,
+      [MODIFIER_STATE_NO_HEALTH_BAR] = not self.projectileTable.selectable,
+      [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+      [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+      [MODIFIER_STATE_INVULNERABLE] = not self.projectileTable.noInvul,
+      [MODIFIER_STATE_STUNNED] = false,
+    }
+  end
+  return {}
 end
 
 ------------------------------------------------------------------------------------
@@ -100,7 +86,7 @@ function modifier_generic_projectile:OnIntervalThink()
 
         local z = projectileTable.height * math.sin(math.pi * self.traveled)
 
-        local step = math.min(projectileTable.speed, (projectile:GetAbsOrigin() - projectileTable.target):Length2D())
+        --local step = math.min(projectileTable.speed, (projectile:GetAbsOrigin() - projectileTable.target):Length2D())
         local newPosition = LerpVectors(projectileTable.origin, projectileTable.target, self.traveled)
 
         newPosition.z = LerpVectors(Vector(0,0,projectileTable.origin.z), Vector(0,0,projectileTable.target.z), self.traveled).z + z
@@ -115,11 +101,11 @@ function modifier_generic_projectile:OnIntervalThink()
                 DOTA_UNIT_TARGET_TEAM_ENEMY,
                 DOTA_UNIT_TARGET_ALL,
                 DOTA_UNIT_TARGET_FLAG_NONE,
-                FIND_CLOSEST,
+                FIND_ANY_ORDER,
                 false
             )
 
-            for k,v in pairs(units) do
+            for _, v in pairs(units) do
                 if not self.hits[v:entindex()] then
                     self.hits[v:entindex()] = true
 

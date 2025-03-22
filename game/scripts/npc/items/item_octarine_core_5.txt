@@ -5,19 +5,19 @@
   //=================================================================================================================
   "item_recipe_octarine_core_5"
   {
-    "ID"                                                  "8464"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
-    "ItemCost"                                            "20000"
+
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
+
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_octarine_core_5"
     "ItemRequirements"
     {
       "01"                                                "item_octarine_core_4;item_upgrade_core_4"
-      "02"                                                "item_refresher_4;item_upgrade_core_4"
-      "03"                                                "item_satanic_core_2;item_upgrade_core_4"
     }
   }
 
@@ -28,67 +28,31 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8465"    // unique ID
-    "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/refresher_core.lua"
+    "BaseClass"                                           "item_octarine_core"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityTextureName"                                  "custom/octarine_core_5"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "38100"
-    "ItemShopTags"                                        "move_speed;boost_mana;mana_pool"
+    "ItemCost"                                            "34804"
+    "ItemShopTags"                                        "health_pool;mana_pool;boost_mana;regen_mana;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "octarine core 5;octarine 5"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "5"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intelligence"                              "10 15 25 40 60"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "425 850 1275 1700 2125"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "425 525 675 875 1125"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_magical_armor"                             "10"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_cooldown"                                  "25"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "hero_lifesteal"                                  "25 27 29 31 33"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "creep_lifesteal"                                 "5 7 9 11 13"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "active_duration"                                 "7"
-      }
+      "bonus_cooldown"                                    "25"
+      "bonus_health"                                      "425 675 925 1175 1425"
+      "bonus_mana"                                        "425 525 675 875 1125"
+      "bonus_health_regen"                                "0"
+      "bonus_mana_regen"                                  "6 6.25 6.75 7.5 8.5"
     }
   }
 }

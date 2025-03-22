@@ -7,24 +7,24 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5612"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "350"
-    "AbilityCastPoint"                                    "0.01"
+    "AbilityCastPoint"                                    "0.2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60" //OAA
+    "AbilityCooldown"                                     "80 75 70 65 60" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -32,52 +32,53 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "cast_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cast_radius"                                     "350"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "damage_per_second" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "50 150 250 450 650" //OAA
+        "value"                                           "80 120 160 280 400"
+        "special_bonus_unique_earth_spirit_8"             "+30%"
       }
-      "03"
+      "damage_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_duration"                                 "6.0"
+        "value"                                           "6.0"
+        "special_bonus_unique_earth_spirit_8"             "+30%"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
+        "CalculateSpellDamageTooltip"                     "0"
       }
-      "04"
+      "rock_search_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "rock_search_radius"                              "400"
+        "value"                                           "600"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "rock_explosion_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "rock_explosion_radius"                           "600"
+        "value"                                           "600"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "damage_interval"                                   "1.0"
+      "rock_explosion_delay"                              "8.0"
+      "silence_duration"                                  "5.0"
+      "slow_duration"                                     "2.0"
+      "magnetized_rocks_buff_self"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_interval"                                 "1.0"
+        "value"                                           "0"
+        "special_bonus_facet_earth_spirit_resonance"      "=1"
       }
-      "07"
+      "magnetized_rocks_buff_self_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "rock_explosion_delay"                            "8.0"
+        "value"                                           "0"
+        "special_bonus_facet_earth_spirit_resonance"      "+8"
       }
-      "08"
+      "magnetized_rocks_bonus_self_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "silence_duration"                                "5.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "2.0"
+        "value"                                           "0"
+        "special_bonus_facet_earth_spirit_resonance"      "=40 =80 =120 =160 =200"
       }
     }
   }

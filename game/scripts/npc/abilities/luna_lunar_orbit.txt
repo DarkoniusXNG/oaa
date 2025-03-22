@@ -1,0 +1,74 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Luna: Lunar Orbit
+  //=================================================================================================================
+  "luna_lunar_orbit"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "rotating_glaives_duration"
+      {
+        "value"                                           "5 6 7 8 9 10"
+      }
+      "rotating_glaives"
+      {
+        "value"                                           "4"
+        "special_bonus_unique_luna_lunar_orbit_glaive_count"  "+1"
+      }
+      "rotating_glaives_movement_radius"
+      {
+        "value"                                           "250"
+      }
+      "rotating_glaives_hit_radius"
+      {
+        "value"                                           "175"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "rotating_glaives_movement_radius_expand_speed_scale"
+      {
+        "value"                                           "3"
+      }
+      "rotating_glaives_collision_damage"
+      {
+        "value"                                           "22 28 34 40 43 46" // this is a % of luna's damage
+        "special_bonus_shard"                             "+20"
+      }
+      "rotating_glaives_speed"
+      {
+        "value"                                           "160"
+        "special_bonus_shard"                             "+50%" // also change tooltip value below
+      }
+      "rotating_glaives_shard_speed_bonus_tooltip"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+50" // TOOLTIP ONLY, change value above too
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "25 24 23 22 21 20"
+      }
+      "AbilityManaCost"
+      {
+        "value"                                           "65 70 75 80 85 90"
+      }
+      "rotating_glaives_damage_reduction"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_luna_moonshield"             "15 20 25 30 30 30"
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Boss tier 5 - Twin Boss (ranged)
+  //=================================================================================
+  "npc_dota_boss_twin_dumb_tier5"
+  {
+    // General
+    //
+    "BaseClass"                                           "npc_dota_creature"
+    "Model"                                               "models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl"
+    "vscripts"                                            "units/ai_simple.lua"
+    "SoundSet"                                            "Creep_Good_Range"
+    "ModelScale"                                          "1"
+    "Level"                                               "50"
+    "IsAncient"                                           "1"
+    "ConsideredHero"                                      "1"
+    "UseNeutralCreepBehavior"                             "0"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"                                            "boss_basic_properties_oaa"
+    "Ability2"                                            "boss_regen"
+    "Ability3"                                            "boss_true_strike"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"                                       "43"
+    "MagicalResistance"                                   "-25"
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"                                     "4500"
+    "AttackDamageMax"                                     "4500"
+    "AttackRate"                                          "0.75"
+    "AttackAnimationPoint"                                "0.7"
+    "AttackAcquisitionRange"                              "600"
+    "AttackRange"                                         "600"
+    "ProjectileModel"                                     "particles/items2_fx/necronomicon_archer_projectile.vpcf"
+    "ProjectileSpeed"                                     "900"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "2500" // Total with the other twin: 5000
+    "BountyGoldMin"                                       "0"
+    "BountyGoldMax"                                       "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"                                      "DOTA_HULL_SIZE_HERO"
+    "RingRadius"                                          "110"
+    "HealthBarOffset"                                     "400"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"                                       "420"
+    "MovementTurnRate"                                    "0.8"
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "16000"
+    "StatusHealthRegen"                                   "0"
+    "StatusMana"                                          "8000"
+    "StatusManaRegen"                                     "4000"
+
+    // Creature data
+    "Creature"
+    {
+      "DisableResistance"                                 "80.0"
+    }
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                                            "DOTA_TEAM_NEUTRALS"
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"                                  "1400"
+    "VisionNighttimeRange"                                "1400"
+
+    // Inventory
+    //----------------------------------------------------------------
+    "HasInventory"                                        "1"
+
+    // Minimap
+    //----------------------------------------------------------------
+    "MinimapIcon"                                         "minimap_roshancamp"
+    "MinimapIconSize"                                     "450"
+  }
+}

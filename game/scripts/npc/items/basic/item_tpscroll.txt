@@ -1,0 +1,14 @@
+"DOTAAbilities"
+{
+  // Teleport Scroll / Town Portal Scroll
+  "item_tpscroll"
+  {
+    "AbilityCooldown"                                     "90" //OAA
+    "ItemCost"                                            "1" //OAA
+    "ItemPermanent"                                       "1" //OAA
+    "ItemRequiresCharges"                                 "0" //OAA
+    "ItemDisplayCharges"                                  "0" //OAA
+    "ItemKillable"                                        "0" //OAA
+    "ItemDroppable"                                       "1" //OAA
+  }
+}

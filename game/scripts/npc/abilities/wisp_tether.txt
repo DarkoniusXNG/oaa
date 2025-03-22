@@ -7,12 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5485"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "LinkedAbility"                                       "wisp_tether_break"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -32,51 +32,50 @@
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1800"
+    "AbilityCastRange"                                    "1600"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "900"
+        "value"                                           "1000"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "movespeed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed"                                       "5 8 11 14 17 20"
+        "value"                                           "6 8 10 12 14 16"
+        "special_bonus_unique_wisp_3"                     "+5"
       }
-      "03"
+      "latch_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "latch_distance"                                  "700"
+        "value"                                           "700"
       }
-      "04"
+      "latch_speed"                                       "1000"
+      "tether_heal_amp"                                   "50 60 70 80 90 100" //OAA
+      "tether_mana_amp"                                   "50 60 70 80 90 100" //OAA
+      "self_bonus"                                        "0"
+      "slow"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "latch_speed"                                     "1000"
+        "value"                                           "15 30 45 60 65 70"
+        "special_bonus_unique_wisp_11"                    "+15"
       }
-      "05"
+      "slow_duration"                                     "0.2"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tether_heal_amp"                                 "0.6 0.9 1.2 1.5 1.6 1.7"
+        "value"                                           "0"
+        "special_bonus_shard"                             "+120"
       }
-      "06"
+      "damage_to_heal"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "self_bonus"                                      "0"
+        "value"                                           "0"
+        "special_bonus_shard"                             "50"
       }
-      "07"
+      "tick_rate"                                         "0.5"
+      "tether_attack_damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow"                                            "8 16 24 32 40 48"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "0.2"
+        "special_bonus_unique_wisp_4"                     "=75"
       }
     }
   }

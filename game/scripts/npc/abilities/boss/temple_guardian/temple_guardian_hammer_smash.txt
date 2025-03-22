@@ -1,0 +1,44 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Temple Guardian: Hammer Smash
+  //=================================================================================================================
+  "temple_guardian_hammer_smash"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/temple_guardian/temple_guardian_hammer_smash.lua"
+    "AbilityTextureName"                                  "omniknight_hammer_of_purity"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
+
+    "MaxLevel"                                            "1"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "300"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_6"
+    "AbilityCastPoint"                                    "0.04"
+    "AnimationIgnoresModelScale"                          "1"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "2.6"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "impact_radius"                                     "250"
+      "stun_duration"                                     "0.4"
+      "damage"                                            "4000" // physical
+      "base_swing_speed"                                  "1.0"
+    }
+  }
+}

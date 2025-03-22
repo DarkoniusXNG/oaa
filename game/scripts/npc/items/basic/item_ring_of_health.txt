@@ -1,0 +1,10 @@
+"DOTAAbilities"
+{
+  "item_ring_of_health"
+  {
+
+    "ItemShareability"                                    "ITEM_PARTIALLY_SHAREABLE" //OAA
+    "SideShop"                                            "1" //OAA
+    "SecretShop"                                          "0" //OAA
+  }
+}

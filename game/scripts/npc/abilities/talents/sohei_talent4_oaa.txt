@@ -1,26 +1,14 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Flurry of Blows talent: Increases radius
+  // Flurry of Blows talent: Increases radius - unused
   //=================================================================================================================
-  "special_bonus_sohei_fob_radius"
+  "special_bonus_unique_sohei_4_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "9508"
-    "BaseClass"                                           "special_bonus_undefined"
+    "BaseClass"                                           "special_bonus_base"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
-    {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "value"                                           "200"
-      }
-    }
   }
 }

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5335"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
@@ -18,18 +17,31 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "15 30 45 60 120 180"
-        "LinkedSpecialBonus"                              "special_bonus_unique_spectre_2"
+        "value"                                           "20 35 50 65 95 125"
+        "special_bonus_unique_spectre_2"                  "+15"
+        "special_bonus_facet_spectre_forsaken"            "x2"         // if changing this, change bonus_damage_multiplier_tooltip
       }
-      "02"
+      "bonus_damage_multiplier_tooltip"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "325" //OAA, heroes are clamped-up a lot
+        "value"                                           "0"
+        "special_bonus_facet_spectre_forsaken"            "+2"
+      }
+      "radius"
+      {
+        "value"                                           "400"
+      }
+      "only_creep_allies_damage_pct"
+      {
+        "value"                                           "0"
+      }
+      "illusions_can_apply"
+      {
+        "value"                                           "1"
+        "special_bonus_facet_spectre_forsaken"            "=0"
       }
     }
   }

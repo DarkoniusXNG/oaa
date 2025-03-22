@@ -1,0 +1,13 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Slime Boss: Split
+  //=================================================================================================================
+  "boss_slime_split"
+  {
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "bloodseeker_bloodrage"
+    "ScriptFile"                                          "abilities/boss/slime/boss_slime_split.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  }
+}

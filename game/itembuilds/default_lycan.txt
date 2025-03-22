@@ -1,51 +1,67 @@
 "itembuilds"
 {
-    "author"        "Valve"
-    "hero"          "npc_dota_hero_lycan"
-    "Title"         "Recommended items for Lycan"
+  "author"        "OAA 7.37e + Frost"
+  "hero"          "npc_dota_hero_lycan"
+  "Title"         "Recommended items for Lycan"
 
-    "Items"
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
     {
-        "#DOTA_Item_Build_Starting_Items"
-        {
-            "item"      "item_boots"
-            "item"      "item_clarity"
-            "item"      "item_flask"
-            "item"      "item_mango"
-            "item"      "item_mango"
-        }
-
-        "#DOTA_Item_Build_Early_Game"
-        {
-            "item"      "item_vladmir"
-            "item"      "item_necronomicon_3"
-        }
-
-        "#DOTA_Item_Build_Mid_Items"
-        {
-            "item"      "item_ancient_janggo"
-            "item"      "item_solar_crest"
-        }
-
-        "#DOTA_Item_Build_Late_Items"
-        {
-            "item"      "item_assault"
-            "item"      "item_helm_of_the_dominator_2"
-            "item"      "item_vladmir_2"
-        }
-
-        "#DOTA_Item_Build_Luxury"
-        {
-            "item"      "item_pipe"
-            "item"      "item_ultimate_scepter"
-            "item"      "item_black_king_bar_1"
-            "item"      "item_skadi"
-            "item"      "item_satanic"
-            "item"      "item_desolator"
-            "item"      "item_monkey_king_bar"
-            "item"      "item_nullifier"
-            "item"      "item_abyssal_blade_3"
-            "item"      "item_heart"
-        }
+      "item"      "item_quelling_blade"
+      "item"      "item_flask"
+      "item"      "item_gloves"
     }
+
+    "#DOTA_Item_Build_For_Farming"
+    {
+      "item"      "item_maelstrom"
+    }
+
+    "#DOTA_Item_Build_Physical_Core"
+    {
+      "item"      "item_harpoon"
+      "item"      "item_black_king_bar_1"
+      "item"      "item_satanic"
+      "item"      "item_abyssal_blade_2"
+      "item"      "item_devastator_oaa_2"
+    }
+
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_vladmirs_grimoire_1"
+      "item"      "item_assault"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_octarine_core"
+      "item"      "item_lucience"
+    }
+
+    "#DOTA_Item_Build_Summons_Core"
+    {
+      "item"      "item_helm_of_the_overlord"
+      "item"      "item_vladmirs_grimoire_1"
+      "item"      "item_assault"
+      "item"      "item_bloodthorn"
+      "item"      "item_lucience"
+      "item"      "item_azazel_summon_fighter"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_manta"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_nullifier"
+      "item"      "item_skadi"
+      "item"      "item_spell_breaker_1"
+      "item"      "item_sphere"
+      "item"      "item_azazel_summon_tank"
+      "item"      "item_greater_power_treads"
+      "item"      "item_sheepstick_4"
+    }
+  }
 }

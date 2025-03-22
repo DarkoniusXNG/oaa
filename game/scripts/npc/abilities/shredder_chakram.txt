@@ -1,30 +1,26 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Shredder: Chakram
+  // Timbersaw: Chakram
   //=================================================================================================================
   "shredder_chakram"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5527"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "1200"
-    "AbilityCastPoint"                                    "0.3"
+    "AbilityCastPoint"                                    "0.15"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -32,61 +28,48 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80 140 200 260 320"
+    "AbilityManaCost"                                     "100 140 180 220 260"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "speed"                                             "900.0"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "speed"                                           "900.0"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "pass_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "radius"                                          "200.0"
+        "value"                                           "100 165 230 360 490"
       }
-      "03"
+      "damage_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pass_damage"                                     "100 180 260 420 740" //OAA
+        "value"                                           "50 75 100 175 250"
       }
-      "04"
+      "slow"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "50 100 150 250 400" //OAA
+        "value"                                           "5"
+        "special_bonus_unique_timbersaw_4"                "+5"
       }
-      "05"
+      "damage_interval"                                   "0.5"
+      "break_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow"                                            "5"
+        "value"                                           "2000.0"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "mana_per_second"                                   "14 22 30 38 46"
+      "pass_slow_duration"                                "0.5"
+      "slow_health_percentage"                            "5"
+      "castpoint_scepter"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_interval"                                 "0.5"
+        "value"                                           "0.15"
+        "RequiresScepter"                                 "1"
       }
-      "07"
+      "second_chakram"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "break_distance"                                  "2000.0"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "mana_per_second"                                 "16 23 30 37 44"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "pass_slow_duration"                              "0.5"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_health_percentage"                          "5"
+        "value"                                           "0"
       }
     }
   }

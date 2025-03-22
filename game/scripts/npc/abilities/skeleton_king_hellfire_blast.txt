@@ -4,15 +4,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5086"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -21,54 +22,34 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14 12 10 8 7.8 7.5"
-
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "70 80 90 100 350 600"
+    "AbilityCooldown"                                     "14 12 10 8 7 6" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "95 110 125 140 150 160"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Applies two modifiers
+    "AbilityManaCost"                                     "95 110 125 140 155 170"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "blast_speed"                                       "1200"
+      "blast_stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "blast_speed"                                     "1000"
+        "value"                                           "1.0 1.2 1.4 1.6 1.7 1.8"
+        "special_bonus_unique_wraith_king_11"             "+1"
       }
-
-      "02"
+      "blast_dot_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "blast_stun_duration"                             "1.1 1.4 1.7 2.0 2.3 2.6"
+        "value"                                           "2.0"
       }
-
-      "03"
+      "blast_slow"                                        "-20"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "blast_dot_duration"                              "2.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_wraith_king_7"
+        "value"                                           "75 90 105 120 240 480"
       }
-
-      "04"
+      "blast_dot_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "blast_slow"                                      "-20"
-      }
-
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "blast_dot_damage"                                "10 30 50 70 140 215"
-        "LinkedSpecialBonus"                              "special_bonus_unique_wraith_king_3"
+        "value"                                           "20 40 60 80 160 320"
       }
     }
   }

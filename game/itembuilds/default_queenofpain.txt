@@ -1,0 +1,54 @@
+"itembuilds"
+{
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_queen_of_pain"
+  "Title"         "Recommended items for Queen of Pain"
+
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_boots"
+      "item"      "item_clarity"
+      "item"      "item_flask"
+      "item"      "item_mango"
+      "item"      "item_mango"
+    }
+
+    "#DOTA_Item_Build_Magical_Core"
+    {
+      "item"      "item_kaya"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_shivas_guard"
+      "item"      "item_dagger_of_moriah_1"
+      "item"      "item_refresher_4"
+    }
+
+    "#DOTA_Item_Build_Physical_Core"
+    {
+      "item"      "item_maelstrom"
+      "item"      "item_hurricane_pike"
+      "item"      "item_devastator"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_greater_crit"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_black_king_bar_1"
+      "item"      "item_bloodthorn"
+      "item"      "item_ethereal_blade"
+      "item"      "item_lotus_orb"
+      "item"      "item_satanic"
+      "item"      "item_skadi"
+      "item"      "item_sphere"
+      "item"      "item_greater_travel_boots"
+      "item"      "item_sheepstick_4"
+    }
+  }
+}

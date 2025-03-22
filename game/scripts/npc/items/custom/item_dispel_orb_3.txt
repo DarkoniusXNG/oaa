@@ -1,20 +1,20 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: dispel_orb_3
+  // Recipe: Dispel Orb 3
   //=================================================================================================================
   "item_recipe_dispel_orb_3"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8438"   // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -24,79 +24,51 @@
     "ItemRequirements"
     {
       "01"                                                "item_dispel_orb_2;item_upgrade_core_4"
-      "02"                                                "item_lotus_orb_4;item_upgrade_core_4"
-      "03"                                                "item_bubble_orb_1;item_upgrade_core_4"
     }
   }
 
   //=================================================================================================================
-  // dispel_orb_3
+  // Dispel Orb 3
   //=================================================================================================================
   "item_dispel_orb_3"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8439"  // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/dispel_orb.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/dispel_orb_3"
-    "ScriptFile"                                          "items/reflex/preemptive_purge.lua"
-    "FightRecapLevel"                                     "1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxUpgradeLevel"                                     "3"
     "ItemBaseLevel"                                       "3"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "150"
+    "AbilityManaCost"                                     "100"
     "AbilityCooldown"                                     "20"
     "AbilitySharedCooldown"                               "purge"
-    "AbilityCastPoint"                                    "0.0"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "36950"
-    "ItemShopTags"                                        "regen_health;regen_mana;str;agi;int;hard_to_tag"
+    "ItemCost"                                            "34054"
+    "ItemShopTags"                                        "agi;int;str;damage;hard_to_tag"
     "ItemQuality"                                         "epic"
-    "ItemAliases"                                         "Dispel orb 3;purge crystal 3"
+    "ItemAliases"                                         "dispel orb 3; purge crystal 3"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
-    // Modifiers
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "15 19 24"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "11.0 16.0 30.0"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "4.75 5.5 6.5"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "500 700 950"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.2"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
+      "bonus_strength"                                    "27 42 62"
+      "bonus_agility"                                     "41 56 76"
+      "bonus_intellect"                                   "22 27 32"
+      "bonus_damage"                                      "55 85 125"
+      "magic_resist_while_silenced"                       "26 28 30"
+      "tick_interval"                                     "0.2"
+      "duration"                                          "7.0"
     }
   }
 }

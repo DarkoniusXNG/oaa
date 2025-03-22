@@ -1,12 +1,14 @@
 -- Component for various chat commands useful for testing
 -- Majority of original command code by Darklord
 
-DevCheats = class({})
+DevCheats = DevCheats or class({})
 
 function DevCheats:Init()
+  self.moduleName = "DevCheats"
   ChatCommand:LinkDevCommand("-help", Dynamic_Wrap(DevCheats, "Help"), self)
   ChatCommand:LinkDevCommand("-list", Dynamic_Wrap(DevCheats, "Help"), self)
   ChatCommand:LinkDevCommand("-print_modifiers", Dynamic_Wrap(DevCheats, "PrintModifiers"), self)
+  ChatCommand:LinkDevCommand("-print_abilities", Dynamic_Wrap(DevCheats, "PrintAbilities"), self)
   ChatCommand:LinkDevCommand("-addbots", Dynamic_Wrap(DevCheats, "AddBots"), self)
   ChatCommand:LinkDevCommand("-nofog", Dynamic_Wrap(DevCheats, "DisableFog"), self)
   ChatCommand:LinkDevCommand("-fog", Dynamic_Wrap(DevCheats, "EnableFog"), self)
@@ -15,15 +17,19 @@ function DevCheats:Init()
   ChatCommand:LinkDevCommand("-god", Dynamic_Wrap(DevCheats, "GodMode"), self)
   ChatCommand:LinkDevCommand("-disarm", Dynamic_Wrap(DevCheats, "ToggleDisarm"), self)
   ChatCommand:LinkDevCommand("-dagger", Dynamic_Wrap(DevCheats, "GiveDevDagger"), self)
+  ChatCommand:LinkDevCommand("-blink", Dynamic_Wrap(DevCheats, "GiveDevDagger"), self)
   ChatCommand:LinkDevCommand("-core", Dynamic_Wrap(DevCheats, "GiveUpgradeCore"), self)
   ChatCommand:LinkDevCommand("-addability", Dynamic_Wrap(DevCheats, "AddAbility"), self)
   ChatCommand:LinkDevCommand("-give", Dynamic_Wrap(DevCheats, "GiveLevelledItem"), self)
   ChatCommand:LinkDevCommand("-loadout", Dynamic_Wrap(DevCheats, "GiveLoadout"), self)
   ChatCommand:LinkDevCommand("-scepter", Dynamic_Wrap(DevCheats, "GiveUltimateScepter"), self)
+  ChatCommand:LinkDevCommand("-shard", Dynamic_Wrap(DevCheats, "GiveAghanimShard"), self)
   ChatCommand:LinkDevCommand("-dagon", Dynamic_Wrap(DevCheats, "GiveDevDagon"), self)
   ChatCommand:LinkDevCommand("-switchhero", Dynamic_Wrap(DevCheats, "SwitchHero"), self)
-  ChatCommand:LinkDevCommand("-lazer", Dynamic_Wrap(DevCheats, "AddDevAttack"), self)
-  ChatCommand:LinkDevCommand("-lvlup", Dynamic_Wrap(DevCheats, "LevelUp"), self)
+  ChatCommand:LinkDevCommand("-kill_all", Dynamic_Wrap(DevCheats, "KillEverything"), self)
+  --ChatCommand:LinkDevCommand("-lvlup", Dynamic_Wrap(DevCheats, "LevelUp"), self)
+  ChatCommand:LinkCommand("-entity_count", Dynamic_Wrap(DevCheats, "CountAllEntities"), self)
+  ChatCommand:LinkCommand("-memory", Dynamic_Wrap(DevCheats, "MemoryUsage"), self)
 end
 
 -- Print all modifiers on player's hero to console
@@ -40,11 +46,28 @@ function DevCheats:PrintModifiers(keys)
   foreach(PrintModifier, modifiers)
 end
 
+function DevCheats:PrintAbilities(keys)
+  local playerID = keys.playerid
+  local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+
+  for a = 0, hero:GetAbilityCount() - 1 do
+    local ability = hero:GetAbilityByIndex(a)
+    if ability and not ability:IsNull() then
+      print(tostring(a) .. ': ' .. ability:GetAbilityName())
+    else
+      print(tostring(a) .. ': empty')
+    end
+  end
+end
+
 -- Print list of available commands to chat
 function DevCheats:Help(keys)
-  GameRules:SendCustomMessage("-nofog, -fog, -god, -disarm, -dagger, -core 1-4, -duel, -end_duel, -addbots", 0, 0)
-  GameRules:SendCustomMessage("-addability x, -give x y, -fixspawn, -kill_limit x, -switchhero x, -loadout x, -scepter [1-5]", 0, 0)
-  GameRules:SendCustomMessage("-addpoints, -print_modifiers, -dagon, -lazer, -spawncamps, -getpos", 0, 0)
+  GameRules:SendCustomMessage("-nofog, -fog, -god, -disarm, -dagger, -dagon, -duel, -end_duel, -kill_all", 0, 0)
+  GameRules:SendCustomMessage("-addability x, -give x y, -switchhero x, -loadout x, -scepter, -shard", 0, 0)
+  GameRules:SendCustomMessage("-corepoints x, -core 1-4, -addpoints, -add_enemy_points, -kill_limit x, -print_modifiers, -getpos", 0, 0)
+  GameRules:SendCustomMessage("-spawncamps, -spawnbosses, -spawngrendel, -spawnwanderer, -capture, -end_capture", 0, 0)
+  GameRules:SendCustomMessage("-test_state, -test_tp, -fixspawn, -addbots, -state, -enable_lock_in, -enable_lock_out", 0, 0)
+  GameRules:SendCustomMessage("-entity_count, -memory, -print_abilities", 0, 0)
 end
 
 -- Populate game with bots
@@ -96,10 +119,27 @@ end
 
 -- Teleport all heroes to their fountain
 function DevCheats:TeleportHeroesToFountain(keys)
+  local fountains = Entities:FindAllByClassname("ent_dota_fountain")
+  local radiant_fountain
+  local dire_fountain
+  for _, entity in pairs(fountains) do
+    if entity:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      radiant_fountain = entity
+    elseif entity:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+      dire_fountain = entity
+    end
+  end
   PlayerResource:GetAllTeamPlayerIDs():each(function(playerID)
     local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-    if hero ~= nil and IsValidEntity(hero) then
-      hero:AddNewModifier(nil, nil, "modifier_chen_test_of_faith_teleport", {duration = 1})
+    if hero and not hero:IsNull() then
+      local team = hero:GetTeamNumber()
+      if team == DOTA_TEAM_GOODGUYS then
+        FindClearSpaceForUnit(hero, radiant_fountain:GetAbsOrigin(), true)
+        hero:AddNewModifier(hero, nil, "modifier_phased", {duration = FrameTime()})
+      elseif team == DOTA_TEAM_BADGUYS then
+        FindClearSpaceForUnit(hero, dire_fountain:GetAbsOrigin(), true)
+        hero:AddNewModifier(hero, nil, "modifier_phased", {duration = FrameTime()})
+      end
     end
   end)
 end
@@ -176,22 +216,7 @@ function DevCheats:AddAbility(keys)
       end
     end
     hero:AddAbility(splitted[2])
-
-    -- Not sure what this is for. Seems to remove Talents for some reason?
-    -- for i = 0, 23 do
-    --   if hero:GetAbilityByIndex(i) then
-    --     local ability = hero:GetAbilityByIndex(i)
-    --     if ability and string.match(ability:GetName(), "special_bonus_") then
-    --       local abName = ability:GetName()
-    --       hero:RemoveAbility(abName)
-    --     end
-    --   end
-    -- end
   end
-end
-
-function DevCheats:AddDevAttack(keys)
-  PlayerResource:GetSelectedHeroEntity(keys.playerid):AddAbility("dev_attack")
 end
 
 -- Give items. If you put a number after the name of the item, it will look for that level, e.g. "-give heart 3" gives lvl 3 heart
@@ -223,8 +248,8 @@ end
 -- Set player inventory to pre-defined loadouts
 function DevCheats:GiveLoadout(keys)
   local loadouts = {
-    ['tank'] = {"item_heart_5", "item_stoneskin_2", "item_satanic_core_3"},
-    ['damage'] = {"item_greater_crit_5", "item_desolator_5", "item_mjollnir_5", "item_monkey_king_bar_5"},
+    ['tank'] = {"item_heart_oaa_5", "item_stoneskin_2", "item_eternal_shroud_5", "item_pipe_5"},
+    ['damage'] = {"item_greater_crit_5", "item_devastator_oaa_5", "item_mjollnir_5", "item_monkey_king_bar_5"},
   }
   local text = string.lower(keys.text)
   local hero = PlayerResource:GetSelectedHeroEntity(keys.playerid)
@@ -241,15 +266,17 @@ function DevCheats:GiveLoadout(keys)
   end
 end
 
--- Give player Aghanim's Scepter of given level or level 1 if no level given
+-- Give player Aghanim's Scepter
 function DevCheats:GiveUltimateScepter(keys)
-  local text = string.lower(keys.text)
-  local splitted = split(text, " ")
   local hero = PlayerResource:GetSelectedHeroEntity(keys.playerid)
   local name = "item_ultimate_scepter"
-  if splitted[2] then
-    name = name .. "_" .. splitted[2]
-  end
+  hero:AddItemByName(name)
+end
+
+-- Give player Aghanim's Shard
+function DevCheats:GiveAghanimShard(keys)
+  local hero = PlayerResource:GetSelectedHeroEntity(keys.playerid)
+  local name = "item_aghanims_shard"
   hero:AddItemByName(name)
 end
 
@@ -269,9 +296,15 @@ function DevCheats:SwitchHero(keys)
     local herolist = LoadKeyValues('scripts/npc/herolist.txt')
     for hero,_ in pairs(herolist) do
       if string.find(hero, splitted[2]) then
-        PrecacheUnitByNameAsync(hero, function()
-          PlayerResource:ReplaceHeroWith(playerID, hero, Gold:GetGold(playerID), PlayerResource:GetTotalEarnedXP(playerID))
-        end)
+        PrecacheUnitByNameAsync(
+          hero,
+          function()
+            local old_gold = Gold:GetGold(playerID)
+            PlayerResource:ReplaceHeroWith(playerID, hero, 0, 0)
+            Gold:SetGold(playerID, old_gold) -- because ReplaceHeroWith doesn't work properly ofc
+          end,
+          playerID
+        )
       end
     end
   else
@@ -282,7 +315,7 @@ end
 function DevCheats:LevelUp(keys)
   local text = string.lower(keys.text)
   local splitted = split(text, " ")
-  local number = false
+  local number
   if #splitted > 0 then
     number = tonumber(splitted[1])
   end
@@ -292,7 +325,7 @@ function DevCheats:LevelUp(keys)
   end
 
   local playerID = keys.playerid
-  local hero = PlayerResource:GetSelectedHeroEntity(keys.playerid)
+  local hero = PlayerResource:GetSelectedHeroEntity(playerID)
 
   local desiredLevel = math.min(50, hero:GetLevel() + number)
 
@@ -305,4 +338,70 @@ function DevCheats:LevelUp(keys)
       hero:AddExperience(XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - hero:GetCurrentXP(), DOTA_ModifyXP_Unspecified, false, false)
     end
   end)
+end
+
+function DevCheats:KillEverything(keys)
+  local playerID = keys.playerid
+  local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+  local all_units = FindUnitsInRadius(
+    hero:GetTeamNumber(),
+    Vector(0, 0, 0),
+    nil,
+    FIND_UNITS_EVERYWHERE,
+    DOTA_UNIT_TARGET_TEAM_BOTH,
+    bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
+    bit.bor(DOTA_UNIT_TARGET_FLAG_INVULNERABLE, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD),
+    FIND_ANY_ORDER,
+    false
+  )
+
+  for _, unit in pairs(all_units) do
+    if unit and not unit:IsNull() and unit ~= hero then
+      unit:Kill(nil, hero)
+    end
+  end
+end
+
+function DevCheats:CountAllEntities(keys)
+  local hero_count = 0
+  local creep_count = 0
+  local thinker_count = 0
+  local wearable_count = 0
+  local modifier_count = 0
+  local all_entities = Entities:FindAllInSphere(Vector(0, 0, 0), 50000)
+
+  for _, ent in pairs(all_entities) do
+    if string.find(ent:GetDebugName(), "hero") then
+      hero_count = hero_count + 1
+    end
+
+    if string.find(ent:GetDebugName(), "creep") then
+      creep_count = creep_count + 1
+    end
+
+    if string.find(ent:GetDebugName(), "thinker") then
+      thinker_count = thinker_count + 1
+    end
+
+    if string.find(ent:GetDebugName(), "wearable") then
+      wearable_count = wearable_count + 1
+    end
+
+    if ent.FindAllModifiers then
+      local ent_modifiers = ent:FindAllModifiers()
+      modifier_count = modifier_count + #ent_modifiers
+    end
+  end
+
+  GameRules:SendCustomMessage("There are currently "..tostring(#all_entities).." entities residing on the map. From these entities, it is estimated that...", 0, 0)
+  GameRules:SendCustomMessage(tostring(hero_count).." of them are heroes, "..tostring(creep_count).." of them are creeps, "..tostring(thinker_count).." of them are thinkers, and "..tostring(wearable_count).." of them are wearables.", 0, 0)
+  GameRules:SendCustomMessage("There are a total of "..tostring(modifier_count).." modifiers present.", 0, 0)
+end
+
+function DevCheats:MemoryUsage(keys)
+  local function comma_value(n)
+    local left, num, right = string.match(n, '^([^%d]*%d)(%d*)(.-)$')
+    return left .. (num:reverse():gsub('(%d%d%d)', '%1,'):reverse()) .. right
+  end
+  GameRules:SendCustomMessage("Current LUA Memory Usage: "..comma_value(collectgarbage('count')*1024).." KB", 0, 0)
 end

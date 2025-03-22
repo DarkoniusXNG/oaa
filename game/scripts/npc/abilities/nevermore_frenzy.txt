@@ -1,0 +1,46 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Shadow Fiend: Feast of Souls
+  //=================================================================================================================
+  "nevermore_frenzy"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "16.0"
+    "AbilityManaCost"                                     "60"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_attack_speed"
+      {
+        "value"                                           "40 55 70 85 100 115"
+        "special_bonus_unique_nevermore_4"                "+30"
+      }
+      "cast_speed_pct" //OAA
+      {
+        "value"                                           "100"
+        "special_bonus_unique_nevermore_frenzy_castspeed"  "+20"
+      }
+      "cast_speed_pct_tooltip" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_unique_nevermore_frenzy_castspeed"  "=120"
+      }
+      "duration"                                          "7.5 8 8.5 9 9.5 10"
+      "soul_cost"                                         "5"
+    }
+  }
+
+}

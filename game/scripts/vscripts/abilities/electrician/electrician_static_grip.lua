@@ -2,15 +2,31 @@ electrician_static_grip = class( AbilityBaseClass )
 
 LinkLuaModifier( "modifier_electrician_static_grip", "abilities/electrician/electrician_static_grip.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_electrician_static_grip_movement", "abilities/electrician/electrician_static_grip.lua", LUA_MODIFIER_MOTION_HORIZONTAL )
+LinkLuaModifier( "modifier_electrician_static_grip_debuff_tracker", "abilities/electrician/electrician_static_grip.lua", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
 
 function electrician_static_grip:GetChannelTime()
-	if self.modGrip and not self.modGrip:IsNull() then
-		return self.modGrip:GetDuration()
-	end
+  local isPseudoChannel = self:GetSpecialValueFor("pseudochannel") == 1
+  if isPseudoChannel then
+    return 0
+  end
 
-	return 0
+  if self.modGrip and not self.modGrip:IsNull() then
+    return self.modGrip:GetDuration()
+  end
+
+  -- this point is reached when Static Grip is blocked with Linkens
+  return 0 -- self:GetSpecialValueFor("max_stun_duration")
+end
+
+function electrician_static_grip:GetBehavior()
+  local isPseudoChannel = self:GetSpecialValueFor("pseudochannel") == 1
+  if isPseudoChannel then
+    return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET
+  end
+
+  return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_CHANNELLED
 end
 
 --------------------------------------------------------------------------------
@@ -19,16 +35,23 @@ function electrician_static_grip:OnSpellStart()
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 
-  -- trigger and get blocked by linkens
-  if not target:TriggerSpellAbsorb( self ) then
-    local durationMax = self:GetSpecialValueFor( "channel_time" )
-    durationMax = target:GetValueChangedByStatusResistance( durationMax )
+  -- Don't do anything if target has Linken's effect or it's spell-immune
+  if target:TriggerSpellAbsorb(self) or target:IsMagicImmune() then
+    return
+  end
 
-    -- create the stun modifier on target
-    target:AddNewModifier( caster, self, "modifier_electrician_static_grip", { duration = durationMax } )
+  local durationMax = self:GetSpecialValueFor( "max_stun_duration" )
+  durationMax = target:GetValueChangedByStatusResistance( durationMax )
 
-    -- create the movement modifier on caster
-    caster:AddNewModifier( caster, self, "modifier_electrician_static_grip_movement", { target = target:entindex(), duration = durationMax } )
+  -- Apply the stun modifier on target
+  target:AddNewModifier( caster, self, "modifier_electrician_static_grip", { duration = durationMax } )
+
+  -- Apply the motion controller on caster if channeling or stun/silence tracker if pseudochanneling
+  local isPseudoChannel = self:GetSpecialValueFor("pseudochannel") == 1
+  if isPseudoChannel then
+    caster:AddNewModifier(caster, self, "modifier_electrician_static_grip_debuff_tracker", {duration = durationMax})
+  else
+    caster:AddNewModifier(caster, self, "modifier_electrician_static_grip_movement", {target = target:entindex(), duration = durationMax})
   end
 end
 
@@ -56,10 +79,6 @@ function modifier_electrician_static_grip:IsHidden()
 end
 
 function modifier_electrician_static_grip:IsPurgable()
-	return false
-end
-
-function modifier_electrician_static_grip:IsPurgeException()
 	return true
 end
 
@@ -72,30 +91,22 @@ function modifier_electrician_static_grip:GetPriority()
 	return MODIFIER_PRIORITY_ULTRA
 end
 
-function modifier_electrician_static_grip:GetAttributes()
-	return MODIFIER_ATTRIBUTE_MULTIPLE
-end
-
 --------------------------------------------------------------------------------
 
 function modifier_electrician_static_grip:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_STUNNED] = true,
 		[MODIFIER_STATE_INVISIBLE] = false,
 		[MODIFIER_STATE_FROZEN] = true,
 	}
-
-	return state
 end
 
 --------------------------------------------------------------------------------
 
 function modifier_electrician_static_grip:DeclareFunctions()
-	local func = {
+	return {
 		MODIFIER_PROPERTY_PROVIDES_FOW_POSITION,
 	}
-
-	return func
 end
 
 --------------------------------------------------------------------------------
@@ -115,30 +126,36 @@ function modifier_electrician_static_grip:OnCreated( event )
 	-- is ran on the client
 	spell.modGrip = self
 
-	if IsServer() then
-		local parent = self:GetParent()
-		local caster = self:GetCaster()
+  if IsServer() then
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
 
-		-- grab ability specials
-		local damageInterval = spell:GetSpecialValueFor( "damage_interval" )
-		self.distBreak = spell:GetCastRange( parent:GetAbsOrigin(), parent ) + spell:GetSpecialValueFor( "link_buffer" )
-		self.damagePerInterval = spell:GetSpecialValueFor( "damage_per_second" ) * damageInterval
-		self.damageType = spell:GetAbilityDamageType()
+    -- grab ability specials
+    local damageInterval = spell:GetSpecialValueFor( "damage_interval" )
+    local damage_per_second = spell:GetSpecialValueFor("damage_per_second")
+    self.damagePerInterval = damage_per_second * damageInterval
+    self.damageType = spell:GetAbilityDamageType()
+    self.width = spell:GetSpecialValueFor("damage_width")
+    self.damageInterval = damageInterval
+    self.ellapsedTime = 0
 
-		-- create the particle
-		self.part = ParticleManager:CreateParticle( "particles/units/heroes/hero_stormspirit/stormspirit_electric_vortex.vpcf", PATTACH_POINT_FOLLOW, caster )
-		ParticleManager:SetParticleControlEnt( self.part, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster:GetAbsOrigin(), true )
-		ParticleManager:SetParticleControlEnt( self.part, 1, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", parent:GetAbsOrigin(), true )
+    -- create the particle
+    self.part = ParticleManager:CreateParticle( "particles/units/heroes/hero_stormspirit/stormspirit_electric_vortex.vpcf", PATTACH_POINT_FOLLOW, caster )
+    ParticleManager:SetParticleControlEnt( self.part, 0, caster, PATTACH_POINT_FOLLOW, "attach_sword", caster:GetAbsOrigin(), true )
+    ParticleManager:SetParticleControlEnt( self.part, 1, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", parent:GetAbsOrigin(), true )
 
-		-- play sound
-		parent:EmitSound( "Hero_StormSpirit.ElectricVortex" )
+    -- play sound
+    parent:EmitSound( "Hero_StormSpirit.ElectricVortex" )
 
     -- cast animation
-    caster:StartGesture( ACT_DOTA_CAST_ABILITY_3 )
+    --caster:StartGesture( ACT_DOTA_CAST_ABILITY_3 )
 
-		-- start thinking
-		self:StartIntervalThink( damageInterval )
-	end
+    -- Apply first damage tick immediately
+    self:OnIntervalThink()
+
+    -- start thinking
+    self:StartIntervalThink( damageInterval )
+  end
 end
 
 --------------------------------------------------------------------------------
@@ -152,37 +169,40 @@ function modifier_electrician_static_grip:OnRefresh( event )
 	-- is ran on the client
 	spell.modGrip = self
 
-	if IsServer() then
-		local parent = self:GetParent()
-		local caster = self:GetCaster()
+  if IsServer() then
+    local parent = self:GetParent()
 
-		-- grab ability specials
-		local damageInterval = spell:GetSpecialValueFor( "damage_interval" )
-		self.distBreak = spell:GetCastRange( parent:GetAbsOrigin(), parent ) + spell:GetSpecialValueFor( "link_buffer" )
-		self.damagePerInterval = spell:GetSpecialValueFor( "damage_per_second" ) * damageInterval
-		self.damageType = spell:GetAbilityDamageType()
+    -- grab ability specials
+    local damageInterval = spell:GetSpecialValueFor( "damage_interval" )
+    local damage_per_second = spell:GetSpecialValueFor("damage_per_second")
+    self.damagePerInterval = damage_per_second * damageInterval
+    self.damageType = spell:GetAbilityDamageType()
+    self.width = spell:GetSpecialValueFor("damage_width")
 
-		-- play sound
-		parent:EmitSound( "Hero_StormSpirit.ElectricVortex" )
-
-		-- start thinking
-		self:StartIntervalThink( damageInterval )
-	end
+    -- play sound
+    parent:EmitSound( "Hero_StormSpirit.ElectricVortex" )
+  end
 end
 
 --------------------------------------------------------------------------------
 
 if IsServer() then
 	function modifier_electrician_static_grip:OnDestroy()
-		-- clean up the particle
-		ParticleManager:DestroyParticle( self.part, false )
-		ParticleManager:ReleaseParticleIndex( self.part )
+    local caster = self:GetCaster()
+    local parent = self:GetParent()
 
-		-- end the sound prematurely
-		self:GetParent():StopSound( "Hero_StormSpirit.ElectricVortex" )
+    -- clean up the particle
+    if self.part then
+      ParticleManager:DestroyParticle( self.part, false )
+      ParticleManager:ReleaseParticleIndex( self.part )
+    end
 
-		-- remove the movement modifier on caster
-		self:GetCaster():RemoveModifierByName( "modifier_electrician_static_grip_movement" )
+    -- end the sound prematurely
+    parent:StopSound( "Hero_StormSpirit.ElectricVortex" )
+
+    -- remove modifiers on the caster
+    caster:RemoveModifierByName("modifier_electrician_static_grip_movement")
+    caster:RemoveModifierByName("modifier_electrician_static_grip_debuff_tracker")
 
 		-- end the channel
 		-- with the new channel duration method this seems superfluous
@@ -192,20 +212,71 @@ if IsServer() then
 
 --------------------------------------------------------------------------------
 
-	function modifier_electrician_static_grip:OnIntervalThink()
-		local parent = self:GetParent()
-		local caster = self:GetCaster()
-		local spell = self:GetAbility()
+  function modifier_electrician_static_grip:OnIntervalThink()
+    -- parent = enemy
+    local parent = self:GetParent()
+    -- caster = chatterjee
+    local caster = self:GetCaster()
+    local spell = self:GetAbility()
 
-		ApplyDamage( {
-			victim = parent,
-			attacker = caster,
-			damage = self.damagePerInterval,
-			damage_type = self.damageType,
-			damage_flags = DOTA_DAMAGE_FLAG_NONE,
-			ability = spell,
-		} )
-	end
+    local attackSpeedPercent = spell:GetSpecialValueFor("attack_speed_pct") / 100
+
+    if attackSpeedPercent > 0 then
+      -- seconeds per attack, so larger = slower
+      -- percent is out of 100, so at 100 it should * 1, and at 50% it should be *2
+      -- if we turn the percent into a 0-1 then we can use it as a divisor
+      -- seconds / percent, so 1 second per attack at 90% becomes 1.111
+      -- seems right?
+      local secondsPerAttack = caster:GetSecondsPerAttack(false) / attackSpeedPercent
+      self.ellapsedTime = self.ellapsedTime + self.damageInterval
+
+      if self.ellapsedTime > secondsPerAttack then
+        self.ellapsedTime = self.ellapsedTime - secondsPerAttack
+
+        local useCastAttackOrb = false
+        local processProcs = true
+        local skipCooldown = true
+        local ignoreInvis = false
+        local useProjectile = false -- only ranged units need a projectile
+        local fakeAttack = false
+        local neverMiss = true -- should it never miss? i kind of want it to....
+
+        caster:PerformAttack(parent, useCastAttackOrb, processProcs, skipCooldown, ignoreInvis, useProjectile, fakeAttack, neverMiss)
+      end
+    end
+
+    if parent:IsMagicImmune() or parent:IsInvulnerable() then
+      self:StartIntervalThink(-1)
+      self:Destroy()
+      return
+    end
+
+    local enemies = FindUnitsInLine(
+      caster:GetTeamNumber(),
+      caster:GetAbsOrigin(),
+      parent:GetAbsOrigin(),
+      nil,
+      self.width,
+      DOTA_UNIT_TARGET_TEAM_ENEMY,
+      bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
+      DOTA_UNIT_TARGET_FLAG_NONE
+    )
+
+    local damage_table = {
+      attacker = caster,
+      damage = self.damagePerInterval,
+      damage_type = self.damageType,
+      damage_flags = DOTA_DAMAGE_FLAG_NONE,
+      ability = spell,
+    }
+
+    for _, enemy in pairs(enemies) do
+      if enemy and not enemy:IsNull() then
+        damage_table.victim = enemy
+        ApplyDamage(damage_table)
+      end
+    end
+  end
 end
 
 --------------------------------------------------------------------------------
@@ -233,26 +304,22 @@ end
 --------------------------------------------------------------------------------
 
 function modifier_electrician_static_grip_movement:CheckState()
-	local state = {
-		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-	}
-
-	return state
+  return {
+    [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+  }
 end
 
 --------------------------------------------------------------------------------
 
 if IsServer() then
 	function modifier_electrician_static_grip_movement:OnCreated( event )
-		local parent = self:GetParent()
 		local spell = self:GetAbility()
 		self.target = EntIndexToHScript( event.target )
-		self.speed = spell:GetSpecialValueFor( "pull_speed" )
-		self.pullBuffer = 150 --spell:GetSpecialValueFor( "pull_buffer" )
+		self.speed = spell:GetSpecialValueFor( "pull_speed" ) or 120
+		self.pullBuffer = spell:GetSpecialValueFor( "pull_buffer" ) or 150
 
 		if self:ApplyHorizontalMotionController() == false then
 			self:Destroy()
-			return
 		end
 	end
 
@@ -307,4 +374,61 @@ if IsServer() then
 	function modifier_electrician_static_grip_movement:OnHorizontalMotionInterrupted()
 		self:Destroy()
 	end
+end
+
+---------------------------------------------------------------------------------------------------
+
+modifier_electrician_static_grip_debuff_tracker = class(ModifierBaseClass)
+
+function modifier_electrician_static_grip_debuff_tracker:IsHidden()
+  return true
+end
+
+function modifier_electrician_static_grip_debuff_tracker:IsDebuff()
+  return false
+end
+
+function modifier_electrician_static_grip_debuff_tracker:IsPurgable()
+  return false
+end
+
+function modifier_electrician_static_grip_debuff_tracker:OnCreated()
+  if not IsServer() then
+    return
+  end
+  -- start thinking
+  self:StartIntervalThink(0)
+end
+
+function modifier_electrician_static_grip_debuff_tracker:OnIntervalThink()
+  if not IsServer() then
+    return
+  end
+
+  local ability = self:GetAbility()
+  if not ability or ability:IsNull() then
+    self:StartIntervalThink(-1)
+    self:Destroy()
+    return
+  end
+
+  local modifier = ability.modGrip
+  if not modifier or modifier:IsNull() then
+    self:StartIntervalThink(-1)
+    self:Destroy()
+    return
+	end
+
+  local parent = self:GetParent()
+  if parent:IsSilenced() or parent:IsStunned() or parent:IsHexed() then
+    modifier:Destroy()
+    self:StartIntervalThink(-1)
+    self:Destroy()
+  end
+end
+
+function modifier_electrician_static_grip_debuff_tracker:CheckState()
+  return {
+    [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+  }
 end

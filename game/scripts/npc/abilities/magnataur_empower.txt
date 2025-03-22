@@ -7,10 +7,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5519"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
@@ -20,7 +20,6 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0.3"
 
     // Time
@@ -29,57 +28,74 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "45 60 75 90 105 120"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.3"  // Easy to spam
+    "AbilityManaCost"                                     "45 50 55 60 65 70" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "empower_duration"                                "38 42 46 50 54 58"
+        "value"                                           "800"
       }
-      "02"
+      "should_self_cast"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_pct"                                "11 18 25 32 39 46"
-        "LinkedSpecialBonus"                              "special_bonus_unique_magnus_2"
+        "value"                                           "0"
       }
-      "03"
+      "empower_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "cleave_damage_pct"                               "10 20 30 40 50 60"
-        "LinkedSpecialBonus"                              "special_bonus_unique_magnus_2"
+        "value"                                           "30 33 36 39 42 45"
+        "special_bonus_unique_magnus_4"                   "+10"
       }
-      "04"
+      "bonus_damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_starting_width"                           "150"
+        "value"                                           "16 24 32 40 48 56"
+        "special_bonus_unique_magnus_2"                   "+10"
       }
-      "05"
+      "cleave_damage_pct" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_ending_width"                             "360"
+        "value"                                           "20 30 40 50 60 70"
+        "special_bonus_unique_magnus_2"                   "+10"
       }
-      "06"
+      "cleave_starting_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_distance"                                 "650"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "07" // unused
+      "cleave_ending_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "900"
+        "value"                                           "360"
+        "affected_by_aoe_increase"                        "1"
       }
-      "08"
+      "cleave_distance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "self_multiplier"                                 "75"
+        "value"                                           "650"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "secondary_cleave_distance"
+      {
+        "value"                                           "0"
+      }
+      "self_multiplier"                                   "50"
+      "always_on"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_eternal_empowerment"  "=1"
+      }
+      "self_multiplier_bonus_stack_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_eternal_empowerment"  "10"
+      }
+      "self_multiplier_bonus_max_stacks"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_eternal_empowerment"  "8 12 16 20 24 28"
+      }
+      "self_multiplier_bonus_per_stack"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_eternal_empowerment"  "2 3 4 5 6 7"
       }
     }
   }

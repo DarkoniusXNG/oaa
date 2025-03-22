@@ -7,55 +7,39 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5508"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.2"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_move_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_hp"                                        "0"
+        "value"                                           "15 25 35 45 55 65"
+        "special_bonus_unique_troll_warlord_2"            "+25"
       }
-      "02"
+      "bonus_armor" //OAA, Valve has var_type FIELD_INTEGER
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_move_speed"                                "10 20 30 40 50 60"
+        "value"                                           "2 3 4 5 6 7"
+        "special_bonus_unique_troll_warlord"              "+9"
       }
-      "03"
+      "bonus_range"                                       "350" // this is probably not needed here
+      "base_attack_time"                                  "1.4" // this is probably not needed here
+      "ensnare_chance"                                    "20"
+      "ensnare_duration"                                  "0.8 1.2 1.6 2.0 2.1 2.2"
+      "maim_chance"                                       "20"
+      "maim_duration"                                     "0.8 1.2 1.6 2.0 2.1 2.2"
+      "maim_slow"                                         "8 16 24 32 36 40" // affects attack speed slow too
+      "maim_attack_slow"                                  "8 16 24 32 36 40" // tooltip only
+      "maim_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "6"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_range"                                     "350"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "base_attack_time"                                "1.45"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "ensnare_chance"                                  "14 16 18 20 22 24"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "ensnare_duration"                                "0.8 1.2 1.6 2.0 2.1 2.2"
+        "value"                                           "5 10 15 20 40 60"
+        "CalculateSpellDamageTooltip"                     "0"
       }
     }
   }

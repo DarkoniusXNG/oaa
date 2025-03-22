@@ -1,11 +1,10 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ghost: Frostburn - reduce target's regeneration and healing by a percent on attack
+  // Ghost: Frostburn - reduce target's health restoration by a percent on attack
   //=================================================================================================================
   "ghost_frostburn_oaa"
   {
-    "ID"                                                  "85301"
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/neutrals/oaa_ghost_frostburn.lua"
     "AbilityTextureName"                                  "ghost_frost_attack"
@@ -14,23 +13,26 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+    "IsBreakable"                                         "1"
 
-    "MaxLevel"                                            "1"
+    "MaxLevel"                                            "4"
+
+    "precache"
+    {
+      "particle"                                          "particles/ghost_frostbite_ground_elec.vpcf"
+      "particle"                                          "particles/ghost_frostbite_ring.vpcf"
+      "particle"                                          "particles/ghost_frostbite_ring_base.vpcf"
+      "particle"                                          "particles/ghost_frostbite_ring_detail.vpcf"
+      "particle"                                          "particles/ghost_frostbite.vpcf"
+    }
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "heal_prevent_percent"                            "-35"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "heal_prevent_duration"                           "5.0"
-      }
+      "heal_prevent_percent"                              "-20 -25 -30 -35"
+      "attack_speed_slow"                                 "-25 -35 -45 -55"
+      "heal_prevent_duration"                             "2.5"
     }
   }
 }

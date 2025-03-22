@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=================================================================================================================
   // Lycan: Howl
   //=================================================================================================================
@@ -8,12 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5396"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
-    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -21,39 +20,41 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "24 22 20 18 18 18"
+    "AbilityCooldown"                                     "19 18 17 16 15 14" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportBonus"                         "5"
+    "AbilityManaCost"                                     "40 45 50 55 60 65" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "howl_duration"                                     "8"
+      "attack_damage_reduction" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "howl_duration"                                   "5 6 7 8 9 10"
+        "value"                                           "25 28 31 34 37 40"
       }
-      "02"
+      "total_attack_damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_damage_reduction"                         "25 30 35 40 45 50"
+        "value"                                           "0"
+        "special_bonus_unique_lycan_5"                    "+1"
       }
-      "03"
+      "armor"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "armor"                                           "5 6 7 8 10 16"
+        "value"                                           "4 5 6 7 9 13"
+        "special_bonus_unique_lycan_howl_armor"           "+3"
       }
-      "04"
+      "radius" //OAA, during night time it's global
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "2000"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "fear_duration"                                     "0"
+      "max_level" //OAA
+      {
+        "value"                                           "6"
+        "special_bonus_facet_lycan_alpha_wolves"          "-1"
       }
     }
   }

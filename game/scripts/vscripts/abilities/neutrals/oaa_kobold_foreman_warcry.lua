@@ -1,6 +1,6 @@
-kobold_foreman_warcry_oaa = class(AbilityBaseClass)
-
 LinkLuaModifier("modifier_kobold_foreman_warcry_oaa_buff", "abilities/neutrals/oaa_kobold_foreman_warcry.lua", LUA_MODIFIER_MOTION_NONE)
+
+kobold_foreman_warcry_oaa = class(AbilityBaseClass)
 
 function kobold_foreman_warcry_oaa:OnSpellStart()
   local caster = self:GetCaster()
@@ -19,7 +19,7 @@ function kobold_foreman_warcry_oaa:OnSpellStart()
     false
   )
 
-  for _,ally in pairs(allies) do
+  for _, ally in pairs(allies) do
     -- Apply a buff
     if ally then
       ally:AddNewModifier(caster, self, "modifier_kobold_foreman_warcry_oaa_buff", { duration = duration } )
@@ -29,7 +29,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_kobold_foreman_warcry_oaa_buff = class(ModifierBaseClass)
+modifier_kobold_foreman_warcry_oaa_buff = class({})
 
 function modifier_kobold_foreman_warcry_oaa_buff:IsHidden()
   return false
@@ -44,11 +44,10 @@ function modifier_kobold_foreman_warcry_oaa_buff:IsPurgable()
 end
 
 function modifier_kobold_foreman_warcry_oaa_buff:DeclareFunctions()
-  local funcs = {
+  return {
     MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
     MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
   }
-  return funcs
 end
 
 function modifier_kobold_foreman_warcry_oaa_buff:GetModifierPreAttack_BonusDamage()

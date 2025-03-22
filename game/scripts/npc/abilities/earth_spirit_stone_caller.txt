@@ -1,43 +1,64 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Earth Spirit: Stone Caller
+  // Earth Spirit: Stone Remnant (Innate)
   //=================================================================================================================
   "earth_spirit_stone_caller"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5611"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
 
-    "MaxLevel"                                            "1"
-
-    "HasScepterUpgrade"                                   "1"
+    "MaxLevel"                                            "10" // OAA, ability auto-levels every 5 Earth Spirit levels
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "1100"
     "AbilityCastPoint"                                    "0.0"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "0.0"
-    "AbilityCharges"                                      "10" //OAA
-    "AbilityChargeRestoreTime"                            "20" //OAA
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "0"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "120.0"
+        "value"                                           "40.0"
+        "special_bonus_facet_earth_spirit_stepping_stone"  "=20.0"
+      }
+      "polarization_distance"
+      {
+        "value"                                           "0"
+      }
+      "vision_radius"
+      {
+        "value"                                           "0"
+      }
+      "AbilityCharges"
+      {
+        "value"                                           "7 8 9 10 11 12 13 14 15 16"
+        "special_bonus_facet_earth_spirit_stepping_stone"  "=0 =0 =0 =0 =0 =0 =0 =0 =0 =0"
+      }
+      "rolling_offset_distance"                           "150"
+      "hero_level_increment"                              "5"
+      "AbilityManaCost"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_earth_spirit_stepping_stone"  "0"
+      }
+      "AbilityCooldown"
+      {
+        "value"                                           "0.0"
+        "special_bonus_facet_earth_spirit_stepping_stone"  "=4.0"
+      }
+      "AbilityChargeRestoreTime"
+      {
+        "value"                                           "18"
+        "special_bonus_facet_earth_spirit_stepping_stone"  "=4"
+      }
+      "is_stepping_stone"
+      {
+        "special_bonus_facet_earth_spirit_stepping_stone"  "=1"
       }
     }
   }

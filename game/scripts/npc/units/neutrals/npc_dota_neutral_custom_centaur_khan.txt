@@ -7,8 +7,8 @@
   {
     // General
     //----------------------------------------------------------------
+    "BaseClass"                                           "npc_dota_creep_neutral" //"npc_dota_creature"
     "Model"                                               "models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
-    "BaseClass"                                           "npc_dota_creature"
     "SoundSet"                                            "n_creep_Melee"
     "Level"                                               "5"
     "ModelScale"                                          "1"
@@ -18,10 +18,10 @@
 
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                                            "centaur_khan_war_stomp"        // Ability 1
-    "Ability2"                                            "centaur_khan_endurance_aura"   // Ability 2
-    "Ability3"                                            ""                              // Ability 3
-    "Ability4"                                            ""                              // Ability 4
+    "Ability1"                                            "centaur_khan_war_stomp"
+    "Ability2"                                            "centaur_khan_endurance_aura"
+    "Ability3"                                            ""
+    "Ability4"                                            ""
 
     // Armor
     //----------------------------------------------------------------
@@ -33,7 +33,8 @@
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
     "AttackDamageMin"                                     "49"    // Damage range min.
     "AttackDamageMax"                                     "55"    // Damage range max.
-    "AttackRate"                                          "1.5"   // Speed of attack.
+    "AttackRate"                                          "2.0"   // Speed of attack.
+    "BaseAttackSpeed"                                     "120"
     "AttackAnimationPoint"                                "0.3"   // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "500"   // Range within a target can be acquired.
     "AttackRange"                                         "100"   // Range within a target can be attacked.
@@ -55,6 +56,7 @@
     //----------------------------------------------------------------
     "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
     "MovementSpeed"                                       "320"   // Speed.
+    "MovementTurnRate"                                    "0.9"
 
     // Status
     //----------------------------------------------------------------
@@ -71,8 +73,6 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_BASIC"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
     "HasInventory"                                        "0"

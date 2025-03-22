@@ -7,18 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5057"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -27,7 +25,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120 80 40 20 10" //OAA
+    "AbilityCooldown"                                     "70 65 60 55 50" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -35,24 +33,51 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "20"
-        "LinkedSpecialBonus"                              "special_bonus_unique_morphling_8"
+        "value"                                           "24"
+        "special_bonus_unique_morphling_8"                "+12"
       }
-      "02"
+      "scepter_stat_steal" // unused
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_manacost_reduction"                      "50"
+        "value"                                           "20"
         "RequiresScepter"                                 "1"
       }
-      "03"
+      "scepter_spell_amplify" // unused
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_cast_range_bonus"                        "600"
+        "value"                                           "25"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_attack_speed" // unused
+      {
+        "value"                                           "70"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_status_resist" // unused
+      {
+        "value"                                           "40"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_additional_stats" // unused
+      {
+        "value"                                           "20"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_cooldown_reduction" // unused
+      {
+        "value"                                           "0"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_illusion_outgoing"
+      {
+        "value"                                           "100"
+        "RequiresScepter"                                 "1"
+      }
+      "scepter_illusion_incoming"
+      {
+        "value"                                           "300"
         "RequiresScepter"                                 "1"
       }
     }

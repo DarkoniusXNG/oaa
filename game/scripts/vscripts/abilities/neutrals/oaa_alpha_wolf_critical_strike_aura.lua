@@ -1,7 +1,7 @@
-alpha_wolf_critical_strike_aura_oaa = class(AbilityBaseClass)
+LinkLuaModifier("modifier_alpha_critical_strike_aura_oaa_applier", "abilities/neutrals/oaa_alpha_wolf_critical_strike_aura.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_alpha_critical_strike_aura_oaa_effect", "abilities/neutrals/oaa_alpha_wolf_critical_strike_aura.lua", LUA_MODIFIER_MOTION_NONE)
 
-LinkLuaModifier("modifier_alpha_critical_strike_aura_oaa_applier", "abilities/neutrals/oaa_alpha_wolf_critical_strike_aura.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_alpha_critical_strike_aura_oaa_effect", "abilities/neutrals/oaa_alpha_wolf_critical_strike_aura.lua", LUA_MODIFIER_MOTION_NONE )
+alpha_wolf_critical_strike_aura_oaa = class(AbilityBaseClass)
 
 function alpha_wolf_critical_strike_aura_oaa:GetIntrinsicModifierName()
   return "modifier_alpha_critical_strike_aura_oaa_applier"
@@ -9,7 +9,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_alpha_critical_strike_aura_oaa_applier = class(ModifierBaseClass)
+modifier_alpha_critical_strike_aura_oaa_applier = class({})
 
 function modifier_alpha_critical_strike_aura_oaa_applier:IsHidden()
   return true
@@ -62,7 +62,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_alpha_critical_strike_aura_oaa_effect = class(ModifierBaseClass)
+modifier_alpha_critical_strike_aura_oaa_effect = class({})
 
 function modifier_alpha_critical_strike_aura_oaa_effect:IsHidden()
   return false
@@ -77,40 +77,39 @@ function modifier_alpha_critical_strike_aura_oaa_effect:IsPurgable()
 end
 
 function modifier_alpha_critical_strike_aura_oaa_effect:DeclareFunctions()
-  local funcs = {
+  return {
     MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
   }
-  return funcs
 end
 
-function modifier_alpha_critical_strike_aura_oaa_effect:GetModifierPreAttack_CriticalStrike(params)
-  if IsServer() then
+if IsServer() then
+  function modifier_alpha_critical_strike_aura_oaa_effect:GetModifierPreAttack_CriticalStrike(params)
     local ability = self:GetAbility()
     local parent = self:GetParent()
     local target = params.target
 
-     -- Don't crit on allies, towers, or wards
+    -- Don't crit on allies, towers, or wards
     if UnitFilter(target, DOTA_UNIT_TARGET_TEAM_ENEMY, bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC), DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, parent:GetTeamNumber() ) ~= UF_SUCCESS then
       return 0
     end
 
-    if not ability then
+    if not ability or ability:IsNull() then
       return 0
     end
 
     local chance = ability:GetSpecialValueFor("crit_chance")/100
 
     -- Using the modifier's stack to store the amount of prng failures
-    local prngMult = self:GetStackCount() + 1
+    local prngMult = math.abs(self:GetStackCount()) + 1
 
     if RandomFloat( 0.0, 1.0 ) <= ( PrdCFinder:GetCForP(chance) * prngMult )  then
       -- Reset failure count
-      self:SetStackCount( 0 )
+      self:SetStackCount(0)
 
       return ability:GetSpecialValueFor("crit_multiplier")
     else
       -- Increment failure count
-      self:SetStackCount( prngMult )
+      self:SetStackCount(0 - prngMult)
 
       return 0
     end

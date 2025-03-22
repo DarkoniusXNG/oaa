@@ -7,11 +7,9 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5679"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -26,63 +24,61 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80"
+    "AbilityManaCost"                                     "80 90 100 110 120 130" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "375"
+        "value"                                           "375"
+        "special_bonus_shard"                             "+100"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"                                          "16"
+      "move_speed_slow_pct"                               "100"
+      "base_activation_delay"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "activation_delay"                                "2.0"
+        "value"                                           "1.5"
+        "special_bonus_unique_arc_warden_7"               "-1.0"
       }
-      "03"
+      "spark_damage_base"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "45"
+        "value"                                           "100 170 240 310 620 930"
+        "special_bonus_unique_arc_warden"                 "+40%"
       }
-      "04"
+      "wraith_speed_base"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "wraith_speed"                                    "400"
+        "value"                                           "550"
       }
-      "05"
+      "ministun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spark_damage"                                    "100 170 240 310 620 930"
-        "LinkedSpecialBonus"                              "special_bonus_unique_arc_warden"
+        "value"                                           "0.5 0.6 0.7 0.8 0.9 1.0"
       }
-      "06"
+      "think_interval"                                    "0.2"
+      "wraith_vision_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "think_interval"                                  "0.2"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "07"
+      "wraith_vision_duration"                            "3.34"
+      "maximum_targets"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "wraith_vision_radius"                            "300"
+        "value"                                           "1"
+        "special_bonus_shard"                             "+1"
       }
-      "08"
+      "second_wraith_damage_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "wraith_vision_duration"                          "3.34"
+        "value"                                           "0"
+        "special_bonus_shard"                             "=80.0"
       }
-      "09"
+      "second_wraith_speed_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "ministun_duration"                               "0.4 0.5 0.6 0.7 0.8 0.9"
+        "value"                                           "0"
+        "special_bonus_shard"                             "=100.0"
       }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "move_speed_slow_pct"                             "100"
-      }
+      "creep_damage_bonus_pct"                            "0"
     }
   }
 }

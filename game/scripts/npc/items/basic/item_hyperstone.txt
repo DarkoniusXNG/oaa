@@ -1,0 +1,8 @@
+"DOTAAbilities"
+{
+  "item_hyperstone"
+  {
+
+    "SecretShop"                                          "0" //OAA
+  }
+}

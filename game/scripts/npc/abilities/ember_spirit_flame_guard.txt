@@ -7,62 +7,55 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5605"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "400"
+    "AbilityCastRange"                                    "500" // OAA, same as active_radius
     "AbilityCastPoint"                                    "0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "35.0"
+    "AbilityCooldown"                                     "25 24 23 22 21 20" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80 90 100 110 120 130"
+    "AbilityManaCost"                                     "65 80 95 110 125 140"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "18" //OAA
+      "passive_radius" // unused
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "20.0" //OAA
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "tick_interval"                                     "0.2"
+      "damage_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "400"
+        "value"                                           "20 30 40 50 100 150"
+        "special_bonus_unique_ember_spirit_3"             "+100%"
       }
-      "03"
+      "linger_duration"                                   "0.5"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "absorb_amount"                                   "80 220 360 500 1500 3000"
-        "LinkedSpecialBonus"                              "special_bonus_unique_ember_spirit_1"
+        "value"                                           "500"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "shield_pct_absorb"                                 "70"
+      "absorb_amount" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.2"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "25 35 45 55 110 220"
-        "LinkedSpecialBonus"                              "special_bonus_unique_ember_spirit_3"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "blind_pct"                                       "50"
+        "value"                                           "60 120 240 480 960 1920"
+        "special_bonus_unique_ember_spirit_1"             "+240"
       }
     }
   }

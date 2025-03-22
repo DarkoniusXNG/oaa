@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5082"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -30,42 +30,42 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage_min"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_min"                                      "15 25 35 45 90 180"
+        "value"                                           "35 40 45 50 100 200"
       }
-      "02"
+      "damage_max"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_max"                                      "80 115 150 185 370 740"
+        "value"                                           "80 115 150 185 370 740"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "700"
+        "value"                                           "700"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "total_ability_time"                                "2.2"
+      "slow_min"                                          "5"
+      "slow_max"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "636"  // 1.2 second to reach radius
+        "value"                                           "25 30 35 40 45 50"
+        "special_bonus_unique_razor_plasmafield_max_slow"  "+20"
       }
-      "05"
+      "slow_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_min"                                        "5"
+        "value"                                           "1.5"
+        "special_bonus_unique_razor_4"                    "+0.75"
       }
-      "06"
+      "second_ring_delay"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_max"                                        "25 30 35 40 45 50"
+        "value"                                           "0"
+        "special_bonus_unique_razor_plasmafield_second_ring"  "+0.8"
       }
-      "07"
+      "second_ring_reduction"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "1.5"
+        "value"                                           "0"
+        "special_bonus_unique_razor_plasmafield_second_ring"  "+30"
       }
     }
   }

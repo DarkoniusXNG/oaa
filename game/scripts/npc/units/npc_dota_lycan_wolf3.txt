@@ -1,0 +1,39 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Lycan Wolf 3
+  //=================================================================================
+  "npc_dota_lycan_wolf3"
+  {
+    "include_keys_from"                                   "npc_dota_lycan_wolf1"
+
+    "Level"                                               "3"
+    "ModelScale"                                          "0.975"
+
+    // Abilities
+    //----------------------------------------------------------------
+    // "Ability1"                                            "lycan_summon_wolves_invisibility"
+
+    "MagicalResistance"                                   "50" // Magical protection.
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackDamageMin"                                     "60" // OAA
+    "AttackDamageMax"                                     "60" // OAA
+    "AttackRate"                                          "1.0" // BAT
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "30" // OAA
+    "BountyGoldMin"                                       "36" // Gold earned min.
+    "BountyGoldMax"                                       "36" // Gold earned max.
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementSpeed"                                       "440" // Speed.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "525" // OAA
+  }
+}

@@ -1,13 +1,12 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Stonework Pendant - neutral tier 4 item
+  // Stonework Pendant - custom neutral tier 5 item
   //=================================================================================================================
   "item_stonework_pendant"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8627" // unique ID
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/neutral/stonework_pendant.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -16,27 +15,17 @@
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                                            "0"
-
-    "ItemIsNeutralDrop"                                   "1"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
     "ItemPurchasable"                                     "0"
-    "ItemShareability"                                    "ITEM_FULLY_SHAREABLE"
 
     "Model"                                               "models/props_gameplay/neutral_box.vmdl"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_spell_lifesteal"                           "30"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "hp_cost_multiplier"                              "3"
-      }
+      "hp_cost_multiplier"                                "3"
     }
   }
 }

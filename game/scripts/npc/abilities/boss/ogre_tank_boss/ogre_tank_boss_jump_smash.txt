@@ -1,0 +1,49 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ability: Ogre Tank Boss Jump Smash
+  //=================================================================================================================
+  "ogre_tank_boss_jump_smash"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/ogre_tank_boss/ogre_tank_boss_jump_smash.lua"
+    "AbilityTextureName"                                  "elder_titan_echo_stomp"
+
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0.03"
+    "AbilityCastRange"                                    "400"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2"
+    "AnimationIgnoresModelScale"                          "1"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "5.25"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "impact_radius"                                     "400"
+      "stun_duration"                                     "3.5"
+      "damage"                                            "6000" // physical
+      "jump_speed"                                        "1.8"
+    }
+
+    "precache"
+    {
+      "particle"                                          "particles/test_particle/ogre_melee_smash.vpcf"
+      "particle"                                          "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+    }
+  }
+}

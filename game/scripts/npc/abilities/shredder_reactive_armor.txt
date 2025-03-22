@@ -1,13 +1,12 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Shredder: Reactive Armor
+  // Timbersaw: Reactive Armor
   //=================================================================================================================
   "shredder_reactive_armor"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5526"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
@@ -17,28 +16,79 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_armor"                                       "0.6 1.2 1.8 2.4 3.0 3.6" //OAA, total armor: 4.8/9.6/14.4/19.2/24/28.8
+      "bonus_hp_regen" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_armor"                                     "1 2 3 4 5 6" //OAA
+        "value"                                           "0.5 1.2 1.9 2.6 3.3 4.0" // total regen: 4/9.6/15.2/20.8/26.4/32
+        "special_bonus_unique_timbersaw_reactive_armor_regen_per_stack"  "+0.2" // with both talents: 8.4/14.4/25.2/33.6/42/50.4
       }
-      "02"
+      "stack_limit" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_hp_regen"                                  "1 2 3 4 5 6" //OAA
+        "value"                                           "8"
+        "special_bonus_unique_timbersaw_2"                "+4" // armor: 7.2/14.4/21.6/28.8/36/43.2; regen: 6/14.4/22.8/31.2/39.6/48
       }
-      "03"
+      "stack_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "stack_limit"                                     "6" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_timbersaw_2"
+        "value"                                           "10 12 14 16 18 20"
       }
-      "04"
+      "stacks_per_hero_attack" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stack_duration"                                  "10 13 16 19 19 19"
+        "value"                                           "2"
+        "special_bonus_unique_timbersaw_2"                "+1"
+      }
+      "AbilityManaCost"
+      {
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+200"
+      }
+      "AbilityCooldown"
+      {
+        "value"                                           "45"
+        "RequiresScepter"                                 "1"
+      }
+      "initial_shield"
+      {
+        "value"                                           "200"
+        "RequiresScepter"                                 "1"
+      }
+      "shield_per_sec"
+      {
+        "value"                                           "100"
+        "RequiresScepter"                                 "1"
+      }
+      "shield_per_sec_per_enemy"
+      {
+        "value"                                           "75"
+        "RequiresScepter"                                 "1"
+      }
+      "max_shield" //OAA
+      {
+        "value"                                           "500 600 700 800 1000 1200"
+        "RequiresScepter"                                 "1"
+      }
+      "duration"
+      {
+        "value"                                           "8"
+        "RequiresScepter"                                 "1"
+      }
+      "radius"
+      {
+        "value"                                           "600"
+        "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "explosion_radius"
+      {
+        "value"                                           "600"
+        "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "base_explosion" //OAA
+      {
+        "value"                                           "50 100 150 200 400 800"
+        "RequiresScepter"                                 "1"
       }
     }
   }

@@ -1,0 +1,60 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Primal Beast: Onslaught
+  //=================================================================================================================
+  "primal_beast_onslaught"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "19 18 17 16 15 14" //OAA
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "120"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "charge_speed"                                      "1200"
+      "chargeup_time"                                     "2.2"
+      "knockback_radius"
+      {
+        "value"                                           "190"
+      }
+      "max_distance"                                      "2000"
+      "knockback_distance"
+      {
+        "value"                                           "200"
+      }
+      "knockback_damage" //OAA, reminder: this is physical damage
+      {
+        "value"                                           "90 180 270 360 720 1440"
+      }
+      "knockback_duration"                                "0.2"
+      "max_charge_time"                                   "1.7"
+      "turn_rate"                                         "70"
+      "base_power"                                        "0.05"
+      "movement_turn_rate"                                "50"
+      "stun_duration"                                     "0.8 1.0 1.2 1.4 1.6 1.8"
+    }
+  }
+}

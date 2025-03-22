@@ -1,6 +1,7 @@
 modifier_spark_gpm = class(ModifierBaseClass)
 
 function modifier_spark_gpm:OnCreated()
+  if not IsServer() then return end
   self:StartIntervalThink(1)
 end
 
@@ -46,29 +47,38 @@ function modifier_spark_gpm:OnIntervalThink()
     return
   end
 
-  local caster = self:GetParent()
+  local parent = self:GetParent()
 
-  -- Don't give gold on illusions, Tempest Doubles, or Meepo clones, or during duels
-  if caster:IsIllusion() or caster:IsTempestDouble() or caster:IsClone() or not Gold:IsGoldGenActive() then
+  -- This modifier is not supposed to exist on illusions, Tempest Doubles, Meepo clones or Spirit Bears
+  if parent:IsIllusion() or parent:IsTempestDouble() or parent:IsClone() or parent:IsSpiritBearOAA() then
+    self:StartIntervalThink(-1)
+    self:Destroy()
+    return
+  end
+
+  -- Don't give gold during duels
+  if not Gold:IsGoldGenActive() then
     return
   end
 
   local gpm = self:CalculateGPM()
-  Gold:ModifyGold(caster:GetPlayerOwnerID(), math.ceil(gpm / 60), true, DOTA_ModifyGold_GameTick)
+  Gold:ModifyGold(parent:GetPlayerOwnerID(), math.ceil(gpm / 60), true, DOTA_ModifyGold_GameTick)
 
-  self:SetStackCount(gpm)
+  --self:SetStackCount(gpm)
 end
 
 -- Formula for GPM scaling
 function modifier_spark_gpm:CalculateGPM()
   local gpmChart = {500, 1000, 2000, 4000, 6000, 10000, 20000}
   local gpm = gpmChart[self:GetSparkLevel()]
-
+  if HeroSelection and HeroSelection.is10v10 then
+    gpm = gpm * 1.5
+  end
   return math.floor(gpm)
 end
 
 function modifier_spark_gpm:IsHidden()
-  return false
+  return true
 end
 
 function modifier_spark_gpm:IsDebuff()
@@ -87,12 +97,12 @@ function modifier_spark_gpm:GetAttributes()
   return MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
 end
 
-function modifier_spark_gpm:DeclareFunctions()
-  return {
-    MODIFIER_PROPERTY_TOOLTIP
-  }
-end
+-- function modifier_spark_gpm:DeclareFunctions()
+  -- return {
+    -- MODIFIER_PROPERTY_TOOLTIP
+  -- }
+-- end
 
-function modifier_spark_gpm:OnTooltip()
-  return self:GetStackCount()
-end
+-- function modifier_spark_gpm:OnTooltip()
+  -- return self:GetStackCount()
+-- end

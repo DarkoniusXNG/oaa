@@ -7,10 +7,8 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5460"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -20,13 +18,9 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.05"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15" //OAA
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70"
+    "AbilityManaCost"                                     "70 75 80 85 90 95" //OAA
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
@@ -34,24 +28,28 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" // special_bonus_unique_disruptor_2 is not used
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "350"
+        "value"                                           "20 18 16 14 12 10"
+        "special_bonus_unique_disruptor_2"                "-3"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "formation_time"                                  "1.2"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "formation_time"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2.6 3.2 3.8 4.4 5.0 5.6"
-        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_5"
+        "value"                                           "1"
       }
+      "duration" //OAA
+      {
+        "value"                                           "2.6 3.2 3.8 4.4 4.7 5.0"
+        "special_bonus_unique_disruptor_5"                "+1"
+      }
+      "damage_per_second"                                 "0"
     }
   }
 }

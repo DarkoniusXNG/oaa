@@ -7,13 +7,11 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5376"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "MaxLevel"                                            "1"
     "HotKeyOverride"                                      "Y"
-    "FightRecapLevel"                                     "1"
 
     // Unit Targeting
     //-------------------------------------------------------------------------------------------------------------
@@ -25,46 +23,45 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "1000"
     "AbilityCastPoint"                                    "0.05"
-    "AbilityCooldown"                                     "20"
     "AbilityManaCost"                                     "100"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.15"  // Applies multiple modifiers
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 8.0 8.5 9.0 9.5 10.0"
-        "levelkey"                                        "quaslevel"
-        "LinkedSpecialBonus"                              "special_bonus_unique_invoker_7"
+        "value"                                           "18"
+        "special_bonus_unique_invoker_9"                  "-5"
       }
-      "02"
+      "duration" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "freeze_duration"                                 "0.35" //OAA
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "freeze_cooldown"                                 "0.77 0.74 0.71 0.69 0.66 0.63 0.60 0.57 0.54 0.51 0.48 0.45 0.42 0.39 0.36"
+        "value"                                           "3.0 3.4 3.8 4.2 4.6 5.0 5.4 5.8 6.0 6.2 6.4 6.6 6.8 7.0 7.2 7.4 7.6"
         "levelkey"                                        "quaslevel"
       }
-      "04"
+      "freeze_duration"                                   "0.4"
+      "freeze_cooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "freeze_damage"                                   "8 16 24 32 40 48 56 64 72 88 96 112 128 160 224"
+        "value"                                           "0.80 0.77 0.74 0.71 0.68 0.65 0.62 0.59 0.56 0.53 0.5 0.5 0.5 0.5 0.5 0.5 0.5"
         "levelkey"                                        "quaslevel"
       }
-      "05"
+      "freeze_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_trigger"                                  "10.0"
+        "value"                                           "8 16 24 32 40 48 56 64 80 96 112 128 144 160 176 192 208"
+        "levelkey"                                        "quaslevel"
       }
+      "freeze_heal" // OAA, freeze_damage x 2
+      {
+        "value"                                           "0"
+        "levelkey"                                        "quaslevel"
+        "special_bonus_facet_invoker_quas_focus"          "16 32 48 64 80 96 112 128 160 192 224 256 288 320 352 384 416"
+      }
+      "freeze_mana"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_invoker_quas_focus"          "+5"
+      }
+      "damage_trigger"                                    "10.0"
     }
   }
 }

@@ -1,7 +1,7 @@
-ghost_frostburn_oaa = class(AbilityBaseClass)
+LinkLuaModifier("modifier_frostburn_oaa_applier", "abilities/neutrals/oaa_ghost_frostburn.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_frostburn_oaa_effect", "abilities/neutrals/oaa_ghost_frostburn.lua", LUA_MODIFIER_MOTION_NONE)
 
-LinkLuaModifier("modifier_frostburn_oaa_applier", "abilities/neutrals/oaa_ghost_frostburn.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_frostburn_oaa_effect", "abilities/neutrals/oaa_ghost_frostburn.lua", LUA_MODIFIER_MOTION_NONE )
+ghost_frostburn_oaa = class(AbilityBaseClass)
 
 function ghost_frostburn_oaa:GetIntrinsicModifierName()
   return "modifier_frostburn_oaa_applier"
@@ -9,7 +9,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_frostburn_oaa_applier = class(ModifierBaseClass)
+modifier_frostburn_oaa_applier = class({})
 
 function modifier_frostburn_oaa_applier:IsHidden()
   return true
@@ -35,29 +35,47 @@ end
 modifier_frostburn_oaa_applier.OnRefresh = modifier_frostburn_oaa_applier.OnCreated
 
 function modifier_frostburn_oaa_applier:DeclareFunctions()
-  local funcs = {
-    MODIFIER_EVENT_ON_ATTACK_LANDED,
+  return {
+    MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
   }
-  return funcs
 end
 
-function modifier_frostburn_oaa_applier:OnAttackLanded(event)
-  if IsServer() then
+if IsServer() then
+  function modifier_frostburn_oaa_applier:GetModifierProcAttack_Feedback(event)
+    local parent = self:GetParent()
     local attacker = event.attacker
     local target = event.target
-    local parent = self:GetParent()
-    if not parent or parent:IsNull() then
+
+    -- Check if attacker exists
+    if not attacker or attacker:IsNull() then
       return
     end
-    if attacker == self:GetParent() and not attacker:IsIllusion() and not attacker:PassivesDisabled() and not target:IsMagicImmune() then
-      target:AddNewModifier(attacker, self:GetAbility(), "modifier_frostburn_oaa_effect", {duration = self.heal_prevent_duration})
+
+    -- Check if attacker has this modifier
+    if attacker ~= parent then
+      return
+    end
+
+    -- Check if attacked unit exists
+    if not target or target:IsNull() then
+      return
+    end
+
+    -- Don't continue if the attacked entity doesn't have IsMagicImmune method -> attacked entity is something weird
+    if target.IsMagicImmune == nil then
+      return
+    end
+
+    -- Don't proc for illusions, when broken or on spell immune units
+    if not parent:IsIllusion() and not parent:PassivesDisabled() and not target:IsMagicImmune() then
+      target:AddNewModifier(parent, self:GetAbility(), "modifier_frostburn_oaa_effect", {duration = self.heal_prevent_duration})
     end
   end
 end
 
 --------------------------------------------------------------------------------
 
-modifier_frostburn_oaa_effect = class(ModifierBaseClass)
+modifier_frostburn_oaa_effect = class({})
 
 function modifier_frostburn_oaa_effect:IsHidden()
   return false
@@ -72,25 +90,54 @@ function modifier_frostburn_oaa_effect:IsPurgable()
 end
 
 function modifier_frostburn_oaa_effect:OnCreated()
-  if IsServer() then
-    local ability = self:GetAbility()
-    if ability then
-      self.heal_prevent_percent = ability:GetSpecialValueFor("heal_prevent_percent")
-    else
-      self.heal_prevent_percent = 35
-    end
-    self.duration = self:GetDuration()
-    self.health_fraction = 0
+  local ability = self:GetAbility()
+  if ability then
+    self.heal_prevent_percent = ability:GetSpecialValueFor("heal_prevent_percent")
+    self.attack_slow = ability:GetSpecialValueFor("attack_speed_slow")
+  else
+    self.heal_prevent_percent = -25
+    self.attack_slow = -25
   end
+  --self.duration = self:GetDuration()
+  --self.health_fraction = 0
+end
+
+function modifier_frostburn_oaa_effect:GetEffectName()
+  return "particles/ghost_frostbite.vpcf"--"particles/items4_fx/spirit_vessel_damage.vpcf"
 end
 
 function modifier_frostburn_oaa_effect:DeclareFunctions()
-  local funcs = {
-    MODIFIER_EVENT_ON_HEALTH_GAINED
+  return {
+    MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
+    MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE,
+    MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE,
+    MODIFIER_PROPERTY_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,
+    MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+    --MODIFIER_EVENT_ON_HEALTH_GAINED
   }
-  return funcs
 end
 
+function modifier_frostburn_oaa_effect:GetModifierHealAmplify_PercentageTarget()
+  return 0 - math.abs(self.heal_prevent_percent)
+end
+
+function modifier_frostburn_oaa_effect:GetModifierHPRegenAmplify_Percentage()
+  return 0 - math.abs(self.heal_prevent_percent)
+end
+
+function modifier_frostburn_oaa_effect:GetModifierLifestealRegenAmplify_Percentage()
+  return 0 - math.abs(self.heal_prevent_percent)
+end
+
+function modifier_frostburn_oaa_effect:GetModifierSpellLifestealRegenAmplify_Percentage()
+  return 0 - math.abs(self.heal_prevent_percent)
+end
+
+function modifier_frostburn_oaa_effect:GetModifierAttackSpeedBonus_Constant()
+  return 0 - math.abs(self.attack_slow)
+end
+
+--[[
 function modifier_frostburn_oaa_effect:OnHealthGained(event)
   if IsServer() then
     -- Check that event is being called for the unit that self is attached to
@@ -107,3 +154,4 @@ function modifier_frostburn_oaa_effect:OnHealthGained(event)
     end
   end
 end
+]]

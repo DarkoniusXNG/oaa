@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5381"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
@@ -16,41 +15,60 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "45"
-    "AbilityManaCost"                                     "200"
+    "AbilityManaCost"                                     "175"
     "AbilityCastPoint"                                    "0.05"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "100.0"
+        "value"                                           "30"
       }
-      "02"
+      "duration"                                          "60"
+      "area_of_effect"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "area_of_effect"                                  "400"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "enemy_slow" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "enemy_slow"                                      "-20 -25 -30 -35 -40 -45 -50 -55 -57 -59 -61 -63 -65 -67 -69"
+        "value"                                           "-20 -25 -30 -35 -40 -45 -50 -55 -57 -59 -61 -63 -65 -67 -69 -71 -73"
         "levelkey"                                        "quaslevel"
       }
-      "04"
+      "self_slow"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "self_slow"                                       "-30 -20 -10 0 10 20 30 40 45 50 55 58 61 63 65"
+        "value"                                           "-20 -15 -10 -5 0 5 10 15 20 25 30 35 40 45 50 55 60"
         "levelkey"                                        "wexlevel"
       }
-      "05"
+      "aura_fade_time"                                    "2.0"
+      "health_regen"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "aura_fade_time"                                  "2.0"
+        "value"                                           "2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34"
+        "levelkey"                                        "quaslevel"
       }
+      "mana_regen"
+      {
+        "value"                                           "2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34"
+        "levelkey"                                        "wexlevel"
+      }
+      "ally_cast_area_of_effect"
+      {
+        "value"                                           "0"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_facet_invoker_quas_focus"
+        {
+          "value"                                         "0"
+          "special_bonus_scepter"                         "+600"
+        }
+      }
+      "ally_duration"
+      {
+        "value"                                           "30"
+      }
+      "ally_fadetime"                                     "0.5"
+      "disable_time"                                      "3"
     }
   }
 }

@@ -1,52 +1,58 @@
 "itembuilds"
 {
-	"author"		"Valve"
-	"hero"			"npc_dota_hero_nyx_assassin"
-	"Title"			"Recommended items for Nyx Assassin"
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_nyx_assassin"
+  "Title"         "Recommended items for Nyx Assassin"
 
-	"Items"
-	{
-		"#DOTA_Item_Build_Starting_Items"
-		{
-			"item"		"item_flask"
-			"item"		"item_boots"
-			"item"		"item_magic_stick"
-		}
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_flask"
+      "item"      "item_boots"
+    }
 
-		"#DOTA_Item_Build_Early_Game"
-		{
-			"item"		""
-			"item"		""
-			"item"		"item_force_staff"
-			"item"		""
-		}
+    "#DOTA_Item_Build_For_Farming"
+    {
+      "item"      "item_meteor_hammer_1"
+    }
 
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		""
-			"item"		"item_spirit_vessel"
-			"item"		"item_shivas_guard"
-			"item"		""
-			"item"		"item_octarine_core"
-		}
+    "#DOTA_Item_Build_Magical_Core"
+    {
+      "item"      "item_dagon_oaa_1"
+      "item"      "item_ethereal_blade"
+      "item"      "item_shivas_guard"
+      "item"      "item_greater_travel_boots"
+      "item"      "item_dagger_of_moriah_1"
+    }
+    
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_far_sight"
+      "item"      "item_shield_staff"
+      "item"      "item_wind_waker"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_octarine_core"
+    }
 
-		"#DOTA_Item_Build_Late_Items"
-		{
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
 
-			"item"		""
-			"item"		"item_ultimate_scepter"
-		}
-
-		"#DOTA_Item_Build_Luxury"
-		{
-			"item"		"item_ancient_janggo"
-			"item"		"item_lucience"
-			"item"		"item_sheepstick_4"
-			"item"		"item_cyclone"
-			"item"		"item_lotus_orb"
-			"item"		"item_ethereal_blade"
-      "item"    "item_stoneskin"
-      "item"    "item_bubble_orb_1"
-		}
-	}
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_angels_demise"
+      "item"      "item_blink"
+      "item"      "item_devastator"
+      "item"      "item_heart_oaa_1"
+      "item"      "item_lotus_orb"
+      "item"      "item_spirit_vessel_oaa"
+      "item"      "item_shade_staff_1"
+      "item"      "item_bubble_orb_1"
+      "item"      "item_sheepstick_4"
+      "item"      "item_stoneskin"
+      "item"      "item_magic_lamp_1"
+    }
+  }
 }

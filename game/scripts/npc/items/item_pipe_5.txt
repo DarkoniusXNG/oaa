@@ -7,14 +7,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3712"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -24,7 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_pipe_4;item_upgrade_core_4"
-      "02"                                                "item_glimmer_cape_4;item_upgrade_core_4"
     }
   }
 
@@ -35,16 +34,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3713"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_pipe"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "FightRecapLevel"                                     "2"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "AbilityTextureName"                                  "custom/pipe_of_insight_5"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60.0"
+    "AbilityCooldown"                                     "30"
     "AbilitySharedCooldown"                               "pipe"
-    "AbilityManaCost"                                     "100"
+    "AbilityManaCost"                                     "150"
     "AbilityCastRange"                                    "1200"
 
     "MaxUpgradeLevel"                                     "5"
@@ -52,77 +51,38 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "36425"
+    "ItemCost"                                            "33229"
     "ItemShopTags"                                        "regen_health;boost_magic_resist"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "pipe of insight 5;pipe 5"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
     "ItemAlertable"                                       "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "health_regen"                                      "12 13 14 15 16"
+      "magic_resistance"                                  "20 22 24 26 28"
+      "barrier_debuff_duration"                           "50.0"
+      "tooltip_resist"                                    "20 22 24 26 28"
+      "aura_health_regen"                                 "2.5 4.5 6.5 8.5 10.5"
+      "magic_resistance_aura"                             "8 10 12 14 16"
+      "aura_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "health_regen"                                    "8.5 10.0 13.0 16.0 18.0"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "barrier_block"                                     "425 525 725 1025 1425"
+      "barrier_duration"                                  "8.0"
+      "barrier_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "magic_resistance"                                "30 32 34 36 38"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "barrier_debuff_duration"                         "50.0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_resist"                                  "30 32 34 36 38"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "aura_health_regen"                               "2.0 4.0 6.0 9.0 12.0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "magic_resistance_aura"                           "10 13 16 19 22"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "1200"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "barrier_block"                                   "400 500 700 1000 1400"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "barrier_duration"                                "12.0"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "barrier_radius"                                  "1200"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_all_stats"                                 "0"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "barrier_block_creep"                             "400 500 700 1000 1400"
-      }
+      "bonus_all_stats"                                   "0"
+      "barrier_block_creep"                               "425 525 725 1025 1425"
     }
   }
 }

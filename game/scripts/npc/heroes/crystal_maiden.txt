@@ -5,7 +5,10 @@
   //=================================================================================================================
   "npc_dota_hero_crystal_maiden"
   {
-    "MovementSpeed"                                       "320"
+    "Ability3"                                            "crystal_maiden_arcane_magic_oaa" // replaces crystal_maiden_brilliance_aura
+    "Ability8"                                            "crystal_maiden_brilliance_aura" // replaces undefined
+
+    "MovementSpeed"                                       "300"
     "StatusHealthRegen"                                   "4"
   }
 }

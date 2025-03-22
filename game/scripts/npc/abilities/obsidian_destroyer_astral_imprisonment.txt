@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5392"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -17,69 +16,77 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
-
-    "HasScepterUpgrade"                                   "1"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDuration"                                     "4.0"
-    "AbilityCooldown"                                     "18 16 14 12 11 10" //OAA
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "300 350 400 450 500 550"
-    "AbilityCastPoint"                                    "0.25"
+    "AbilityCastPoint"                                    "0.3"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "140 160 180 200 400 600"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5" // applies multiple modifiers
+    "AbilityManaCost"                                     "150" // old: "140 160 180 200 400 600"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "prison_duration"                                 "4.0"
+        "value"                                           "18 16 14 12 12 12"
       }
-      "02"
+      "prison_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "100 175 250 325 700 1075"
-        "LinkedSpecialBonus"                              "special_bonus_unique_outworld_devourer_3"
+        "value"                                           "1.75 2.5 3.25 4 4 4"
       }
-      "03"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "400"
+        "value"                                           "90 180 270 360 720 1440"
       }
-      "04"
+      "has_mana_steal"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_charges_scepter"                             "2"
-        "RequiresScepter"                                 "1"
+        "value"                                           "1"
       }
-      "05"
+      "mana_capacity_steal"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "charge_restore_time_scepter"                     "18 16 14 12 11 10" //OAA, same as AbilityCooldown
-        "RequiresScepter"                                 "1"
+        "value"                                           "16 19 22 25 28 31"
+        "special_bonus_unique_outworld_devourer_2"        "+8"
       }
-      "06"
+      "mana_capacity_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_range_bonus"                             "300"
-        "RequiresScepter"                                 "1"
+        "value"                                           "30 40 50 60 70 80"
       }
-      "07"
+      "allied_movement_speed_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "counter_duration"                                "35"
+        "value"                                           "0"
+        "special_bonus_shard"                             "+70"
+      }
+      "damage_radius"
+      {
+        "value"                                           "0"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_shard"                             "+300"
+        "RequiresShard"                                   "1"
+      }
+      "AbilityCastRange"
+      {
+        "value"                                           "650"
+        "special_bonus_unique_outworld_devourer_astral_castrange"  "+100"
+      }
+      "debuff_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_obsidian_destroyer_overwhelming_devourer"  "+5"
+      }
+      "percentage_damage"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_obsidian_destroyer_overwhelming_devourer"  "0"
+      }
+      "percentage_heal"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_obsidian_destroyer_overwhelming_devourer"  "+100"
       }
     }
   }

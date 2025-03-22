@@ -1,13 +1,12 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Bane Friends Grip
+  // Ability: Bane Fiends Grip
   //=================================================================================================================
   "bane_fiends_grip"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5013"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -15,8 +14,7 @@
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -25,12 +23,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "625"
-    "AbilityCastPoint"                                    "0.4"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityChannelTime"                                  "6.0"
-    "AbilityCooldown"                                     "100" //OAA
+    "AbilityCastPoint"                                    "0.2"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -38,28 +31,36 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "fiend_grip_tick_interval"                          "0.5"
+      "fiend_grip_mana_drain"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "fiend_grip_tick_interval"                        "0.5"
+        "value"                                           "5"
+        "special_bonus_unique_bane_9"                     "+5"
       }
-      "02"
+      "AbilityChannelTime"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "fiend_grip_mana_drain"                           "5"
+        "value"                                           "4.75 5.25 5.75 6.0 6.25"
+        "special_bonus_unique_bane_3"                     "+3"
       }
-      "03"
+      "fiend_grip_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "abilitychanneltime"                              ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_bane_3"
+        "value"                                           "70 150 230 390 550"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "04"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "fiend_grip_damage"                               "100 200 300 600 900" //OAA
+        "value"                                           "100"
+        "special_bonus_scepter"                           "-45"
+      }
+      "illusion_count"
+      {
+        "special_bonus_scepter"                           "+2"
+      }
+      "scepter_incoming_illusion_damage"
+      {
+        "special_bonus_scepter"                           "+200"
       }
     }
   }

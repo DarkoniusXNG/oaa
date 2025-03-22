@@ -7,51 +7,78 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5521"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.3"
-    "AbilityCooldown"                                     "100" //OAA
-    "AbilityManaCost"                                     "200 250 300 350 400"
-    "AbilityCastRange"                                    "410"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Applies multiple modifiers
+    "AbilityManaCost"                                     "150 225 300 375 450"
+    "AbilityCastRange"                                    "430" //OAA, same as pull_radius (only true when normal Reverse Polarity)
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_radius"                                     "410"
+        "value"                                           "100 95 90 85 80"
+        "special_bonus_facet_magnataur_reverse_reverse_polarity"  "-20"
       }
-      "02"
+      "pull_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "polarity_damage"                                 "50 200 350 650 950" //OAA
+        "value"                                           "430"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_facet_magnataur_reverse_reverse_polarity"  "-100%"
       }
-      "03"
+      "push_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "hero_stun_duration"                              "2.75 3.25 3.75 4.25 4.75"
-        "LinkedSpecialBonus"                              "special_bonus_unique_magnus_5"
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_reverse_reverse_polarity"  "+700"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "max_knockback_distance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "pull_duration"                                   "0.0"
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_reverse_reverse_polarity"  "+850"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "knockback_height"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_magnataur_reverse_reverse_polarity"  "+100"
+      }
+      "polarity_damage" //OAA
+      {
+        "value"                                           "250 450 650 1250 1850"
+        "CalculateSpellDamageTooltip"                     "1"
+      }
+      "hero_stun_duration"
+      {
+        "value"                                           "2.5 3.0 3.5 3.75 4.0"
+        "special_bonus_unique_magnus_5"                   "+0.8"
+      }
+      "pull_duration"
+      {
+        "value"                                           "0.0"
+        "special_bonus_facet_magnataur_reverse_reverse_polarity"  "+0.2"
+      }
+      "stat_buff_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_magnus_reverse_polarity_stats"  "+20"
+      }
+      "stats_per_stack" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_unique_magnus_reverse_polarity_stats"  "+15"
       }
     }
   }

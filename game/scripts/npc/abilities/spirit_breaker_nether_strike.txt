@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5356"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -16,23 +15,20 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "0"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "1.2"
+    "AbilityCastPoint"                                    "1.0"
     "AbilityCastRange"                                    "700"
     "AbilityCastRangeBuffer"                              "500"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60 50 40 30 20" //OAA
+    "AbilityCooldown"                                     "50 45 40 35 30" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -40,17 +36,40 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "100 250 400 850 1600" //OAA
+        "value"                                           "150 350 550 1150 1750"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "fade_time"                                         "1.0"
+      "shard_bonus_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "fade_time"                                       "1.0"
+        "value"                                           "0"
+        "RequiresShard"                                   "1"
+      }
+      "shard_break_duration"
+      {
+        "value"                                           "0.0"
+        "RequiresShard"                                   "1"
+      }
+      "shard_spell_immune_duration"
+      {
+        "value"                                           "0.0"
+        "RequiresShard"                                   "1"
+      }
+      "knockback_amp"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_spirit_breaker_imbalanced"   "+100"
+        "RequiresFacet"                                   "spirit_breaker_imbalanced"
+      }
+      "knockback_amp_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_spirit_breaker_imbalanced"   "+6"
+        "RequiresFacet"                                   "spirit_breaker_imbalanced"
       }
     }
   }

@@ -7,51 +7,43 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5186"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "400"
+    "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0.2"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "5"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "85 105 125 145 165 185"
+    "AbilityManaCost"                                     "85 105 125 145 165 185" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "structure_damage_mod"                            "0.5"
+        "value"                                           "5"
+        "special_bonus_unique_pugna_4"                    "-2"
       }
-      "02"
+      "structure_damage_mod"                              "150" //OAA, percentage bonus damage against bosses
+      "delay"                                             "0.8"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "delay"                                           "0.9"
+        "value"                                           "400"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "blast_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "400"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "blast_damage"                                    "100 175 250 325 725 1125"
-        "LinkedSpecialBonus"                              "special_bonus_unique_pugna_2"
+        "value"                                           "95 170 245 320 640 1280"
+        "special_bonus_unique_pugna_2"                    "+320"
       }
     }
   }

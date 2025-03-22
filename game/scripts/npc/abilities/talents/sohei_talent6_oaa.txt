@@ -1,31 +1,22 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Wholeness of Body talent: Applies Momentum Strike knockback (if Momentum Strike is learned) to enemies around the target
+  // Wholeness of Body talent: Applies knockback on its own or with an ability - unused
   //=================================================================================================================
-  "special_bonus_sohei_wholeness_knockback"
+  "special_bonus_unique_sohei_6_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "9505"
     "BaseClass"                                           "special_bonus_undefined"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "value"                                           "400"     // Knockback max distance
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "0.2"     // Knockback max duration
-      }
+      "value"                                             "400" // Knockback max distance (fallback value)
+      "duration"                                          "0.2" // Knockback max duration (fallback value)
     }
   }
 }

@@ -1,75 +1,70 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Enigma: Demonic Conversion
+  // Enigma: Demonic Conversion/Summoning - needed for shard (only AbilityValues matter, casting stuff doesn't)
   //=================================================================================================================
   "enigma_demonic_conversion"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5147"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"                                           "ability_lua"
-    "ScriptFile"                                          "abilities/oaa_demonic_conversion.lua"
-    "AbilityTextureName"                                  "enigma_demonic_conversion"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
-    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CREEP"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO | DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE" //OAA
 
-    "MaxLevel"                                            "6"
+    "MaxLevel"                                            "4"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "700"
+    "AbilityCastRange"                                    "400"
     "AbilityCastPoint"                                    "0.3"
-    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "35.0"
-    "AbilityDuration"                                     "35.0"
+    "AbilityCooldown"                                     "40 38 36 34"
+    "AbilityDuration"                                     "40.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "140 150 160 170 180 190"
+    "AbilityManaCost"                                     "70 80 90 100"
+    "AbilityHealthCost"                                   "75 100 125 150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "spawn_count"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spawn_count"                                     "3"
-        "LinkedSpecialBonus"                              "special_bonus_unique_enigma"
+        "value"                                           "3"
+        "special_bonus_unique_enigma"                     "+4"
       }
-      "02"
+      "split_attack_count"                                "6"
+      "eidelon_max_health" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "split_attack_count"                              "6"
+        "value"                                           "180 220 260 300"
       }
-      "03"
+      "life_extension"                                    "2.0"
+      "eidelon_base_damage"                               "20 30 40 50" //OAA
+      "eidolon_damage_spread"                             "4"
+      "eidolon_bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "eidolon_hp_tooltip"                              "180 200 220 240 1240 2480"
+        "value"                                           "0"
+        "special_bonus_unique_enigma_3"                   "+40"
       }
-      "04"
+      "eidolon_bonus_attack_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "life_extension"                                  "2.0"
+        "value"                                           "0"
+        "special_bonus_unique_enigma_4"                   "+10"
       }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "eidolon_dmg_tooltip"                             "20 28 38 47 94 198"
-        "LinkedSpecialBonus"                              "special_bonus_unique_enigma_3"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_level"                                     "7"
-      }
+      "eidelon_base_movespeed"                            "370" //OAA
+      "creep_max_level"                                   "4" // unused
+      "eidolon_magic_resist"                              "60" //OAA
+      "eidolon_attack_range"                              "500" //OAA
+      "allied_damage_pct"                                 "45"
+      "self_modelscale"                                   "-40"
+      "spawn_offset"                                      "100"
+      "current_health_pct"                                "3"
+      "eidolon_xp_bounty"                                 "10"
+      "eidolon_gold_bounty_min"                           "17"
+      "eidolon_gold_bounty_max"                           "20"
+      "non_splitting_bounty_reduction"                    "50"
     }
   }
 }

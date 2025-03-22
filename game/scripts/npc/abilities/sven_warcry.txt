@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5096"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
@@ -21,35 +20,63 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "32 28 24 20 16 16"
+    "AbilityCooldown"                                     "23 22 21 20 19 18" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "30 40 50 60 70 80"
+    "AbilityManaCost"                                     "30 35 40 45 50 55"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "movespeed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed"                                       "8 12 16 20 24 28"
+        "value"                                           "6 9 12 15 18 21"
+        "special_bonus_shard"                             "+3"
       }
-      "02"
+      "bonus_armor"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "6 9 12 15 18 21"
+        "value"                                           "5 8 11 14 16 18"
+        "special_bonus_unique_sven_7"                     "+8"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "700"
+        "value"                                           "700"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "8"
+        "value"                                           "8"
+        "special_bonus_unique_sven_5"                     "+5"
+      }
+      "shard_passive_armor" //OAA
+      {
+        "value"                                           "3 4 5 6 8 12"
+        "RequiresShard"                                   "1"
+      }
+      "shard_passive_movespeed"
+      {
+        "value"                                           "0"
+        "RequiresShard"                                   "1"
+      }
+      "shard_radius"
+      {
+        "value"                                           "1200"
+        "RequiresShard"                                   "1"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "base_barrier_amount" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_facet_sven_heavy_plate"            "=100 =170 =240 =310 =620 =930"
+        "RequiresFacet"                                   "sven_heavy_plate"
+      }
+      "barrier_per_strength"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_sven_heavy_plate"            "=0"
+        "RequiresFacet"                                   "sven_heavy_plate"
       }
     }
   }

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5341"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -19,51 +18,47 @@
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16 12 8 4 4 4"
-    "AbilityManaCost"                                     "40"
+    "AbilityCooldown"                                     "13 10 7 4 4 4"
+    "AbilityManaCost"                                     "40 50 60 70 80 90" //OAA
     "AbilityCastRange"                                    "200"
     "AbilityCastPoint"                                    "0.0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "burn_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_damage"                                     "16 20 24 28 32 36"
+        "value"                                           "15 30 45 60 120 240"
       }
-      "02"
+      "burn_damage_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_damage_pct"                                 "1.25 2.5 3.75 5 5.5 6"
-        "LinkedSpecialBonus"                              "special_bonus_unique_doom_1"
+        "value"                                           "1 2 3 4 4.5 5"
+        "special_bonus_unique_doom_1"                     "+2.5"
       }
-      "03"
+      "burn_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_duration"                                   "4.0"
+        "value"                                           "4"
       }
-      "04"
+      "ministun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "ministun_duration"                               "0.6"
+        "value"                                           "0.6"
+        "special_bonus_unique_doom_4"                     "+0.2" 
       }
-      "05"
+      "shard_ministun_duration" // unused
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "ministun_duration_scepter"                       "1.75"
-        "RequiresScepter"                                 "1"
+        "value"                                           "1"
+        "RequiresShard"                                   "1"
       }
-      "06"
+      "shard_bonus_stun_duration" // unused
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_duration_scepter"                           "6.0"
-        "RequiresScepter"                                 "1"
+        "value"                                           "1.45"
+        "RequiresShard"                                   "1"
+      }
+      "shard_bonus_damage" // unused
+      {
+        "value"                                           "125"
+        "RequiresShard"                                   "1"
       }
     }
   }

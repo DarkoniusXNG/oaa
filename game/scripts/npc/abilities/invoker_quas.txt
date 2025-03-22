@@ -7,10 +7,8 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5370"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "MaxLevel"                                            "14"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_INVISIBLE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -19,12 +17,37 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "max_level" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "health_regen_per_instance"                       "1 3 5 7 9 11 13 15 17 19 21 23 25 27"
+        "value"                                           "14"
+        "special_bonus_scepter"                           "+1"
+        "special_bonus_facet_invoker_quas_focus"
+        {
+          "value"                                         "+1"
+          "special_bonus_scepter"                         "+1"
+        }
+      }
+      "hp_regen_per_instance"
+      {
+        "value"                                           "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17"
+        "special_bonus_unique_invoker_13"                 "x2"
+      }
+      "upgrade_at_level"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_invoker_quas_focus"          "6"
+      }
+      "strength_bonus"                                    "1"
+      "scepter_bonus_levels"
+      {
+        "value"                                           "1"
+        "special_bonus_facet_invoker_quas_focus"
+        {
+          "value"                                         "0"
+          "special_bonus_scepter"                         "+1"
+        }
       }
     }
   }

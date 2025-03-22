@@ -7,16 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "6583"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -24,62 +24,77 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14.0"
+    "AbilityCooldown"                                     "14.0 13.0 12.0 11.0 10.0 9.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "110 120 130 140 150 160"
+    "AbilityManaCost"                                     "100 110 120 130 140 150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "100 175 250 325 650 1300"
-        "LinkedSpecialBonus"                              "special_bonus_unique_mars_spear_bonus_damage"
+        "value"                                           "100 175 250 325 650 975"
+        "special_bonus_unique_mars_spear_bonus_damage"    "+175"
       }
-      "02"
+      "spear_speed"                                       "1400"
+      "spear_width"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "spear_speed"                                     "1400"
+        "value"                                           "125"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "spear_vision"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spear_width"                                     "125"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "max_impale_targets"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spear_vision"                                    "300"
+        "value"                                           "1"
+        "special_bonus_shard"                             "+1"
       }
-      "05"
+      "spear_range"                                       "900 1000 1100 1200 1300 1400"
+      "activity_duration"                                 "1.7"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spear_range"                                     "900 1000 1100 1200 1300 1400"
+        "value"                                           "1.3 1.6 1.9 2.2 2.5 2.8"
+        "special_bonus_unique_mars_spear_stun_duration"   "+0.4"
       }
-      "06"
+      "knockback_duration"                                "0.25"
+      "knockback_distance"                                "75"
+      "shard_trail_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "activity_duration"                               "1.7"
+        "value"                                           "10.0"
+        "RequiresShard"                                   "1"
       }
-      "07"
+      "shard_trail_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.6 2.0 2.4 2.8 2.8 2.8"
-        "LinkedSpecialBonus"                              "special_bonus_unique_mars_spear_stun_duration"
+        "value"                                           "200"
+        "RequiresShard"                                   "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "08"
+      "shard_dps" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "knockback_duration"                              "0.25"
+        "value"                                           "25 30 35 40 80 120"
+        "RequiresShard"                                   "1"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "09"
+      "shard_move_slow_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "knockback_distance"                              "75"
+        "value"                                           "20"
+        "RequiresShard"                                   "1"
+      }
+      "shard_debuff_linger_duration"
+      {
+        "value"                                           "2.0"
+        "RequiresShard"                                   "1"
+      }
+      "shard_interval"
+      {
+        "value"                                           "0.5"
+        "RequiresShard"                                   "1"
       }
     }
   }

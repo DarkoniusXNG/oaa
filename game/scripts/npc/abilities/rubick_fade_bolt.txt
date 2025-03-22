@@ -7,14 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5450"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -30,53 +28,36 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "120 130 140 150 160 170"
+    "AbilityManaCost"                                     "110 125 140 155 170 185"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.35"  // can chain to multiple units
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage"                                            "100 175 250 325 650 975"
+      "jump_damage_reduction_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "100 175 250 325 650 975"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "jump_damage_reduction_pct"                       "8"
+        "value"                                           "6"
         "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "03"
+      "attack_damage_reduction" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_damage_reduction"                         "10 18 26 34 42 50"
-        "LinkedSpecialBonus"                              "special_bonus_unique_rubick_2"
+        "value"                                           "20 25 30 35 40 45"
         "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "04"
+      "duration"                                          "10.0"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "10.0"
+        "value"                                           "440"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "440"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "jump_delay"                                      "0.25"
-      }
+      "jump_delay"                                        "0.25"
     }
   }
 }

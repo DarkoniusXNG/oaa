@@ -7,14 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5677"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -22,7 +20,6 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "500 600 700 800 900 1000"
     "AbilityCastPoint"                                    "0.3"
 
     // Time
@@ -35,39 +32,34 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_arc_warden_2"
+        "value"                                           "6.0"
+        "special_bonus_scepter"                           "+2.0"
       }
-      "02"
+      "search_radius"                                     "150" //OAA
+      "think_interval"                                    "0.5"
+      "damage_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "15 30 45 60 120 180"
+        "value"                                           "15 30 45 60 120 180"
+        "special_bonus_scepter"                           "+50%"
       }
-      "03"
+      "move_speed_slow_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "search_radius"                                   "150" //OAA
+        "value"                                           "14 21 28 35 42 49"
+        "special_bonus_unique_arc_warden_4"               "+20"
       }
-      "04"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "think_interval"                                  "0.5"
+        "value"                                           "500 600 700 800 900 1000"
+        "special_bonus_unique_arc_warden_5"               "+200"
       }
-      "05"
+      "applies_silence"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "move_speed_slow_pct"                             "20 25 30 35 40 45" //OAA
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "abilitycastrange"                                ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_arc_warden_5"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "1"
       }
     }
   }

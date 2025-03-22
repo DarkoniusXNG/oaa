@@ -1,0 +1,38 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Telescope (OAA rework) - custom neutral tier 4 item
+  //=================================================================================================================
+  "item_telescope_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/telescope.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"                                  "item_spy_gadget"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_vision"                                      "200"
+      "bonus_attack_range"                                "100" // ranged only
+      "bonus_cast_range"                                  "100"
+      "aura_range"
+      {
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
+      }
+    }
+  }
+}

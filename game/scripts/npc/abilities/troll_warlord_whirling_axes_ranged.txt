@@ -7,14 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5509"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -22,61 +20,55 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1000"
+    "AbilityCastRange"                                    "950"
     "AbilityCastPoint"                                    "0.2"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "9"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "axe_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "axe_width"                                       "100"
+        "value"                                           "100"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "axe_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "axe_speed"                                       "1500.0"
+        "value"                                           "1500.0"
       }
-      "03"
+      "axe_range"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "axe_range"                                       "1000.0"
+        "value"                                           "950.0"
       }
-      "04"
+      "axe_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "axe_damage"                                      "50 100 150 200 400 800" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_troll_warlord_3"
+        "value"                                           "60 80 100 120 240 480"
+        "special_bonus_unique_troll_warlord_3"            "+100"
       }
-      "05"
+      "axe_slow_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "axe_slow_duration"                               "2.5 3 3.5 4 5.5 7.0"
+        "value"                                           "2.5 3 3.5 4 4 4"
+        "special_bonus_unique_troll_warlord_whirling_axes_debuff_duration"  "+2.5"
       }
-      "06"
+      "movement_speed"                                    "40"
+      "axe_spread"                                        "25"
+      "axe_count"                                         "5"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "40"
+        "value"                                           "9"
+        "special_bonus_scepter"                           "-5"
+        "RequiresScepter"                                 "1"
       }
-      "07"
+      "AbilityManacost"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "axe_spread"                                      "25"
+        "value"                                           "60"
+        "special_bonus_scepter"                           "-30"
+        "RequiresScepter"                                 "1"
       }
-      "08"
+      "pierces_magic_immunity"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "axe_count"                                       "5"
+        "value"                                           "0"
+        "special_bonus_unique_troll_warlord_6"            "+1"
       }
     }
   }

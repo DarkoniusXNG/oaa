@@ -8,31 +8,32 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                                           "ability_lua"
-    "ID"                                                  "9501"
+    "ScriptFile"                                          "abilities/sohei/sohei_flurry_of_blows.lua"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
+    "AbilityTextureName"                                  "custom/ronin_flurry_of_blows"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES" // DOTA_ABILITY_BEHAVIOR_CHANNELLED
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY" // this is for UI tooltip
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" // this is for UI tooltip
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES" // this is for UI tooltip
-    "AbilityTextureName"                                  "custom/ronin_flurry_of_blows"
-    "ScriptFile"                                          "abilities/sohei/sohei_flurry_of_blows.lua"
+
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.0" // old: 1.0
-    "AbilityCastRange"                                    "400"
+    "AbilityCastPoint"                                    "0.7" // old: 1.0
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
-    "AnimationPlaybackRate"                               "2"
+    "AnimationPlaybackRate"                               "2.5"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "10" // old: 75
+    "AbilityCooldown"                                     "90"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50" // old: 150
+    "AbilityManaCost"                                     "100 150 200 250 300"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
@@ -45,38 +46,36 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "flurry_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "flurry_radius"                                   "450"
-        "LinkedSpecialBonus"                              "special_bonus_sohei_fob_radius"
+        "value"                                           "450"
+        //"special_bonus_unique_sohei_4_oaa"                "+250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02" // unused KV
+      "max_attacks"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_attacks"                                     "6 10 12 14 18"
+        "value"                                           "6 9 12 15 18"
+        "special_bonus_unique_sohei_8_oaa"                "+6"
       }
-      "03" // unused KV
+      "max_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "max_duration"                                    "3.0 4.0 5.0 5.5 6.0"
+        "value"                                           "2.5 3.5 4.5 5.5 6" // min is: (max_attacks + 1) * attack_interval
+        "special_bonus_unique_sohei_8_oaa"                "+1.8"
       }
-      "04" // unused KV
+      "attack_interval"                                   "0.3"
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "attack_interval"                                 "0.4"
+        "value"                                           "20 30 40 50 60"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
-      "05"
+      "heal_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "120 175 230 460 920"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "delay"                                           "1.0"
+        "value"                                           "0"
+        "special_bonus_facet_sohei_monk"                  "=160 =170 =180 =190 =200"
+        "RequiresFacet"                                   "sohei_monk"
       }
     }
   }

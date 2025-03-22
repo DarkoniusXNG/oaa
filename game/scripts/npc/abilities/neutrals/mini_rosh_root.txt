@@ -1,0 +1,32 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Mini Rosh: Root - roots and damages the attacked unit
+  //=================================================================================================================
+  "mini_rosh_root"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/neutrals/oaa_mini_rosh_root.lua"
+    "AbilityTextureName"                                  "roshan_bash"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+    "IsBreakable"                                         "1"
+
+    "MaxLevel"                                            "4"
+
+    "AbilityCooldown"                                     "2.0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "root_chance"                                       "17 20 23 26"
+      "bonus_damage"                                      "30 60 120 240"
+      "root_duration"                                     "1.65"
+    }
+  }
+}

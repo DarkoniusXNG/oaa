@@ -11,14 +11,7 @@ local function SafeTeleport(unit, location, maxDistance)
     if ability and ability:IsActivated() then
       unit:CastAbilityNoTarget(ability, unit:GetPlayerOwnerID())
     else
-      print("Error: Could not find Consume ability on an Infesting unit")
-      D2CustomLogging:sendPayloadForTracking(D2CustomLogging.LOG_LEVEL_INFO, "COULD NOT FIND CONSUME ABILITY", {
-        ErrorMessage = "Tried to teleport an Infesting unit, but could not find Consume ability on that unit, or ability was not castable",
-        ErrorTime = GetSystemDate() .. " " .. GetSystemTime(),
-        GameVersion = GAME_VERSION,
-        DedicatedServers = (IsDedicatedServer() and 1) or 0,
-        MatchID = tostring(GameRules:GetMatchID())
-      })
+      print("Error: Tried to teleport an Infesting unit, but could not find Consume ability on that unit, or ability was not castable")
     end
   end
   if unit:FindModifierByName("modifier_life_stealer_assimilate_effect") then
@@ -27,20 +20,12 @@ local function SafeTeleport(unit, location, maxDistance)
     if ability and ability:IsActivated() then
       unit:CastAbilityNoTarget(ability, unit:GetPlayerOwnerID())
     else
-      print("Error: Could not find Eject ability on an Assimilating unit")
-      D2CustomLogging:sendPayloadForTracking(D2CustomLogging.LOG_LEVEL_INFO, "COULD NOT FIND EJECT ABILITY", {
-        ErrorMessage = "Tried to teleport an Assimilating unit, but could not find Eject ability on that unit, or ability was not castable",
-        ErrorTime = GetSystemDate() .. " " .. GetSystemTime(),
-        GameVersion = GAME_VERSION,
-        DedicatedServers = (IsDedicatedServer() and 1) or 0,
-        MatchID = tostring(GameRules:GetMatchID())
-      })
+      print("Error: Tried to teleport an Assimilating unit, but could not find Eject ability on that unit, or ability was not castable")
     end
   end
   local exileModifiers = {
     "modifier_obsidian_destroyer_astral_imprisonment_prison",
     --"modifier_riki_tricks_of_the_trade_phase", -- Should be removed by stop order
-    -- "modifier_sohei_flurry_self", -- Bugs out hard if it occurs during casting. TODO: Update after PR #2025
     --"modifier_puck_phase_shift", -- Should be removed by stop order
     "modifier_phoenix_supernova_hiding",
     "modifier_shadow_demon_disruption",
@@ -60,45 +45,64 @@ local function SafeTeleport(unit, location, maxDistance)
     end
     local distance = (location - unit:GetAbsOrigin()):Length2D()
     if distance > maxDistance then
-      SafeTeleport(unit, location, maxDistance)
+      SafeTeleport(unit, location, maxDistance+50)
+      -- Increase the maxDistance by 50 to eventually stop and not cause the infinite loop
+      -- This should stop the infinite glitching of the hero
     end
   end)
 end
 
-local function SafeTeleportAll(mainUnit, location, maxDistance)
+local function CheckIfUnitIsValidForTeleport(unit)
+  if not unit or unit:IsNull() then
+    print("Duel Teleport: CheckIfUnitIsValidForTeleport is called for the entity that doesn't exist.")
+    return false
+  end
+  if unit.IsBaseNPC == nil or unit.HasModifier == nil or unit.GetUnitName == nil then
+    print("Duel Teleport: CheckIfUnitIsValidForTeleport is called for the invalid entity.")
+    return false
+  end
+  local name = unit:GetUnitName()
+  local valid_name = name ~= "npc_dota_custom_dummy_unit" and name ~= "npc_dota_elder_titan_ancestral_spirit" and name ~= "aghsfort_mars_bulwark_soldier"
+  local not_thinker = not unit:HasModifier("modifier_oaa_thinker") and not unit:IsPhantomBlocker()
+
+  return not unit:IsCourier() and not unit:IsZombie() and unit:HasMovementCapability() and not_thinker and valid_name
+end
+
+local function SafeTeleportAll(mainUnit, location, maxDistance, resetAbilities)
+  -- Teleport the main hero first
   SafeTeleport(mainUnit, location, maxDistance)
-  local playerAdditionalUnits
+
+  local playerAdditionalUnits = {} -- mainUnit:GetAdditionalOwnedUnits() or {}
   -- GetAdditionalOwnedUnits is unsuitable here as it apparently only returns hero-like units, like Lone Druid's Bear and such.
   -- It definitely does not return most normal unit summons, including Necronomicon and Broodmother Spiderlings.
-  -- if mainUnit.GetAdditionalOwnedUnits then
-  --   playerAdditionalUnits = mainUnit:GetAdditionalOwnedUnits() or {} -- assign empty table instead of nil so iter can be called without errors
-  -- else
-  playerAdditionalUnits = FindUnitsInRadius(mainUnit:GetTeam(),
-                                            mainUnit:GetAbsOrigin(),
-                                            nil,
-                                            FIND_UNITS_EVERYWHERE,
-                                            DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-                                            bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
-                                            DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED,
-                                            FIND_ANY_ORDER,
-                                            false)
-  playerAdditionalUnits = playerAdditionalUnits or {} -- assign empty table instead of nil so iter can be called without errors
-  playerAdditionalUnits = iter(playerAdditionalUnits):filter(function (unit)
-    return unit:GetPlayerOwnerID() == mainUnit:GetPlayerOwnerID() and (not unit:IsCourier())
-  end)
-  -- end
+
+  playerAdditionalUnits = FindUnitsInRadius(
+    mainUnit:GetTeam(),
+    mainUnit:GetAbsOrigin(),
+    nil,
+    FIND_UNITS_EVERYWHERE,
+    DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+    bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
+    bit.bor(DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD),
+    FIND_ANY_ORDER,
+    false
+  )
 
   iter(playerAdditionalUnits)
-    :filter(CallMethod("HasMovementCapability"))
+    :filter(function (unit)
+      return unit ~= mainUnit and CheckIfUnitIsValidForTeleport(unit) and unit:GetPlayerOwnerID() == mainUnit:GetPlayerOwnerID()
+    end)
     :foreach(function (unit)
       SafeTeleport(unit, location, maxDistance)
+
+      unit:ResetUnitOAA(resetAbilities)
     end)
 end
 
 -- Test SafeTeleport function
 local function TestSafeTeleport(keys)
   local hero = PlayerResource:GetSelectedHeroEntity(keys.playerid)
-  SafeTeleportAll(hero, Vector(0, 0, 0), 150)
+  SafeTeleportAll(hero, Vector(0, 0, 0), 150, true)
 end
 
 ChatCommand:LinkDevCommand("-test_tp", TestSafeTeleport, nil)

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "7307"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
@@ -18,27 +17,15 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "chance_pct"                                        "17"
+      "duration"                                          "3.5 4 4.5 5 5.5 6"
+      "attack_slow"                                       "40 80 120 160 320 480"
+      "armor"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "chance_pct"                                      "17"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2 2.5 3 3.5 4 5" //OAA, for picking screen tooltip
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow"                                            "35"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "armor"                                           "3 4 5 6 8 10"
+        "value"                                           "3 5 7 9 13 21"
+        "special_bonus_unique_pangolier_luckyshot_armor"  "+4"
       }
     }
   }

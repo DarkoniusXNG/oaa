@@ -7,13 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5015"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES" // OAA, Valve has it wrong (SPELL_IMMUNITY_ENEMIES_YES doesn't make sense if you can target only allies)
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -21,48 +20,49 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.2"
+    "AbilityCastPoint"                                    "0.2" // Valve DOTA_ABILITY_BEHAVIOR_IMMEDIATE overrides this afaik
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "25"
+    "AbilityManaCost"                                     "0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14 12 10 8 7 6"
+    "AbilityCooldown"                                     "14 12 10 8 8 8"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.1"  // Primarily about the damage
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "8"
+      "attack_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "8"
+        "value"                                           "60 90 120 150 180 210"
+        "special_bonus_unique_bloodseeker_5"              "+25"
       }
-      "02"
+      "spell_amp"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_speed"                                    "50 80 110 140 170 200"
-        "LinkedSpecialBonus"                              "special_bonus_unique_bloodseeker_5"
+        "value"                                           "15 20 25 30 35 40"
+        "special_bonus_unique_bloodseeker_6"              "+15"
       }
-      "03"
+      "damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "spell_amp"                                       "15 20 25 30 35 40"
+        "value"                                           "1.4"
+        "special_bonus_unique_bloodseeker"                "-0.7"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PURE"
       }
-      "04"
+      "max_health_dmg_pct" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_pct"                                      "2.2" //OAA, there is no need to scale this Valve...
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+2.0"
+      }
+      "thirst_threshold_bonus"
+      {
+        "value"                                           "0"
       }
     }
   }

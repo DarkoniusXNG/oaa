@@ -7,14 +7,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3347"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -24,7 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_giant_form;item_upgrade_core_4"
-      "02"                                                "item_hurricane_pike_4;item_upgrade_core_4"
     }
   }
 
@@ -35,100 +34,65 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3349"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/transformation/giant_form.lua"
+    "ScriptFile"                                          "items/giant_form.lua"
+    "AbilityTextureName"                                  "custom/giant_form_2"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
-    "AbilityTextureName"                                  "custom/giant_form_2"
-    "AbilityCastPoint"                                    "0.0"
-    "AbilityManaCost"                                     "0"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "AbilityManaCost"                                     "50"
     "AbilityCooldown"                                     "16"
+    "AbilitySharedCooldown"                               "giant_form"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "37525"
+    "ItemCost"                                            "34004"
     "ItemShopTags"                                        "damage"
     "ItemQuality"                                         "artifact"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemAliases"                                         "siege mode 2;siege 2;giant form;giant"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemAliases"                                         "giant form;giant"
+
     "MaxUpgradeLevel"                                     "2"
     "ItemBaseLevel"                                       "2"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage"                                      "150 200"
+      "bonus_health_regen"                                "17 20"
+      "bonus_attack_range_melee"                          "50 100" // doesn't work on ranged heroes
+      "cleave_percent"                                    "55 60" // doesn't work on ranged heroes
+      "cleave_starting_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "50 70"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "cleave_ending_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "50 70"
+        "value"                                           "360"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "cleave_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "base_attack_range"                               "170 180"
+        "value"                                           "650"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "giant_attack_damage"                               "100"
+      "giant_primary_attribute_bonus"                     "55 75"
+      "giant_attack_speed_reduction"                      "35" // percentage attack speed reduction
+      "giant_splash_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "giant_attack_range"                              "500"
+        "value"                                           "650"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "giant_damage_bonus"                              "400 500"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "giant_attack_rate"                               "0.7"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "giant_cast_range"                                "0"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "giant_aoe"                                       "300"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "giant_splash"                                    "150"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "giant_move_speed"                                "290"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "giant_scale"                                     "40"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
-    }
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
-    "precache"
-    {
-      "particle"                                          "particles/units/heroes/hero_oracle/oracle_fortune_purge_root_pnt.vpcf"
-      "particle"                                          "particles/econ/items/clockwerk/clockwerk_paraflare/clockwerk_para_rocket_flare_explosion.vpcf"
+      "giant_splash_damage"                               "250" // splash percent, doesn't work on ranged heroes
+      "giant_scale"                                       "50"
+      "duration"                                          "8.0"
     }
   }
 }

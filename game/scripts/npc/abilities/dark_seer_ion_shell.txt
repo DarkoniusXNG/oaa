@@ -7,15 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5256"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY" // OAA
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO | DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -23,8 +21,8 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
-    "AbilityCastPoint"                                    "0.4"
+    "AbilityCastRange"                                    "800"
+    "AbilityCastPoint"                                    "0.2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -34,35 +32,35 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "100 110 120 130 140 150"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.0"  // just does damage
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "250"
-        "LinkedSpecialBonus"                              "special_bonus_unique_dark_seer_5"
+        "value"                                           "275"
+        "special_bonus_unique_dark_seer_5"                "+65"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "damage_per_second" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "24 46 68 90 180 360"
-        "LinkedSpecialBonus"                              "special_bonus_unique_dark_seer"
+        "value"                                           "25 40 55 70 140 280"
+        "special_bonus_unique_dark_seer"                  "+85"
       }
-      "03"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "25"
+        "value"                                           "21 24 27 30 33 36"
       }
-      "04"
+      "tick_interval"                                     "0.2"
+      "AbilityCharges"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.1"
+        "value"                                           "0"
+        "special_bonus_unique_dark_seer_14"               "+2"
+      }
+      "bonus_health"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_dark_seer_6"                "+250"
       }
     }
   }

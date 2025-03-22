@@ -7,9 +7,9 @@ BAREBONES_VERSION = "1.00"
 BAREBONES_DEBUG_SPEW = false
 
 if GameMode == nil then
-    DebugPrint( '[BAREBONES] creating barebones game mode' )
-    print("Lua Version: " .. _VERSION)
-    GameMode = class({})
+  DebugPrint( '[BAREBONES] creating barebones game mode' )
+  print("Lua Version: " .. _VERSION)
+  GameMode = class({})
 end
 
 -- functional library, sugar for excellent code. this should be usable in any library, so we include it first
@@ -21,38 +21,20 @@ require('libraries/event')
 
 -- This library allow for easily delayed/timed actions
 require('libraries/timers')
--- This library can be used for advancted physics/motion/collision of units.  See PhysicsReadme.txt for more information.
---require('libraries/physics')
--- This library can be used for advanced 3D projectile systems.
---require('libraries/projectiles')
 -- This library can be used for sending panorama notifications to the UIs of players/teams/everyone
 require('libraries/notifications')
 -- This library can be used for starting customized animations on units from lua
 require('libraries/animations')
--- This library can be used for performing "Frankenstein" attachments on units
---require('libraries/attachments')
 -- This library can be used to synchronize client-server data via player/client-specific nettables
 require('libraries/playertables')
--- This library can be used to create container inventories or container shops
-require('libraries/containers')
--- This library provides a searchable, automatically updating lua API in the tools-mode via "modmaker_api" console command
---require('libraries/modmaker')
--- This library provides an automatic graph construction of path_corner entities within the map
---require('libraries/pathgraph')
--- This library (by Noya) provides player selection inspection and management from server lua
-require('libraries/selection')
 -- Helpful math functions from the internet
 require('libraries/math')
 -- chat command registry made easy
 require('libraries/chatcommand')
 -- extension functions to PlayerResource
 require('libraries/playerresource')
--- Extensions to CDOTA_BaseNPC
-require('libraries/basenpc')
 -- Extensions to CDOTA_BaseNPC_Hero
 require('libraries/basehero')
--- extension functions to GameRules
-require('libraries/gamerules')
 -- Pseudo-random distribution C constant calculator
 require('libraries/cfinder')
 -- Library for handling buildings (OAA custom or DOTA original)
@@ -73,8 +55,6 @@ require('events')
 
 -- load components
 require('components/index')
-
---require("examples/worldpanelsExample")
 
 --[[
   This function should be used to set up Async precache calls at the beginning of the gameplay.
@@ -126,23 +106,7 @@ end
   The hero parameter is the hero entity that just spawned in
 ]]
 function GameMode:OnHeroInGame(hero)
-  --DebugPrint("[BAREBONES] Hero spawned in game for first time -- " .. hero:GetUnitName())
-  -- This line for example will set the starting gold of every hero to 500 unreliable gold
-  --hero:SetGold(500, false)
 
-  -- These lines will create an item and add it to the player, effectively ensuring they start with the item
-  -- local item = CreateItem("item_example_item", hero, hero)
-  -- hero:AddItem(item)
-
-  --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
-    --with the "example_ability" ability
-
-  local abil = hero:GetAbilityByIndex(1)
-  hero:RemoveAbility(abil:GetAbilityName())
-  hero:AddAbility("example_ability")]]
-end
-
-function GameMode:OnStrategyTime()
 end
 
 function GameMode:OnPreGame()
@@ -154,7 +118,6 @@ function GameMode:OnPreGame()
   InitModule(ZoneControl)
   InitModule(AbilityLevels)
   InitModule(HeroProgression)
-  InitModule(SellBlackList)
   InitModule(Glyph)
   InitModule(BubbleOrbFilter)
   InitModule(BossProtectionFilter)
@@ -166,12 +129,14 @@ function GameMode:OnPreGame()
   InitModule(EntityStatProvider)
   InitModule(RespawnManager)
   InitModule(BountyRunePick)
-  --InitModule(WispProjectileFilter)
+  InitModule(ModifyAbilitiesFilter)
   InitModule(HudTimer)
   InitModule(Duels)
   InitModule(DuelRunes)
   InitModule(PlayerConnection)
   InitModule(ProtectionAura)
+  InitModule(CustomRuneSystem)
+  InitModule(StatTracker)
 
   CheckCheatMode()
 end
@@ -195,17 +160,21 @@ function GameMode:OnGameInProgress()
   InitModule(FinalDuel)
   --InitModule(StatusResistance)
   InitModule(SaveLoadState)
-  InitModule(Runes)
+  InitModule(PassiveExperience)
 
-  -- xpm stuff
-  LinkLuaModifier( "modifier_xpm_thinker", "modifiers/modifier_xpm_thinker.lua", LUA_MODIFIER_MOTION_NONE )
-  CreateModifierThinker( nil, nil, "modifier_xpm_thinker", {}, Vector( 0, 0, 0 ), DOTA_TEAM_NEUTRALS, false )
+  -- valve is a really great company that totally cares about custom game mode creators and it's a breath of fresh air
+  GameRules:SetTimeOfDay( 0.251 )
 end
 
 function InitModule(myModule)
   if myModule ~= nil then
-    local status, err = pcall(function ()
+    if myModule.initialized == true then
+      print("Module "..tostring(myModule.moduleName).." is already initialized and there was an attempt to initialize it again -> preventing")
+      return
+    end
+    local status, err = pcall(function () --luacheck: ignore status
       myModule:Init()
+      myModule.initialized = true
     end)
     if err then
       local info = debug.getinfo(2, "Sl")
@@ -228,7 +197,6 @@ local OnInitGameModeEvent = CreateGameEvent('OnInitGameMode')
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
-  GameMode = self
   DebugPrint('[BAREBONES] Starting to load Barebones gamemode...')
 
   InitModule(Components)
@@ -237,33 +205,29 @@ function GameMode:InitGameMode()
   InitModule(Bottlepass)
   InitModule(Courier)
   --InitModule(StartingItems)
+  InitModule(OAAOptions)
   InitModule(HeroSelection)
   InitModule(ChatCommand)
   InitModule(DevCheats)
   --InitModule(VectorTarget)
+  InitModule(CorePointsManager)
+  InitModule(TeamVision)
+  InitModule(CustomTalentSystem)
+  InitModule(CustomWardButtons)
+  InitModule(HeroCosmetics)
 
   -- Increase maximum owned item limit
   Convars:SetInt('dota_max_physical_items_purchase_limit', 64)
 
-  -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  -- Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+  -- Change spectating delay
+  if GetMapName() ~= "captains_mode" then
+    Convars:SetInt('tv_delay', 60)
+  end
+
+  -- Reduce taunt secondary cooldown
+  Convars:SetFloat('dota_taunt_second_cooldown', 13)
 
   DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
 
   OnInitGameModeEvent()
 end
-
--- This is an example console command
--- function GameMode:ExampleConsoleCommand()
---   print( '******* Example Console Command ***************' )
---   local cmdPlayer = Convars:GetCommandClient()
---   if cmdPlayer then
---     local playerID = cmdPlayer:GetPlayerID()
---     if playerID ~= nil and playerID ~= -1 then
---       -- Do something here for the player who called this command
---       PlayerResource:ReplaceHeroWith(playerID, "npc_dota_hero_viper", 1000, 1000)
---     end
---   end
-
---   print( '*********************************************' )
--- end

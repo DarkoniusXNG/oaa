@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5014"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
@@ -21,41 +20,46 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "425 500 575 650 725 800"
+    "AbilityCastRange"                                    "550 600 650 700 750 800"
     "AbilityCastPoint"                                    "0.4"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "22 19 16 13 13 13"
-    "AbilityDuration"                                     "4.0 5.0 6.0 7.0 8.0 9.0"
+    "AbilityDuration"                                     "3.5 4.5 5.5 6.5 7.0 7.5"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "165"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Applies two modifiers
+    "AbilityManaCost"                                     "120 130 140 150 160 170"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "nightmare_invuln_time"                             "1.0"
+      "animation_rate"                                    "0.2"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "nightmare_invuln_time"                           "1.0"
+        "value"                                           "18 17 16 15 15 15"
+        "special_bonus_unique_bane_5"                     "-3"
       }
-      "02"
+      "bonus_attack_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0 5.0 6.0 7.0 8.0 9.0"
+        "value"                                           "0"
+        "special_bonus_facet_bane_dream_stalker"          "40 60 80 100 120 140"
       }
-      "03"
+      "is_vector_targeted"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "animation_rate"                                  "0.2"
+        "value"                                           "0"
+        "special_bonus_facet_bane_sleepwalk"              "+1"
       }
+      "vector_render_distance"                            "600"
+      "vector_render_radius"                              "120"
+      "walk_speed"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_bane_sleepwalk"              "+110"
+      }
+      "turn_rate"                                         "200"
     }
   }
 }

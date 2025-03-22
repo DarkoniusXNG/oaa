@@ -5,18 +5,19 @@
   //=================================================================================================================
   "item_recipe_satanic_3"
   {
-    "ID"                                                  "3159"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
+
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
+
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_satanic_3"
     "ItemRequirements"
     {
       "01"                                                "item_satanic_2;item_upgrade_core_2"
-      "02"                                                "item_mask_of_madness_2;item_upgrade_core_2"
     }
   }
 
@@ -27,70 +28,42 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3163"    // unique ID
     "BaseClass"                                           "item_satanic"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "FightRecapLevel"                                     "2"
     "AbilityTextureName"                                  "custom/satanic_3"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "35.0"
+    "AbilityCooldown"                                     "25"
     "AbilitySharedCooldown"                               "satanic"
+    "AbilityManaCost"                                     "50"
 
     // Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
-
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "3"
     "UpgradesItems"                                       "item_satanic_3;item_satanic_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "10800"
-    "ItemShopTags"                                        "damage;str;armor;unique;hard_to_tag"
+    "ItemCost"                                            "10052"
+    "ItemShopTags"                                        "damage;str;unique;hard_to_tag"
     "ItemQuality"                                         "artifact"
     "ItemAliases"                                         "satanic 3"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "25 35 50 70 95"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "25 35 55 85 125"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "lifesteal_percent"                               "25 30 35 40 45"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "unholy_lifesteal_percent"                        "175 170 165 160 155"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "unholy_lifesteal_total_tooltip"                  "200"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "unholy_duration"                                 "5.0"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "status_resistance"                               "22 24 26 28 30" //OAA
-			}
+      "bonus_strength"                                    "25 30 40 55 75"
+      "bonus_damage"                                      "25 35 55 85 125"
+      "lifesteal_percent"                                 "30 35 40 45 50"
+      "unholy_lifesteal_percent"                          "150"
+      "unholy_lifesteal_total_tooltip"                    "180 185 190 195 200"
+      "unholy_duration"                                   "6.0"
     }
   }
 }

@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=================================================================================================================
   // Legion Commander: Duel
   //=================================================================================================================
@@ -8,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5598"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
@@ -16,56 +14,61 @@
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "150"
     "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "50.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "3.0"  // Value much higher than cost.
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5.0 5.5 6.0 6.5 7.0" //OAA
+        "value"                                           "4.0 4.5 5.0 5.75 6.5"
+        "special_bonus_scepter"                           "+2.0"
       }
-      "02"
+      "AbilityCastRange" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_scepter"                                "6 7 8 9 10"
-        "RequiresScepter"                                 "1"
+        "value"                                           "200 250 300 350 400"
       }
-      "03"
+      "reward_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "reward_damage"                                   "12 24 36 48 60" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_legion_commander"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "10 20 30 50 70"
+        "special_bonus_shard"                             "+10"
       }
-      "04"
+      "assist_reward_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "victory_range"                                   "600"
-			}
+        "value"                                           "0"
+        "special_bonus_facet_legion_commander_spoils_of_war"  "5 10 15 20 25"
+      }
+      "debuff_immunity"
+      {
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+1"
+      }
+      "damage_reduction_pct"
+      {
+        "value"                                           "0"
+      }
+      //"victory_range"                                     "600"
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "50"
+      }
+      "shard_duel_damage_bonus" //OAA
+      {
+        "value"                                           "10"
+        "RequiresShard"                                   "1"
+      }
     }
   }
 }

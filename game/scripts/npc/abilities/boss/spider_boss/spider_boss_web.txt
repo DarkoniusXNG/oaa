@@ -1,0 +1,22 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Spider Web - unused
+  //=================================================================================================================
+  "spider_web"
+  {
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "broodmother_spin_web"
+    "ScriptFile"                                          "abilities/boss/spider_boss/spider_web.lua"
+
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "radius"                                            "900"
+    }
+  }
+}

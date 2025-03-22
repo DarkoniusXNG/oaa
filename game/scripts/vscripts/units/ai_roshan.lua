@@ -14,7 +14,11 @@ function Spawn( entityKeyValues )
 end
 
 function RoshanThink()
-  if GameRules:IsGamePaused() == true or GameRules:State_Get() == DOTA_GAMERULES_STATE_POST_GAME or thisEntity:IsAlive() == false then
+  if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME or not IsValidEntity(thisEntity) or not thisEntity:IsAlive() then
+    return -1
+  end
+
+  if GameRules:IsGamePaused() then
     return 1
   end
 
@@ -31,13 +35,20 @@ function RoshanThink()
     thisEntity.initialized = true
   end
 
+  local function IsNonHostileWard(entity)
+    if entity.HasModifier then
+      return entity:HasModifier("modifier_item_buff_ward") or entity:HasModifier("modifier_ward_invisibility")
+    end
+    return false
+  end
+
   local function FindNearestAttackableUnit(thisEntity)
     local nearby_enemies = FindUnitsInRadius(thisEntity:GetTeamNumber(), thisEntity.spawn_position, nil, SIMPLE_BOSS_LEASH_SIZE, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, bit.bor(DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE), FIND_CLOSEST, false)
     if #nearby_enemies ~= 0 then
       for i = 1, #nearby_enemies do
         local enemy = nearby_enemies[i]
         if enemy and not enemy:IsNull() then
-          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not enemy:HasModifier("modifier_item_buff_ward") and not enemy:IsCourier() then
+          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not IsNonHostileWard(enemy) and not enemy:IsCourier() then
             return enemy
           end
         end
@@ -48,7 +59,7 @@ function RoshanThink()
       for i = 1, #nearby_enemies do
         local enemy = nearby_enemies[i]
         if enemy and not enemy:IsNull() then
-          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not enemy:HasModifier("modifier_item_buff_ward") and not enemy:IsCourier() and enemy:GetAttackRange() > SIMPLE_BOSS_LEASH_SIZE and (enemy:GetAbsOrigin() - thisEntity.spawn_position):Length2D() < 2*SIMPLE_BOSS_LEASH_SIZE then
+          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not IsNonHostileWard(enemy) and not enemy:IsCourier() and enemy:GetAttackRange() > SIMPLE_BOSS_LEASH_SIZE and (enemy:GetAbsOrigin() - thisEntity.spawn_position):Length2D() < 2*SIMPLE_BOSS_LEASH_SIZE then
             return enemy
           end
         end
@@ -76,9 +87,13 @@ function RoshanThink()
     return 1
   end
 
+  local current_hp_pct = thisEntity:GetHealth() / thisEntity:GetMaxHealth()
+  local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT / 100
+
   if thisEntity.state == SIMPLE_AI_STATE_IDLE then
-    local current_hp_pct = thisEntity:GetHealth()/thisEntity:GetMaxHealth()
-    local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT/100
+    -- Remove debuff protection
+    thisEntity:RemoveModifierByName("modifier_anti_stun_oaa")
+    -- Check boss hp
     if current_hp_pct < aggro_hp_pct then
       -- Issue an attack-move command towards the nearast unit that is attackable and assign it as aggro_target.
       -- Because of attack priorities (wards have the lowest attack priority) aggro_target will not always be
@@ -115,7 +130,6 @@ function RoshanThink()
 
     -- Check if aggro_target exists
     if thisEntity.aggro_target then
-      --print(thisEntity.aggro_target:GetUnitName())
       -- Check if aggro_target is getting deleted soon from c++
       if thisEntity.aggro_target:IsNull() then
         thisEntity.aggro_target = nil
@@ -135,8 +149,6 @@ function RoshanThink()
         end
       end
       -- Check HP of the boss
-      local current_hp_pct = thisEntity:GetHealth()/thisEntity:GetMaxHealth()
-      local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT/100
       if current_hp_pct > aggro_hp_pct then
         thisEntity.aggro_target = nil
       end
@@ -145,9 +157,7 @@ function RoshanThink()
         thisEntity.aggro_target = nil
       end
     else
-      -- Check HP of the boss and if its able to attack
-      local current_hp_pct = thisEntity:GetHealth()/thisEntity:GetMaxHealth()
-      local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT/100
+      -- Check HP of the boss
       if current_hp_pct < aggro_hp_pct then
         AttackNearestTarget(thisEntity)
       end
@@ -157,16 +167,36 @@ function RoshanThink()
       end
     end
 
-    local enemies = FindUnitsInRadius(thisEntity:GetTeamNumber(), thisEntity:GetAbsOrigin(), nil, 350, DOTA_UNIT_TARGET_TEAM_ENEMY, bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC), DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-    if thisEntity.slam_ability and thisEntity.slam_ability:IsFullyCastable() and #enemies > 2 then
-      ExecuteOrderFromTable({
-        UnitIndex = thisEntity:entindex(),
-        OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET,
-        AbilityIndex = thisEntity.slam_ability:entindex(),
-        Queue = false,
-      })
+    if thisEntity.slam_ability and thisEntity.slam_ability:IsFullyCastable() then
+      local ability = thisEntity.slam_ability
+      local radius = ability:GetSpecialValueFor("radius")
+      local enemies = FindUnitsInRadius(
+        thisEntity:GetTeamNumber(),
+        thisEntity:GetAbsOrigin(),
+        nil,
+        radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+        FIND_ANY_ORDER,
+        false
+      )
+      if #enemies > 2 then
+        thisEntity:DispelWeirdDebuffs()
+
+        ExecuteOrderFromTable({
+          UnitIndex = thisEntity:entindex(),
+          OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET,
+          AbilityIndex = ability:entindex(),
+          Queue = false,
+        })
+
+        return ability:GetCastPoint() + 0.1
+      end
     end
   elseif thisEntity.state == SIMPLE_AI_STATE_LEASH then
+    -- Add Debuff Protection when leashing
+    thisEntity:AddNewModifier(thisEntity, nil, "modifier_anti_stun_oaa", {})
     -- Actual leashing
     thisEntity:MoveToPosition(thisEntity.spawn_position)
     -- Check if boss reached the spawn_position
@@ -177,5 +207,6 @@ function RoshanThink()
       thisEntity.state = SIMPLE_AI_STATE_IDLE
     end
   end
+
   return 1
 end

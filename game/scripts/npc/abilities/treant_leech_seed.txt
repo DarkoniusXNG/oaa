@@ -5,17 +5,15 @@
   //=================================================================================================================
   "treant_leech_seed"
   {
-    "ID"                                                  "5435"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
-    "AbilityCastPoint"                                    "0.4"
-    "AbilityCastRange"                                    "400"
-    "FightRecapLevel"                                     "1"
+    "AbilityCastPoint"                                    "0.3"
+    "AbilityCastRange"                                    "400 450 500 550 600 650"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -23,47 +21,45 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "18 16 14 12 11 10"
+    "AbilityCooldown"                                     "15 14 13 12 11 10" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "110 120 130 140 150 160"
+    "AbilityManaCost"                                     "80 90 100 110 120 130"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-     "01"
+      "damage_interval"                                   "1"
+      "leech_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_interval"                                 "1"
+        "value"                                           "18 35 52 69 138 276"
+        "special_bonus_unique_treant_2"                   "+60"
       }
-      "02"
+      "movement_slow" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "leech_damage"                                    "16 32 48 64 128 256"
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_2"
+        "value"                                           "-15 -20 -25 -30 -35 -40"
+        "special_bonus_unique_treant_3"                   "-20"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_slow"                                   "-8 -14 -20 -26 -32 -38"
+        "value"                                           "650"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "duration"                                          "5.0"
+      "projectile_speed"                                  "450"
+      "can_target_ground"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "650"
+        "value"                                           "0"
+        "special_bonus_facet_treant_sapling"              "=1"
       }
-      "06"
+      "creep_damage_reduction_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5.0"
+        "value"                                           "0"
+        "special_bonus_facet_treant_sapling"              "=50"
       }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "450"
-      }
+      "creep_heal_reduction_pct"                          "50"
     }
   }
 }

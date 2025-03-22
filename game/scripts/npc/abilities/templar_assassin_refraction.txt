@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5194"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
@@ -23,38 +22,48 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "17.0"
+    "AbilityCooldown"                                     "16.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
+    "AbilityManaCost"                                     "85"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "instances"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "instances"                                       "3 4 5 6 7 8"
-        "LinkedSpecialBonus"                              "special_bonus_unique_templar_assassin"
+        "value"                                           "2 3 4 5 6 7"
+        "special_bonus_unique_templar_assassin"           "+3"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "02"
+      "shield_per_instance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "25 50 75 100 150 250"
+        "value"                                           "30 30 30 30 60 90"
       }
-      "03"
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_threshold"                                "5"
+        "value"                                           "20 40 60 80 160 240"
+        "special_bonus_unique_templar_assassin_refraction_damage"  "+40"
       }
-      "04"
+      "bonus_damage_per_instance_burn"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "17.0"
+        "special_bonus_facet_templar_assassin_refractor"  "+1"
+      }
+      "duration"
+      {
+        "value"                                           "17"
+      }
+      "cast_while_disabled"
+      {
+        "special_bonus_unique_templar_assassin_refraction_disable_cast"  "+1"
+      }
+      "dispels"
+      {
+        "special_bonus_unique_templar_assassin_4"         "+1"
       }
     }
   }
-
 }

@@ -7,28 +7,23 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5648"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES" //OAA, Valve has extra space
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "1"
 
-    "IsGrantedByScepter"                                  "1"
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "125"
+    "AbilityCastRange"                                    "200" //OAA
     "AbilityCastPoint"                                    "0.2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "45"
+    "AbilityCooldown"                                     "30" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -36,26 +31,20 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "2.4"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3"
-        "RequiresScepter"                                 "1"
+        "value"                                           "450"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "aoe"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage"                                          "300"
-        "RequiresScepter"                                 "1"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "aoe"                                             "300"
-        "RequiresScepter"                                 "1"
-      }
+      "ally_cast_range"                                   "500"
     }
   }
 }

@@ -1,5 +1,3 @@
-LinkLuaModifier("modifier_intrinsic_multiplexer", "modifiers/modifier_intrinsic_multiplexer.lua", LUA_MODIFIER_MOTION_NONE)
-
 require('libraries/fun')()
 
 modifier_intrinsic_multiplexer = class(ModifierBaseClass)
@@ -54,7 +52,7 @@ function modifier_intrinsic_multiplexer:CreateModifiers()
   end
   local caster = self:GetCaster()
   local ability = self:GetAbility()
-  if ability == nil or ability:IsNull() then
+  if not ability or ability:IsNull() then
     -- sometimes we create modifiers that don't have abilities and i don't know why yet
     return
   end

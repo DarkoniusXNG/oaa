@@ -1,0 +1,60 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Alchemist: Chemical Rage (OAA ability that improves vanilla ability)
+  //=================================================================================================================
+  "alchemist_chemical_rage_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/oaa_alchemist_chemical_rage.lua"
+    "AbilityTextureName"                                  "alchemist_chemical_rage"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
+
+    "HasScepterUpgrade"                                   "1"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0.0"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "60 55 50 45 40"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "50 75 100 125 150"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "duration"                                          "30.0"
+      "transformation_time"                               "0.35"
+      "base_attack_time"
+      {
+        "value"                                           "1.2 1.15 1.1 1.05 1.0"
+        "special_bonus_unique_alchemist_8"                "-0.1"
+      }
+      "bonus_health"                                      "0"
+      "bonus_health_regen"
+      {
+        "value"                                           "60 110 160 260 360"
+        "special_bonus_unique_alchemist_4"                "+50"
+      }
+      "bonus_mana_regen"                                  "0"
+      "bonus_movespeed"
+      {
+        "value"                                           "20 30 40 50 60"
+        "special_bonus_unique_alchemist_6"                "+50"
+      }
+    }
+  }
+}

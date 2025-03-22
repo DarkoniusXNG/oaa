@@ -1,0 +1,21 @@
+"DOTAAbilities"
+{
+  "boss_stopfightingyourself_dupe_items"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/stopfightingyourself/dupe_items.lua"
+    "AbilityTextureName"                                  "custom/stopfightingyourself_dupe_items"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "1"
+
+    "AbilityValues"
+    {
+      "cooldown"                                          "5"
+    }
+  }
+}

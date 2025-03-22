@@ -1,0 +1,46 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Bear Boss: Fury Swipes
+  //=================================================================================================================
+  "boss_fury_swipes"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ursa_fury_swipes"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "IsBreakable"                                         "1"
+
+    "MaxLevel"                                            "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_reset_time" //OAA
+      {
+        "value"                                           "20"
+        "special_bonus_unique_ursa_4"                     "+20"
+      }
+      "bonus_reset_time_roshan"                           "10"
+      "damage_per_stack" //OAA
+      {
+        "value"                                           "150"
+        "LinkedSpecialBonus"                              "special_bonus_unique_ursa"
+      }
+      "stun_stack_count"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_ursa_furyswipes_stun"       "+5"
+      }
+      "stun_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_ursa_furyswipes_stun"       "+1.5"
+      }
+    }
+  }
+}

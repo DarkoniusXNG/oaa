@@ -7,61 +7,43 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5161"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS" // OAA, not ancient flag to disable casting on bosses
+    //"AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS" // OAA, not ancient flag to disable casting on bosses
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "0"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.55"
+    "AbilityCastPoint"                                    "0.45"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120 100 80 60 40" //OAA
+    "AbilityCooldown"                                     "100 95 90 85 80" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "200 350 500 650 800"
-
-    // Cast Range
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.1"  // Primarily about the damage
+    "AbilityManaCost"                                     "250 375 500 625 750"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage_per_health"                                 "0.7 0.8 0.9 1.0 1.1"
+      "stun_duration"                                     "1.5"
+      "hp_per_kill"                                       "2 4 6 8 10"
+      "mana_per_kill"                                     "1 2 3 4 5"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_per_health"                               "0.7 0.8 0.9 1.1 1.5"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.5"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "respawn_constant"                                "1" //OAA, This doesn't work in OAA anyway because of the custom respawn times
+        "value"                                           "600"
+        "special_bonus_unique_necrophos_6"                "+125"
       }
     }
   }

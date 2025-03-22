@@ -7,14 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5233"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -27,61 +25,66 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "21 20 19 18 17 16" //OAA
+    "AbilityCooldown"                                     "18 17 16 15 14 13" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "110 120 130 140 160 180"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.35"  // Can apply multiple modifiers
+    "AbilityManaCost"                                     "125 130 135 140 145 150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "start_radius"
       {
-        "var_type"            "FIELD_INTEGER"
-        "start_radius"        "200"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "end_radius"
       {
-        "var_type"            "FIELD_INTEGER"
-        "end_radius"          "300"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "end_distance"
       {
-        "var_type"            "FIELD_INTEGER"
-        "end_distance"        "600 700 800 900 1000 1100"
+        "value"                                           "600 700 800 900 1000 1100"
       }
-      "04"
+      "targets"                                           "2 4 6 8 8 8"
+      "damage" //OAA
       {
-        "var_type"            "FIELD_INTEGER"
-        "targets"             "8" //OAA
+        "value"                                           "15 30 45 60 160 260"
+        "special_bonus_unique_dazzle_3"                   "+90"
       }
-      "05"
+      "slow"
       {
-        "var_type"            "FIELD_INTEGER"
-        "damage"              "20 40 60 80 160 320" //OAA
-        "LinkedSpecialBonus"  "special_bonus_unique_dazzle_3"
+        "value"                                           "-16 -18 -20 -22 -24 -26"
+        "special_bonus_unique_dazzle_1"                   "-40"
       }
-      "06"
+      "projectile_speed"                                  "1300"
+      "duration"                                          "3.5 5 6.5 8 8.5 9"
+      "bonus_damage"                                      "0"
+      "bonus_slow"                                        "-2 -2.5 -3 -3.5 -4 -4.5"
+      "attack_range_bonus"
       {
-        "var_type"            "FIELD_INTEGER"
-        "slow"                "-14 -16 -18 -20 -25 -30"
-        "LinkedSpecialBonus"  "special_bonus_unique_dazzle_1"
+        "value"                                           "0"
+        "special_bonus_unique_dazzle_poison_touch_attack_range_bonus"  "+300"
       }
-      "07"
+      "split_radius"
       {
-        "var_type"            "FIELD_INTEGER"
-        "projectile_speed"    "1300"
+        "value"                                           "0"
+        "special_bonus_facet_dazzle_poison_bloom"         "=450"
       }
-      "08"
+      "split_damage" //OAA
       {
-        "var_type"            "FIELD_FLOAT"
-        "duration"            "4 5 6 7 8 9"
+        "value"                                           "0"
+        "special_bonus_facet_dazzle_poison_bloom"         "=30 =60 =90 =120 =240 =480"
+        "special_bonus_unique_dazzle_3"                   "+75"
+        "RequiresFacet"                                   "dazzle_poison_bloom"
+      }
+      "attacks_to_split"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_dazzle_poison_bloom"         "=4"
       }
     }
   }

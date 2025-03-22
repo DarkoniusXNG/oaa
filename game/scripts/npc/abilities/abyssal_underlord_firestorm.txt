@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5613"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
@@ -15,75 +14,58 @@
 
     "AbilityCastRange"                                    "600 625 650 675 700 725"
     "AbilityCastPoint"                                    "0.5"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "12.0"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 110 120 130 140 150"
+    "AbilityManaCost"                                     "110 125 140 155 170 185"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "400 430 460 490 520 550"
+        "value"                                           "16 15 14 13 12 11"
+        "special_bonus_unique_underlord_5"                "-3"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "wave_duration"                                   "7.0"
+        "value"                                           "425"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "wave_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "wave_count"                                      "6"
+        "value"                                           "7.0"
       }
-      "04"
+      "wave_count"                                        "6"
+      "wave_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "wave_damage"                                     "25 40 55 70 140 280"
-        "LinkedSpecialBonus"                              "special_bonus_unique_underlord_2"
+        "value"                                           "30 50 70 90 180 270"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "05"
+      "wave_interval"                                     "1.0"
+      "burn_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "wave_interval"                                   "1.0"
+        "value"                                           "1.0 1.5 2.0 2.5 3.0 3.5"
+        "special_bonus_unique_underlord_4"                "+1.0"
       }
-      "06"
+      "burn_interval"                                     "1.0"
+      "burn_duration"                                     "2.0"
+      "can_target_units"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_damage"                                     "1 2 3 4 5 6"
-        "CalculateSpellDamageTooltip"                     "0"
+        "special_bonus_shard"                             "+1"
       }
-      "07"
+      "shard_wave_count_bonus"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_interval"                                   "1.0"
+        "special_bonus_shard"                             "+3"
       }
-      "08"
+      "shard_wave_interval_reduction"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_duration"                                   "2.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "first_wave_delay"                                "0.0"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "building_damage"                                 "33"
+        "special_bonus_shard"                             "+25"
       }
     }
   }

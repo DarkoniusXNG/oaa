@@ -7,16 +7,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85616"
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_dark_rift.lua"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityTextureName"                                  "abyssal_underlord_dark_rift"
 
@@ -24,45 +22,64 @@
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "AbilityCastRange"                                    "1200 1400 1600 1800 2000"
-    "AbilityCastPoint"                                    "0.0"
-    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
-    "AbilityChannelTime"                                  "1.5"
+    "HasScepterUpgrade"                                   "1"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90"
+    "AbilityCastPoint"                                    "1.67"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 175 225 275 325"
+    "AbilityManaCost"                                     "150 225 300 375 450"
 
-
-    "AbilitySpecial"
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
     {
-      "01"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "400"
+        "value"                                           "1400"
+        "special_bonus_facet_abyssal_underlord_summons"   "=50000"
       }
-      "02"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "2.0 2.25 2.5 2.75 3.0"
+        "value"                                           "100 95 90 85 80"
+        "special_bonus_scepter"                           "-10"
+        "special_bonus_facet_abyssal_underlord_summons"   "-40"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "250 450 650 1250 1850"
+        "value"                                           "400"
+        "special_bonus_facet_abyssal_underlord_summons"   "+100"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "minimum_range"                                   "0.0"
+        "value"                                           "2.25 2.5 2.75 3.0 3.25"
+        "special_bonus_facet_abyssal_underlord_summons"   "=0.01"
+      }
+      "damage"
+      {
+        "value"                                           "250 450 650 1250 1850"
+        "special_bonus_unique_underlord_9_oaa"            "+450"
+      }
+      "minimum_range"                                     "0"
+      "damage_reduction"
+      {
+        "value"                                           "4 6 8 10 12"
+        "special_bonus_scepter"                           "=35"
+      }
+      "bonus_ms"
+      {
+        "value"                                           "5 10 15 20 25"
+        "special_bonus_scepter"                           "+15"
+      }
+      "buff_duration"
+      {
+        "value"                                           "5"
       }
     }
 
-    "Precache"
+    "precache"
     {
       "particle"                                          "particles/units/heroes/heroes_underlord/abyssal_underlord_dark_rift_portal.vpcf"
     }

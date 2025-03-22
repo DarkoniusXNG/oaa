@@ -1,0 +1,12 @@
+"DOTAAbilities"
+{
+  "boss_charger_summon_pillar"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/charger/boss_charger_summon_pillar.lua"
+    "AbilityTextureName"                                  "custom/boss_charger_summon_pillar"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT"
+
+    "MaxLevel"                                            "1"
+  }
+}

@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=====================================================================================================
+  // Lycan: Feral Movement - custom shard ability
+  //=================================================================================================================
+  "lycan_feral_movement_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/oaa_lycan_feral_movement.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY" // this is for UI tooltip
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" // this is for UI tooltip
+    "AbilityTextureName"                                  "custom/lycan_feral_movement_oaa"
+    "IsBreakable"                                         "1"
+
+    "MaxLevel"                                            "1"
+
+    "AbilityCastRange"                                    "1200"
+
+    //"IsGrantedByShard"                                    "1" // crashes when uncommented
+
+    "AbilityValues"
+    {
+      "radius"
+      {
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "attack_speed_flat"                                 "0"
+      "attack_speed_pct"                                  "10"
+      "evasion"                                           "15"
+    }
+  }
+}

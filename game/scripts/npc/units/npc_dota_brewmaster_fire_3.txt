@@ -20,11 +20,15 @@
     // Abilities
     //----------------------------------------------------------------
     "Ability1"                                            "brewmaster_fire_permanent_immolation"
-    "Ability2"                                            "brewmaster_drunken_brawler"
+    "Ability2"                                            "brewmaster_fire_phase"
+    "Ability3"                                            "generic_hidden"
+    "Ability4"                                            "generic_hidden"
+    "Ability5"                                            "generic_hidden"
+    "Ability6"                                            "brewmaster_primal_split_cancel"
 
     // Armor
     //----------------------------------------------------------------
-    "ArmorPhysical"                                       "10" //OAA
+    "ArmorPhysical"                                       "32" //OAA
 
     // Attack
     //----------------------------------------------------------------
@@ -49,8 +53,8 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "2000" //OAA
-    "StatusHealthRegen"                                   "4"
+    "StatusHealth"                                        "1900" //OAA
+    "StatusHealthRegen"                                   "10" //OAA
     "StatusMana"                                          "750"
     "StatusManaRegen"                                     "1.5"
 
@@ -62,8 +66,8 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_HERO"
+    
+    
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
   }
 }

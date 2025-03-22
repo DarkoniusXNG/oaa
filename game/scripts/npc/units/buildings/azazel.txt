@@ -11,12 +11,12 @@
     "HealthBarOffset"                                     "260"
     "MinimapIcon"                                         "minimap_tower90"
     "MinimapIconSize"                                     "320"
-	"ConsideredHero"									  "1"
+    "ConsideredHero"                                      "1"
 
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"                                            ""          // Ability 1.
+    "Ability1"                                            "creep_siege"          // Ability 1.
     "Ability2"                                            ""          // Ability 2.
     "Ability3"                                            ""          // Ability 3.
     "Ability4"                                            ""          // Ability 4.
@@ -53,8 +53,6 @@
     // Status
     //----------------------------------------------------------------
     "StatusHealth"                                        "1000"       // Base health.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_SIEGE"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 
     // Vision
@@ -62,6 +60,7 @@
     "VisionDaytimeRange"                                  "800"      // Range of vision during day light.
     "VisionNighttimeRange"                                "800"      // Range of vision at night time.
   }
+
   "npc_azazel_tower_watch"
   {
     // General
@@ -73,12 +72,12 @@
     "HealthBarOffset"                                     "260"
     "MinimapIcon"                                         "minimap_tower45"
     "MinimapIconSize"                                     "320"
-	"ConsideredHero"									  "1"
+    "ConsideredHero"                                      "1"
 
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"                                            ""          // Ability 1.
+    "Ability1"                                            "creep_siege"          // Ability 1.
     "Ability2"                                            ""          // Ability 2.
     "Ability3"                                            ""          // Ability 3.
     "Ability4"                                            ""          // Ability 4.
@@ -110,8 +109,6 @@
     // Status
     //----------------------------------------------------------------
     "StatusHealth"                                        "500"       // Base health.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_SIEGE"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 
     // Vision
@@ -119,6 +116,7 @@
     "VisionDaytimeRange"                                  "1500"      // Range of vision during day light.
     "VisionNighttimeRange"                                "1500"      // Range of vision at night time.
   }
+
   "npc_azazel_wall_segment"
   {
     // General
@@ -133,7 +131,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"                                            ""          // Ability 1.
+    "Ability1"                                            "creep_siege"          // Ability 1.
     "Ability2"                                            ""          // Ability 2.
     "Ability3"                                            ""          // Ability 3.
     "Ability4"                                            ""          // Ability 4.
@@ -169,8 +167,6 @@
     // Status
     //----------------------------------------------------------------
     "StatusHealth"                                        "1500"       // Base health.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_SIEGE"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 
     // Vision

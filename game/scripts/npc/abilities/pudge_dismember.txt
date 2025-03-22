@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5077"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -16,95 +15,75 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "160"
+    "AbilityCastRange"                                    "200"
     "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityChannelTime"                                  "3.0"
-    "AbilityCooldown"                                     "30 25 20 20 20"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "100 130 170 220 280"
 
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "dismember_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "dismember_damage"                                "60 120 180 360 540" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_pudge_3"
-        "LinkedSpecialBonusField"                         "value"
-        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_MULTIPLY"
+        "value"                                           "80 120 160 280 480"
+        "special_bonus_unique_pudge_3"                    "x1.8"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "strength_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "strength_damage"                                 "0.3 0.6 0.9 1.0 1.1"
-        "LinkedSpecialBonus"                              "special_bonus_unique_pudge_3"
-        "LinkedSpecialBonusField"                         "value"
-        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_MULTIPLY"
+        "value"                                           "0.3 0.6 0.9 1.5 2.1"
+        "special_bonus_unique_pudge_3"                    "x1.8" // Valve has it wrong lmao
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "ticks"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "ticks"                                           "6"
-        "LinkedSpecialBonus"                              "special_bonus_unique_pudge_6"
-        "LinkedSpecialBonusField"                         "value2"
+        "value"                                           "6"
+        "special_bonus_unique_pudge_6"                    "+2"
       }
-      "04"
+      "pull_units_per_second"                             "75"
+      "pull_distance_limit"                               "125"
+      "animation_rate"                                    "1.5"
+      "AbilityChannelTime"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_units_per_second"                           "75"
+        "value"                                           "2.75"
+        "special_bonus_unique_pudge_6"                    "+0.75"
       }
-      "05"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_distance_limit"                             "125"
+        "value"                                           "22 21 20 19 18"
       }
-      "06"
+      "shard_regen_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "animation_rate"                                  "1.5"
+        "value"                                           "5"
+        "RequiresShard"                                   "1"
       }
-      "07"
+      "order_lock_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "abilitychanneltime"                              ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_pudge_6"
+        "value"                                           "2.75"
+        "RequiresShard"                                   "1"
       }
-      "08"
+      "shard_cast_range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_dismember_duration_tooltip"                "6.0"
+        "value"                                           "300"
+        "RequiresShard"                                   "1"
       }
-      "09"
+      "gluttony_strength_bonus"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_regen_pct"                               "4"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_facet_pudge_fresh_meat"            "2 4 6 10 14" // 6/8 stacks (lvl 20 talent)
       }
-      "10"
+      "glutton_strength_stack_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "order_lock_duration"                             "3"
-        "RequiresScepter"                                 "1"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_cooldown"                                "11"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_facet_pudge_fresh_meat"            "12"
       }
     }
   }

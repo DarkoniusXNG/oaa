@@ -1,0 +1,45 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Spider Boss: Larval Parasite - unused
+  //=================================================================================================================
+  "spider_boss_larval_parasite"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/spider_boss/spider_boss_larval_parasite.lua"
+
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityTextureName"                                  "broodmother_spawn_spiderlings"
+
+    // Unit Targeting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "1500"
+    "AbilityCastPoint"                                    "1.0"
+    "AnimationIgnoresModelScale"                          "1"
+    "AbilityCooldown"                                     "13.0"
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "buff_duration"                                     "3.0"
+      "damage"                                            "500"
+      "projectile_speed"                                  "600"
+      "explosion_damage"                                  "1000"
+      "infection_radius"                                  "500"
+      "num_spawns"                                        "3"
+      "vision_radius"                                     "100"
+      "projectile_width_initial"                          "100"
+      "projectile_width_end"                              "100"
+      "projectile_distance"                               "1500"
+      "spider_lifetime"                                   "60"
+    }
+  }
+}

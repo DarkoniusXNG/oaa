@@ -1,0 +1,9 @@
+"DOTAAbilities"
+{
+  // Sacred Relic
+  "item_relic"
+  {
+
+    "SecretShop"                                          "0" //OAA
+  }
+}

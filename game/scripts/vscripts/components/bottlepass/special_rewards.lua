@@ -1,4 +1,16 @@
 
+-- special bottles, these shouldn't be given out freely:
+-- 1: contributor bottle
+-- 2: tournament winner bottle
+-- 47: bottle_kyler looks a lot like tournament winner bottle
+
+-- potential unlockable bottles:
+-- 60: frostkitten bottle, swirly blue and cool looking
+-- 4: better rainbow one
+-- 43: zapp bottle, ghost ship in a bottle
+-- 5: universe
+-- 56: dota 1 bottle
+
 SPECIAL_BOTTLES = {
   --comments with names indicate a person having access to that icon but another one being currently active
 
@@ -15,15 +27,14 @@ SPECIAL_BOTTLES = {
   [141335296] = {1}, -- SquawkyArctangent
   [56309069] = {1}, -- imaGecko
   [116407282] = {1}, -- Haganeko
-  [123791730] = {1}, -- Warpdragon
+  [123791730] = {1,57,61,62,63,64,65,66,67,68,69,70}, -- Warpdragon
   [98536810] = {1}, -- Honeth
   [53917791] = {1}, -- Minnakht
   [103179022] = {1}, -- Allan vbhg
   [114538910] = {1}, -- Apisal
   [53999591] = {1}, -- carlosrpg
   [72521220] = {1}, -- Abit Gray
-  [290575742] = {1,54}, -- Obby
-  [37885614] = {1,55}, --Darkonius
+  [37885614] = {1,55,63,70}, --Darkonius
 
 
   -- golden tournament winners
@@ -66,11 +77,23 @@ SPECIAL_BOTTLES = {
 
 
   -- special people
-  [110318967] = {7}, -- timo
+  [110318967] = {4,5,7}, -- timo
   [34314091] = {8}, -- frej
   [370166341] = {9}, -- Melon
   [110964954] = {3,4,10}, -- Karmatic
-
+  [121375868] = {3,4,5}, -- BUDSTER
+  [110199172] = {3,4,5}, -- Mr F
+  [315878482] = {3,4,5}, -- GFC
+  [71409875] = {3,4,5}, -- Dabeast
+  [180650885] = {3,4,5}, -- Glaceon
+  [165382017] = {4,5,26,44,55,57}, -- Noob322
+  [312688223] = {3,4,5,59}, -- Nate
+  [211047291] = {3,4,5,56}, -- Mungeon
+  [290575742] = {3,4,5,54}, -- Obby
+  [858631509] = {3,4,5,54}, -- Obby
+  [256293935] = {3,4,5,9}, -- Woozi
+  [151615799] = {4,5,60}, -- FrostKitten
+  [111521761] = {3,4,57,70}, -- Jandiss
 
   -- twitch donators 3
 
@@ -148,7 +171,6 @@ SPECIAL_BOTTLES = {
   [92726647] = {3}, --steam: http://steamcommunity.com/profiles/76561198052992375 - twitch: -no name given}, current steam name Pomfritten
   [201059237] = {3}, --steam: https://steamcommunity.com/profiles/76561198161324965/ - twitch: GiveYaTheWorld
 
-
   -- twitch donators 20
 
   --KarmaticNeutral
@@ -174,7 +196,6 @@ SPECIAL_BOTTLES = {
   [74822878] = {3,4}, --steam: http://steamcommunity.com/profiles/76561198035088606 - twitch: UrusMerek
   [123104098] = {3,4}, --steam: http://steamcommunity.com/profiles/76561198083369826 - twitch: sir_mampfer
 
-
   -- twitch donators 50
 
   [116097701] = {3,4,5}, --steam: http://steamcommunity.com/profiles/76561198076363429 - twitch: Azure_Robe
@@ -187,7 +208,6 @@ SPECIAL_BOTTLES = {
   [53067223] = {3,4,5}, --steam: http://steamcommunity.com/profiles/76561198013332951 - twitch: BattleSammy
   [107719587] = {3,4,5}, --steam: http://steamcommunity.com/profiles/76561198067985315 - twitch: Creatures_rule1
   [80434451] = {3,4,5}, --steam: http://steamcommunity.com/profiles/76561198040700179 - twitch: xxSlaniz
-
 
   -- twitch donators 50 Custom
 
@@ -207,7 +227,7 @@ SPECIAL_BOTTLES = {
   [134237802] = {3,4,5,23}, --steam: http://steamcommunity.com/profiles/76561198094503530 - twitch: TheRealXAgent
   [252879820] = {3,4,5,24}, --steam: http://steamcommunity.com/profiles/76561198213145548 - twitch: yommi1999
   [177718580] = {3,4,5,25}, --steam: http://steamcommunity.com/profiles/76561198137984308 - twitch: FabianOtten
-  [184428872] = {3,4,5,26}, --steam: http://steamcommunity.com/profiles/76561198144694600 - twitch: DevilSunrise
+  [184428872] = {3,4,5,26}, --steam: http://steamcommunity.com/profiles/76561198144694600 - twitch: (Devil)SunriseSyrene
   [28215809] = {3,4,5,27}, --steam: http://steamcommunity.com/profiles/76561197988481537 - twitch: mr pootis
   [119820692] = {3,4,5,28}, --steam: http://steamcommunity.com/profiles/76561198080086420 - twitch: TokenGoat
   [59735209] = {3,4,5,29}, --steam: http://steamcommunity.com/profiles/76561198020000937 - twitch: sms77

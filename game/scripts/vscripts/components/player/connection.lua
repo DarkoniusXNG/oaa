@@ -8,6 +8,7 @@ local OnPlayerAbandonEvent = CreateGameEvent('OnPlayerAbandon')
 local OnPlayerStateChangeEvent = CreateGameEvent('OnPlayerStateChange')
 
 function PlayerConnection:Init()
+  self.moduleName = "PlayerConnection"
   self.disconnectedPlayers = {}
   self.disconnectedTime = {}
   self.disconnectTime = {}
@@ -17,6 +18,10 @@ function PlayerConnection:Init()
   GameEvents:OnPlayerDisconnect(function(keys)
 -- [VScript] [components\duels\duels:48] PlayerID: 1
 -- [VScript] [components\duels\duels:48] splitscreenplayer: -1
+    if not keys.PlayerID then
+      print("PlayerConnection module - player_disconnect event has no PlayerID key. Gj Valve.")
+      return
+    end
     if HeroSelection.isCM then
       PauseGame(true)
     end
@@ -34,6 +39,10 @@ function PlayerConnection:Init()
 -- [VScript] [components\duels\duels:64] userid: 3
 -- [VScript] [components\duels\duels:64] xuid: 76561198014183519
     DebugPrint('A player has reconnected')
+    if not keys.PlayerID then
+      print("PlayerConnection module - player_reconnected event has no PlayerID key. Gj Valve.")
+      return
+    end
     if not self.disconnectedTime[keys.PlayerID] then
       return
     end
@@ -237,18 +246,20 @@ function PlayerConnection:CheckAbandons ()
   local direAbandons = 0
   local radiantAbandons = 0
 
-  for playerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-    local team = PlayerResource:GetTeam(playerID)
+  for playerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+    if PlayerResource:IsValidPlayerID(playerID) and PlayerResource:IsValidPlayer(playerID) then
+      local team = PlayerResource:GetTeam(playerID)
 
-    if team == DOTA_TEAM_BADGUYS then
-      self:CheckPlayerState(playerID)
-      if self:IsAbandoned(playerID) then
-        direAbandons = direAbandons + 1
-      end
-    elseif team == DOTA_TEAM_GOODGUYS then
-      self:CheckPlayerState(playerID)
-      if self:IsAbandoned(playerID) then
-        radiantAbandons = radiantAbandons + 1
+      if team == DOTA_TEAM_BADGUYS then
+        self:CheckPlayerState(playerID)
+        if self:IsAbandoned(playerID) then
+          direAbandons = direAbandons + 1
+        end
+      elseif team == DOTA_TEAM_GOODGUYS then
+        self:CheckPlayerState(playerID)
+        if self:IsAbandoned(playerID) then
+          radiantAbandons = radiantAbandons + 1
+        end
       end
     end
   end

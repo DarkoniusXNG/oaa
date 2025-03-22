@@ -1,54 +1,54 @@
 "itembuilds"
 {
-	"author"		"Valve"
-	"hero"			"npc_dota_hero_phantom_assassin"
-	"Title"			"Recommended items for Phantom Assassin"
+  "author"        "OAA 7.37e"
+  "hero"          "npc_dota_hero_phantom_assassin"
+  "Title"         "Recommended items for Phantom Assassin"
 
-	"Items"
-	{
-		"#DOTA_Item_Build_Starting_Items"
-		{
-			"item"		"item_flask"
-			"item"		"item_blight_stone"
-			"item"		"item_enchanted_mango"
-		}
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_flask"
+      "item"      "item_blight_stone"
+      "item"      "item_enchanted_mango"
+    }
 
-		"#DOTA_Item_Build_Early_Game"
-		{
-			"item"		"item_boots"
-			"item"		"item_magic_wand"
-			"item"		""
-		}
+    "#DOTA_Item_Build_For_Farming"
+    {
+      "item"      "item_small_cleaver_oaa"
+    }
 
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		"item_skadi"
-			"item"		"item_desolator"
-		}
+    "#DOTA_Item_Build_Physical_Core" // Standard PA build
+    {
+      "item"      "item_desolator"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_black_king_bar_1"
+      "item"      "item_satanic"
+      "item"      "item_abyssal_blade_2"
+      "item"      "item_giant_form"
+    }
 
-		"#DOTA_Item_Build_Late_Items"
-		{
-			"item"		"item_assault"
-      "item"		"item_butterfly"
-      "item"		"item_abyssal_blade_3"
-      "item"		"item_satanic"
-		}
+    "#DOTA_Item_Build_Magical_Core" // Dagger build
+    {
+      "item"      "item_spell_breaker_1"
+      "item"      "item_angels_demise"
+      "item"      "item_devastator"
+      "item"      "item_greater_power_treads"
+      "item"      "item_rapier"
+    }
 
-		"#DOTA_Item_Build_Luxury"
-		{
-			"item"		"item_black_king_bar_1"
-      "item"		"item_monkey_king_bar"
-      "item"		"item_sphere"
-      "item"		"item_nullifier"
-			"item"		"item_trumps_fists"
-			"item"		"item_bloodthorn"
-			"item"		"item_sange_and_yasha"
-			"item"		"item_manta"
-			"item"		"item_devastator_3"
-			"item"		"item_silver_edge"
-			"item"		"item_ultimate_scepter"
-			"item"		"item_vampire"
-			"item"		"item_rapier"
-		}
-	}
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_bloodthorn"
+      "item"      "item_nullifier"
+      "item"      "item_sphere"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_trumps_fists_1"
+    }
+  }
 }

@@ -1,0 +1,115 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Primal Beast: Uproar
+  //=================================================================================================================
+  "primal_beast_uproar"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    "AbilityCooldown"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_damage_per_stack" //OAA
+      {
+        "value"                                           "10 16 22 28 56 112"
+      }
+      "stack_limit"
+      {
+        "value"                                           "5"
+      }
+      "stack_count_increase_on_disable"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_primal_beast_provoke_the_beast"  "3"
+      }
+      "damage_limit"                                      "50"
+      "stack_duration"                                    "20"
+      "move_slow_per_stack"                               "4 6 8 10 12 14"
+      "slow_duration"                                     "3.0"
+      "damage_min"                                        "20"
+      "damage_max"                                        "2000"
+      "radius"
+      {
+        "value"                                           "900"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "roared_bonus_attack_speed"                         "0"
+      "roared_bonus_armor"
+      {
+        "value"                                           "2 3 4 5 6 7"
+        "special_bonus_unique_primal_beast_uproar_armor"  "+7"
+      }
+      "roar_duration"                                     "7"
+      "should_dispell"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_primal_beast_roar_dispells"  "+1"
+      }
+      "projectiles_per_stack"
+      {
+        "value"                                           "2"
+        "RequiresScepter"                                 "1"
+      }
+      "projectile_distance"
+      {
+        "value"                                           "1400"
+        "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "projectile_width"
+      {
+        "value"                                           "75"
+        "affected_by_aoe_increase"                        "1"
+        "RequiresScepter"                                 "1"
+      }
+      "projectile_damage" //OAA
+      {
+        "value"                                           "55 65 75 85 105 125"
+        "RequiresScepter"                                 "1"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
+        "CalculateSpellDamageTooltip"                     "1"
+      }
+      "projectile_speed"
+      {
+        "value"                                           "500"
+        "RequiresScepter"                                 "1"
+      }
+      "splinter_angle"
+      {
+        "value"                                           "30"
+        "RequiresScepter"                                 "1"
+      }
+      "max_split_amount"
+      {
+        "value"                                           "2"
+        "RequiresScepter"                                 "1"
+      }
+      "split_delay"
+      {
+        "value"                                           "1.25"
+        "RequiresScepter"                                 "1"
+      }
+      "projectile_break_duration"
+      {
+        "value"                                           "2.5"
+        "RequiresScepter"                                 "1"
+      }
+      "projectile_waves"
+      {
+        "value"                                           "3"
+        "RequiresScepter"                                 "1"
+      }
+    }
+  }
+}

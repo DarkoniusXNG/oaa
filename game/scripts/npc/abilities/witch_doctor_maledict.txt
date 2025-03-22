@@ -4,29 +4,28 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5140"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "575"
+    "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0.35"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "30 26 22 18 17 16"
-    "AbilityDuration"                                     "12.0"
+    "AbilityCooldown"                                     "21 20 19 18 17 16" //OAA
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "7 14 21 28 56 112"
+    "AbilityDamage"                                       "18 22 26 30 60 90"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,38 +33,29 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "180"
-        "LinkedSpecialBonus"                              "special_bonus_unique_witch_doctor_6"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_unique_witch_doctor_6"             "+125"
       }
-      "02"
+      "bonus_damage" // this is the percentage of the lost health as damage
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "abilityduration"                                 ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_witch_doctor_4"
-        "LinkedSpecialBonusField"                         "value"
+        "value"                                           "16 24 32 40 48 56"
       }
-      "03"
+      "bonus_damage_threshold"                            "100"
+      "ticks"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "16 24 32 40 48 56"
-        "LinkedSpecialBonus"                              "special_bonus_unique_witch_doctor_7"
+        "value"                                           "3"
+        "LinkedSpecialBonusField"                         "value2" // Valve this whole line is literally useless and does nothing but whatever
+        "special_bonus_unique_witch_doctor_7"             "+2"
       }
-      "04"
+      "AbilityDuration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage_threshold"                          "100"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "ticks"                                           "3"
-        "LinkedSpecialBonus"                              "special_bonus_unique_witch_doctor_4"
-        "LinkedSpecialBonusField"                         "value2"
+        "value"                                           "12.0"
+        "special_bonus_unique_witch_doctor_7"             "+8"            // if updating this, update tick value above
       }
     }
   }

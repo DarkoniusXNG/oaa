@@ -5,8 +5,8 @@
   //=================================================================================================================
   "npc_dota_hero_jakiro"
   {
-    "ArmorPhysical"		        "8"
-    "StatusHealthRegen"		    "5.0"
+    "AttributeBaseStrength"                               "26" // 25
+    "AttributeStrengthGain"                               "2.8" // 2.5
   }
 }
 

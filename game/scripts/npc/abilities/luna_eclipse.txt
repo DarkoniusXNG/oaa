@@ -7,29 +7,22 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5225"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.6"
-    "AbilityCastRange"                                    "0"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120.0" //OAA
-    "AbilityDuration"                                     "2.4 4.2 6.0 7.2 8.4"
+    "AbilityCastPoint"                                    "0.5"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -37,64 +30,48 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "beams" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "beams"                                           "6 9 12 15 18"
+        "value"                                           "6 9 12 15 18"
+        "special_bonus_scepter"                           "+2 +4 +6 +6 +6"
       }
-      "02"
+      "beam_interval" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hit_count"                                       "5"
+        "value"                                           "0.6"
+        "special_bonus_scepter"                           "-0.2"
       }
-      "03"
+      "beam_interval_scepter"                             "0.4" // OAA, purely for the tooltip Note, since the scepter tooltip doesn't show this.
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "beam_interval"                                   "0.6"
+        "value"                                           "675"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "hit_count" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "beam_interval_scepter"                           "0.4" //OAA
-        "RequiresScepter"                                 "1"
+        "value"                                           "6 9 12 15 18"
+        "special_bonus_scepter"                           "+2 +4 +6 +6 +6"
       }
-      "06" // 05
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "675"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+2500"
       }
-      "07" // 06
+      "AbilityDuration" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "beams_scepter"                                   "8 12 16 20 24" //OAA
-        "RequiresScepter"                                 "1"
+        "value"                                           "3.6 5.4 7.2 9.0 10.8"
+        "special_bonus_scepter"                           "-0.4 +0.2 +0 +0.6 +1.2"
       }
-      "08" // 07
+      "night_duration" //OAA, slightly larger than AbilityDuration
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hit_count_scepter"                               "8 12 16 20 24" //OAA
-        "RequiresScepter"                                 "1"
+        "value"                                           "4 6 8 10 12"
       }
-      "09" // 08
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_tooltip_scepter"                        "3.2 4.8 6.4 8.0 9.6" //OAA
-        "RequiresScepter"                                 "1"
-      }
-      "10" // 09
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cast_range_tooltip_scepter"                      "2500"
-        "RequiresScepter"                                 "1"
-      }
-      "11" // 10
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "night_duration"                                  "10.0"
+        "value"                                           "110"
+        "special_bonus_unique_luna_6"                     "-40.0"
       }
     }
   }
-
 }

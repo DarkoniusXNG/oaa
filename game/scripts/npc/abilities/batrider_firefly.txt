@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5322"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
@@ -23,52 +22,38 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "34" //OAA
+    "AbilityCooldown"                                     "35 34 33 32 31 30" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125"
+    "AbilityManaCost"                                     "100 105 110 115 120 125" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "20 40 60 80 180 280" //OAA
+        "value"                                           "25 50 75 100 200 300"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "4 7 10 13 16 19"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "200"
+        "value"                                           "15"
+        "special_bonus_unique_batrider_1"                 "+4.5"
       }
-      "04"
+      "tick_interval"                                     "0.5"
+      "tree_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "15"
-        "LinkedSpecialBonus"                              "special_bonus_unique_batrider_1"
+        "value"                                           "100"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.5"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "tree_radius"                                     "100"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_vision"                                    "200 400 600 800 900 900"
-      }
+      "bonus_slow_resistance"                             "0"
     }
   }
 }

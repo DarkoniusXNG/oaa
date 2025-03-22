@@ -1,0 +1,30 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Colossal Eidolon
+  //=================================================================================
+  "npc_dota_colossal_eidolon"
+  {
+    "include_keys_from"                                   "npc_dota_lesser_eidolon"
+
+    "ModelScale"                                          "1.1"
+    "Level"                                               "6"
+
+    "ArmorPhysical"                                       "20"    // Physical protection.
+    "MagicalResistance"                                   "60"    // Magical protection.
+
+    "AttackDamageMin"                                     "200"    // Damage range min.
+    "AttackDamageMax"                                     "200"    // Damage range max.
+    "AttackRange"                                         "500"
+
+    "BountyXP"                                            "40"    // Experience earn.
+    "BountyGoldMin"                                       "112"    // Gold earned min.
+    "BountyGoldMax"                                       "160"    // Gold earned max.
+
+    "HealthBarOffset"                                     "155"
+
+    "MovementSpeed"                                       "370"    // Speed
+
+    "StatusHealth"                                        "2300"    // Base health.
+  }
+}

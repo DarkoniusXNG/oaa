@@ -99,7 +99,11 @@ function Spawn( entityKeyValues )
 end
 
 function SpidersThink()
-  if GameRules:IsGamePaused() == true or GameRules:State_Get() == DOTA_GAMERULES_STATE_POST_GAME or thisEntity:IsAlive() == false then
+  if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME or not IsValidEntity(thisEntity) or not thisEntity:IsAlive() then
+    return -1
+  end
+
+  if GameRules:IsGamePaused() then
     return 1
   end
 
@@ -123,7 +127,7 @@ function SpidersThink()
     thisEntity:GetOrigin(), nil,
     800,
     DOTA_UNIT_TARGET_TEAM_ENEMY,
-    DOTA_UNIT_TARGET_HERO,
+    DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
     DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
     FIND_CLOSEST,
     false

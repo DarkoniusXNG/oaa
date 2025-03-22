@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, Game, Entities, Buffs */
 'use strict';
 /*
   Author:
@@ -11,18 +11,24 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports.ColorToHexCode = ColorToHexCode;
   module.exports.ColoredText = ColoredText;
   module.exports.LuaTableToArray = LuaTableToArray;
+  module.exports.is10v10 = is10v10;
+  module.exports.FindModifier = FindModifier;
+  module.exports.HasModifier = HasModifier;
+  module.exports.GetStackCount = GetStackCount;
 }
-var HudNotFoundException = /** @class */ (function () {
+const HudNotFoundException = /** @class */ (function () {
   function HudNotFoundException (message) {
     this.message = message;
   }
   return HudNotFoundException;
 }());
+
 function FindDotaHudElement (id) {
   return GetDotaHud().FindChildTraverse(id);
 }
+
 function GetDotaHud () {
-  var p = $.GetContextPanel();
+  let p = $.GetContextPanel();
   while (p !== null && p.id !== 'Hud') {
     p = p.GetParent();
   }
@@ -38,8 +44,8 @@ function GetDotaHud () {
  * Order of elements is preserved.
  */
 function LuaTableToArray (table) {
-  var array = [];
-  for (var i = 1; table[i.toString()] !== undefined; i++) {
+  const array = [];
+  for (let i = 1; table[i.toString()] !== undefined; i++) {
     array.push(table[i.toString()]);
   }
   return array;
@@ -48,11 +54,46 @@ function LuaTableToArray (table) {
  * Takes an integer and returns a hex code string of the color represented by the integer
  */
 function ColorToHexCode (color) {
-  var red = (color & 0xff).toString(16);
-  var green = ((color & 0xff00) >> 8).toString(16);
-  var blue = ((color & 0xff0000) >> 16).toString(16);
+  let red = (color & 0xff).toString(16);
+  let green = ((color & 0xff00) >> 8).toString(16);
+  let blue = ((color & 0xff0000) >> 16).toString(16);
+  if (red === '0') {
+    red = '00';
+  }
+  if (green === '0') {
+    green = '00';
+  }
+  if (blue === '0') {
+    blue = '00';
+  }
   return '#' + red + green + blue;
 }
+
 function ColoredText (colorCode, text) {
   return '<font color="' + colorCode + '">' + text + '</font>';
+}
+
+function is10v10 () {
+  const mapname = Game.GetMapInfo().map_display_name;
+  return mapname === '10v10' || mapname === 'oaa_bigmode';
+}
+
+// FindModifier returns BuffID or undefined
+function FindModifier (unit, modifierName) {
+  for (let i = 0; i < Entities.GetNumBuffs(unit); i++) {
+    if (Buffs.GetName(unit, Entities.GetBuff(unit, i)) === modifierName) {
+      return Entities.GetBuff(unit, i);
+    }
+  }
+}
+
+// HasModifier returns a boolean
+function HasModifier (unit, modifierName) {
+  return FindModifier(unit, modifierName) !== undefined;
+}
+
+// GetStackCount returns a number
+function GetStackCount (unit, modifierName) {
+  const m = FindModifier(unit, modifierName);
+  return m !== undefined ? Buffs.GetStackCount(unit, m) : 0;
 }

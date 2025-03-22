@@ -7,15 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5596"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_NO"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES" //OAA
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -24,34 +25,35 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16.0 15.0 14.0 13.0 12.0 11.0"
+    "AbilityCooldown"                                     "16 15 14 13 12 11" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "110"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "3.0"  // Value much higher than cost.
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5.0"
+        "value"                                           "5.0"
       }
-      "02"
+      "move_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_speed"                                    "65 90 115 140 165 190"
+        "value"                                           "10 14 18 22 26 30"
+        "special_bonus_unique_legion_commander_pta_movespeed"  "+12"
       }
-      "03"
+      "hp_regen" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hp_regen"                                        "30 50 70 90 130 250" //OAA
+        "value"                                           "30 40 50 60 80 110"
+        "special_bonus_unique_legion_commander_6"         "+60"
+      }
+      "radius"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_legion_commander_5"         "+300"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }

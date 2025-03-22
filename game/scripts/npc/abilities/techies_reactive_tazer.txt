@@ -1,0 +1,55 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Techies: Reactive Tazer
+  //=================================================================================================================
+  "techies_reactive_tazer"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    //"AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0.1"
+    "AbilityCastRange"                                    "500"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "18 17 16 15 14 13" //OAA
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "60"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "duration"                                          "6"
+      "disarm_duration"                                   "2.4 2.7 3 3.3 3.6 3.9"
+      "bonus_ms"                                          "18 22 26 30 35 40"
+      "stun_radius"
+      {
+        "value"                                           "400"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "shard_damage" //OAA
+      {
+        "value"                                           "75 150 225 300 600 900"
+        "RequiresShard"                                   "1"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
+      }
+    }
+  }
+}

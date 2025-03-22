@@ -1,42 +1,31 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Drow Ranger's Trueshot Aura
+  // Drow Ranger: Precision Aura (Innate) - unused
   //=================================================================================================================
   "drow_ranger_trueshot"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5021"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-
-    "MaxLevel"                                            "6"
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "0"
-    "AbilityCastPoint"                                    "0"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "30" //OAA
-    "AbilityDuration"                                     "5" //OAA
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_INNATE_UI | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS" //OAA
+    "Innate"                                              "1"
+    "MaxLevel"                                            "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "trueshot_ranged_damage"                          "10 20 30 40 80 120"
-        "LinkedSpecialBonus"                              "special_bonus_unique_drow_ranger_1"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "trueshot_agi_bonus_base"                           "4 8 12 16"
+      "trueshot_agi_bonus_per_level"                      "1"
+      "trueshot_agi_bonus_allies_pct"                     "50"
+      "agi_bonus_pct_tooltip"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1200"
+        "dynamic_value"                                   "true"
       }
     }
   }

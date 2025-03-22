@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5409"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
@@ -29,17 +28,15 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration_hero"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_hero"                                   "6.0"
+        "value"                                           "3 4 5 5.5 6"
       }
-      "02"
+      "duration_unit"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_unit"                                   "20.0"
+        "value"                                           "16"
       }
     }
   }

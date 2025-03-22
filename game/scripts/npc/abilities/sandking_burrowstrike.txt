@@ -7,16 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5102"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
-
-    "HasScepterUpgrade"                                   "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -24,55 +20,46 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "450 525 600 700 725 750" //OAA
     "AbilityCastPoint"                                    "0.0"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14 13 12 11 11 11"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "110 120 130 140 150 160"
 
-    "AbilityDamage"                                       "100 160 220 280 560 1120"
+    "AbilityDamage"                                       "80 140 200 260 520 1040"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "burrow_width"                                    "150"
+        "value"                                           "14 13 12 11 10 9"
+        "special_bonus_unique_sand_king_7"                "-2"
       }
-      "02"
+      "burrow_width"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burrow_duration"                                 "1.6 1.8 2.0 2.2 2.3 2.4"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "burrow_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "burrow_speed"                                    "2000"
+        "value"                                           "1.2 1.4 1.6 1.8 1.9 2.0"
       }
-      "04"
+      "burrow_speed"                                      "2000"
+      "burrow_anim_time"                                  "0.52"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "burrow_anim_time"                                "0.52"
+        "value"                                           "525 600 675 750 825 900"
+        "special_bonus_unique_sand_king_8"                "+150"
       }
-      "05"
+      "burrow_speed_scepter" // unused
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cast_range_scepter"                              "700 900 1100 1300 1400 1500" //OAA
+        "value"                                           "3000"
         "RequiresScepter"                                 "1"
       }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burrow_speed_scepter"                            "3000"
-        "RequiresScepter"                                 "1"
-      }
+      "scepter_channel_time"                              "2" // unused
+      "scepter_max_power"                                 "2" // unused
     }
   }
 }

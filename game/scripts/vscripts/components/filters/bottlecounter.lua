@@ -1,7 +1,4 @@
 
-LinkLuaModifier('modifier_bottle_counter', 'modifiers/modifier_bottle_counter.lua', LUA_MODIFIER_MOTION_NONE)
-
-
 if BottleCounter == nil then
   -- Debug:EnableDebugging()
   DebugPrint('Creating new BottleCounter object')
@@ -9,6 +6,7 @@ if BottleCounter == nil then
 end
 
 function BottleCounter:Init()
+  self.moduleName = "BottleCounter"
   self.bottleCount = tomap(zip(PlayerResource:GetAllTeamPlayerIDs(), duplicate(0)))
   FilterManager:AddFilter(FilterManager.ItemAddedToInventory, self, Dynamic_Wrap(BottleCounter, 'Filter'))
 end
@@ -19,12 +17,15 @@ function BottleCounter:Filter(filterTable)
   local item = EntIndexToHScript(itemEntIndex)
   local parentEntIndex = filterTable.inventory_parent_entindex_const
   local parent = EntIndexToHScript(parentEntIndex)
+
+  if not parent or parent:IsNull() then
+    return true
+  end
+
   local player = parent:GetPlayerOwner()
 
   if player and not parent:IsIllusion() and not parent:IsTempestDouble() and not parent:IsPhantom() then
-    local hero = player:GetAssignedHero()
     local playerID = player:GetPlayerID()
-
     if item:GetName() == "item_infinite_bottle" and not item.firstPickedUp then
       item.firstPickedUp = true
       if not PlayerResource:IsFakeClient(playerID) then

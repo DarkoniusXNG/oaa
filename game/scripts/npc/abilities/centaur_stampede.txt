@@ -7,79 +7,57 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5517"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90 80 70 60 50" //OAA
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "150 200 250 300 350"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.2"  // hits everything on the map
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0"
+        "value"                                           "3.5 4 4.5 5 5.5"
       }
-      "02"
+      "scepter_bonus_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "base_damage"                                     "0"
+        "special_bonus_scepter"                           "+1"
       }
-      "03"
+      "base_damage"                                       "0"
+      "strength_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "strength_damage"                                 "1.0 2.0 3.0 4.5 6.5"
+        "value"                                           "2 3 4 5 6"
         "CalculateSpellDamageTooltip"                     "1"
       }
-      "04"
+      "slow_duration"                                     "3 3 3 3.5 4"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "2.3"
+        "value"                                           "105"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "slow_movement_speed"                               "100"
+      "damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "105"
+
       }
-      "06"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_movement_speed"                             "100"
+        "value"                                           "95 90 85 80 75"
+        "special_bonus_unique_centaur_5"                  "-25"
       }
-      "07"
+      "has_flying_movement"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "40"
-        "RequiresScepter"                                 "1"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction_tooltip_scepter"                "40"
-        "RequiresScepter"                                 "1"
-        "CalculateSpellDamageTooltip"                     "0"
+
       }
     }
   }

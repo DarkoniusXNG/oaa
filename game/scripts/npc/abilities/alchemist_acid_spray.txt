@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5365"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
@@ -18,47 +17,43 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.2"
+    "AbilityCastPoint"                                    "0.1"
     "AbilityCastRange"                                    "900"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "22.0"
+    "AbilityCooldown"                                     "22 21 20 19 18 17" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "130 140 150 160 170 180"
+    "AbilityManaCost"                                     "105 110 115 120 125 130"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "475 525 575 625 650 675"
+        "value"                                           "350 400 450 500 550 600"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"                                          "15"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "16"
+        "value"                                           "25 30 35 40 80 160"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "armor_reduction" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "15 20 25 30 60 120"
+        "value"                                           "3 4 5 6 8 12"
+        "special_bonus_unique_alchemist_5"                "+2"
       }
-      "04"
+      "armor_allies"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "armor_reduction"                                 "4 5 6 7 9 15"
-        "LinkedSpecialBonus"                              "special_bonus_unique_alchemist_5"
+        "value"                                           "0"
+        "special_bonus_unique_alchemist_3"                "+1"
       }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_rate"                                       "1.0"
-      }
+      "tick_rate"                                         "1.0"
     }
   }
 }

@@ -7,12 +7,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5514"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -20,30 +18,30 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.5"
-    "AbilityCooldown"                                     "15 14 13 12 11 11"
+    "AbilityCastPoint"                                    "0"
+    "AbilityCooldown"                                     "15 14 13 12 11 10" //OAA
     "AbilityManaCost"                                     "100 110 120 130 140 150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "315"
+        "value"                                           "325"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "stomp_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.7 2.0 2.3 2.6 2.75 2.9"
-        "LinkedSpecialBonus"                              "special_bonus_unique_centaur_2"
+        "value"                                           "90 160 230 300 600 1200"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "stomp_damage"                                    "100 150 200 250 500 750"
+        "value"                                           "1.6 1.8 2.0 2.2 2.4 2.6"
+        "special_bonus_unique_centaur_2"                  "+0.8"
       }
+      "windup_time"                                       "0.5"
     }
   }
 }

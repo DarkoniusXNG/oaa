@@ -7,13 +7,11 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5240"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -30,42 +28,44 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "150"
+    "AbilityManaCost"                                     "100 125 150 175 200"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "latch_radius"                                      "125"
+      "stun_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "latch_radius"                                    "125"
+        "value"                                           "175"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "radius_ally"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "stun_radius"                                     "175"
+        "value"                                           "175"
+        "affected_by_aoe_increase"                        "1"
+        "special_bonus_facet_rattletrap_hookup"           "=350"
       }
-      "03"
+      "cooldown_refund_ally"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.5 1.75 2.0 2.25 2.5"
+        "value"                                           "0"
+        "special_bonus_facet_rattletrap_hookup"           "75"
       }
-      "04"
+      "ally_shield_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "4000 5000 6000 7000 7500"
+        "special_bonus_facet_rattletrap_hookup"           "4"
       }
-      "05"
+      "allied_armor_bonus"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "75 275 475 975 1675" //OAA
+        "special_bonus_facet_rattletrap_hookup"           "15 20 25 30 35"
       }
-      "06"
+      "duration"                                          "1.2 1.4 1.6 1.8 2.0"
+      "speed"                                             "4000 5000 6000 7000 7500"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "cooldown_scepter"                                "12.0"
-        "RequiresScepter"                                 "1"
+        "value"                                           "75 275 475 1075 1675"
+        "special_bonus_unique_clockwerk_hookshot_damage"  "+75"
+        "CalculateSpellDamageTooltip"                     "1"
       }
     }
   }

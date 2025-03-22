@@ -7,49 +7,70 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5403"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120" //OAA
+    "AbilityCooldown"                                     "120 110 100 90 80" //OAA
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.65"
+    "AbilityCastPoint"                                    "0.55"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 150 175 200 225"
+    "AbilityManaCost"                                     "150 200 250 300 350"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "16 18 20 20 20"
+        "value"                                           "16 18 20 22 24"
+        "special_bonus_shard"                             "+8"
       }
-      "02"
+      "split_duration"                                    "0.6"
+      "tooltip_earth_brewling_hp" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "split_duration"                                  "0.6"
+        "value"                                           "1400 3200 5000 8600 15800"
+        "special_bonus_unique_brewmaster"                 "+1800"
       }
-      "03"
+      "tooltip_storm_brewling_hp" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_movementspeed"                           "100"
-        "RequiresScepter"                                 "1"
+        "value"                                           "1000 2000 3000 6000 9000"
+        "special_bonus_unique_brewmaster"                 "+1800"
+      }
+      "tooltip_fire_brewling_hp" //OAA
+      {
+        "value"                                           "1300 1600 1900 2800 3700"
+        "special_bonus_unique_brewmaster"                 "+1800"
+      }
+      "tooltip_void_brewling_hp" //OAA
+      {
+        "value"                                           "1200 1800 2400 4200 6000"
+        "special_bonus_unique_brewmaster"                 "+1800"
+      }
+      "bonus_brewling_hp" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_unique_brewmaster"                 "+1800"
+      }
+      "bonus_damage"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_brewmaster_2"               "+10"
+      }
+      "give_brawler_passive"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_brewmaster_6"               "=1"
       }
     }
   }

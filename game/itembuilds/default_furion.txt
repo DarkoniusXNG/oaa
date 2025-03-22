@@ -1,60 +1,64 @@
 "itembuilds"
 {
-	"author"		"Valve"
-	"hero"			"npc_dota_hero_furion"
-	"Title"			"Recommended items for Nature's Prophet"
+  "author"        "OAA 7.37x"
+  "hero"          "npc_dota_hero_furion"
+  "Title"         "Recommended items for Nature's Prophet"
 
-	"Items"
-	{
-		"#DOTA_Item_Build_Starting_Items"
-		{
-			"item"		"item_tango"
-			"item"		"item_ring_of_protection"
-			"item"		"item_clarity"
-			"item"		"item_clarity"
-      "item"    "item_flask"
-		}
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_blight_stone"
+      "item"      "item_ring_of_protection"
+      "item"      "item_clarity"
+      "item"      "item_flask"
+    }
 
-		"#DOTA_Item_Build_Early_Game"
-		{
-			"item"    "item_magic_wand"
-			"item"		"item_boots"
-			"item"		"item_ring_of_basilius"
-		}
+    "#DOTA_Item_Build_Physical_Core"
+    {
+      "item"      "item_hurricane_pike"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_greater_crit"
+      "item"      "item_black_king_bar_1"
+      "item"      "item_greater_power_treads"
+      "item"      "item_devastator_oaa_2"
+    }
 
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		""
-			"item"		""
-			"item"		"item_maelstrom"
-		}
+    "#DOTA_Item_Build_Summons_Core"
+    {
+      "item"      "item_solar_crest"
+      "item"      "item_ancient_janggo"
+      "item"      "item_vladmirs_grimoire_1"
+      "item"      "item_bloodthorn"
+      "item"      "item_assault"
+      "item"      "item_lucience"
+    }
 
-		"#DOTA_Item_Build_Late_Items"
-		{
-			"item"		"item_silver_edge"
-			"item"		""
-			"item"		"item_bloodthorn"
-		}
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_ward_stack"
+      "item"      "item_spirit_vessel_oaa"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_orchid"
+      "item"      "item_shade_staff_1"
+      "item"      "item_sheepstick_4"
+    }
 
-		"#DOTA_Item_Build_Luxury"
-		{
-			"item"		""
-			"item"		"item_ultimate_scepter"
-			"item"		"item_desolator"
-			"item"		"item_necronomicon_3"
-			"item"		"item_greater_crit"
-			"item"		""
-			"item"		""
-			"item"		"item_monkey_king_bar"
-			"item"		"item_sphere"
-			"item"		""
-			"item"		"item_ancient_janggo"
-			"item"		""
-			"item"		"item_hurricane_pike"
-			"item"		""
-			"item"		"item_assault"
-			"item"		""
-			"item"		"item_octarine_core"
-		}
-	}
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_devastator"
+      "item"      "item_satanic"
+      "item"      "item_silver_edge"
+      "item"      "item_skadi"
+      "item"      "item_sphere"
+      "item"      "item_siege_mode"
+      "item"      "item_trumps_fists_1"
+      "item"      "item_rapier"
+    }
+  }
 }

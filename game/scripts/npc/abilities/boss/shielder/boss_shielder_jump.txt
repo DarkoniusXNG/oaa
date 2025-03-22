@@ -1,0 +1,40 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Shielder: Shield Crash - Jumps in place, damages enemies around and reduces their attack dmg
+  //=================================================================================================================
+  "boss_shielder_jump"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/shielder/boss_shielder_jump.lua"
+    "AbilityTextureName"                                  "pangolier_shield_crash"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "1"
+
+    "AbilityCastRange"                                    "450"
+
+    "AbilityCooldown"                                     "10"
+
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage"                                            "3000" // physical
+      "attack_damage_reduction"                           "40"
+      "proc_chance"                                       "17"
+      "debuff_duration"                                   "5.0"
+      "radius"                                            "450"
+      "jump_duration"                                     "0.4"
+      "jump_height"                                       "250"
+      "jump_horizontal_distance"                          "0"
+    }
+  }
+}

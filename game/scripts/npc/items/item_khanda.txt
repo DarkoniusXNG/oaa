@@ -1,0 +1,71 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Khanda
+  //=================================================================================================================
+  "item_recipe_angels_demise"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    //"AbilityTextureName"                                  "custom/recipe/recipe_1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "600" //OAA
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_angels_demise"
+    "ItemRequirements"
+    {
+      "01"                                                "item_phylactery;item_tiara_of_selemene"
+    }
+  }
+
+  //=================================================================================================================
+  // Khanda
+  //=================================================================================================================
+  "item_angels_demise"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL" //OAA, Valve forgot
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES" //OAA, Valve forgot
+    "AbilityTextureName"                                  "custom/khanda_1"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "10.0 9.5 9.0 8.5 8.0"
+    "AbilitySharedCooldown"                               "phylactery"
+    "AbilityManaCost"                                     "0" //OAA
+
+    "MaxUpgradeLevel"                                     "5"
+    "ItemBaseLevel"                                       "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "5000" //OAA
+    "ItemShopTags"                                        "hard_to_tag"
+    "ItemQuality"                                         "common"
+    "ItemAliases"                                         "khanda; kanda"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_mana_regen"                                  "8 8.25 8.75 9.5 10.5"
+      "bonus_health"                                      "200 300 450 650 900"
+      "bonus_mana"                                        "200 300 450 650 900"
+      "bonus_all_stats"                                   "8 13 18 23 28"
+      "slow"                                              "30 35 40 45 50"
+      "slow_duration"                                     "4 4.25 4.5 4.75 5"
+      "bonus_spell_damage"                                "250 375 550 775 1050"
+    }
+  }
+}

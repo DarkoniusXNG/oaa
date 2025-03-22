@@ -1,13 +1,12 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Tinker: Rearm (OAA rework)
+  // Tinker: Rearm (OAA rework) - unused
   //=================================================================================================================
   "oaa_rearm"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85153"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_rearm.lua"
     "AbilityTextureName"                                  "tinker_rearm"
@@ -18,40 +17,30 @@
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
+    "LinkedAbility"                                       "tinker_keen_teleport"
+
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.53"
+    "AbilityCastPoint"                                    "0"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
     "AbilityChannelAnimation"                             "ACT_DOTA_CHANNEL_ABILITY_4"
     "AbilityChannelTime"                                  "60"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "0.0"
+    "AbilityCooldown"                                     "1.75 1.5 1.25 1.0 0.75" // serves as min down-time in a way
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
+    "AbilityManaCost"                                     "60"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "cooldown_rate"                                   "10 14 18 22 26"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "mana_cost_pct"                                   "3 6 9 12 15"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "split_pct"                                       "50 45 40 35 30"
-      }
+      "cooldown_rate"                                     "10 14 18 22 26"
+      "mana_cost_pct"                                     "10"
+      "split_pct"                                         "50 45 40 35 30"
     }
   }
 }

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5244"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -15,9 +14,10 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -26,27 +26,27 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70 80 90 100 110" //OAA
+    "AbilityManaCost"                                     "70 75 80 85 90" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "mana_cost_per_second"                              "30 50 70 90 110" //OAA
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_cost_per_second"                            "20 40 60 100 140"
+        "value"                                           "500"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "475"
+        "value"                                           "90 140 190 340 490"
+        "special_bonus_unique_leshrac_3"                  "+50"
       }
-      "03"
+      "damage_resistance" // special_bonus_unique_leshrac_4 is not used
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "100 180 260 500 740" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_leshrac_3"
+        "value"                                           "0"
+        "special_bonus_unique_leshrac_4"                  "+10"
       }
     }
   }

@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Meepo: Ransack
+  //=================================================================================================================
+  "meepo_ransack"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "health_steal_heroes"
+      {
+        "value"                                           "9 12 15 18 24 30"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PURE"
+        "special_bonus_unique_meepo_6"                    "+8"
+      }
+      "health_steal_creeps" //OAA, same as health_steal_heroes
+      {
+        "value"                                           "9 12 15 18 24 30"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PURE"
+        "special_bonus_unique_meepo_6"                    "+8"
+      }
+    }
+  }
+}

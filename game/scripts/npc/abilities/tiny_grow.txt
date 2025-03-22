@@ -1,44 +1,38 @@
-// NOT USED, SEE TINY_GROW_OAA
-// THIS ABILITY CRASHES THE GAME MOST OF THE TIME
-
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Tiny: Grow
+  // Tiny: Grow (first 3 levels)
   //=================================================================================================================
   "tiny_grow"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5109"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilitySound"                                        "Tiny.Grow"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE" //OAA
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC" //OAA
 
     "MaxLevel"                                            "3"
-    "RequiredLevel"                                       "6"
-    "LevelsBetweenUpgrades"                               "6"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_armor"                                       "5 10 15"
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "10 16 22 28 34"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "25 50 75 150 300"
+        "value"                                           "60 120 180"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "attack_speed_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_speed_reduction"                          "20 35 50 55 60"
+        "value"                                           "-30"
+        "special_bonus_unique_tiny_6"                     "+8"
       }
+      "toss_bonus_damage" //OAA
+      {
+        "value"                                           "75 300 525"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
+      }
+      "move_speed"                                        "10 20 30"
     }
   }
 }

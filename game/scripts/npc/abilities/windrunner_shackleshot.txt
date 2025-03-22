@@ -4,24 +4,20 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5130"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0.15"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "12" //OAA
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -29,42 +25,53 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70 85 100 115 130 145"
+    "AbilityManaCost"                                     "70 80 90 100 110 120"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "fail_stun_duration"                              "0.75"
+        "value"                                           "16 14 12 10 9 8"
       }
-      "02"
+      "fail_stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "2.0 2.6 3.2 3.8 4.0 4.2"
-        "LinkedSpecialBonus"                              "special_bonus_unique_windranger_6"
+        "value"                                           "0.6"
       }
-      "03"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shackle_distance"                                "575"
+        "value"                                           "1.75 2.25 2.75 3.25 3.3 3.35"
+        "special_bonus_unique_windranger_6"               "+0.75"
       }
-      "04"
+      "shackle_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "arrow_speed"                                     "1650"
+        "value"                                           "575"
       }
-      "05"
+      "arrow_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shackle_count"                                   "1"
+        "value"                                           "1650"
       }
-      "06"
+      "shackle_count"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "shackle_angle"                                   "23"
+        "value"                                           "1"
+        "special_bonus_facet_windrunner_tangled"          "=0"
+      }
+      "shackle_angle"
+      {
+        "value"                                           "23"
+      }
+      "bonus_damage_per_hero"
+      {
+        "special_bonus_facet_windrunner_tangled"          "12 20 28 36 72 144"
+      }
+      "bonus_damage_per_other_pct"
+      {
+        "special_bonus_facet_windrunner_tangled"          "50"
+      }
+      "damage_buff_duration"
+      {
+        "special_bonus_facet_windrunner_tangled"          "6"
       }
     }
   }

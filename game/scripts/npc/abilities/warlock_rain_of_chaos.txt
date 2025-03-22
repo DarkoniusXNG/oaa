@@ -4,17 +4,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5165"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -26,87 +23,73 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "250 375 500 625 750"
+    "AbilityManaCost"                                     "200 400 600 800 1000"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1200"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Primarily about the summon
+    "AbilityCastRange"                                    "900"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "golem_duration"                                    "60"
+      "stun_duration"                                     "0.8"
+      "aoe"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "golem_duration"                                  "60"
+        "value"                                           "600"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "golem_hp" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.0"
+        "value"                                           "1500 3000 4500 9000 13500"
       }
-      "03"
+      "golem_dmg"                                         "100 200 300 600 1100" //OAA
+      "golem_armor"                                       "8 14 20 26 32" //OAA
+      "golem_movement_speed"                              "320 340 360 380 400"
+      "golem_health_regen"                                "25 50 75 100 125"
+      "golem_gold_bounty"                                 "100 150 200 500 1000"
+      "stun_delay"                                        "0.5"
+      "number_of_golems_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "aoe"                                             "600"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "golem_hp_tooltip"                                "1000 3000 5000 7500 10000" //OAA
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "golem_dmg_tooltip"                               "100 200 300 600 900" //OAA
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "golem_armor_tooltip"                             "10 20 30 40 50" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_warlock_2"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "golem_regen_tooltip"                             "30 60 90 150 300" //OAA
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "number_of_golems_scepter"                        "2"
+        "value"                                           "2"
         "RequiresScepter"                                 "1"
       }
-      "09" // 75% of golem_hp_tooltip
+      "golem_hp_scepter" //OAA, same as golem_hp
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "golem_hp_tooltip_scepter"                        "750 2250 3750 5625 7500" //OAA
+        "value"                                           "1500 3000 4500 9000 13500"
         "RequiresScepter"                                 "1"
       }
-        "10" // at least 75% of golem_dmg_tooltip
+      "golem_dmg_scepter" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "golem_dmg_tooltip_scepter"                       "75 150 225 450 675" //OAA
-        "RequiresScepter"                                 "1"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "hp_dmg_reduction_scepter"                        "25"
+        "value"                                           "80 160 240 480 720"
         "RequiresScepter"                                 "1"
       }
-      "12"
+      "golem_gold_bounty_scepter" // same as golem_gold_bounty
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bounty_reduction_scepter"                        "50"
+        "value"                                           "100 150 200 500 1000"
         "RequiresScepter"                                 "1"
+      }
+      "bonus_magic_resistance"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_warlock_1"                  "+80"
+      }
+      "bonus_armor"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_warlock_2"                  "+20"
+      }
+      "tooltip_golem_armor" //OAA
+      {
+        "value"                                           "8 14 20 26 32"
+        "special_bonus_unique_warlock_2"                  "+20"
+      }
+      "bonus_slow_resistance"                             "60"
+      "tooltip_manahealthboost" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_facet_warlock_golem"               "+50"
       }
     }
   }

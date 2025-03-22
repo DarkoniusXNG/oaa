@@ -1,0 +1,22 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Generic Boss Kraken Shell ability
+  //=================================================================================================================
+  "boss_kraken_shell"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/boss_kraken_shell.lua"
+    "AbilityTextureName"                                  "tidehunter_kraken_shell"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "IsBreakable"                                         "1"
+
+    "MaxLevel"                                            "1"
+
+    "AbilityValues"
+    {
+      "damage_threshold"                                  "200"
+    }
+  }
+}

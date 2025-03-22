@@ -1,0 +1,26 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Dire Eidolon
+  //=================================================================================
+  "npc_dota_dire_eidolon"
+  {
+    "include_keys_from"                                   "npc_dota_lesser_eidolon"
+
+    "ModelScale"                                          "0.9"
+    "Level"                                               "4"
+
+    "ArmorPhysical"                                       "5"     // Physical protection.
+    "MagicalResistance"                                   "60"    // Magical protection.
+
+    "AttackDamageMin"                                     "50"    // Damage range min.
+    "AttackDamageMax"                                     "50"    // Damage range max.
+    "AttackRange"                                         "500"
+
+    "HealthBarOffset"                                     "145"
+
+    "MovementSpeed"                                       "370"    // Speed
+
+    "StatusHealth"                                        "300"    // Base health.
+  }
+}

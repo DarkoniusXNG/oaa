@@ -1,0 +1,76 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Greater Boots of Travel 3
+  //=================================================================================================================
+  "item_recipe_greater_travel_boots_3"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "8000"
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_greater_travel_boots_3"
+    "ItemRequirements"
+    {
+      "01"                                                "item_greater_travel_boots_2;item_upgrade_core_3"
+    }
+  }
+
+  //=================================================================================================================
+  // Greater Boots of Travel 3
+  //=================================================================================================================
+  "item_greater_travel_boots_3"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/greater_travel_boots.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_BUILDING"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+    "AbilityTextureName"                                  "item_custom/greater_travels_3"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "30"
+    "AbilitySharedCooldown"                               "travel"
+    "AbilityChannelTime"                                  "3.0 2.5 2.0 1.5"
+    "AbilityManaCost"                                     "75"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "14003"
+    "ItemShopTags"                                        "teleport;move_speed"
+    "ItemQuality"                                         "common"
+    "ItemAliases"                                         "bot 3;boots of travel 3;greater boots of travel 3"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
+
+    "SpeciallyBannedFromNeutralSlot"                      "1"
+
+    "MaxUpgradeLevel"                                     "4"
+    "ItemBaseLevel"                                       "3"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_movement_speed"                              "100 105 110 115"
+      "bonus_damage_during_duels"                         "26 34 42 50"
+      "bonus_spell_amp_during_duels"                      "16 20 24 28"
+      "bonus_boss_damage"                                 "20 30 40 50"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+"DOTAAbilities"
+{
+  "item_mystic_staff"
+  {
+
+    "SecretShop"                                          "0" //OAA
+  }
+}

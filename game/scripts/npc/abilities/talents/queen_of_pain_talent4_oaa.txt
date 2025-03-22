@@ -1,0 +1,21 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Custom Queen of Pain Talent: Shadow Strike bonus damage per tick
+  //=================================================================================================================
+  "special_bonus_unique_queen_of_pain_4_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "special_bonus_undefined"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "value"                                             "30"
+    }
+  }
+}

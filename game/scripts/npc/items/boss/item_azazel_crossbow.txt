@@ -1,0 +1,83 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Azazel Crossbow
+  //=================================================================================================================
+  "item_recipe_azazel_crossbow"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_farming_6"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "20000"
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_azazel_crossbow"
+
+    "ItemRequirements"
+    {
+      "01"                                                "item_siege_mode_2;item_greater_crit_5;item_upgrade_core_4"
+    }
+  }
+
+  //=================================================================================================================
+  // Azazel Crossbow
+  //=================================================================================================================
+  "item_azazel_crossbow"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_datadriven"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT"
+    "AbilityTextureName"                                  "item_greater_crit"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "18"
+    "AbilitySharedCooldown"                               "splash_cannon"
+    "AbilityCastRange"                                    "1200"
+    "AbilityManaCost"                                     "100"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "89059"
+    "ItemShopTags"                                        "int;armor;regen_health;hard_to_tag"
+    "ItemQuality"                                         "rare"
+    "ItemAliases"                                         "azazels;azazels crossbow;crossbow"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_agility"                                     "70"
+      "bonus_strength"                                    "65"
+      "bonus_intellect"                                   "70"
+      "bonus_health"                                      "1000"
+      "bonus_health_regen"                                "15"
+      "bonus_attack_range"                                "200"
+      "bonus_damage"                                      "450"
+
+      "passive_splash_radius"                             "250"
+      "passive_splash_percent"                            "40"
+      "crit_chance"                                       "30"
+      "crit_multiplier"                                   "300"
+
+      "active_damage"                                     "1000"
+      "active_radius"                                     "600"
+      "active_splash_percent"                             "200"
+      "active_crit_chance"                                "100"
+      "knockback_distance"                                "300"
+      "knockback_duration"                                "0.5"
+      "projectile_speed"                                  "1800"
+    }
+  }
+}

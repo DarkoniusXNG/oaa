@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ability: Spider Cold Combustion - Explode on Death or when reaching enemies
+  //=================================================================================================================
+  "spider_cold_combustion"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "crystal_maiden_crystal_nova"
+    "ScriptFile"                                          "abilities/boss/spider_boss/spider_cold_combustion.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage"                                            "1000"
+      "radius"                                            "350"
+    }
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "particle"                                          "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf"
+      "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts"
+    }
+  }
+}

@@ -13,8 +13,6 @@ function Control( keys )
   --local ability_level = ability:GetLevel() - 1
 
   -- Little bonus for bots because they dont farm and mostly walk around doing nothing
-  caster:AddExperience(5,0,false,false)
-  caster:ModifyGold(5,false,0)
 
   position = caster:GetAbsOrigin()
   -- Hardcoded arenas coordinates, the top left corner and the bottom right corner
@@ -62,7 +60,7 @@ function Control( keys )
     caster:RemoveModifierByName("modifier_disable_control")
   -- If none of the above conditions are made, disable all bot orders and force them to move to a semi-random part of the map
   else
-    caster:AddNewModifier( caster, self, "modifier_disable_control", {} )
+    caster:AddNewModifier( caster, ability, "modifier_disable_control", {} )
     -- Only recieves a new move order command every 10 seconds to prevent going in circles
     if ability:IsCooldownReady() then
       -- If bots are in a duel and the arena middle has been set move there, otherwise go to random spot

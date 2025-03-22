@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8437"        // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
 
@@ -24,8 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_regen_crystal_1;item_upgrade_core_3"
-      "02"                                                "item_heart_3;item_upgrade_core_3"
-      "03"                                                "item_crimson_guard_3;item_upgrade_core_3"
     }
   }
 
@@ -36,71 +34,41 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8434"                                                      // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/reflex/postactive_regen.lua"
+    "ScriptFile"                                          "items/regen_crystal.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityTextureName"                                  "custom/regen_crystal_2"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "20.0"
-    "AbilityCastPoint"                                    "0.0"
+    "AbilityCooldown"                                     "25"
     "AbilitySharedCooldown"                               "regen_crystal"
+    "AbilityManaCost"                                     "200"
 
     "MaxUpgradeLevel"                                     "3"
     "ItemBaseLevel"                                       "2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "16800"
-    "ItemShopTags"                                        "str;regen_health;health_pool"
+    "ItemCost"                                            "18603"
+    "ItemShopTags"                                        "regen_health;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "regen crystal 2"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "1600 2100 2700"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "40 60 80"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "max_mana_to_hp_regen"                            "3"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "active_hp_regen"                                 "500"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "active_hp_regen_amp"                             "100"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "5"
-      }
-    }
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
-    "precache"
-    {
-      "particle"                                          "particles/items/regen_crystal/regen_ambient.vpcf"
+      "bonus_health"                                      "1300 1800 2450"
+      "bonus_strength"                                    "0"
+      "max_mana_to_hp_regen"                              "2.4"
+      //"active_hp_regen"                                   "175 200 225"
+      //"active_hp_regen_amp"                               "50"
+      "active_max_hp_as_heal"                             "7"
+      "duration"                                          "6"
     }
   }
 }

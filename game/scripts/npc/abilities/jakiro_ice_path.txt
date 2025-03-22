@@ -7,25 +7,21 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5298"                  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1200"
+    "AbilityCastRange"                                    "1200" //OAA, Valve has it wrong
     "AbilityCastPoint"                                    "0.65"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "12.0 11.0 10.0 9.0 9.0 9.0"
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -37,28 +33,49 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "path_delay"                                        "0.2"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "path_delay"                                      "0.5"
+        "value"                                           "1.25 1.50 1.75 2.0 2.25 2.5"
+        "special_bonus_unique_jakiro"                     "+0.4"
       }
-      "02"
+      "path_duration" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1 1.5 2.0 2.5 2.75 3.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_jakiro"
+        "value"                                           "3.25 3.5 3.75 4.0 4.25 4.5"
+        "special_bonus_facet_jakiro_ice_breaker"          "=5"
+        "special_bonus_unique_jakiro"                     "+0.4"
       }
-      "03"
+      "path_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "path_radius"                                     "150"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "50"
+        "value"                                           "50 50 50 50 100 150"
+        "CalculateSpellDamageTooltip"                     "1"
+        "special_bonus_unique_jakiro_6"                   "+60"
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "14 13 12 11 10 9"
+      }
+      "detonate_damage"
+      {
+        "value"                                           "=0"
+        "special_bonus_facet_jakiro_ice_breaker"          "=75 =125 =175 =225 =450 =675"
+      }
+      "detonate_stun_duration"
+      {
+        "value"                                           "=0"
+        "special_bonus_facet_jakiro_ice_breaker"          "=0.5"
+      }
+      "detonate_projectile_speed"
+      {
+        "value"                                           "=0"
+        "special_bonus_facet_jakiro_ice_breaker"          "=2400"
       }
     }
   }

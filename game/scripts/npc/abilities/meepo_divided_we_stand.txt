@@ -7,47 +7,76 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5433"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "BaseClass"                                           "ability_lua"
-    "ScriptFile"                                          "abilities/oaa_divided_we_stand.lua"
-    "AbilityTextureName"                                  "meepo_divided_we_stand"
-    "DisplayAdditionalHeroes"                             "1"
-    "LevelsBetweenUpgrades"                               "7"
-    "RequiredLevel"                                       "3"
-    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
-    "MaxLevel"                                            "5"
-    "HasScepterUpgrade"                                   "1"
+
+    // Damage.
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityDamage"                                       "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "tooltip_clones"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_clones"                                  "1 2 3 4 5"
+        "value"                                           "1 2 3"
+        "special_bonus_facet_meepo_more_meepo"            "=0"
       }
-      "02"
+      "tooltip_clones_multiplicity"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_share_percentage"                        "20"
+        "value"                                           "1 2 3 4"
+        "RequiresFacet"                                   "meepo_more_meepo"
       }
-      "03"
+      "tooltip_share_percentage"                          "20"
+      "tooltip_share_percentage_scepter"                  "100" // unused
+      "respawn"                                           "0.0"
+      "tooltip_respawn"                                   "20" // unused
+      "magic_resist"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_share_percentage_scepter"                "100"
+        "value"                                           "10 15 20"
       }
-      "04"
+      "tooltip_magic_resist"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "respawn"                                         "0.0"
+        "value"                                           "10 15 20"
+        "special_bonus_facet_meepo_more_meepo"            "=0"
       }
-      "05"
+      "tooltip_magic_resist_multiplicity"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_respawn"                                 "20"
+        "value"                                           "10 15 20 20"
+        "special_bonus_facet_meepo_pack_rat"              "=0"
+      }
+      "required_level"
+      {
+        "value"                                           "4"
+        "special_bonus_facet_meepo_more_meepo"            "=3"
+      }
+      "levels_between_upgrades"
+      {
+        "value"                                           "7"
+        "special_bonus_facet_meepo_more_meepo"            "=7"
+      }
+      "max_level"
+      {
+        "value"                                           "3"
+        "special_bonus_facet_meepo_more_meepo"            "=4"
+      }
+      "main_meepo_stats_pct"
+      {
+        "value"                                           "100"
+        "special_bonus_facet_meepo_more_meepo"            "=85"
+      }
+      "support_radius"
+      {
+        "special_bonus_facet_meepo_codependent"           "600"
+      }
+      "support_group_attack_speed_pct"
+      {
+        "special_bonus_facet_meepo_codependent"           "5"
+      }
+      "support_group_armor"
+      {
+        "special_bonus_facet_meepo_codependent"           "2"
       }
     }
   }

@@ -7,24 +7,23 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                            "8415"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "Model"                         "models/props_gameplay/recipe.vmdl"
-    "BaseClass"                     "item_datadriven"
-    "AbilityTextureName"            "custom/recipe/recipe_2"
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "1500"
-    "ItemShopTags"                  ""
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "1500"
+    "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"                    "1"
-    "ItemResult"                    "item_meteor_hammer_2"
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_meteor_hammer_2"
     "ItemRequirements"
     {
-      "01"                                                "item_rod_of_atos;item_upgrade_core"
-      "02"                                                "item_cyclone;item_upgrade_core"
+      "01"                                                "item_meteor_hammer_1;item_upgrade_core"
     }
   }
 
@@ -35,14 +34,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                            "8416"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"                     "item_lua"
-    "ScriptFile"                    "items/meteor_hammer.lua"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-    "AbilityTextureName"            "item_custom/meteor_hammer_2"
-    "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
-    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"               "1"
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/meteor_hammer.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityTextureName"                                  "item_custom/meteor_hammer_2"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     // Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
@@ -51,103 +48,57 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityChannelTime"            "2.5"
+    "AbilityChannelTime"                                  "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"              "600"
-    "AbilitySharedCooldown"         "meteor"
-    "AbilityCooldown"               "24"
-    "AbilityManaCost"               "125"
+    "AbilityCastRange"                                    "600"
+    "AbilitySharedCooldown"                               "meteor"
+    "AbilityCooldown"                                     "25 23 21 19 17"
+    "AbilityManaCost"                                     "125"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "4225"
-    "ItemQuality"                   "epic"
-    "ItemAliases"                   "mh 2;meteor hammer 2"
-    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemCost"                                            "5151"
+    "ItemQuality"                                         "epic"
+    "ItemAliases"                                         "mh 2;meteor hammer 2"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_intellect"                                   "26 31 41 56 76"
+      "bonus_strength"                                    "12 17 22 27 32"
+      "bonus_agility"                                     "12 17 22 27 32"
+      "spell_amp"                                         "12 16 20 24 28"
+      "mana_regen_multiplier"                             "50 60 70 80 90"
+      "spell_lifesteal_amp"                               "12 14 16 18 20"
+
+      "burn_dps_boss"                                     "150 300 450 600 750"
+      "burn_dps"                                          "60 150 240 330 420"
+      "burn_duration"                                     "6"
+      "stun_duration"                                     "1.5"
+      "burn_interval"                                     "1.0"
+      "land_time"                                         "0.5"
+      "impact_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "10 25 45 70 100"
+        "value"                                           "380"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "10 25 45 70 100"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "10 15 25 40 60"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "6.5 10.5 14.5 18.5 22.5"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "5.0 5.25 5.75 6.5 7.5"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_dps_boss"                                   "180 360 540 720 900"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_dps"                                        "90 180 270 360 450"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_duration"                                   "6"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.75 2.0 2.25 2.5 2.75"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_interval"                                   "1.0"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "land_time"                                       "0.5"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impact_radius"                                   "315"
-      }
-      "13"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impact_damage_boss"                              "150 300 450 600 750"
-      }
-      "14"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impact_damage"                                   "150 300 450 600 750"
-      }
+      "impact_damage_boss"                                "200 400 700 1100 1600"
+      "impact_damage"                                     "130 260 455 715 1040"
+      "move_speed_slow_pct"                               "20 25 30 35 40"
+      "cooldown_tooltip"                                  "24 22 20 18 16"
     }
+
     "precache"
     {
-      "particle"                "particles/items4_fx/meteor_hammer_aoe.vpcf"
-      "particle"                "particles/items4_fx/meteor_hammer_spell.vpcf"
-      "particle"                "particles/items4_fx/meteor_hammer_spell_debuff.vpcf"
-      "particle"                "particles/items4_fx/meteor_hammer_cast.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_aoe.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_spell.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_spell_debuff.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_cast.vpcf"
     }
   }
 }

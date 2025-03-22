@@ -7,14 +7,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "9456"       // unique ID
     "BaseClass"                                           "item_datadriven"
     "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "20000"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -24,8 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_vampire;item_upgrade_core_4"
-      "02"                                                "item_satanic_4;item_upgrade_core_4"
-      "03"                                                "item_mask_of_madness_4;item_upgrade_core_4"
     }
   }
 
@@ -36,19 +34,17 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "9457"       // unique ID
     "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/transformation/vampire.lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-    "FightRecapLevel"                                     "2"
+    "ScriptFile"                                          "items/vampire.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/vampire_2"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.0"
     "AbilityManaCost"                                     "0"
-    "AbilityCooldown"                                     "16"
-    "AbilitySharedCooldown"                               "vampire"
+    "AbilityCooldown"                                     "20"
+    "AbilitySharedCooldown"                               "satanic"
 
     "MaxUpgradeLevel"                                     "2"
     "ItemBaseLevel"                                       "2"
@@ -56,71 +52,44 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "38800"
+    "ItemCost"                                            "35054"
     "ItemShopTags"                                        "damage;unique;hard_to_tag"
     "ItemQuality"                                         "artifact"
-    "ItemAliases"                                         "vampire;vamp;vampire tooth;vampires tooth;satanic"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemAliases"                                         "vampire;vampire tooth;vampire fang"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_strength"                                    "55 75"
+      "bonus_damage"                                      "85 125"
+      "bonus_armor"                                       "0"
+      "bonus_status_resistance"                           "16 18"
+      //"bonus_slow_resist"                                 "16 18"
+      "bonus_night_vision"                                "400 600"
+      "lifesteal_percent"                                 "45 50"
+      "active_lifesteal_percent"                          "200"
+      "damage_per_second_pct"                             "8" // only during the day
+      "ticks_per_second"                                  "4"
+      "night_bonus_damage"                                "100"
+      "night_thirst_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "70 95"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "100 140"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_status_resistance"                         "28 30"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "40 50"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_night_vision"                              "400 600"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "lifesteal_percent"                               "40 45"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "active_lifesteal_percent"                        "215 225"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second_pct"                           "8"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "ticks_per_second"                                "4"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
+      "duration"                                          "6.0"
     }
+
     "precache"
     {
-      "particle"                  "particles/generic_gameplay/generic_lifesteal_lanecreeps.vpcf"
+      "particle"                                          "particles/generic_gameplay/generic_lifesteal.vpcf"
+      "particle"                                          "particles/items/vampire/vampire_arc.vpcf"
+      "particle"                                          "particles/items/vampire/vampire_base.vpcf"
+      "particle"                                          "particles/items/vampire/vampire.vpcf"
+      "particle"                                          "particles/items/vampire/vampire_projectile.vpcf"
+      "soundfile"                                         "soundevents/items/oaa_items_sfx.vsndevts"
     }
   }
 }

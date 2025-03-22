@@ -1,6 +1,6 @@
 "itembuilds"
 {
-  "author"        "Valve"
+  "author"        "OAA 7.35d"
   "hero"          "npc_dota_hero_tiny"
   "Title"         "Recommended items for Tiny"
 
@@ -8,47 +8,54 @@
   {
     "#DOTA_Item_Build_Starting_Items"
     {
-      "item"      "item_flask"
-      "item"      "item_branches"
-      "item"      "item_enchanted_mango"
-      "item"      "item_quelling_blade"
+      "item"      "item_boots"
     }
 
-    "#DOTA_Item_Build_Early_Game"
+    "#DOTA_Item_Build_Physical_Core" // Aghanim Scepter oriented
     {
-      "item"      "item_magic_wand"
-      "item"      "item_lesser_crit"
-    }
-
-    "#DOTA_Item_Build_Mid_Items"
-    {
+      "item"      "item_harpoon"
       "item"      "item_ultimate_scepter"
-      "item"      "item_assault"
-      "item"      "item_echo_sabre"
+      "item"      "item_greater_crit"
+      "item"      "item_devastator_oaa_2"
+      "item"      "item_giant_form"
     }
 
-    "#DOTA_Item_Build_Late_Items"
+    // "#DOTA_Item_Build_Physical_Core" // Attack Speed Tiny
+    // {
+      // "item"      "item_harpoon"
+      // "item"      "item_mjollnir"
+      // "item"      "item_monkey_king_bar"
+      // "item"      "item_spell_breaker_1"
+      // "item"      "item_bloodthorn"
+      // "item"      "item_abyssal_blade_2"
+    // }
+
+    "#DOTA_Item_Build_Magical_Core"
     {
-      "item"      "item_sange_and_yasha"
-      "item"      "item_greater_crit"
-      "item"      "item_giant_form"
-      "item"      "item_abyssal_blade_3"
+      "item"      "item_overwhelming_blink"
+      "item"      "item_angels_demise"
+      "item"      "item_ethereal_blade"
+      "item"      "item_shivas_guard"
+      "item"      "item_heart_oaa_1"
+      "item"      "item_kaya_and_sange"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
     }
 
     "#DOTA_Item_Build_Luxury"
     {
+      "item"      "item_assault"
       "item"      "item_black_king_bar_1"
-      "item"      "item_blink"
+      "item"      "item_greater_phase_boots"
+      "item"      "item_sange_and_yasha"
       "item"      "item_silver_edge"
-      "item"      "item_ancient_janggo"
-      "item"      "item_desolator"
-      "item"      "item_heart"
-      "item"      "item_satanic"
-      "item"      "item_helm_of_the_dominator_2"
-      "item"      "item_bloodthorn"
-      "item"      "item_lotus_orb"
-      "item"      "item_ethereal_blade"
-      "item"      "item_kaya_and_sange"
+      "item"      "item_spell_breaker_1"
+      "item"      "item_greater_travel_boots"
+      "item"      "item_dagger_of_moriah_1"
+      "item"      "item_rapier"
     }
   }
 }

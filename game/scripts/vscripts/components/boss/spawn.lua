@@ -17,6 +17,7 @@ if BossSpawner == nil then
 end
 
 function BossSpawner:Init ()
+  self.moduleName = "BossSpawner"
   HudTimer:At(BOSS_RESPAWN_START, Dynamic_Wrap(BossSpawner, 'SpawnAllBosses'))
   ChatCommand:LinkDevCommand("-spawnbosses", Dynamic_Wrap(BossSpawner, 'SpawnAllBosses'), BossSpawner)
 
@@ -28,27 +29,27 @@ function BossSpawner:Init ()
   each(partial(addToList, allGoodPlayers), PlayerResource:GetPlayerIDsForTeam(DOTA_TEAM_BADGUYS))
   each(partial(addToList, allBadPlayers), PlayerResource:GetPlayerIDsForTeam(DOTA_TEAM_GOODGUYS))
 
-  BossSpawner.goodZone2 = ZoneControl:CreateZone('good_safe_pit_2', {
-    mode = ZONE_CONTROL_EXCLUSIVE_OUT,
-    margin = 300,
-    players = allGoodPlayers
-  })
-  BossSpawner.goodZone1 = ZoneControl:CreateZone('good_safe_pit_1', {
-    mode = ZONE_CONTROL_EXCLUSIVE_OUT,
-    margin = 300,
-    players = allGoodPlayers
-  })
+  -- BossSpawner.goodZone2 = ZoneControl:CreateZone('good_safe_pit_2', {
+    -- mode = ZONE_CONTROL_EXCLUSIVE_OUT,
+    -- margin = 300,
+    -- players = allGoodPlayers
+  -- })
+  -- BossSpawner.goodZone1 = ZoneControl:CreateZone('good_safe_pit_1', {
+    -- mode = ZONE_CONTROL_EXCLUSIVE_OUT,
+    -- margin = 300,
+    -- players = allGoodPlayers
+  -- })
 
-  BossSpawner.badZone2 = ZoneControl:CreateZone('bad_safe_pit_2', {
-    mode = ZONE_CONTROL_EXCLUSIVE_OUT,
-    margin = 300,
-    players = allBadPlayers
-  })
-  BossSpawner.badZone1 = ZoneControl:CreateZone('bad_safe_pit_1', {
-    mode = ZONE_CONTROL_EXCLUSIVE_OUT,
-    margin = 300,
-    players = allBadPlayers
-  })
+  -- BossSpawner.badZone2 = ZoneControl:CreateZone('bad_safe_pit_2', {
+    -- mode = ZONE_CONTROL_EXCLUSIVE_OUT,
+    -- margin = 300,
+    -- players = allBadPlayers
+  -- })
+  -- BossSpawner.badZone1 = ZoneControl:CreateZone('bad_safe_pit_1', {
+    -- mode = ZONE_CONTROL_EXCLUSIVE_OUT,
+    -- margin = 300,
+    -- players = allBadPlayers
+  -- })
 
   local bossPits = Entities:FindAllByName('boss_pit')
 
@@ -146,6 +147,7 @@ function BossSpawner:SpawnBoss (pit, boss, bossTier, isProtected)
     team = DOTA_TEAM_BADGUYS
   end
 
+  -- Wrong on different maps
   if pit:GetAbsOrigin().y > 5000 then
     team = DOTA_TEAM_GOODGUYS
   elseif pit:GetAbsOrigin().y < -5000 then
@@ -161,10 +163,6 @@ function BossSpawner:SpawnBoss (pit, boss, bossTier, isProtected)
     return
   end
 
-  --local heart = CreateItem("item_heart", bossHandle, bossHandle)
-
-  --bossHandle:AddItem(heart)
-
   --Adding cores to the bosses inventory
   local core = CreateItem(BossSpawner.CoreItems[bossTier], bossHandle, bossHandle)
 
@@ -174,9 +172,9 @@ function BossSpawner:SpawnBoss (pit, boss, bossTier, isProtected)
     bossHandle:AddItem(core)
   end
 
-  local resistance = bossHandle:FindAbilityByName("boss_resistance")
-  if resistance then
-    DebugPrint('Leveling up the boss resistance manager')
+  -- This is not even needed for npc_dota_creature baseclass
+  local resistance = bossHandle:FindAbilityByName("boss_basic_properties_oaa")
+  if resistance and resistance:GetLevel() ~= 1 then
     resistance:SetLevel(1)
   end
 
@@ -189,18 +187,24 @@ function BossSpawner:SpawnBoss (pit, boss, bossTier, isProtected)
 
   Minimap:SpawnBossIcon(pit, bossTier)
 
-  local newBossTier = math.min(5, bossTier + 1)
-
   bossAI.onDeath(function ()
     DebugPrint('Boss has died ' .. pit.killCount .. ' times')
     pit.killCount = pit.killCount + 1
+
     if not BossSpawner.hasKilledTiers[bossTier] then
       BossSpawner.hasKilledTiers[bossTier] = true
-      local scoreLimitIncrease = PlayerResource:GetTeamPlayerCount() * KILL_LIMIT_INCREASE
-      PointsManager:IncreaseLimit(scoreLimitIncrease)
+      -- Notify everyone that a first boss is killed
+      local message = "First tier " .. tostring(bossTier) .. " boss has been slain!"
+      -- Show the message on the screen
+      Notifications:BottomToAll({text = message, duration = 5.0})
+      -- Show the message in chat
+      GameRules:SendCustomMessage(message, 0, 0)
+      -- Increasing the score limit with the first boss kill of the tier
+      --PointsManager:IncreaseLimit()
     end
+
     Timers:CreateTimer(BOSS_RESPAWN_TIMER, function()
-      BossSpawner:SpawnBossAtPit(pit, bossTier)
+      BossSpawner:SpawnBossAtPit(pit)
     end)
   end)
 end

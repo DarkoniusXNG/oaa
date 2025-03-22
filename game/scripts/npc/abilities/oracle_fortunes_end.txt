@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5637"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_CHANNEL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -15,21 +14,19 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "850"
     "AbilityCastPoint"                                    "0"
-    //"AbilityChannelTime"                                  "2.5"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15 12 9 6 6 6"
+    "AbilityCooldown"                                     "15 12 9 6 6 6" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -37,59 +34,45 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "channel_time" // AbilityChannelTime
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "channel_time"                                    "2.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_oracle_7"
-        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_SUBTRACT"
+        "value"                                           "2.5"
       }
-      "02"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "120 150 180 210 420 630"
+        "value"                                           "100 160 220 280 560 1120"
       }
-      "03"
+      "bolt_speed"                                        "1200"
+      "minimum_purge_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bolt_speed"                                      "1000"
+        "value"                                           "0.75"
+        "special_bonus_unique_oracle_2"                   "+0.5"
       }
-      "04"
+      "maximum_purge_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "minimum_purge_duration"                          "0.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_oracle_2"
+        "value"                                           "2.75"
+        "special_bonus_unique_oracle_2"                   "+0.5"
       }
-      "05"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "maximum_purge_duration"                          "2.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_oracle_2"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "damage_per_buff"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "300"
+        "value"                                           "0"
+        "special_bonus_unique_oracle_damage_per_purge"    "+80"
       }
-      "07"
+      "heal_per_debuff"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_bonus_range"                             "800"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_unique_oracle_damage_per_purge"    "+80"
       }
-      "08"
+      "purge_constantly"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_bonus_radius"                            "150"
-        "RequiresScepter"                                 "1"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_stun_percentage"                         "60" //OAA
-        "RequiresScepter"                                 "1"
+        "special_bonus_unique_oracle_7"                   "=1"
       }
     }
   }

@@ -1,0 +1,35 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ancient Relic - custom neutral tier 4 item
+  //=================================================================================================================
+  "item_ancient_relic"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/ancient_relic.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"                                  "item_ancient_perseverance"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralPassiveDrop"                            "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_move_speed"                                  "30"
+      "bonus_damage"                                      "50"
+      "bonus_spell_amp"                                   "15"
+      "bonus_hp_regen"                                    "8"
+      "bonus_mana_regen"                                  "8"
+    }
+  }
+}

@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=====================================================================================================
   // Lycan: Feral Impulse
   //=================================================================================================================
@@ -8,29 +7,26 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5397"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1200"
+        "value"                                           "10 16 22 28 34 40"
+        "special_bonus_unique_lycan_4"                    "+20"
       }
-      "02"
+      "bonus_hp_regen" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "14 26 38 50 62 74"
-        "LinkedSpecialBonus"                              "special_bonus_unique_lycan_4"
+        "value"                                           "2 6 10 14 22 34"
       }
-      "03"
+      "max_level" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_hp_regen"                                  "2 6 10 14 22 30" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_lycan_3"
+        "value"                                           "6"
+        "special_bonus_facet_lycan_alpha_wolves"          "-1"
       }
     }
   }

@@ -1,4 +1,6 @@
-require("internal/util")
+if IsInTrigger == nil then
+  require('internal/util')
+end
 
 LinkLuaModifier("modifier_fountain_attack", "abilities/fountain_attack.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_fountain_attack_aura", "abilities/fountain_attack.lua", LUA_MODIFIER_MOTION_NONE)
@@ -9,6 +11,7 @@ function fountain_attack:GetIntrinsicModifierName()
   return "modifier_fountain_attack"
 end
 
+---------------------------------------------------------------------------------------------------
 
 modifier_fountain_attack = class(ModifierBaseClass)
 
@@ -48,9 +51,39 @@ function modifier_fountain_attack:GetAuraSearchType()
 end
 
 function modifier_fountain_attack:GetAuraEntityReject(entity)
-  return entity:GetTeamNumber() == DOTA_TEAM_NEUTRALS or not IsInTrigger(entity, self.trigger)
+  -- Reject entities outside of the trigger
+  if not IsInTrigger(entity, self.trigger) then
+    return true
+  end
+
+  -- Reject neutrals
+  if entity.GetTeamNumber then
+    if entity:GetTeamNumber() == DOTA_TEAM_NEUTRALS then
+      return true
+    end
+  end
+
+  if entity.HasModifier then
+    -- Reject custom thinkers
+    if entity:HasModifier("modifier_oaa_thinker") then
+      return true
+    end
+
+    -- Reject bosses even if they are not neutral
+    if entity:IsOAABoss() then
+      return true
+    end
+
+    -- Reject couriers
+    if entity:IsCourier() then
+      return true
+    end
+  end
+
+  return false
 end
 
+---------------------------------------------------------------------------------------------------
 
 modifier_fountain_attack_aura = class(ModifierBaseClass)
 
@@ -84,7 +117,8 @@ function modifier_fountain_attack_aura:OnIntervalThink()
     local caster = self:GetCaster()
     local teamID = caster:GetTeamNumber()
     local target = self:GetParent()
-    local timetokill = self:GetAbility():GetSpecialValueFor("timetokill")
+    local ability = self:GetAbility()
+    local timetokill = ability:GetSpecialValueFor("timetokill")
     local killTicks = timetokill / 0.1
     local targetHealth = target:GetHealth()
     local targetMaxHealth = target:GetMaxHealth()
@@ -92,15 +126,12 @@ function modifier_fountain_attack_aura:OnIntervalThink()
     local targetMaxMana = target:GetMaxMana()
     local manaReductionAmount = targetMaxMana / killTicks
 
-    if target:IsCourier() then
-      return
-    end
-
     target:MakeVisibleDueToAttack(teamID, 0)
-    target:Purge(true, false, false, false, true)
-    target:ReduceMana(manaReductionAmount)
+    -- Basic Dispel (for enemies)
+    target:Purge(true, false, false, false, false)
+    target:ReduceMana(manaReductionAmount, ability)
     if targetHealth - healthReductionAmount < 1 then
-      target:Kill(self, caster)
+      target:Kill(ability, caster)
     else
       target:SetHealth(targetHealth - healthReductionAmount)
     end

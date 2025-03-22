@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3530"      // unique ID
     "BaseClass"                                           "item_datadriven"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -19,19 +18,20 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-
-    "ItemCost"                                            "1500"
-    "ItemPurchasable"                                     "0"
+    "ItemCorePointCost"                                   "2"
+    "ItemCost"                                            "1"
+    "ItemPurchasable"                                     "1"
     //"ItemSellable"                                      "0"
     "ItemKillable"                                        "1"
     "ItemShareability"                                    "ITEM_NOT_SHAREABLE"
+    "IsTempestDoubleClonable"                             "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
-      "particle"                  "particles/items/upgrade_1.vpcf"
-      "model"                     "models/items/upgrade_1.vmdl"
+      "particle"                                          "particles/items/upgrade_1.vpcf"
+      "model"                                             "models/items/upgrade_1.vmdl"
     }
   }
 }

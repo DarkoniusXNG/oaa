@@ -1,0 +1,39 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Lycan Boss Claw Lunge
+  //=================================================================================================================
+  "lycan_boss_claw_lunge_tier5"
+  {
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "lycan_feral_impulse"
+    "ScriptFile"                                          "abilities/boss/lycan_boss/lycan_boss_claw_lunge_tier5.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "1000"
+    "AbilityCastPoint"                                    "2.0"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "30.0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "lunge_damage"                                      "12000" // physical
+      "lunge_width"                                       "200"
+      "lunge_speed"                                       "1200"
+      "lunge_distance"                                    "1000"
+    }
+  }
+}

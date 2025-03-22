@@ -1,19 +1,22 @@
 function Spawn( entityKeyValues )
-	if thisEntity == nil then
-		return
-	end
+	if not thisEntity or not IsServer() then
+    return
+  end
 
 	thisEntity.hPoisonSpit = thisEntity:FindAbilityByName( "spider_poison_spit" )
 	thisEntity:SetContextThink( "PoisonSpiderThink", PoisonSpiderThink, 1 )
 end
 
 function PoisonSpiderThink()
+  if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME or not IsValidEntity(thisEntity) or not thisEntity:IsAlive() then
+    return -1
+  end
 
-	if ( not IsValidEntity(thisEntity) ) or ( not thisEntity:IsAlive()) or (thisEntity:IsDominated()) then
-		return -1
-	end
+  if thisEntity:IsDominated() or thisEntity:IsIllusion() then
+    return -1
+  end
 
-	if GameRules:IsGamePaused() == true then
+	if GameRules:IsGamePaused() then
 		return 1
   end
 

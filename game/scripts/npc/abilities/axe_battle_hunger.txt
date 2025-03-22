@@ -7,20 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5008"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -28,7 +24,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "5.0" //OAA
+    "AbilityCooldown"                                     "11 9 7 5 5 5" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -36,49 +32,36 @@
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "750"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.1"  // Primarily about the damage
+    "AbilityCastRange"                                    "700 775 850 925 1000 1075"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "12.0"
+      "slow"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "9 10 11 12 14 16" //OAA
+        "value"                                           "-15 -20 -25 -30 -35 -40"
+        "special_bonus_unique_axe_6"                      "-10"
       }
-      "02"
+      "damage_per_second" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow"                                            "-12"
+        "value"                                           "10 20 30 40 140 240"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "armor_multiplier" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed_bonus"                                     "12"
+        "value"                                           "1"
+        "special_bonus_unique_axe"                        "x3"
       }
-      "04"
+      "speed_bonus"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "16 24 32 40 80 120"
-        "LinkedSpecialBonus"                              "special_bonus_unique_axe"
+        "value"                                           "0"
+        "special_bonus_unique_axe_8"                      "+10"
       }
-      "05"
+      "should_stack"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction_scepter"                        "30"
-        "CalculateSpellDamageTooltip"                     "0"
-        "RequiresScepter"                                 "1"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_range"                                   "400"
-        "RequiresScepter"                                 "1"
+        "special_bonus_shard"                             "1"
       }
     }
   }

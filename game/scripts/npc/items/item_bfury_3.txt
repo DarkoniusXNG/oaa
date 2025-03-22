@@ -5,18 +5,19 @@
   //=================================================================================================================
   "item_recipe_bfury_3"
   {
-    "ID"                                                  "3075"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_3"
+
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
+
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_bfury_3"
-    "AbilityTextureName"                                  "custom/recipe/recipe_3"
     "ItemRequirements"
     {
       "01"                                                "item_bfury_2;item_upgrade_core_2"
-      "02"                                                "item_desolator_oaa_2;item_upgrade_core_2"
     }
   }
 
@@ -27,15 +28,17 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3078"    // unique ID
     "BaseClass"                                           "item_bfury"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
+
     "AbilityCastRange"                                    "350"
     "AbilityCastPoint"                                    "0.0"
     "AbilityCooldown"                                     "4.0"
+    "AbilitySharedCooldown"                               "cleavers"
     "AbilityTextureName"                                  "custom/battle_fury_3"
+
     //Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
     "MaxUpgradeLevel"                                     "5"
@@ -44,66 +47,41 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "8500"
+    "ItemCost"                                            "9002"
     "ItemShopTags"                                        "damage;health_regen;mana_regen;hard_to_tag"
     "ItemQuality"                                         "epic"
-    "ItemAliases"                                         "cleaver 3"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemAliases"                                         "bf 3;battle fury 3;cleaver 3"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage"                                      "60 80 120 180 260"
+      "bonus_health_regen"                                "7.5 11 14 17 20"
+      "bonus_mana_regen"                                  "2.75 3.0 3.5 4.25 5.25"
+      "cleave_damage_percent"                             "60 65 70 75 80"
+      "cleave_damage_percent_creep"                       "40 45 50 55 60"
+      "quelling_bonus"                                    "10"
+      "quelling_bonus_ranged"                             "10"
+      "cleave_starting_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "55 75 115 175 255"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "cleave_ending_width"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "7.5 14.0 20.0 25.0 32.0"
+        "value"                                           "360"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "cleave_distance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "3.25 3.5 4.0 4.75 5.75"
+        "value"                                           "650"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04" // Cleave against heroes
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_damage_percent"                           "70 90 110 130 150"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_damage_percent_creep"                     "30 50 70 90 110" //OAA
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "quelling_bonus"                                  "18"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "quelling_bonus_ranged"                           "18" //OAA
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_starting_width"                           "150"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_ending_width"                             "360"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cleave_distance"                                 "650"
-      }
+      "upgraded_cleave_bonus"                             "25"
+      "upgraded_damage_bonus"                             "15"
     }
   }
 }

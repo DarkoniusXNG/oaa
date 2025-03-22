@@ -1,78 +1,71 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: Combo Breaker 5
+  // Recipe: Aeon Disk 5
   //=================================================================================================================
-  "item_recipe_aeon_disk_5"
+  "item_recipe_aeon_disk_oaa_5"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8405"    // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_5"
-    "ItemCost"                                            "20000"
-    "ItemShopTags"                                        ""
-    "ItemRecipe"                                          "1"
 
-    "ItemResult"                                          "item_aeon_disk_5"
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
+    "ItemShopTags"                                        ""
+
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_aeon_disk_oaa_5"
     "ItemRequirements"
     {
-      "01"                                                "item_aeon_disk_4;item_upgrade_core_4"
-      "02"                                                "item_sphere_4;item_upgrade_core_4"
-      "03"                                                "item_reflection_shard_3;item_upgrade_core_4"
+      "01"                                                "item_aeon_disk_oaa_4;item_upgrade_core_4"
     }
   }
 
   //=================================================================================================================
-  // Combo Breaker 5
+  // Aeon Disk 5
   //=================================================================================================================
-  "item_aeon_disk_5"
+  "item_aeon_disk_oaa_5"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8406" // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"                                           "item_aeon_disk"
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/aeon_disk.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"                                  "custom/combo_breaker_5"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "105 95 85 75 65"
+    "AbilitySharedCooldown"                               "combobreaker"
+    "AbilityManaCost"                                     "0"
+
+    // Spicy Parameters
+    //-------------------------------------------------------------------------------------------------------------
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "5"
-    "ItemCost"                                            "37600"
-    "ItemAliases"                                         "ad 5;aeon disk 5"
 
-    "AbilitySharedCooldown"                               "combobreaker"
-    "AbilityCooldown"                                     "105.0 95.0 75.0 55.0 35.0"
-    "AbilityTextureName"                                  "custom/combo_breaker_5"
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "34304"
+    "ItemShopTags"                                        "health_pool;mana_pool"
+    "ItemQuality"                                         "epic"
+    "ItemAliases"                                         "ad 5;aeon disk 5"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "300 550 1050 1800 2800"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "300 400 550 750 1000"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "health_threshold_pct"                            "70"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "status_resistance"                               "75"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "buff_duration"                                   "2.5"
-      }
+      "bonus_health"                                      "250 500 750 1000 1250"
+      "bonus_mana"                                        "300 400 550 750 1000"
+      "health_threshold_pct"                              "70"
+      "status_resistance"                                 "75"
+      "buff_duration"                                     "2.5"
+      "cooldown_tooltip"                                  "105 95 85 75 65"
     }
   }
 }

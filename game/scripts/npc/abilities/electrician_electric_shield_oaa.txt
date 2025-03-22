@@ -8,78 +8,117 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                                           "ability_lua"
-    "ID"                                                  "8481"
+    "ScriptFile"                                          "abilities/electrician/electrician_electric_shield.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "AbilityTextureName"                                  "custom/electrician_electric_shield"
-    "ScriptFile"                                          "abilities/electrician/electrician_electric_shield.lua"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.0"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "0.5"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "5"
+    "AbilityManaCost"                                     "5" // handled in lua, we can put minimum mana cost here just for clarity and hero selection screen
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_cost"                                       "20"
+        "value"                                           "24"
       }
-      "02"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shield_per_mana"                                 "75 95 115 135 155 175"
+        "value"                                           "18"
       }
-      "03"
+      "flat_mana_cost"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "shield_damage_block"                             "10 20 30 40 50 60"
+        "value"                                           "5"
+        "special_bonus_facet_electrician_alternating_current"  "=110 =120 =130 =140 =150 =160"
+      }
+      "max_mana_cost" // both Direct Current & No Current
+      {
+        "value"                                           "20"
+        "special_bonus_facet_electrician_alternating_current"  "=0"
+      }
+      "shield_per_mana" // both Direct Current & No Current
+      {
+        "value"                                           "0.75 0.95 1.15 1.35 1.55 1.75"
+        "special_bonus_facet_electrician_alternating_current"  "=0"
+        "special_bonus_facet_electrician_no_current"      "+0.25"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "04"
+      "magical_shield_damage_block" // Direct Current
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "shield_duration"                                 "12.0"
+        "value"                                           "0"
+        "special_bonus_facet_electrician_direct_current"  "=70"
+        "CalculateSpellDamageTooltip"                     "0"
+        "RequiresFacet"                                   "electrician_direct_current"
       }
-      "05"
+      "attack_damage_block" // Alternating Current
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "400"
+        "value"                                           "0"
+        "special_bonus_facet_electrician_alternating_current"  "=15 =35 =55 =75 =150 =225"
+        "CalculateSpellDamageTooltip"                     "0"
+        "RequiresFacet"                                   "electrician_alternating_current"
       }
-      "06"
+      "bonus_magic_resist" // Alternating Current
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_damage"                                     "25 35 45 55 110 220"
+        "value"                                           "0"
+        "special_bonus_facet_electrician_alternating_current"  "=15 =20 =25 =30 =35 =40"
+        "RequiresFacet"                                   "electrician_alternating_current"
       }
-      "07"
+      "aura_radius" // both Direct Current & Alternating Current
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "aura_interval"                                   "0.2"
+        "value"                                           "375"
+        "special_bonus_unique_electrician_2_oaa"          "+125"
+        "special_bonus_facet_electrician_no_current"      "=0"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "aura_damage" // both Direct Current & Alternating Current
+      {
+        "value"                                           "25 35 45 55 110 220"
+        "special_bonus_unique_electrician_5_oaa"          "+100"
+        "special_bonus_facet_electrician_no_current"      "=0"
+      }
+      "aura_interval" // both Direct Current & Alternating Current (not shown in tooltip)
+      {
+        "value"                                           "0.25"
+      }
+      "physical_shield_damage_block" // No Current
+      {
+        "value"                                           "0"
+        "special_bonus_facet_electrician_no_current"      "=70"
+        "special_bonus_unique_electrician_2_oaa"          "+30"
+        "CalculateSpellDamageTooltip"                     "0"
+        "RequiresFacet"                                   "electrician_no_current"
+      }
+      "bonus_attack_damage" // No Current
+      {
+        "value"                                           "0"
+        "special_bonus_facet_electrician_no_current"      "=25 =35 =45 =55 =110 =220"
+        "special_bonus_unique_electrician_5_oaa"          "+100"
+        "CalculateSpellDamageTooltip"                     "0"
+        "RequiresFacet"                                   "electrician_no_current"
       }
     }
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
-    "Precache"
+    "precache"
     {
-      "particle"                                          "particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"
-      "particle"                                          "particles/units/heroes/hero_templar_assassin/templar_assassin_refraction.vpcf"
+      "particle"                                          "particles/hero/electrician/electrician_electric_shield.vpcf"
+      "particle"                                          "particles/items_fx/chain_lightning.vpcf"
       "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_razor.vsndevts"
     }
   }

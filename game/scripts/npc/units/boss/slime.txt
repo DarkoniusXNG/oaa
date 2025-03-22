@@ -1,0 +1,109 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Boss tier 2 - Slime
+  //=================================================================================
+  "npc_dota_boss_slime"
+  {
+    // General
+    //
+    "BaseClass"                                           "npc_dota_creature"
+    "Model"                                               "models/creeps/darkreef/blob/darkreef_blob_02_small.vmdl" // model of the smaller slimes
+    "vscripts"                                            "units/ai_slime.lua"
+    "ModelScale"                                          "1"
+    "Level"                                               "35"
+    "IsAncient"                                           "1"
+    "ConsideredHero"                                      "1"
+    "UseNeutralCreepBehavior"                             "0"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"                                            "boss_slime_jump"
+    "Ability2"                                            "boss_slime_slam"
+    "Ability3"                                            "boss_slime_shake"
+    "Ability4"                                            "boss_slime_split"
+    "Ability5"                                            "boss_basic_properties_oaa"
+    "Ability6"                                            "boss_regen"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"                                       "28"
+    "MagicalResistance"                                   "-25"
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"                                     "2000" // Jump/Slam damage (visual purpose only)
+    "AttackDamageMax"                                     "2000" // Jump/Slam damage (visual purpose only)
+    "AttackRate"                                          "1.0"
+    "AttackAnimationPoint"                                "0.4"
+    "AttackAcquisitionRange"                              "150"
+    "AttackRange"                                         "128"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "2000"
+    "BountyGoldMin"                                       "0"
+    "BountyGoldMax"                                       "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"                                      "DOTA_HULL_SIZE_HERO"
+    "RingRadius"                                          "110"
+    "HealthBarOffset"                                     "400"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"                                       "200"
+    "MovementTurnRate"                                    "0.8"
+    "FollowRange"                                         "175"
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "2500" // Total HP of the boss because of the split is x3
+    "StatusHealthRegen"                                   "0"
+    "StatusMana"                                          "1250"
+    "StatusManaRegen"                                     "5"
+
+    // Creature data
+    "Creature"
+    {
+      "DisableResistance"                                 "50.0"
+    }
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                                            "DOTA_TEAM_NEUTRALS"      // Team name.
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"                                  "1400"
+    "VisionNighttimeRange"                                "1400"
+
+    // Inventory
+    //----------------------------------------------------------------
+    "HasInventory"                                        "1"
+
+    // Minimap
+    //----------------------------------------------------------------
+    "MinimapIcon"                                         "minimap_roshancamp"
+    "MinimapIconSize"                                     "250"
+  }
+
+  "npc_dota_creature_slime_spawner"
+  {
+    "vscripts"                                            "units/ai_slime_spawner.lua"
+
+    "BaseClass"                                           "npc_dota_creature"
+    "Model"                                               "models/development/invisiblebox.vmdl"
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_NO_ATTACK"
+    "VisionDaytimeRange"                                  "0"
+    "VisionNighttimeRange"                                "0"
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_NONE"
+
+    "Ability1"                                            "boss_out_of_game"
+  }
+}

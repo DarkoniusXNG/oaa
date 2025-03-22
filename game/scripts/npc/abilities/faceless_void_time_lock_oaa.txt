@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85184"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_time_lock.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -15,56 +14,35 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityTextureName"                                  "faceless_void_time_lock"
+    "IsBreakable"                                         "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "0"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportBonus"                         "25"
-
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "2"
+    "AbilityCooldown"                                     "1.8"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01" // in normal dota: min stun time is second_attack_delay + duration (0.65) =  0.98;
+      "duration"                                          "1.0" // in vanilla: min stun time is second_attack_delay + vanilla duration (0.5) + 0.1 =  1.0;
+      "duration_creep"                                    "1.0"
+      "chance_pct"                                        "18 20 22 24 26 28"
+      "min_damage" // it should be vanilla value x 2
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.0"
+        "value"                                           "24 36 48 60 120 180"
+        "LinkedSpecialBonus"                              "special_bonus_unique_faceless_void_3_oaa"
       }
-      "02"
+      "max_damage" // it should be at least: vanilla value x 4
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_creep"                                  "2.0"
+        "value"                                           "48 72 96 120 240 360"
+        "LinkedSpecialBonus"                              "special_bonus_unique_faceless_void_3_oaa"
+        "LinkedSpecialBonusField"                         "value2"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "chance_pct"                                      "12 16 20 24 25 25"
-      }
-      "04" // this should be vanilla value x 2
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "50 60 70 80 160 320"
-        "LinkedSpecialBonus"                              "special_bonus_unique_faceless_void_3"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "second_attack_delay"                             "0.33"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tooltip_cooldown"                                "2"
-      }
+      "second_attack_delay"                               "0.4"
     }
   }
 }

@@ -7,51 +7,44 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5430"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "500 750 1000 1250 1350 1450"
-    "AbilityCastPoint"                                    "0.3"
+    "AbilityCastRange"                                    "750 900 1050 1200 1350 1500"
+    "AbilityCastPoint"                                    "0.3 0.25 0.2 0.15 0.1 0" //OAA
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "20 16 12 8 7.5 7.0"
+    "AbilityCooldown"                                     "13 12 11 10 9 8" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
+    "AbilityManaCost"                                     "70 80 90 100 110 120"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "2.0"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2.0"
+        "value"                                           "220"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "speed"                                             "1200"
+      "megameepo_net_offset"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "220"
+        "value"                                           "160"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "900"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "abilitycastrange"                                ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_meepo_4"
-      }
+      "cast_point_tooltip"                                "0.3 0.25 0.2 0.15 0.1 0" //OAA
     }
   }
 }

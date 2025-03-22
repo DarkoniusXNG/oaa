@@ -7,10 +7,11 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5056"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -18,27 +19,20 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "points_per_tick"                                   "1"
+      "morph_cooldown"                                    "0.2 0.1 0.06 0.05 0.04 0.03" // points_per_tick / morph_rate_tooltip
+      "morph_rate_tooltip"                                "5 10 15 20 25 30"
+      "mana_cost" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "points_per_tick"                                 "1"
+        "value"                                           "10 15 20 25 30 35"
+        "special_bonus_shard"                             "-50%"
       }
-      "02"
+      "castable_while_stunned"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "morph_cooldown"                                  "1.0 0.25 0.1 0.04 0.02 0.01"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attributes"                                "3 5 7 9 13 25"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "morph_rate_tooltip"                              "1 4 10 25 50 100"
+        "value"                                           "0"
+        "special_bonus_shard"                             "+1"
       }
     }
   }

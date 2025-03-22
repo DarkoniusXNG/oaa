@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5610"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
@@ -15,63 +14,39 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
-    "MaxLevel"                                            "6"
 
-    "HasScepterUpgrade"                                   "1"
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1100"
-    "AbilityCastPoint"                                    "0.01"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "13"
+    "AbilityCastRange"                                    "1000 1100 1200 1300 1400 1500"
+    "AbilityCastPoint"                                    "0.1"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
+    "AbilityManaCost"                                     "75"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "180"
+        "value"                                           "180"  // NOTE: This radius must match the radius for boulder smash
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "rock_damage"                                       "70 140 210 280 560 1120"
+      "duration"                                          "2 2.5 3 3.5 4 4.5"
+      "pull_units_per_second_heroes"                      "600"
+      "pull_units_per_second"                             "900"
+      "speed"                                             "800"
+      "total_pull_distance"                               "1400"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "rock_damage"                                     "50 100 150 200 400 800"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2 2.5 3 3.5 4 4.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_earth_spirit_5"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "pull_units_per_second_heroes"                    "600"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "pull_units_per_second"                           "1000"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "800"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "total_pull_distance"                             "1400"
+        "value"                                           "13"
+        "special_bonus_unique_earth_spirit_5"             "-2"
       }
     }
   }

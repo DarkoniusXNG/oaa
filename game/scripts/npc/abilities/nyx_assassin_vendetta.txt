@@ -7,72 +7,62 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5465"  // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "50" //OAA
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "140 200 260 320 380"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "40 50 60 70 80"
+        "value"                                           "70 65 60 55 50"
       }
-      "02"
+      "AbilityManaCost"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "fade_time"                                       "0.0"
+        "value"                                           "180 240 300 360 420"
       }
-      "03"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "16 18 20 22 24"
+        "value"                                           "60"
       }
-      "04"
+      "fade_time"                                         "0.0"
+      "movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "250 500 750 1500 2250" //OAA
+        "value"                                           "16 18 20 22 24"
       }
-      "05" // unused
+      "bonus_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "cooldown_scepter"                                "50" //OAA
+        "value"                                           "300 450 600 1050 1500"
+        "special_bonus_unique_nyx_vendetta_damage"        "+50"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "06"
+      "health_regen_rate_scepter"                         "3"
+      "mana_regen_rate_scepter"                           "3"
+      "break_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "health_regen_rate_scepter"                       "3"
+        "value"                                           "0"
+        "special_bonus_shard"                             "+4"
       }
-      "07"
+      "free_pathing_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_regen_rate_scepter"                         "3"
+        "value"                                           "0"
+        "special_bonus_facet_nyx_assassin_scuttle"        "=15"
       }
-      "08"
+      "free_pathing_movement_speed_bonus"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "break_duration"                                  "4.0"
+        "value"                                           "0"
+        "special_bonus_facet_nyx_assassin_scuttle"        "=200"
       }
+      "attack_animation_bonus"                            "70"
+      "attack_range_bonus"                                "75"
     }
   }
 }

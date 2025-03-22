@@ -1,3 +1,4 @@
+
 mud_golem_shard_split_oaa = class(AbilityBaseClass)
 
 function mud_golem_shard_split_oaa:OnOwnerDied()
@@ -27,6 +28,11 @@ function mud_golem_shard_split_oaa:OnOwnerDied()
   local caster_gold_max_bounty = caster:GetMaximumGoldBounty()
   local caster_gold_min_bounty = caster:GetMinimumGoldBounty()
   local caster_xp_bounty = caster:GetDeathXP()
+  local caster_ability = caster:FindAbilityByName("mud_golem_hurl_boulder")
+  local caster_ability_lvl
+  if caster_ability then
+    caster_ability_lvl = caster_ability:GetLevel()
+  end
 
   -- Particle
   --local particle = ParticleManager:CreateParticle("particles/creature_splitter/splitter_a.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
@@ -34,7 +40,7 @@ function mud_golem_shard_split_oaa:OnOwnerDied()
   local unit_name
 
   if caster_is_a_hero then
-    -- Doom, Morphling, Rubick when he casts spell steal on Doom/Morphling
+    -- Doom or Morphling when morphed into Doom
     unit_name = "npc_dota_neutral_mud_golem_split_doom"
   else
     unit_name = "npc_dota_neutral_custom_mud_golem_split"
@@ -68,6 +74,7 @@ function mud_golem_shard_split_oaa:OnOwnerDied()
 
     -- LIFETIME DURATION
     shard:AddNewModifier(shard, self, "modifier_kill", {duration = duration})
+    shard:AddNewModifier(shard, self, "modifier_generic_dead_tracker_oaa", {duration = duration + MANUAL_GARBAGE_CLEANING_TIME})
 
     -- DAMAGE
     shard:SetBaseDamageMax(caster_dmg_max*shard_dmg_percentage/100)
@@ -84,5 +91,12 @@ function mud_golem_shard_split_oaa:OnOwnerDied()
       shard:SetMaximumGoldBounty(caster_gold_max_bounty*shard_gold_percentage/100)
       shard:SetDeathXP(caster_xp_bounty*shard_xp_percentage/100)
     end
+
+    local shard_ability = shard:FindAbilityByName("mud_golem_hurl_boulder")
+    if shard_ability and caster_ability_lvl then
+      shard_ability:SetLevel(caster_ability_lvl)
+    end
+
+    shard:AddNewModifier(shard, self, "modifier_phased", {duration = FrameTime()}) -- for unstucking
   end
 end

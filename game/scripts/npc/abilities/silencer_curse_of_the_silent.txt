@@ -1,19 +1,17 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Silencer: Curse of the silent
+  // Silencer: Arcane Curse
   //=================================================================================================================
   "silencer_curse_of_the_silent"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5377"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -24,51 +22,59 @@
     "AbilityCastRange"                                    "1000"
     "AbilityCastPoint"                                    "0.3"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "20 18 16 14 14 14"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 130 135 140 145 150"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Mainly about damage
+    "AbilityManaCost"                                     "120 130 140 150 160 170"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "16 26 36 46 92 138"
-        "LinkedSpecialBonus"                              "special_bonus_unique_silencer"
+        "value"                                           "16 24 32 40 80 160"
       }
-      "02"
+      "application_damage"                                "20 40 60 80 160 320"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "425"
+        "value"                                           "22 20 18 16 15 14"
       }
-      "03"
+      "AbilityCharges"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "6"
+        "value"                                           "0"
+        "special_bonus_unique_silencer_arcane_curse_charges"  "2"
       }
-      "04"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "penalty_duration"                                "5"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed"                                       "-9 -12 -15 -18 -21 -24"
-        "LinkedSpecialBonus"                              "special_bonus_unique_silencer_6"
-        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_SUBTRACT"
+        "value"                                           "6"
+        "special_bonus_unique_silencer_arcane_curse_duration"  "+2"
+        "dynamic_value"                                   "true"
+      }
+      "movespeed"                                         "-16 -19 -22 -25 -28 -31"
+      "undispellable"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_silencer_arcane_curse_undispellable"  "+1"
+      }
+      "penalty_duration"
+      {
+        "value"                                           "2"
+        "special_bonus_unique_silencer_arcane_curse_duration"  "+1"
+      }
+      "penalty_multiplier"
+      {
+        "value"                                           "1.5"
+        "special_bonus_unique_silencer"                   "+0.5"
+      }
+      "duration_percent_per_stolen_int"
+      {
+        "special_bonus_facet_silencer_burden_of_knowledge"  "1"
       }
     }
   }
-
 }

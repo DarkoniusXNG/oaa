@@ -1,56 +1,58 @@
 "itembuilds"
 {
-	"author"		"Valve"
-	"hero"			"npc_dota_hero_snapfire"
-	"Title"			"Recommended items for Snapfire"
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_snapfire"
+  "Title"         "Recommended items for Snapfire"
 
-	"Items"
-	{
-		"#DOTA_Item_Build_Starting_Items"
-		{
-			"item"		"item_ward_stack"
-			"item"		"item_flask"
-			"item"		"item_branches"
-			"item"		"item_branches"
-			"item"		"item_gauntlets"
-		}
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_flask"
+      "item"      "item_bracer"
+    }
 
-		"#DOTA_Item_Build_Early_Game"
-		{
-			"item"    "item_magic_wand"
-      "item"		"item_boots"
-			"item"		"item_bracer"
-		}
+    "#DOTA_Item_Build_Physical_Core"
+    {
+      "item"      "item_maelstrom"
+      "item"      "item_hurricane_pike"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_greater_crit"
+      "item"      "item_devastator_oaa_2"
+      "item"      "item_dispel_orb_1"
+    }
 
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		"item_arcane_boots"
-			"item"		"item_cyclone"
-			"item"		"item_rod_of_atos"
-		}
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_far_sight"
+      "item"      "item_shield_staff"
+      "item"      "item_octarine_core"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_wind_waker"
+    }
 
-		"#DOTA_Item_Build_Late_Items"
-		{
-			"item"		"item_heavens_halberd"
-			"item"		"item_mjollnir"
-			"item"		"item_hurricane_pike"
-      "item"    "item_ultimate_scepter"
-		}
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
 
-		"#DOTA_Item_Build_Luxury"
-		{
-			"item"		"item_ancient_janggo"
-			"item"		"item_kaya"
-			"item"		"item_black_king_bar_1"
-			"item"		"item_spirit_vessel"
-			"item"		"item_glimmer_cape_2"
-			"item"		"item_veil_of_discord"
-			"item"		"item_lotus_orb"
-			"item"		"item_pipe"
-			"item"		"item_javelin"
-			"item"		"item_aether_lens"
-			"item"		"item_sheepstick_4"
-			"item"		"item_guardian_greaves"
-		}
-	}
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_black_king_bar_1"
+      "item"      "item_blink"
+      "item"      "item_disperser"
+      "item"      "item_glimmer_cape"
+      "item"      "item_guardian_greaves"
+      "item"      "item_lotus_orb"
+      "item"      "item_manta"
+      "item"      "item_satanic"
+      "item"      "item_solar_crest"
+      "item"      "item_sphere"
+      "item"      "item_greater_power_treads"
+      "item"      "item_sheepstick_4"
+      "item"      "item_siege_mode"
+      "item"      "item_trumps_fists_1"
+      "item"      "item_rapier"
+    }
+  }
 }

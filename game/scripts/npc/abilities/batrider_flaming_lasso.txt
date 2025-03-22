@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5323"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -16,62 +15,48 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.2"
+    "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "100"
-    "AbilityCooldown"                                     "60" //OAA
+    "AbilityCastRange"                                    "200"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "225"
+    "AbilityManaCost"                                     "125 150 175 200 225"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "2.25 2.75 3.25 3.75 4.25"
+      "drag_distance"                                     "300"
+      "break_distance"                                    "425"
+      "damage" //OAA, total damage
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.0 3.5 4.0 4.5 5.0"
+        "value"                                           "200 400 600 1000 1800"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "02"
+      "grab_radius_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "drag_distance"                                   "300"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "break_distance"                                  "425"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "grab_radius"                                     "400"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "grab_radius_scepter"                             "550"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+650"
         "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage"                                          "20 60 100 220 420" //OAA
+        "value"                                           "90 75 60 60 60"
+        "special_bonus_unique_batrider_6"                 "-7"
       }
+      "tick_rate"                                         "0.5"
     }
   }
 }

@@ -7,104 +7,75 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5064"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "1.67"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120 110 100 90 80"
-
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "80 160 240 480 720" //OAA
+    "AbilityDamage"                                       "80 150 220 360 500" //OAA, applies magic resist reduction
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "150 175 200 225 250"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Primarily about the damage
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_radius"                                  "1000"
+        "value"                                           "120 110 100 90 80"
+        "special_bonus_scepter"                           "-30"
       }
-      "02"
+      "requiem_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_reduction_ms"                            "-25 -30 -35 -40 -45" //OAA
+        "value"                                           "1000"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "requiem_reduction_ms"                              "-20 -25 -30 -35 -40"
+      "requiem_reduction_mres"                            "-5 -10 -15 -20 -25"
+      "requiem_slow_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "requiem_slow_duration"                           "0.8"
+        "value"                                           "0.6"
+        "special_bonus_unique_nevermore_6"                "+0.2"
       }
-      "04"
+      "requiem_slow_duration_max"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "requiem_slow_duration_max"                       "2.4"
+        "value"                                           "2.15"
+        "special_bonus_unique_nevermore_6"                "+0.45"
       }
-      "05"
+      "requiem_soul_conversion"                           "1"
+      "requiem_line_width_start"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_reduction_radius"                        "700"
+        "value"                                           "125"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "requiem_line_width_end"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_soul_conversion"                         "1"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "07"
+      "requiem_line_speed"                                "700"
+      "soul_death_release"                                "0.5"
+      "requiem_heal_pct_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_line_width_start"                        "125"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_line_width_end"                          "350"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "requiem_line_speed"                              "700"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "soul_death_release"                              "0.5"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "requiem_heal_pct_scepter"                        "100"
+        "value"                                           "100"
         "RequiresScepter"                                 "1"
       }
-      "12"
+      "requiem_damage_pct_scepter"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "requiem_damage_pct_scepter"                      "40"
+        "value"                                           "60"
         "RequiresScepter"                                 "1"
         "CalculateSpellDamageTooltip"                     "0"
       }

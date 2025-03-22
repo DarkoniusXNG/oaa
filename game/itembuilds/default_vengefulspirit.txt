@@ -1,0 +1,61 @@
+"itembuilds"
+{
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_vengefulspirit"
+  "Title"         "Recommended items for Vengeful Spirit"
+
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_flask"
+      "item"      "item_boots"
+    }
+
+    "#DOTA_Item_Build_Core_Items" // good for any role
+    {
+      "item"      "item_ultimate_scepter"
+      "item"      "item_vladmirs_grimoire_1"
+    }
+
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_far_sight"
+      "item"      "item_shield_staff"
+      "item"      "item_shivas_guard"
+      "item"      "item_martyrs_mail_1"
+    }
+
+    "#DOTA_Item_Build_Illusions_Core" // Aghanim Illusion oriented
+    {
+      "item"      "item_disperser"
+      "item"      "item_butterfly_oaa"
+      "item"      "item_manta"
+      "item"      "item_greater_power_treads"
+    }
+
+    "#DOTA_Item_Build_Physical_Core" // if you dont care about Aghanim Scepter
+    {
+      "item"      "item_hurricane_pike"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_greater_crit"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_blink"
+      "item"      "item_glimmer_cape"
+      "item"      "item_nullifier"
+      "item"      "item_octarine_core"
+      "item"      "item_pipe"
+      "item"      "item_skadi"
+      "item"      "item_solar_crest"
+      "item"      "item_lucience"
+    }
+  }
+}

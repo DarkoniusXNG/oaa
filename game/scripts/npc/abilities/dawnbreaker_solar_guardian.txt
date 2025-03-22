@@ -1,0 +1,92 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Dawnbreaker: Solar Guardian
+  //=================================================================================================================
+  "dawnbreaker_solar_guardian"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "0"
+    "AbilityCastPoint"                                    "0.1"
+    "AbilityChannelTime"                                  "1.7"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "150 200 250 300 350"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "90 85 80 80 80"
+        "special_bonus_unique_dawnbreaker_solar_guardian_cooldown"  "-20"
+      }
+      "scepter_aura_duration"
+      {
+        "value"                                           "3"
+        "RequiresScepter"                                 "1"
+      }
+      "miss_rate"
+      {
+        "value"                                           "0"
+        "RequiresScepter"                                 "1"
+      }
+      "base_heal" //OAA
+      {
+        "value"                                           "45 95 145 295 545"
+        "special_bonus_scepter"                           "+15 25 35 65 115"
+      }
+      "radius"
+      {
+        "value"                                           "500"
+        "special_bonus_unique_dawnbreaker_solar_guardian_radius"  "+150"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "base_damage" //OAA
+      {
+        "value"                                           "30 70 110 230 350"
+        "CalculateSpellDamageTooltip"                     "1"
+      }
+      "pulse_interval"                                    "0.5"
+      "land_damage" //OAA
+      {
+        "value"                                           "200 400 600 1200 1800"
+        "CalculateSpellDamageTooltip"                     "1"
+      }
+      "land_stun_duration"                                "1.4 1.6 1.8 2.0 2.2"
+      "max_offset_distance"                               "350"
+      "scepter_channel_time"
+      {
+        "value"                                           "1.0"
+        "RequiresScepter"                                 "1"
+      }
+      "airtime_scepter_bonus"
+      {
+        "value"                                           "3.5"
+        "RequiresScepter"                                 "1"
+      }
+      "airtime_scepter_movement_speed"                    "200"
+      "airtime_duration"
+      {
+        "value"                                           "0.8"
+        "special_bonus_scepter"                           "=0.5"
+      }
+    }
+  }
+}

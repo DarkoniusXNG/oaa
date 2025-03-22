@@ -1,63 +1,51 @@
 "DOTAAbilities"
 {
-  // Ability: Bristleback
-  // By: Ragnar Homsar
-  // Date: November 28, 2015
-  // Version: 6.85
-  // Type: Datadriven
-  //
-  // ----- FILE REQUIREMENTS -----
-  // Script files:
-  // scripts/vscripts/heroes/hero_bristleback/bristleback.lua
-  //
-  // KV files:
-  // scripts/npc/abilities/bristleback/quill_spray_datadriven.txt
+  //=================================================================================================================
+  // Bristleback: Bristleback (OAA rework)
+  //=================================================================================================================
   "bristleback_bristleback_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85550"
-    "BaseClass"                                           "ability_datadriven"
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/oaa_bristleback.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityTextureName"                                  "bristleback_bristleback"
+    "IsBreakable"                                         "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
+    "HasScepterUpgrade"                                   "1"
+
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "0.5"
+    "AbilityCooldown"                                     "0.1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "side_damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "side_damage_reduction"                           "8 12 16 20 30 40"
+        "value"                                           "8 12 16 20 30 40"
+        "special_bonus_unique_bristleback_6"              "+4"
       }
-      "02"
+      "back_damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "back_damage_reduction"                           "16 24 32 40 45 55"
+        "value"                                           "16 24 32 40 45 50"
+        "special_bonus_unique_bristleback_6"              "+8"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "side_angle"                                      "110"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "back_angle"                                      "70"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "quill_release_threshold"                         "210"
-      }
+      "side_angle"                                        "110"
+      "back_angle"                                        "70"
+      "quill_release_threshold"                           "275 250 225 200 175 150"
+      // "goo_radius"
+      // {
+        // "value"                                           "0"
+        // "special_bonus_facet_bristleback_snot_rocket"     "+900"
+        // "affected_by_aoe_increase"                        "1"
+      // }
     }
 
     "precache"
@@ -65,29 +53,6 @@
       "particle"                                          "particles/units/heroes/hero_bristleback/bristleback_side_dmg.vpcf"
       "particle"                                          "particles/units/heroes/hero_bristleback/bristleback_back_dmg.vpcf"
       "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
-    }
-
-    "Modifiers"
-    {
-      "modifier_bristleback"
-      {
-        "Passive"                                         "1"
-        "IsHidden"                                        "1"
-        "IsPurgable"                                      "0"
-
-        "OnTakeDamage"
-        {
-          "RunScript"
-          {
-            "ScriptFile"                                  "abilities/oaa_bristleback.lua"
-            "Function"                                    "bristleback_takedamage"
-            "Damage"                                      "%attack_damage"
-            "back_particle"                               "particles/units/heroes/hero_bristleback/bristleback_back_dmg.vpcf"
-            "side_particle"                               "particles/units/heroes/hero_bristleback/bristleback_side_dmg.vpcf"
-            "sound"                                       "Hero_Bristleback.Bristleback"
-          }
-        }
-      }
     }
   }
 }

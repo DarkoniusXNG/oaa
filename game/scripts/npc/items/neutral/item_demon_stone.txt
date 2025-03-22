@@ -1,0 +1,45 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Demon Stone - custom neutral tier 2 item
+  //=================================================================================================================
+  "item_demon_stone"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/demon_stone.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityTextureName"                                  "item_philosophers_stone"
+
+    "AbilityCooldown"                                     "80"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "summon_duration"                                   "40"
+      "summon_health"                                     "1100"
+      "summon_damage"                                     "100"
+      "summon_armor"                                      "10"
+      "summon_move_speed"                                 "370"
+      "summon_true_sight_radius"                          "800"
+      "summon_dmg_reduction"                              "80" // against neutrals and bosses
+    }
+
+    "precache"
+    {
+      "model"                                             "models/heroes/warlock/warlock_demon.vmdl"
+      "soundfile"                                         "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
+    }
+  }
+}

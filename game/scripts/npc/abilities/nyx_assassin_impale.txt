@@ -7,65 +7,50 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5462"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "700"
-    "AbilityCastPoint"                                    "0.4"
+    "AbilityCastRange"                                    "750"
+    "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14.0"
+    "AbilityCooldown"                                     "17 16 15 14 13 12" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "95 115 135 155 175 195"
+    "AbilityManaCost"                                     "90 100 110 120 130 140"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "width"                                           "125"
+        "value"                                           "140"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.4 1.8 2.2 2.6 3.0 3.2"
-        "LinkedSpecialBonus"                              "special_bonus_unique_nyx_4"
+        "value"                                           "1.1 1.4 1.7 2.0 2.1 2.2"
+        "special_bonus_unique_nyx_3"                      "+0.2"
       }
-      "03"
+      "length"                                            "750"
+      "speed"                                             "1600"
+      "impale_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "length"                                          "700"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "1600"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cooldown_upgrade"                                "10" //OAA, setting the cd to this value
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impale_damage"                                   "100 160 220 280 560 840"
-        "LinkedSpecialBonus"                              "special_bonus_unique_nyx_2"
+        "value"                                           "100 160 220 280 560 840"
+        "special_bonus_unique_nyx_2"                      "+150"
       }
     }
   }

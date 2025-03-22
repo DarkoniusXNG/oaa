@@ -7,9 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5444"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-    "FightRecapLevel"                                     "1"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
     "MaxLevel"                                            "6"
@@ -18,51 +16,81 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
-    "AbilityCastPoint"                                    "0.45"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "85 80 75 70 70 70"
+    "AbilityCastRange"                                    "500"
+    "AbilityCastPoint"                                    "0.6"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "120 130 140 150 160 170"
+    "AbilityManaCost"                                     "125 150 175 200 225 250"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tombstone_health"                                "8 10 12 14 18 22"
+        "value"                                           "80"
+        "special_bonus_unique_undying_7"                  "-15"
       }
-      "02"
+      "tombstone_health"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hits_to_destroy_tooltip"                         "4 5 6 7 9 11"
-        "LinkedSpecialBonus"                              "special_bonus_unique_undying_5"
+        "value"                                           "20 24 28 32 36 40"
+        "special_bonus_unique_undying_5"                  "+24"
       }
-      "03"
+      "hits_to_destroy_tooltip"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "30.0"
+        "value"                                           "5 6 7 8 9 10"
+        "special_bonus_unique_undying_5"                  "+6"
       }
-      "04"
+      "duration"                                          "30.0"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1200"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "health_threshold_pct_tooltip"                      "40"
+      "zombie_interval"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "health_threshold_pct_tooltip"                    "40"
+        "value"                                           "4.0 3.6 3.2 2.8 2.8 2.8"
       }
-      "06"
+      "zombie_damage_tooltip" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "zombie_interval"                                 "4.0 3.5 3.0 2.5 2.5 2.5"
+        "value"                                           "34"
+        "special_bonus_unique_undying"                    "+20"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
+      }
+      "zombie_attack_damage_per_level" //OAA
+      {
+        "value"                                           "2"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
+      }
+      "zombie_bonus_damage_against_creeps" //OAA
+      {
+        "value"                                           "10"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
+      }
+      "zombie_bonus_damage_against_bosses" //OAA
+      {
+        "value"                                           "24"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
+      }
+      "zombie_health"                                     "2"
+      "bunker_units"                                      "1"
+      "bunker_heal_pct"                                   "0"
+      "tombstone_grab_radius"
+      {
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "tombstone_bunker_cd"                               "2"
+      "tombstone_stun_penalty"                            "2"
+      "zombie_damage_interval"
+      {
+        "value"                                           "0"
       }
     }
   }

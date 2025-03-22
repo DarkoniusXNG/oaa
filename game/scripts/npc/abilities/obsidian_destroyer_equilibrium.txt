@@ -5,49 +5,36 @@
   //=================================================================================================================
   "obsidian_destroyer_equilibrium"
   {
-    "ID"                                                  "5684"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "AbilityCooldown"                                     "25"
-
-    "AbilityManaCost"                                     "50"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "proc_chance"                                       "25" //OAA
+      "mana_restore"                                      "25 30 35 40 45 50" //OAA
+      "mana_increase"
       {
-        "var_type"                                  "FIELD_INTEGER"
-        "proc_chance"                               "25"
+        "value"                                           "0"
+        "special_bonus_facet_obsidian_destroyer_obsidian_decimator"  "5"
       }
-      "02"
+      "mana_increase_duration"
       {
-        "var_type"                                  "FIELD_INTEGER"
-        "mana_restore"                              "20 25 30 35 40 45" //OAA
+        "value"                                           "0"
+        "special_bonus_facet_obsidian_destroyer_obsidian_decimator"  "10"
       }
-      "03"
+      "mana_as_ms"
       {
-        "var_type"                                  "FIELD_INTEGER"
-        "movement_slow"                             "20 30 40 50 60 70"
-        "LinkedSpecialBonus"                        "special_bonus_unique_outworld_devourer_2"
+        "special_bonus_unique_outworld_devourer_3"        "=1.0"
       }
-      "04"
-      {
-        "var_type"                                  "FIELD_FLOAT"
-        "slow_duration"                             "2"
-      }
-      "05"
-      {
-        "var_type"                                  "FIELD_FLOAT"
-        "duration"                                  "8"
-      }
+      "scepter_barrier_threshold"                         "20"
+      "scepter_barrier_duration"                          "15"
+      "scepter_barrier_cooldown"                          "60" //OAA
+      "scepter_max_mana_barrier_pct"                      "40" //OAA
     }
   }
 }

@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Wanderer: Sticky Blood - Applies Sticky Napalm when damaged over a threshold
+  // Notes: Dispellable; Doesn't pierce spell/debuff immunity; Doesn't work against wards
+  //=================================================================================================================
+  "wanderer_sticky_blood"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/wanderer/oaa_wanderer_sticky_blood.lua"
+    "AbilityTextureName"                                  "batrider_sticky_napalm"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "1"
+
+    "AbilityCooldown"                                     "1.0"
+
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage_per_stack"                                  "70 80 90"
+      "duration"                                          "8.0"
+      "movement_speed_pct"                                "-5"
+      "turn_rate_pct"                                     "-70"
+      "damage_threshold"                                  "300"
+    }
+  }
+}

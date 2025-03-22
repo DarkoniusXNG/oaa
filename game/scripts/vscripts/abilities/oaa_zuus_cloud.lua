@@ -1,4 +1,5 @@
 zuus_cloud_oaa = class( AbilityBaseClass )
+
 LinkLuaModifier( "modifier_zuus_cloud_oaa", "abilities/oaa_zuus_cloud.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zuus_bolt_true_sight", "abilities/oaa_zuus_cloud.lua", LUA_MODIFIER_MOTION_NONE )
 
@@ -8,13 +9,15 @@ end
 
 function zuus_cloud_oaa:OnSpellStart()
   local caster = self:GetCaster()
-  local hCloud = CreateUnitByName( "npc_dota_zeus_cloud", self:GetCursorPosition(), true, caster, caster, caster:GetTeamNumber() )
-  hCloud:SetOwner( self:GetCaster() )
-  hCloud:SetControllableByPlayer( self:GetCaster():GetPlayerOwnerID(), false )
-  hCloud:AddNewModifier( caster, self, "modifier_zuus_cloud_oaa", nil )
-  hCloud:AddNewModifier( caster, self, "modifier_kill", { duration = self:GetSpecialValueFor( "cloud_duration" ) } )
-  hCloud:AddNewModifier( caster, self, "modifier_phased", {} )
-  FindClearSpaceForUnit( hCloud, self:GetCursorPosition(), true )
+  local nimbus_duration = self:GetSpecialValueFor("cloud_duration")
+  local nimbus = CreateUnitByName("npc_dota_zeus_cloud", self:GetCursorPosition(), false, caster, caster, caster:GetTeamNumber())
+  nimbus:SetOwner(caster)
+  nimbus:SetControllableByPlayer(caster:GetPlayerOwnerID(), false)
+  nimbus:AddNewModifier(caster, self, "modifier_zuus_cloud_oaa", {})
+  nimbus:AddNewModifier(caster, self, "modifier_kill", {duration = nimbus_duration})
+  nimbus:AddNewModifier(caster, self, "modifier_generic_dead_tracker_oaa", {duration = nimbus_duration + MANUAL_GARBAGE_CLEANING_TIME})
+  nimbus:AddNewModifier(caster, self, "modifier_phased", {})
+  --FindClearSpaceForUnit(nimbus, self:GetCursorPosition(), true)
 end
 
 function zuus_cloud_oaa:OnHeroCalculateStatBonus()
@@ -93,14 +96,12 @@ function modifier_zuus_cloud_oaa:OnDestroy()
 end
 
 function modifier_zuus_cloud_oaa:DeclareFunctions()
-	local funcs =
-	{
+  return {
     MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
     MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
     MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
-    MODIFIER_EVENT_ON_ATTACKED
-	}
-	return funcs
+    MODIFIER_EVENT_ON_ATTACKED,
+  }
 end
 
 function modifier_zuus_cloud_oaa:GetAbsoluteNoDamagePhysical()
@@ -115,26 +116,31 @@ function modifier_zuus_cloud_oaa:GetAbsoluteNoDamagePure()
   return 1
 end
 
-function modifier_zuus_cloud_oaa:OnAttacked(event)
-  local parent = self:GetParent()
-  if event.target ~= parent then
-    return
-  end
-
-  local attacker = event.attacker
-  -- These damage values are ok if total hp of nimbus is 16.
-  local damage = 1
-  if attacker:IsRealHero() then
-    damage = 4
-    if attacker:IsRangedAttacker() then
-      damage = 2
+if IsServer() then
+  function modifier_zuus_cloud_oaa:OnAttacked(event)
+    local parent = self:GetParent()
+    if event.target ~= parent then
+      return
     end
-  end
-  -- To prevent dead nimbuses staying in memory (preventing SetHealth(0) or SetHealth(-value) )
-  if parent:GetHealth() - damage <= 0 then
-    parent:Kill(self.ability, attacker)
-  else
-    parent:SetHealth(parent:GetHealth() - damage)
+
+    local attacker = event.attacker
+    if not attacker or attacker:IsNull() then
+      return
+    end
+    -- These damage values are ok if total hp of nimbus is 16.
+    local damage = 1
+    if attacker:IsRealHero() then
+      damage = 4
+      if attacker:IsRangedAttacker() then
+        damage = 2
+      end
+    end
+    -- To prevent dead nimbuses staying in memory (preventing SetHealth(0) or SetHealth(-value) )
+    if parent:GetHealth() - damage <= 0 then
+      parent:Kill(self.ability, attacker)
+    else
+      parent:SetHealth(parent:GetHealth() - damage)
+    end
   end
 end
 
@@ -166,11 +172,12 @@ function modifier_zuus_cloud_oaa:CastLightningBolt(target)
   local parent = self:GetParent()
   local lightning_bolt_ability = caster:FindAbilityByName('zuus_lightning_bolt') or self.lightning_bolt_ability
   local sight_radius =  0
+
   -- Rubick stole Nimbus but he doesn't have Lightning Bolt for some reason
   if not lightning_bolt_ability then
     return
   end
-   -- Rubick stole something else while cloud still exists
+  -- Rubick stole something else while cloud still exists
   if lightning_bolt_ability:IsNull() then
     return
   end
@@ -183,64 +190,12 @@ function modifier_zuus_cloud_oaa:CastLightningBolt(target)
 
   if lightning_bolt_ability:GetLevel() > 0 then
 
-    AddFOWViewer(caster:GetTeam(), target:GetAbsOrigin(), sight_radius, sight_duration, false)
+    local caster_team = caster:GetTeamNumber()
 
-    CreateModifierThinker( caster, lightning_bolt_ability, "modifier_zuus_bolt_true_sight", { duration = sight_duration }, target:GetAbsOrigin(), caster:GetTeamNumber(), false )
+    -- Reveal the area
+    AddFOWViewer(caster_team, target:GetAbsOrigin(), sight_radius, sight_duration, false)
 
-    -- Calculate mini-stun duration
-    local ministun_duration = self.ability:GetSpecialValueFor("ministun_duration")
-
-    -- Check for the talent (lightning bolt bonus mini-stun duration)
-    local talent = caster:FindAbilityByName("special_bonus_unique_zeus_3")
-    if talent and talent:GetLevel() > 0 then
-      ministun_duration = ministun_duration + talent:GetSpecialValueFor("value")
-    end
-
-    -- Keep status resistance in mind
-    ministun_duration = target:GetValueChangedByStatusResistance(ministun_duration)
-
-    if target:IsAlive() and not target:IsMagicImmune() then
-      -- Apply mini-stun modifier
-      target:AddNewModifier(caster, lightning_bolt_ability, "modifier_stunned", {duration = ministun_duration})
-
-      -- Damage table values that are the same for both lightning bolt and static field
-      local damage_table = {}
-      damage_table.damage_type = DAMAGE_TYPE_MAGICAL
-      damage_table.victim = target
-
-      -- Static Field damage comes from Zeus but cannot be reflected back to him
-      local static_field_damage = 0
-      -- Check for Static Field if its leveled up
-      local static_field_ability = caster:FindAbilityByName("zuus_static_field")
-      if static_field_ability and static_field_ability:GetLevel() > 0 then
-        static_field_damage = static_field_ability:GetSpecialValueFor("damage_health_pct")
-
-        -- Check for the talent (static field bonus damage)
-        local static_field_talent = caster:FindAbilityByName("special_bonus_unique_zeus")
-        if static_field_talent and static_field_talent:GetLevel() > 0 then
-          static_field_damage = static_field_damage + static_field_talent:GetSpecialValueFor("value")
-        end
-      end
-
-      if not target:IsOAABoss() then
-        damage_table.attacker = caster
-        damage_table.damage = (target:GetHealth()/100)*static_field_damage
-        damage_table.ability = static_field_ability
-        damage_table.damage_flags = bit.bor(DOTA_DAMAGE_FLAG_HPLOSS, DOTA_DAMAGE_FLAG_REFLECTION, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL)
-
-        -- Apply Static Field damage (before lightning bolt damage)
-        ApplyDamage(damage_table)
-      end
-
-      -- Lightning bolt damage table values
-      damage_table.attacker = parent
-      damage_table.damage = lightning_bolt_ability:GetAbilityDamage()
-      damage_table.ability = lightning_bolt_ability
-      damage_table.damage_flags = DOTA_DAMAGE_FLAG_NONE
-
-      -- Apply Lightning Bolt damage
-      ApplyDamage(damage_table)
-    end
+    CreateModifierThinker( caster, lightning_bolt_ability, "modifier_zuus_bolt_true_sight", { duration = sight_duration }, target:GetAbsOrigin(), caster_team, false )
 
     -- Renders the particle on the sigil
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_zeus/zeus_cloud_strike.vpcf", PATTACH_POINT_FOLLOW, parent)
@@ -249,6 +204,57 @@ function modifier_zuus_cloud_oaa:CastLightningBolt(target)
 
     -- Sound at the end (because light is faster than sound)
     target:EmitSound("Hero_Zuus.LightningBolt.Cloud")
+
+    -- Calculate mini-stun duration
+    local ministun_duration = self.ability:GetSpecialValueFor("ministun_duration")
+
+    -- Keep status resistance in mind
+    ministun_duration = target:GetValueChangedByStatusResistance(ministun_duration)
+
+    if target:IsAlive() and not target:IsMagicImmune() then
+      -- Apply mini-stun modifier
+      target:AddNewModifier(caster, lightning_bolt_ability, "modifier_stunned", {duration = ministun_duration})
+
+      -- Damage table for Lightning Bolt
+      local damage_table = {
+        attacker = parent,
+        victim = target,
+        damage = lightning_bolt_ability:GetAbilityDamage(),
+        damage_type = lightning_bolt_ability:GetAbilityDamageType(),
+        damage_flags = DOTA_DAMAGE_FLAG_NONE,
+        ability = lightning_bolt_ability,
+      }
+
+      -- Static Field damage comes from Zeus but cannot be reflected back to him
+      --[[
+      if not caster:PassivesDisabled() then
+        local static_field_damage = 0
+        -- Check for Static Field if its leveled up
+        local static_field_ability = caster:FindAbilityByName("zuus_static_field")
+        if static_field_ability and static_field_ability:GetLevel() > 0 then
+          static_field_damage = static_field_ability:GetSpecialValueFor("damage_health_pct")
+        end
+
+        -- Damage table for Static Field
+        local damage_table_2 = {
+          attacker = caster,
+          victim = target,
+          damage = (target:GetHealth()/100)*static_field_damage,
+          damage_type = DAMAGE_TYPE_MAGICAL,
+          damage_flags = bit.bor(DOTA_DAMAGE_FLAG_REFLECTION, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL),
+          ability = static_field_ability,
+        }
+
+        -- Apply Static Field damage (before lightning bolt damage) to non-boss units
+        if not target:IsOAABoss() then
+          ApplyDamage(damage_table_2)
+        end
+      end
+      ]]
+
+      -- Apply Lightning Bolt damage
+      ApplyDamage(damage_table)
+    end
   end
 end
 

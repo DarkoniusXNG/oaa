@@ -7,15 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5398"              // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -27,39 +25,28 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01" // if Bite is overpowered set duration to 10 and decrease cooldown to 50
+      "duration" //OAA, because of Bite
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "22"
-        "LinkedSpecialBonus"                              "special_bonus_unique_lycan_1"
+        "value"                                           "15"
+        "special_bonus_unique_lycan_1"                    "+6"
       }
-      "02"
+      "speed"                                             "550"
+      "bonus_night_vision"                                "1000"
+      "transformation_time"                               "1.1"
+      "crit_chance"                                       "40"
+      "crit_multiplier"                                   "160 190 220 250 280" //OAA, intentional nerf
+      "health_bonus"                                      "250 350 450 750 1050"
+      "is_wolfpack"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "650"
+        "value"                                           "0"
+        "special_bonus_facet_lycan_pack_leader"           "+1"
       }
-      "03"
+      "kill_duration_extension"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_night_vision"                              "1000"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "transformation_time"                             "1.25"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "crit_chance"                                     "40"
-        "LinkedSpecialBonus"                              "special_bonus_unique_lycan_5"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "crit_multiplier"                                 "150 175 200 225 250"
+        "value"                                           "0"
+        "special_bonus_facet_lycan_pack_leader"           "+5"
       }
     }
   }

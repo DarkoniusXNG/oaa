@@ -1,0 +1,59 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ability: Nyx Assassin Mind Flare
+  //=================================================================================================================
+  "nyx_assassin_jolt"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Unit Targeting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "800"
+    "AbilityCastPoint"                                    "0.4"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "100 105 110 115 120 125"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "11 10 9 8 7 6"
+        "special_bonus_unique_nyx_jolt_cooldown"          "-3"
+      }
+      "max_mana_as_damage_pct" //OAA
+      {
+        "value"                                           "20"
+      }
+      "mana_burn_pct" //OAA
+      {
+        "value"                                           "0"
+      }
+      "aoe"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_nyx"                        "+600"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "damage_echo_duration"                              "15"
+      "damage_echo_pct"                                   "15" //OAA
+    }
+  }
+}

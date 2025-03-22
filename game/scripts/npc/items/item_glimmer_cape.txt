@@ -7,20 +7,22 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"              "253"                           // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    //"AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "0"
-    "ItemShopTags"          ""
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "500" //OAA
+    "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"          "1"
-    "ItemResult"          "item_glimmer_cape"
-    "ItemRequirements"
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_glimmer_cape"
+    "ItemRequirements" //OAA
     {
-      "01"            "item_shadow_amulet;item_cloak;item_gloves"
+      "01"                                                "item_shadow_amulet;item_cloak"
     }
   }
 
@@ -31,64 +33,41 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                          "254"                           // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"             "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
-    "AbilityUnitTargetTeam"       "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "AbilityUnitTargetType"       "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "FightRecapLevel"             "1"
-    "AbilityTextureName"          "custom/glimmer_cape_1"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+    "AbilityTextureName"                                  "custom/glimmer_cape_1"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"            "550 650 750 850 950"
-    "AbilityCooldown"             "14.0"
+    "AbilityCastRange"                                    "600 700 800 900 1000"
+    "AbilityCooldown"                                     "14.0"
     "AbilitySharedCooldown"                               "glimmer"
-    "AbilityManaCost"             "90"
+    "AbilityManaCost"                                     "125"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                    "1900"
-    "ItemShopTags"                ""
-    "ItemQuality"                 "rare"
-    "ItemAliases"                 "glimmer cape;glimmer"
-    "ItemDisassembleRule"         "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-    "MaxUpgradeLevel"             "5"
-    "ItemBaseLevel"               "1"
+    "ItemCost"                                            "2300" //OAA
+    "ItemShopTags"                                        ""
+    "ItemQuality"                                         "rare"
+    "ItemAliases"                                         "glimmer cape;glimmer"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
+
+    "MaxUpgradeLevel"                                     "5"
+    "ItemBaseLevel"                                       "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                "FIELD_INTEGER"
-        "bonus_attack_speed"      "20 25 30 35 40"
-      }
-      "02"
-      {
-        "var_type"                "FIELD_INTEGER"
-        "bonus_magical_armor"     "15 16 17 18 20"
-      }
-      "03"
-      {
-        "var_type"                "FIELD_FLOAT"
-        "fade_delay"              "0.6 0.55 0.5 0.45 0.4"
-      }
-      "04"
-      {
-        "var_type"                "FIELD_INTEGER"
-        "active_magical_armor"    "45 48 51 55 60"
-      }
-      "05"
-      {
-        "var_type"                "FIELD_FLOAT"
-        "duration"                "5"
-      }
-      "06"
-      {
-        "var_type"        "FIELD_FLOAT"
-        "building_duration_limit"     "180"
-      }
+      "initial_fade_delay"                                "0.5"
+      "secondary_fade_delay"                              "0.5"
+      "active_movement_speed"                             "20 30 40 50 60"
+      "duration"                                          "6" //OAA
+      "bonus_magical_armor"                               "25 26 27 28 29"
+      "barrier_block"                                     "400 800 1200 1600 2000" //OAA
     }
   }
 }

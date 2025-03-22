@@ -1,0 +1,43 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Blood Sword - custom neutral tier 5 item
+  //=================================================================================================================
+  "item_blood_sword"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/blood_sword.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "AbilityTextureName"                                  "item_penta_edged_sword"
+
+    "AbilityCastRange"                                    "700"
+    "AbilityCooldown"                                     "15"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "active_lifesteal_percent"                          "250"
+    }
+
+    "precache"
+    {
+      "particle"                                          "particles/items3_fx/iron_talon_active.vpcf"
+      "particle"                                          "particles/generic_gameplay/generic_lifesteal.vpcf"
+    }
+  }
+}

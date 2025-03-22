@@ -1,0 +1,14 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Custom Alchemist Talent: Chemical Rage Applies Strong Dispel
+  //=================================================================================================================
+  "special_bonus_unique_alchemist_1_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "special_bonus_undefined"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ATTRIBUTES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  }
+}

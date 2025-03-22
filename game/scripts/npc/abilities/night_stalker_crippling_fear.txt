@@ -7,44 +7,66 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5276"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "FightRecapLevel"                                     "1"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Unit Targeting
     //-------------------------------------------------------------------------------------------------------------
-    //"AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    //"AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY" //OAA, for UI tooltip
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" //OAA, for UI tooltip
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "375"
-    "AbilityCastPoint"                                    "0.2"
-    "AbilityCooldown"                                     "15" //OAA
+    "AbilityCastPoint"                                    "0"
     "AbilityManaCost"                                     "50"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_day"                                    "3.0"
+        "value"                                           "15"
+        "special_bonus_scepter"                           "-5"
       }
-      "02"
+      "duration_day"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration_night"                                  "4.0 5.0 6.0 7.0 8.0 9.0"
+        "value"                                           "3.0"
       }
-      "03"
+      "duration_night"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "375"
+        "value"                                           "4.5 5 5.5 6.0 6.5 7"
+      }
+      "mana_pct_cost"
+      {
+        "value"                                           "0"
+        "special_bonus_scepter"                           "6"
+      }
+      "mana_interval"                                     "1"
+      "toggled"
+      {
+        "value"                                           "0"
+        "special_bonus_scepter"                           "1"
+      }
+      "radius"
+      {
+        "value"                                           "375"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "dps" //OAA
+      {
+        "value"                                           "25 35 45 55 110 220"
+        "special_bonus_unique_night_stalker_crippling_fear_damage"  "+100"
+      }
+      "tick_rate"                                         "0.1"
+      "death_refresh"
+      {
+        "value"                                           "0"
       }
     }
   }

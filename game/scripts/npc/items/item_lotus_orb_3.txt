@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3660"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
 
@@ -34,16 +34,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3661"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lotus_orb"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
-    "FightRecapLevel"                                     "1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "AbilityTextureName"                                  "custom/lotus_orb_3"
+
     "AbilityCooldown"                                     "15.0"
     "AbilitySharedCooldown"                               "lotus"
-    "AbilityCastRange"                                    "900 1200 1500 1800 2100"
+    "AbilityCastRange"                                    "900 1000 1100 1200 1300"
     "AbilityManaCost"                                     "175"
 
     "MaxUpgradeLevel"                                     "5"
@@ -52,42 +52,22 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "8950"
-    "ItemShopTags"                                        "regen_health;regen_mana;str;agi;int;hard_to_tag"
+    "ItemCost"                                            "8852"
+    "ItemShopTags"                                        "armor;regen_health;regen_mana;mana_pool;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "ls 3;lotus orb 3"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "10 12 15 19 24"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "6.5 8.5 11.0 16.0 30.0"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "4.0 4.25 4.75 5.5 6.5"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "250 350 500 700 950"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "active_duration"                                 "6"
-      }
+      "bonus_armor"                                       "10 11 13 16 20"
+      "bonus_health_regen"                                "6.5 10 13 16 19"
+      "bonus_mana_regen"                                  "4.0 4.25 4.75 5.5 6.5"
+      "bonus_mana"                                        "250 350 500 700 950"
+      "active_duration"                                   "5"
     }
   }
 }

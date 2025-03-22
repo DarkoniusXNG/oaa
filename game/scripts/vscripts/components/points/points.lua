@@ -14,17 +14,24 @@ PointsManager.onScoreChanged = ScoreChangedEvent.listen
 PointsManager.onLimitChanged = LimitChangedEvent.listen
 
 function PointsManager:Init ()
-  DebugPrint ( 'Initializing.' )
+  self.moduleName = "PointsManager (Score)"
 
   self.hasGameEnded = false
+  self.extend_counter = 0
+  self.limitConstant = 16
+  self.timesUsedShrine = 0
 
   local scoreLimit = NORMAL_KILL_LIMIT
-  local scoreLimitIncrease = 10 -- if you want to change put: PlayerResource:GetTeamPlayerCount() * KILL_LIMIT_INCREASE
   if HeroSelection.is10v10 then
     scoreLimit = TEN_V_TEN_KILL_LIMIT
-    scoreLimitIncrease = scoreLimitIncrease/2
+    self.limitConstant = 10
+  elseif HeroSelection.lowPlayerCount then
+    scoreLimit = ONE_V_ONE_KILL_LIMIT
+    self.limitConstant = 14
   end
-  scoreLimit = scoreLimit * PlayerResource:GetTeamPlayerCount() + scoreLimitIncrease
+
+  scoreLimit = self.limitConstant + scoreLimit * PlayerResource:SafeGetTeamPlayerCount()
+
   CustomNetTables:SetTableValue( 'team_scores', 'limit', { value = scoreLimit, name = 'normal' } )
 
   CustomNetTables:SetTableValue( 'team_scores', 'score', {
@@ -33,52 +40,88 @@ function PointsManager:Init ()
   })
 
   GameEvents:OnHeroKilled(function (keys)
-    -- increment points
-    if not keys.killer or not keys.killed then
+    local killed = keys.killed
+    local killer = keys.killer
+    if not killer or not killed then
       return
     end
-    if keys.killer:GetTeam() ~= keys.killed:GetTeam() and not keys.killed:IsReincarnating() and keys.killed:GetTeam() ~= DOTA_TEAM_NEUTRALS then
-      self:AddPoints(keys.killer:GetTeam())
+    -- increment points if valid killer and valid killed
+    if killer:GetTeam() ~= killed:GetTeam() and not killed:IsReincarnating() and not killed:IsTempestDouble() and not killed:IsSpiritBearOAA() and killed:GetTeam() ~= DOTA_TEAM_NEUTRALS then
+      self:AddPoints(killer:GetTeam())
     end
   end)
 
   GameEvents:OnPlayerAbandon(function (keys)
-    local limit = self:GetLimit()
-    local maxPoints = math.max(self:GetPoints(DOTA_TEAM_GOODGUYS), self:GetPoints(DOTA_TEAM_BADGUYS))
-    limit = math.min(limit, math.max(maxPoints + 10, limit - 10))
+    -- Reduce the score limit when player abandons but only if game time is after MIN_MATCH_TIME
+    if HudTimer and HudTimer:GetGameTime() > MIN_MATCH_TIME then
+      PointsManager:RefreshLimit()
+    end
+  end)
 
-    self:SetLimit(limit)
+  GameEvents:OnPlayerReconnect(function (keys)
+    -- Try to refresh the score limit to the correct value if player reconnected
+    Timers:CreateTimer(1, function()
+      PointsManager:RefreshLimit()
+    end)
   end)
 
   -- Register chat commands
   ChatCommand:LinkDevCommand("-addpoints", Dynamic_Wrap(PointsManager, "AddPointsCommand"), self)
   ChatCommand:LinkDevCommand("-add_enemy_points", Dynamic_Wrap(PointsManager, "AddEnemyPointsCommand"), self)
   ChatCommand:LinkDevCommand("-kill_limit", Dynamic_Wrap(PointsManager, "SetLimitCommand"), self)
-  ChatCommand:LinkDevCommand("-kill_limit", Dynamic_Wrap(PointsManager, "SetLimitCommand"), self)
 
-  local position = Vector(-5200, 200, 512)
-  local coreDude = CreateUnitByName("npc_dota_core_guy", position, true, nil, nil, DOTA_TEAM_GOODGUYS)
-  position = Vector(-5200, -200, 512)
-  coreDude = CreateUnitByName("npc_dota_core_guy_2", position, true, nil, nil, DOTA_TEAM_GOODGUYS)
+  -- Find fountains
+  local fountains = Entities:FindAllByClassname("ent_dota_fountain")
+  local radiant_fountain
+  local dire_fountain
+  for _, entity in pairs(fountains) do
+    if entity:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      radiant_fountain = entity
+    elseif entity:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+      dire_fountain = entity
+    end
+  end
 
-  -- PlayerResource:GetPlayerIDsForTeam(DOTA_TEAM_GOODGUYS):each(function (playerID)
-  --   coreDude:SetControllableByPlayer(playerID, false)
-  -- end)
+  -- Find fountain triggers
+  local radiant_fountain_t = Entities:FindByName(nil, "fountain_good_trigger")
+  local dire_fountain_t = Entities:FindByName(nil, "fountain_bad_trigger")
 
-  position = Vector(5200, 200, 512)
-  coreDude = CreateUnitByName("npc_dota_core_guy_2", position, true, nil, nil, DOTA_TEAM_BADGUYS)
-  position = Vector(5200, -200, 512)
-  coreDude = CreateUnitByName("npc_dota_core_guy", position, true, nil, nil, DOTA_TEAM_BADGUYS)
-  -- PlayerResource:GetPlayerIDsForTeam(DOTA_TEAM_BADGUYS):each(function (playerID)
-  --   coreDude:SetControllableByPlayer(playerID, false)
-  -- end)
+  -- Find radiant shrine location(s)
+  local radiant_shrine
+  if radiant_fountain_t then
+    local radiant_fountain_bounds = radiant_fountain_t:GetBounds()
+    local radiant_fountain_origin = radiant_fountain_t:GetAbsOrigin()
+    radiant_shrine = Vector(radiant_fountain_bounds.Maxs.x + radiant_fountain_origin.x + 400, radiant_fountain_origin.y, 512)
+  else
+    radiant_shrine = radiant_fountain:GetAbsOrigin() + 400 * Vector(1, 0, 0)
+  end
+
+  -- Find dire shrine location(s)
+  local dire_shrine
+  if dire_fountain_t then
+    local dire_fountain_bounds = dire_fountain_t:GetBounds()
+    local dire_fountain_origin = dire_fountain_t:GetAbsOrigin()
+    dire_shrine = Vector(dire_fountain_bounds.Mins.x + dire_fountain_origin.x - 400, dire_fountain_origin.y, 512)
+  else
+    dire_shrine = dire_fountain:GetAbsOrigin() - 400 * Vector(1, 0, 0)
+  end
+
+  -- Create shrines in front of the fountains
+  self.radiant_shrine = CreateUnitByName("npc_dota_core_guy", radiant_shrine, true, radiant_fountain, radiant_fountain, DOTA_TEAM_GOODGUYS)
+  self.dire_shrine = CreateUnitByName("npc_dota_core_guy", dire_shrine, true, dire_fountain, dire_fountain, DOTA_TEAM_BADGUYS)
+
+  -- Store their locations
+  self.radiant_shrine_location = radiant_shrine
+  self.dire_shrine_location = dire_shrine
 end
 
 function PointsManager:GetState ()
   return {
     limit = self:GetLimit(),
     goodScore = self:GetPoints(DOTA_TEAM_GOODGUYS),
-    badScore = self:GetPoints(DOTA_TEAM_BADGUYS)
+    badScore = self:GetPoints(DOTA_TEAM_BADGUYS),
+    extend_counter = self.extend_counter,
+    timesUsedShrine = self.timesUsedShrine
   }
 end
 
@@ -86,6 +129,8 @@ function PointsManager:LoadState (state)
   self:SetLimit(state.limit)
   self:SetPoints(DOTA_TEAM_GOODGUYS, state.goodScore)
   self:SetPoints(DOTA_TEAM_BADGUYS, state.badScore)
+  self.extend_counter = state.extend_counter or 0
+  self.timesUsedShrine = state.timesUsedShrine or self.extend_counter
 end
 
 function PointsManager:CheckWinCondition(teamID, points)
@@ -102,13 +147,26 @@ end
 
 function PointsManager:SetWinner(teamID)
   -- actually need to implement lose win logic for teams
+  self.hasGameEnded = true
   Music:FinishMatch(teamID)
   GAME_WINNER_TEAM = teamID
+  GAME_TIME_ELAPSED = GameRules:GetDOTATime(false, false)
+
   Bottlepass:SendWinner(teamID)
 
-  GAME_TIME_ELAPSED = GameRules:GetDOTATime(false, false)
-  GameRules:SetGameWinner(teamID)
-  self.hasGameEnded = true
+  Timers:CreateTimer(2, function()
+    GameRules:SetGameWinner(teamID)
+    --if teamID == DOTA_TEAM_GOODGUYS then
+      --GameRules:SetCustomVictoryMessage("#dota_post_game_radiant_victory")
+    --elseif teamID == DOTA_TEAM_BADGUYS then
+      --GameRules:SetCustomVictoryMessage("#dota_post_game_dire_victory")
+    --end
+    if IsInToolsMode() then
+      GameRules:SetCustomVictoryMessageDuration(99999)
+    else
+      GameRules:SetCustomVictoryMessageDuration(POST_GAME_TIME)
+    end
+  end)
 end
 
 function PointsManager:SetPoints(teamID, amount)
@@ -152,20 +210,36 @@ function PointsManager:GetPoints(teamID)
   end
 end
 
-function PointsManager:GetGameLength()
-  return CustomNetTables:GetTableValue('team_scores', 'limit').name
-end
-
 function PointsManager:GetLimit()
   return CustomNetTables:GetTableValue('team_scores', 'limit').value
 end
 
 function PointsManager:SetLimit(killLimit)
-  CustomNetTables:SetTableValue('team_scores', 'limit', {value = killLimit, name = self:GetGameLength() })
+  CustomNetTables:SetTableValue('team_scores', 'limit', {value = killLimit})
   LimitChangedEvent.broadcast(true)
 end
 
-function PointsManager:IncreaseLimit(extend_amount)
+function PointsManager:IncreaseLimit(limit_increase)
+  local extend_amount = 0
+  local player_count = PlayerResource:SafeGetTeamPlayerCount()
+  local standard_extend_amount = player_count * KILL_LIMIT_INCREASE
+  if HeroSelection.is10v10 then
+    standard_extend_amount = player_count * TEN_V_TEN_LIMIT_INCREASE
+  elseif HeroSelection.lowPlayerCount then
+    standard_extend_amount = math.min(ONE_V_ONE_LIMIT_INCREASE * player_count, 6)
+  end
+  if not limit_increase then
+    extend_amount = standard_extend_amount
+  elseif type(limit_increase) == "number" then
+    extend_amount = limit_increase
+  elseif limit_increase == "grendel" then
+    extend_amount = math.max(math.floor(standard_extend_amount/2), 1)
+  else
+    print("limit_increase argument must be a number or 'grendel' string! When ommited it will use the standard value.")
+  end
+
+  self.extend_counter = self.extend_counter + extend_amount/standard_extend_amount
+
   PointsManager:SetLimit(PointsManager:GetLimit() + extend_amount)
   Notifications:TopToAll({text="#duel_final_duel_objective_extended", duration=5.0, replacement_map={extend_amount=extend_amount}})
 end
@@ -201,4 +275,29 @@ function PointsManager:SetLimitCommand(keys)
   else
     GameRules:SendCustomMessage("Usage is -kill_limit X, where X is the kill limit to set", 0, 0)
   end
+end
+
+function PointsManager:RefreshLimit()
+  -- Current limit:
+  local limit = self:GetLimit()
+  local maxPoints = math.max(self:GetPoints(DOTA_TEAM_GOODGUYS), self:GetPoints(DOTA_TEAM_BADGUYS))
+  local base_limit = NORMAL_KILL_LIMIT
+  local current_player_count = PlayerResource:SafeGetTeamPlayerCount()
+  local extend_amount = KILL_LIMIT_INCREASE * current_player_count
+  if HeroSelection.is10v10 then
+    base_limit = TEN_V_TEN_KILL_LIMIT
+    extend_amount = TEN_V_TEN_LIMIT_INCREASE * current_player_count
+  elseif HeroSelection.lowPlayerCount then
+    base_limit = ONE_V_ONE_KILL_LIMIT
+    extend_amount = math.min(ONE_V_ONE_LIMIT_INCREASE * current_player_count, 6)
+  end
+  -- Expected score limit with changed number of players connected:
+  -- Expected behavior: Disconnects should reduce player_count and reconnects should increase player_count.
+  local newLimit = self.limitConstant + base_limit * current_player_count + math.floor(self.extend_counter * extend_amount)
+  if newLimit < limit then
+    local limitChange = limit - newLimit -- this used to be constant 10 and not dependent on number of players
+    newLimit = math.min(limit, math.max(maxPoints + limitChange, limit - limitChange))
+  end
+
+  self:SetLimit(newLimit)
 end

@@ -1,0 +1,48 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Carapace Boss: Headbutt - Carapace damages, slows and knocks back enemies that are in a rectangle in front of him
+  //=================================================================================================================
+  "boss_carapace_headbutt"
+  {
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "weaver_shukuchi"
+    "ScriptFile"                                          "abilities/boss/carapace/boss_carapace_headbutt.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "MaxLevel"                                            "1"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "2.5"
+    "AbilityCastAnimation"                                "ACT_DOTA_ATTACK"
+    "AnimationIgnoresModelScale"                          "1"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "5"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "move_speed_slow_pct"                               "-50"
+      "attack_speed_slow"                                 "-350"
+      "slow_duration"                                     "3.5"
+      "self_stun"                                         "0.5"
+      "damage_range"                                      "300" // length of the rectangle
+      "damage"                                            "2000" // pure
+      "width"                                             "160" // width of the rectangle
+      "range"                                             "150" // caster travel distance and knockback distance
+    }
+  }
+}

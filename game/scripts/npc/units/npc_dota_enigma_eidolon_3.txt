@@ -1,0 +1,26 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Greater Eidolon
+  //=================================================================================
+  "npc_dota_greater_eidolon"
+  {
+    "include_keys_from"                                   "npc_dota_lesser_eidolon"
+
+    "ModelScale"                                          "0.85"
+    "Level"                                               "3"
+
+    "ArmorPhysical"                                       "4"     // Physical protection.
+    "MagicalResistance"                                   "60"    // Magical protection.
+
+    "AttackDamageMin"                                     "40"    // Damage range min.
+    "AttackDamageMax"                                     "40"    // Damage range max.
+    "AttackRange"                                         "500"
+
+    "HealthBarOffset"                                     "140"
+
+    "MovementSpeed"                                       "370"    // Speed
+
+    "StatusHealth"                                        "260"    // Base health.
+  }
+}

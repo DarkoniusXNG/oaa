@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5148"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -22,32 +22,29 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "35" //OAA
+    "AbilityCooldown"                                     "25" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50 80 110 140 170 200"
+    "AbilityManaCost"                                     "65 90 115 140 165 190"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "550"
+        "value"                                           "600"
+        "special_bonus_unique_enigma_9"                   "+200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "damage_percent"                                    "4 6 8 10 12 14"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_percent"                                  "4.5 5.0 5.5 6.0 6.5 7.0" //OAA
+        "value"                                           "9 10 11 12 13 14"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "9 10 11 12 13 14"
-        "LinkedSpecialBonus"                              "special_bonus_unique_enigma_8"
-      }
+      "base_damage"                                       "5 10 15 20 40 80"
+      "tick_rate"                                         "0.5"
     }
   }
 }

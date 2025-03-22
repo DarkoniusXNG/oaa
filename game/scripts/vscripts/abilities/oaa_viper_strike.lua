@@ -4,34 +4,38 @@ LinkLuaModifier( "modifier_viper_viper_strike_silence", "abilities/oaa_viper_str
 
 --------------------------------------------------------------------------------
 
-function viper_viper_strike_oaa:GetCastRange( loc, target )
-	local caster = self:GetCaster()
+-- function viper_viper_strike_oaa:GetCastRange( loc, target )
+	-- local caster = self:GetCaster()
 
-	if caster:HasScepter() then
-		return self:GetSpecialValueFor( "cast_range_scepter" )
-	end
+	-- if caster:HasScepter() then
+		-- return self:GetSpecialValueFor( "cast_range_scepter" )
+	-- end
 
-	return self.BaseClass.GetCastRange( self, loc, target )
+	-- return self.BaseClass.GetCastRange( self, loc, target )
+-- end
+
+function viper_viper_strike_oaa:GetManaCost(level)
+  local caster = self:GetCaster()
+  local base_mana_cost = self.BaseClass.GetManaCost(self, level)
+
+  local talent1 = caster:FindAbilityByName("special_bonus_unique_viper_8")
+  if talent1 and talent1:GetLevel() > 0 then
+    return base_mana_cost * self:GetSpecialValueFor("talent_mana_cost_reduction") / 100
+  end
+
+	return base_mana_cost
 end
 
-function viper_viper_strike_oaa:GetManaCost( level )
-	local caster = self:GetCaster()
+function viper_viper_strike_oaa:GetCooldown(level)
+  local caster = self:GetCaster()
+  local base_cd = self.BaseClass.GetCooldown(self, level)
 
-	if caster:HasScepter() then
-		return self:GetSpecialValueFor( "mana_cost_scepter" )
-	end
+  local talent1 = caster:FindAbilityByName("special_bonus_unique_viper_8")
+  if talent1 and talent1:GetLevel() > 0 then
+    return base_cd * self:GetSpecialValueFor("talent_cooldown_reduction") / 100
+  end
 
-	return self.BaseClass.GetManaCost( self, level )
-end
-
-function viper_viper_strike_oaa:GetCooldown( level )
-	local caster = self:GetCaster()
-
-	if caster:HasScepter() then
-		return self:GetSpecialValueFor( "cooldown_scepter" )
-	end
-
-	return self.BaseClass.GetCooldown( self, level )
+	return base_cd
 end
 
 --------------------------------------------------------------------------------
@@ -50,10 +54,11 @@ function viper_viper_strike_oaa:OnAbilityPhaseStart()
 end
 
 function viper_viper_strike_oaa:OnAbilityPhaseInterrupted()
-	if self.partCast then
-		ParticleManager:DestroyParticle( self.partCast, false )
-		ParticleManager:ReleaseParticleIndex( self.partCast )
-	end
+  if self.partCast then
+    ParticleManager:DestroyParticle( self.partCast, false )
+    ParticleManager:ReleaseParticleIndex( self.partCast )
+    self.partCast = nil
+  end
 end
 
 --------------------------------------------------------------------------------
@@ -69,19 +74,23 @@ function viper_viper_strike_oaa:OnProjectileHit_ExtraData( target, loc, data )
 		-- play the sound
 		target:EmitSound( "Hero_Viper.ViperStrike.Target" )
 
+    -- Check for 'Viper Strike Purges & Silences' talent
+    local talent = caster:FindAbilityByName("special_bonus_unique_viper_3_oaa")
+    if talent and talent:GetLevel() > 0 then
+      -- Basic Dispel (for enemies)
+      local RemovePositiveBuffs = true
+      local RemoveDebuffs = false
+      local BuffsCreatedThisFrameOnly = false
+      local RemoveStuns = false
+      local RemoveExceptions = false
+      target:Purge(RemovePositiveBuffs, RemoveDebuffs, BuffsCreatedThisFrameOnly, RemoveStuns, RemoveExceptions)
+
+      -- apply the custom silence modifier
+      target:AddNewModifier(caster, self, "modifier_viper_viper_strike_silence", {duration = duration})
+    end
+
 		-- apply the standard viper strike modifier
-		target:AddNewModifier( caster, self, "modifier_viper_viper_strike_slow", {
-			duration = duration,
-		} )
-
-		-- apply the silence modifier if the talent is picked
-		local talent = caster:FindAbilityByName( "special_bonus_unique_viper_3_oaa" )
-
-		if talent and talent:GetLevel() > 0 then
-			target:AddNewModifier( caster, self, "modifier_viper_viper_strike_silence", {
-				duration = duration,
-			} )
-		end
+		target:AddNewModifier(caster, self, "modifier_viper_viper_strike_slow", {duration = duration})
 	end
 
 	-- due to the unique way the projectile part works
@@ -99,10 +108,11 @@ function viper_viper_strike_oaa:OnSpellStart()
 	local target = self:GetCursorTarget()
 	local originCaster = caster:GetAbsOrigin()
 
-	-- clean up cast particle
-	if self.partCast then
-		ParticleManager:ReleaseParticleIndex( self.partCast )
-	end
+  -- clean up cast particle
+  if self.partCast then
+    ParticleManager:ReleaseParticleIndex( self.partCast )
+    self.partCast = nil
+  end
 
 	-- play the sounds
 	caster:EmitSound( "Hero_Viper.ViperStrike" )
@@ -149,15 +159,9 @@ function modifier_viper_viper_strike_silence:IsDebuff()
 	return true
 end
 
-function modifier_viper_viper_strike_silence:IsStunDebuff()
-  return true
-end
-
 function modifier_viper_viper_strike_silence:IsPurgable()
 	return true
 end
-
---------------------------------------------------------------------------------
 
 function modifier_viper_viper_strike_silence:GetEffectName()
 	return "particles/generic_gameplay/generic_silenced.vpcf"
@@ -167,12 +171,8 @@ function modifier_viper_viper_strike_silence:GetEffectAttachType()
 	return PATTACH_OVERHEAD_FOLLOW
 end
 
---------------------------------------------------------------------------------
-
 function modifier_viper_viper_strike_silence:CheckState()
-	local state = {
-		[MODIFIER_STATE_SILENCED] = true,
-	}
-
-	return state
+  return {
+    [MODIFIER_STATE_SILENCED] = true,
+  }
 end

@@ -7,8 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5156"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
@@ -18,26 +17,50 @@
     "AbilityCastRange"                                    "0"
     "AbilityCastPoint"                                    "0"
 
-    "AbilityCooldown"                                     "9 8 7 6 5 4"
+    "AbilityCooldown"                                     "19 18 17 16 15 14" //OAA
 
-    "AbilityManaCost"                                     "30"
+    "AbilityManaCost"                                     "50"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_range"                              "100 200 300 400 500 600"
-        "LinkedSpecialBonus"                              "special_bonus_unique_sniper_6"
+        "value"                                           "3"
+        "special_bonus_unique_sniper_4"                   "+2"
       }
-      // "02"
-      // {
-        // "var_type"                                        "FIELD_INTEGER"
-        // "active_attack_range_multiplier"                  "2"
-      // }
+      "slow"
+      {
+        "value"                                           "65"
+      }
+      "headshot_chance"                                   "100"
+      "active_attack_range_bonus"
+      {
+        "value"                                           "200"
+        "special_bonus_unique_sniper_5"                   "+55"
+      }
+      "bonus_armor"
+      {
+        "value"                                           "5 10 15 20 25 30"
+      }
+      "does_root"
+      {
+        "value"                                           "0"
+      }
+      "require_target"
+      {
+        "value"                                           "0"
+      }
+      "no_reveal"
+      {
+        "special_bonus_facet_sniper_ghillie_suit"         "1"
+      }
+      "attack_speed"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_sniper_6"                   "+45"
+      }
     }
   }
-
 }

@@ -7,14 +7,14 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5469"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -22,33 +22,29 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "hits"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "chance"                                          "17"
+        "value"                                           "6"
       }
-      "02"
+      "armor_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "armor_reduction"                                 "-2 -4 -6 -8 -12 -17"
-        "LinkedSpecialBonus"                              "special_bonus_unique_naga_siren_3"
+        "value"                                           "-2 -4 -6 -8 -12 -20"
       }
-      "03"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "30 40 50 60 120 200"
+        "value"                                           "25 35 45 55 155 255"
+        "special_bonus_unique_naga_siren_2"               "+30%"
       }
-      "04"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "300"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0"
+        "value"                                           "4.0"
       }
     }
   }

@@ -7,26 +7,24 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5606"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1500"
-    "AbilityCastPoint"                                    "0.0"
+    "AbilityCastRange"                                    "1400"
+    "AbilityCastPoint"                                    "0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "0.0"
+    "AbilityCooldown"                                     "0.1" //OAA, intentional buff
     "AbilityCharges"                                      "3"
-    "AbilityChargeRestoreTime"                            "25" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,60 +32,46 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "speed_multiplier"                                  "250"
+      "AbilityChargeRestoreTime" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed_multiplier"                                "250"
+        "value"                                           "25.0"
+        "special_bonus_unique_ember_spirit_5"             "-12"
       }
-      "02"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "AbilityChargeRestoreTime"                        ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_ember_spirit_5"
-        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_SUBTRACT"
+        "value"                                           "100 250 400 850 1300"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "100 250 400 850 1300" //OAA
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "duration"                                          "45.0"
+      "scepter_range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "450"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "45.0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_range_multiplier"                        "3"
+        "value"                                           "3000"
         "RequiresScepter"                                 "1"
       }
-      "07"
+      "scepter_speed_multiplier"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_speed_multiplier"                        "2"
+        "value"                                           "2"
         "RequiresScepter"                                 "1"
       }
-      "08"
+      "scepter_max_charges"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_max_charges"                             "5"
+        "value"                                           "5"
         "RequiresScepter"                                 "1"
       }
-      "09"
+      "shard_charge_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_mana_cost"                               "25"
-        "RequiresScepter"                                 "1"
+        "value"                                           "400"
+        "RequiresShard"                                   "1"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }
-
 }

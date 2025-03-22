@@ -1,0 +1,21 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Roshan: Bonus Attack damage - for abilities that reduce base attack damage
+  //=================================================================================================================
+  "roshan_custom_passive"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/roshan/roshan_custom_passive.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "MaxLevel"                                            "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_damage"                                      "450"
+    }
+  }
+}

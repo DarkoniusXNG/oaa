@@ -8,13 +8,13 @@ test('can read in tooltip list', function (t) {
   const getTranslations = require('../parse-translation');
 
   request.get({
-    // url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-Dota2/master/game/dota/resource/dota_english.txt'
-    url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-Dota2/master/game/dota/pak01_dir/resource/localization/abilities_english.txt'
+    // url: https://raw.githubusercontent.com/dotabuff/d2vpkr/refs/heads/master/dota/resource/localization/dota_english.txt
+    url: 'https://raw.githubusercontent.com/dotabuff/d2vpkr/refs/heads/master/dota/resource/localization/abilities_english.txt'
   }, function (err, result) {
     if (err) {
       t.fail(err);
     }
-    let dotaEnglish = parseKV(result.body);
+    const dotaEnglish = parseKV(result.body.replace(/" and turn rate reduced by %dMODIFIER_PROPERTY_TURN_RATE_PERCENTAGE%%%\./g, ' and turn rate reduced by %dMODIFIER_PROPERTY_TURN_RATE_PERCENTAGE%%%."'));
     t.ok(dotaEnglish);
 
     t.ok(Object.keys(getTranslations(true, false, dotaEnglish).lang.Tokens.values).length, 'there are tokens');
@@ -29,7 +29,7 @@ test('can read list of items', function (t) {
     t.end();
   });
 });
-var itemPaths = null;
+let itemPaths = null;
 test('lists item paths', function (t) {
   luaEntitiesUtil.listAllItems(function (err, lines) {
     t.notOk(err);
@@ -40,16 +40,17 @@ test('lists item paths', function (t) {
 });
 
 test('can parse item', function (t) {
-  var index = ~~(Math.random() * itemPaths.length);
-  var path = itemPaths[index];
-  console.log('Running tests with', path);
+  const index = ~~(Math.random() * itemPaths.length);
+  const path = itemPaths[index];
   t.ok(path);
-
-  luaEntitiesUtil.parseFile(path, function (err, data) {
-    t.notOk(err);
-    t.ok(data);
-    t.end();
+  t.test('Running parsing tests against ' + path, function (t) {
+    luaEntitiesUtil.parseFile(path, function (err, data) {
+      t.notOk(err);
+      t.ok(data);
+      t.end();
+    });
   });
+  t.end();
 });
 
 test('there are no missing tooltips', function (t) {

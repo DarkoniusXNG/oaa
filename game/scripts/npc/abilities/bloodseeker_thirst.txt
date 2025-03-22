@@ -7,64 +7,57 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5017"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "15.0"
+    "AbilityCastPoint"                                    "0.3"
+
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityManaCost"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "min_bonus_pct"                                   "85" //OAA
+        "value"                                           "0"
+        "special_bonus_facet_bloodseeker_bloodrush"       "50"
       }
-      "02"
+      "min_bonus_pct"                                     "100"
+      "bonus_movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "14 24 34 44 54 64"
-        "LinkedSpecialBonus"                              "special_bonus_unique_bloodseeker_4"
+        "value"                                           "10 20 30 40 45 50"
+        "special_bonus_unique_bloodseeker_4"              "+18"
       }
-      "03"
+      "active_movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hero_kill_heal"                                  "12 18 24 30 36 42"
+        "value"                                           "0"
+        "special_bonus_facet_bloodseeker_bloodrush"       "6 12 18 24 30 36"
       }
-      "04"
+      "active_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_kill_heal"                                 "8 12 16 20 24 28"
+        "value"                                           "0"
+        "special_bonus_facet_bloodseeker_bloodrush"       "5"
       }
-      "05"
+      "inactive_penalty_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "half_bonus_aoe"                                  "300"
+        "value"                                           "0"
+        "special_bonus_facet_bloodseeker_bloodrush"       "+50.0"     // NOTE: inactive bonuses are 100 - x
       }
-      "06"
+      "sanguivore_multiplier"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_bonus_pct"                                   "25"
+        "value"                                           "0"
+        "special_bonus_facet_bloodseeker_bloodrush"       "2"
       }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "visibility_threshold_pct"                        "25"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "invis_threshold_pct"                             "25"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "linger_duration"                                 "4.0"
-      }
+      "max_bonus_pct"                                     "25"
+      "visibility_threshold_pct"                          "25"
+      "invis_threshold_pct"                               "25"
+      "linger_duration"                                   "4.0"
     }
   }
 }

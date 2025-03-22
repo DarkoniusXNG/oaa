@@ -1,49 +1,48 @@
 "DOTAAbilities"
 {
+  "item_recipe_meteor_hammer"                             "REMOVE"
+  "item_meteor_hammer"                                    "REMOVE"
+
   //=================================================================================================================
   // Recipe: Meteor Hammer 1
   //=================================================================================================================
-  "item_recipe_meteor_hammer" "REMOVED"
   "item_recipe_meteor_hammer_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                            "10049"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "Model"                         "models/props_gameplay/recipe.vmdl"
-    "BaseClass"                     "item_datadriven"
-    "AbilityTextureName"            "custom/recipe/recipe_1"
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "250"
-    "ItemShopTags"                  ""
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "100"
+    "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"                    "1"
-    "ItemResult"                    "item_meteor_hammer_1"
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_meteor_hammer_1"
     "ItemRequirements"
     {
-      "01"                        "item_pers;item_crown"
+      "01"                                                "item_kaya;item_diadem;item_crown"
     }
   }
 
   //=================================================================================================================
   // Meteor Hammer 1
   //=================================================================================================================
-  "item_meteor_hammer" "REMOVED"
   "item_meteor_hammer_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                            "10050"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"                     "item_lua"
-    "ScriptFile"                    "items/meteor_hammer.lua"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-    "AbilityTextureName"            "item_custom/meteor_hammer_1"
-    "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
-    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"               "1"
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/meteor_hammer.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityTextureName"                                  "item_custom/meteor_hammer_1"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     // Spicy Paramaters
     //-------------------------------------------------------------------------------------------------------------
@@ -52,103 +51,57 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityChannelTime"            "2.5"
+    "AbilityChannelTime"                                  "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"              "600"
-    "AbilitySharedCooldown"         "meteor"
-    "AbilityCooldown"               "24"
-    "AbilityManaCost"               "125"
+    "AbilityCastRange"                                    "600"
+    "AbilitySharedCooldown"                               "meteor"
+    "AbilityCooldown"                                     "25 23 21 19 17"
+    "AbilityManaCost"                                     "125"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "2350"
-    "ItemQuality"                   "epic"
-    "ItemAliases"                   "mh;meteor hammer"
-    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemCost"                                            "3650"
+    "ItemQuality"                                         "epic"
+    "ItemAliases"                                         "mh;meteor hammer"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01" // it should be the same as Sheepstick (Scythe of Vyse) or Eul's Scepter
+      "bonus_intellect"                                   "26 31 41 56 76" // Kaya (16); Diadem (6); Crown (4);
+      "bonus_strength"                                    "12 17 22 27 32" // Diadem (6); Crown (4);
+      "bonus_agility"                                     "12 17 22 27 32" // Diadem (6); Crown (4);
+      "spell_amp"                                         "12 16 20 24 28" // Kaya (10);
+      "mana_regen_multiplier"                             "50 60 70 80 90" // Kaya (50);
+      "spell_lifesteal_amp"                               "12 14 16 18 20" // Kaya (12);
+
+      "burn_dps_boss"                                     "150 300 450 600 750"
+      "burn_dps"                                          "60 150 240 330 420" // vanilla: 50
+      "burn_duration"                                     "6"
+      "stun_duration"                                     "1.5" // vanilla: 0.5
+      "burn_interval"                                     "1.0"
+      "land_time"                                         "0.5"
+      "impact_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "10 25 45 70 100"
+        "value"                                           "380"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02" // it should be the same or better than Rod of Atos; better than Sheepstick (Scythe of Vyse)
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "10 25 45 70 100"
-      }
-      "03" // it should be the same or worse than Rod of Atos; same or better than Sheepstick (Scythe of Vyse)
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "10 15 25 40 60"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "6.5 10.5 14.5 18.5 22.5"
-      }
-      "05" // it should be the same as Eul's Scepter
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "5.0 5.25 5.75 6.5 7.5"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_dps_boss"                                   "180 360 540 720 900"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_dps"                                        "90 180 270 360 450"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_duration"                                   "6"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.75 2.0 2.25 2.5 2.75"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "burn_interval"                                   "1.0"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "land_time"                                       "0.5"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impact_radius"                                   "315"
-      }
-      "13"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impact_damage_boss"                              "150 300 450 600 750"
-      }
-      "14"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "impact_damage"                                   "150 300 450 600 750"
-      }
+      "impact_damage_boss"                                "200 400 700 1100 1600"
+      "impact_damage"                                     "130 260 455 715 1040" // vanilla: 130; impact_damage_boss * 0.65
+      "move_speed_slow_pct"                               "20 25 30 35 40"
+      "cooldown_tooltip"                                  "24 22 20 18 16"
     }
+
     "precache"
     {
-      "particle"                "particles/items4_fx/meteor_hammer_aoe.vpcf"
-      "particle"                "particles/items4_fx/meteor_hammer_spell.vpcf"
-      "particle"                "particles/items4_fx/meteor_hammer_spell_debuff.vpcf"
-      "particle"                "particles/items4_fx/meteor_hammer_cast.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_aoe.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_spell.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_spell_debuff.vpcf"
+      "particle"                                          "particles/items4_fx/meteor_hammer_cast.vpcf"
     }
   }
 }

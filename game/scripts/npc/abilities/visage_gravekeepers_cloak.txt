@@ -1,49 +1,62 @@
 "DOTAAbilities"
 {
+  //=================================================================================================================
+  // Visage: Gravekeeper's Cloak
+  //=================================================================================================================
   "visage_gravekeepers_cloak"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5482"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "max_layers"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_layers"                                      "4 4 4 4 6 10"
-        "LinkedSpecialBonus"                              "special_bonus_unique_visage_5"
+        "value"                                           "4"
+        //"special_bonus_unique_visage_oaa_6"               "+4"
       }
-      "02"
+      "damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "8 12 16 20 14 8"
+        "value"                                           "8 12 16 20 24 28"
       }
-      "03"
+      "recovery_time" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "recovery_time"                                   "6 5 4 3 3 3"
-        "LinkedSpecialBonus"                              "special_bonus_unique_visage_5"
+        "value"                                           "7 6 5 4 3 3"
+        "special_bonus_unique_visage_oaa_5"               "-1.5"
       }
-      "04"
+      "minimum_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "minimum_damage"                                  "40"
+        "value"                                           "40 50 60 70 90 130"
+        "special_bonus_unique_visage_oaa_1"               "+70"
       }
-      "05"
+      "radius" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1200"
+        "affected_by_aoe_increase"                        "1"
+        "value"                                           "1200"
       }
-      "06"
+      "max_damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_damage_reduction"                            "80"
+        "value"                                           "80"
+      }
+      "shard_hp_restoration_pct"
+      {
+        "value"                                           "25"
+        "RequiresShard"                                   "1"
+      }
+      "shard_cooldown" //OAA
+      {
+        "value"                                           "35"
+        "RequiresShard"                                   "1"
+      }
+      "shard_manacost"
+      {
+        "value"                                           "125"
+        "RequiresShard"                                   "1"
       }
     }
   }

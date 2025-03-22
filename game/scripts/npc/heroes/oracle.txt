@@ -5,8 +5,6 @@
   //=================================================================================================================
   "npc_dota_hero_oracle"
   {
-    // Abilities
-    //-------------------------------------------------------------------------------------------------------------
-    "Ability11"   "special_bonus_intelligence_35" // replaces special_bonus_intelligence_12
+    "Ability5"                                            "oracle_innate_oaa" // replaces oracle_prognosticate
   }
 }

@@ -7,12 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8532"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
 
@@ -23,8 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_yasha_and_kaya_2;item_upgrade_core_2"
-      "02"                                                "item_kaya_and_sange_2;item_upgrade_core_2"
-      "03"                                                "item_sange_and_yasha_2;item_upgrade_core_2"
     }
   }
   //=================================================================================================================
@@ -34,65 +33,36 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                            "8548"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"                     "item_yasha_and_kaya"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityTextureName"            "custom/yasha_and_kaya_3"
+    "BaseClass"                                           "item_yasha_and_kaya"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"                                  "custom/yasha_and_kaya_3"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "MaxUpgradeLevel"               "5"
-    "ItemBaseLevel"                 "3"
+    "MaxUpgradeLevel"                                     "5"
+    "ItemBaseLevel"                                       "3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "9100"
-    "ItemShopTags"                  "damage;str;agi;attack_speed;unique"
-    "ItemQuality"                   "artifact"
-    "ItemAliases"                   "ynk 3;y&k 3;yk 3;yasha and kaya 3"
-    "ItemDisassembleRule"           "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    "ShouldBeSuggested"             "1"
+    "ItemCost"                                            "9202"
+    "ItemShopTags"                                        "agi;int;attack_speed;move_speed;regen_mana;unique"
+    "ItemQuality"                                         "artifact"
+    "ItemAliases"                                         "ynk 3;y&k 3;yk 3;yasha and kaya 3"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "16 24 32 48 72"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "16 24 32 48 72"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "16 21 26 31 36"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_regen_multiplier"                           "30 40 50 60 70"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed_percent_bonus"                    "10 12 14 16 18"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spell_amp"                                       "16 20 24 28 32"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spell_lifesteal_amp"                             "26 28 30 32 34"
-      }
+      "bonus_agility"                                     "20 25 35 50 70"
+      "bonus_intellect"                                   "20 25 35 50 70"
+      "bonus_attack_speed"                                "20 25 30 35 40"
+      "mana_regen_multiplier"                             "50 60 70 80 90"
+      "movement_speed_percent_bonus"                      "12 14 16 18 20"
+      "spell_amp"                                         "12 16 20 24 28"
+      "spell_lifesteal_amp"                               "16 18 20 22 24"
+      "cast_speed_pct"                                    "22 24 26 28 30"
     }
   }
 }

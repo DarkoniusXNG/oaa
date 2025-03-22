@@ -1,0 +1,76 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Wind Waker
+  //=================================================================================================================
+  "item_recipe_wind_waker"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    //"AbilityTextureName"                                  "custom/recipe/recipe_1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "675" //OAA
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_wind_waker"
+    "ItemRequirements" //OAA
+    {
+      "01"                                                "item_cyclone;item_mystic_staff"
+    }
+  }
+
+  //=================================================================================================================
+  // Wind Waker
+  //=================================================================================================================
+  "item_wind_waker"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityTextureName"                                  "custom/wind_waker"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "550 575 600 625 650"
+    "AbilityCastPoint"                                    "0.0"
+    "AbilityCooldown"                                     "16.0"
+    "AbilitySharedCooldown"                               "cyclone"
+    "AbilityManaCost"                                     "175"
+
+    // Spicy Parameters
+    //-------------------------------------------------------------------------------------------------------------
+    "MaxUpgradeLevel"                                     "5"
+    "ItemBaseLevel"                                       "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "6075" //OAA
+    "ItemShopTags"                                        "int;regen_mana;move_speed;hard_to_tag"
+    "ItemQuality"                                         "rare"
+    "ItemAliases"                                         "cyclone;wind waker;ww"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_movement_speed"                              "30 35 40 45 50"
+      "bonus_mana_regen"                                  "3.0 3.25 3.75 4.5 5.5"
+      "bonus_intellect"                                   "35 40 50 65 85"
+      "cyclone_duration"                                  "2.5"
+      "tooltip_drop_damage"                               "50"
+      "tornado_speed"                                     "300"
+    }
+  }
+}

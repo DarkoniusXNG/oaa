@@ -1,0 +1,124 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Boss tier 2 - Sven Boss
+  //=================================================================================
+  "npc_dota_boss_swiper"
+  {
+    // General
+    //
+    "BaseClass"                                           "npc_dota_creature"
+    "Model"                                               "models/heroes/sven/sven.vmdl"
+    "vscripts"                                            "units/ai_swiper.lua"
+    "SoundSet"                                            "Meepo"
+    "ModelScale"                                          "1.8"
+    "Level"                                               "35"
+    "IsAncient"                                           "1"
+    "ConsideredHero"                                      "1"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"                                            "boss_swiper_thrust"
+    "Ability2"                                            "boss_swiper_frontswipe"
+    "Ability3"                                            "boss_swiper_backswipe"
+    "Ability4"                                            "boss_swiper_reapers_rush"
+    "Ability5"                                            "boss_basic_properties_oaa"
+    "Ability6"                                            "boss_regen"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"                                       "28"
+    "MagicalResistance"                                   "-25"
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"                                     "6000" // same as his abilities (visual purpose only)
+    "AttackDamageMax"                                     "6000" // same as his abilities (visual purpose only)
+    "AttackRate"                                          "1.0"
+    "AttackAnimationPoint"                                "0.3"
+    "AttackAcquisitionRange"                              "150"
+    "AttackRange"                                         "128"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "2000"
+    "BountyGoldMin"                                       "0"
+    "BountyGoldMax"                                       "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"                                      "DOTA_HULL_SIZE_HERO"
+    "RingRadius"                                          "110"
+    "HealthBarOffset"                                     "400"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"                                       "350"
+    "MovementTurnRate"                                    "0.8"
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "7500"
+    "StatusHealthRegen"                                   "0"
+    "StatusMana"                                          "3750"
+    "StatusManaRegen"                                     "5"
+
+    // Creature data
+    "Creature"
+    {
+      "DisableResistance"                                 "50.0"
+      "AttachWearables" // Default npc_dota_hero_sven
+      {
+        "1" // Sven's Mask
+        {
+          "ItemDef"                                       "16"
+        }
+        "2" // Sven's Back
+        {
+          "ItemDef"                                       "581"
+        }
+        "3" // Sven's Shoulder
+        {
+          "ItemDef"                                       "20"
+        }
+        "4" // Sven's Sword
+        {
+          "ItemDef"                                       "17"
+        }
+        "5" // All Heroes' Default Pet
+        {
+          "ItemDef"                                       "8366"
+        }
+        "6" // Sven's Gauntlet
+        {
+          "ItemDef"                                       "19"
+        }
+        "7" // Sven's Belt
+        {
+          "ItemDef"                                       "18"
+        }
+      }
+    }
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                                            "DOTA_TEAM_NEUTRALS"
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"                                  "1400"
+    "VisionNighttimeRange"                                "1400"
+
+    // Inventory
+    //----------------------------------------------------------------
+    "HasInventory"                                        "1"
+
+    // Minimap
+    //----------------------------------------------------------------
+    "MinimapIcon"                                         "minimap_roshancamp"
+    "MinimapIconSize"                                     "250"
+  }
+}

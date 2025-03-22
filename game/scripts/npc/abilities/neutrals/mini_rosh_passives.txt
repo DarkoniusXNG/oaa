@@ -1,0 +1,31 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Mini Rosh: Mini Rosh Passives - Spell Block + armor aura
+  //=================================================================================================================
+  "mini_rosh_passives"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/neutrals/oaa_mini_rosh_passives.lua"
+    "AbilityTextureName"                                  "roshan_spell_block"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "IsBreakable"                                         "1"
+
+    "MaxLevel"                                            "4"
+
+    "AbilityCooldown"                                     "16 15 14 13" // spell block cooldown
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "aura_bonus_armor"                                  "3 4 5 6"
+      "aura_radius"
+      {
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
+      }
+    }
+  }
+}

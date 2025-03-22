@@ -1,0 +1,9 @@
+"DOTAAbilities"
+{
+  // Eagle Horn / Eaglesong
+  "item_eagle"
+  {
+
+    "SecretShop"                                          "0" //OAA
+  }
+}

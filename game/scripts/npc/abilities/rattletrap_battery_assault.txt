@@ -4,12 +4,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5237"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -21,46 +19,33 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "18.0" //OAA
+    "AbilityCooldown"                                     "21 20 19 18 17 16" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
-
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    //"AbilityDamage"                                       "20 45 70 95 215 350"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.2"  // applies many mini-stuns
+    "AbilityManaCost"                                     "90"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "275"
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"                                          "10.5"
+      "interval"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "10.5"
+        "value"                                           "0.7"
+        "special_bonus_unique_clockwerk"                  "-0.25"
       }
-      "03"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "interval"                                        "0.7"
-        "LinkedSpecialBonus"                              "special_bonus_unique_clockwerk"
+        "value"                                           "20 45 70 95 190 285"
+        "special_bonus_unique_clockwerk_3"                "+36"
       }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "20 45 70 95 215 350"
-        "LinkedSpecialBonus"                              "special_bonus_unique_clockwerk_3"
-      }
+      "creep_damage_multiplier"                           "1.0"
     }
   }
 }

@@ -1,0 +1,8 @@
+"DOTAAbilities"
+{
+  // Boots of Speed / Brown Boots
+  "item_boots"
+  {
+    "SideShop"                                            "1" //OAA
+  }
+}

@@ -7,21 +7,18 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5568"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL" //OAA, Valve forgot about this
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -30,43 +27,28 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "36 24 12 12 12"
+    "AbilityCooldown"                                     "16 13 10 10 10"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50 75 100 125 150"
+    "AbilityManaCost"                                     "75"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage"                                      "50 75 100 150 200"
+      "crit_multiplier"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "crit_multiplier"                                 "350 350 350 400 450"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tusk"
+        "value"                                           "200 250 300 350 400"
+        "special_bonus_unique_tusk"                       "+75"
       }
-      "02"
+      "air_time"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "air_time"                                        "1.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tusk_7"
+        "value"                                           "1.0"
+        "special_bonus_unique_tusk_7"                     "+0.75"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "2.0 3.0 4.0 5.0 6.0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "move_slow"                                       "40"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "push_length"                                     "1000"
-      }
+      "push_length"                                       "1000"
     }
   }
 

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5022"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
@@ -17,60 +16,17 @@
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
-    "AbilityCastRange"                                    "400"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "chance" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "chance"                                          "20 30 40 45 50"
-        "LinkedSpecialBonus"                              "special_bonus_unique_drow_ranger_3"
+        "value"                                           "20 22 24 26 28"
+        "special_bonus_unique_drow_ranger_3"              "+10"
       }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "70 80 90 110 150"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "agility_multiplier"                              "28 36 44 44 44"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "agility_range"                                   "1200"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "split_count_scepter"                             "2"
-        "RequiresScepter"                                 "1"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_range"                                   "375"
-        "RequiresScepter"                                 "1"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction_scepter"                        "50"
-        "RequiresScepter"                                 "1"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "disable_range"                                   "400"
-      }
+      "bonus_damage"                                      "10 20 30 40 50" //OAA
+      "disable_range"                                     "400"
     }
   }
 }

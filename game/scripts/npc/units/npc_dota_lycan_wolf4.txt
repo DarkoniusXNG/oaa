@@ -1,0 +1,40 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Lycan Wolf 4
+  //=================================================================================
+  "npc_dota_lycan_wolf4"
+  {
+    "include_keys_from"                                   "npc_dota_lycan_wolf1"
+
+    "Level"                                               "4"
+    "ModelScale"                                          "0.99"
+
+    // Abilities
+    //----------------------------------------------------------------
+    // "Ability1"                                            "lycan_summon_wolves_invisibility"
+    // "Ability2"                                            "lycan_summon_wolves_critical_strike"
+
+    "MagicalResistance"                                   "50" // Magical protection.
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackDamageMin"                                     "80" // OAA
+    "AttackDamageMax"                                     "80" // OAA
+    "AttackRate"                                          "0.9" // BAT
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "35" // OAA
+    "BountyGoldMin"                                       "46" // OAA
+    "BountyGoldMax"                                       "46" // OAA
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementSpeed"                                       "460" // Speed.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "625" // OAA
+  }
+}

@@ -17,8 +17,6 @@ function item_lucience:GetIntrinsicModifierName()
 end
 
 function item_lucience:OnSpellStart()
-  local caster = self:GetCaster()
-
   self:StartCooldown(self:GetCooldown(self:GetLevel()))
 
   -- Switch state
@@ -110,8 +108,8 @@ function modifier_item_lucience_aura_handler:OnCreated()
   local ability = self:GetAbility()
   if ability and not ability:IsNull() then
     ability.auraHandler = self
-    self.stats = ability:GetSpecialValueFor("bonus_all_stats")
-    self.bonus_mana_regen = ability:GetSpecialValueFor("bonus_mana_regen")
+    self.str = ability:GetSpecialValueFor("bonus_strength")
+    self.int = ability:GetSpecialValueFor("bonus_intellect")
   end
 
   if IsServer() then
@@ -176,28 +174,18 @@ function modifier_item_lucience_aura_handler:DeclareFunctions()
   return {
     MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
     MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
-    MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
-    MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
   }
 end
 
-function modifier_item_lucience_aura_handler:GetModifierBonusStats_Agility()
-  return self.stats or self:GetAbility():GetSpecialValueFor("bonus_all_stats")
+function modifier_item_lucience_aura_handler:GetModifierBonusStats_Strength()
+  return self.str or self:GetAbility():GetSpecialValueFor("bonus_strength")
 end
 
 function modifier_item_lucience_aura_handler:GetModifierBonusStats_Intellect()
-  return self.stats or self:GetAbility():GetSpecialValueFor("bonus_all_stats")
+  return self.int or self:GetAbility():GetSpecialValueFor("bonus_intellect")
 end
 
-function modifier_item_lucience_aura_handler:GetModifierBonusStats_Strength()
-  return self.stats or self:GetAbility():GetSpecialValueFor("bonus_all_stats")
-end
-
-function modifier_item_lucience_aura_handler:GetModifierConstantManaRegen()
-  return self.bonus_mana_regen or self:GetAbility():GetSpecialValueFor("bonus_mana_regen")
-end
-
-------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 modifier_item_lucience_regen_aura = class(ModifierBaseClass)
 
@@ -245,7 +233,7 @@ function modifier_item_lucience_regen_aura:GetModifierAura()
   return "modifier_item_lucience_regen_effect"
 end
 
-------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 modifier_item_lucience_movespeed_aura = class(modifier_item_lucience_regen_aura)
 
@@ -270,7 +258,7 @@ function modifier_item_lucience_movespeed_aura:GetModifierAura()
   return "modifier_item_lucience_movespeed_effect"
 end
 
-------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 modifier_item_lucience_regen_effect = class(ModifierBaseClass)
 
@@ -283,49 +271,64 @@ function modifier_item_lucience_regen_effect:IsDebuff()
 end
 
 function modifier_item_lucience_regen_effect:OnCreated()
-  local ability = self:GetAbility()
-  local hp_regen = 60
+  self.hp_regen = 60
+  self.mana_regen = 1.75
   --local regen_interval = 1/3
+  local ability = self:GetAbility()
   if ability and not ability:IsNull() then
-    hp_regen = ability:GetSpecialValueFor("regen_bonus")
+    self.hp_regen = ability:GetSpecialValueFor("aura_bonus_hp_regen")
+    self.mana_regen = ability:GetSpecialValueFor("aura_bonus_mana_regen")
     --regen_interval = 1 / ability:GetSpecialValueFor("heals_per_sec")
   end
 
-  self.regen = hp_regen
   --self.healInterval = regen_interval
+
   --if IsServer() then
     --self:StartIntervalThink(self.healInterval)
   --end
 end
 
 function modifier_item_lucience_regen_effect:OnRefresh()
-  local ability = self:GetAbility()
   local hp_regen = 60
+  local mana_regen = 1.75
   --local regen_interval = 1/3
+  local ability = self:GetAbility()
   if ability and not ability:IsNull() then
-    hp_regen = ability:GetSpecialValueFor("regen_bonus")
+    hp_regen = ability:GetSpecialValueFor("aura_bonus_hp_regen")
+    mana_regen = ability:GetSpecialValueFor("aura_bonus_mana_regen")
     --regen_interval = 1 / ability:GetSpecialValueFor("heals_per_sec")
   end
 
-  self.regen = hp_regen
   --self.healInterval = regen_interval
+  if self.hp_regen and self.mana_regen then
+    self.hp_regen = math.max(self.hp_regen, hp_regen)
+    self.mana_regen = math.max(self.mana_regen, mana_regen)
+  else
+    self.hp_regen = hp_regen
+    self.mana_regen = mana_regen
+  end
 end
 
 -- function modifier_item_lucience_regen_effect:OnIntervalThink()
   -- local parent = self:GetParent()
   -- local ability = self:GetAbility()
 
-  -- parent:Heal(self.regen * self.healInterval, ability)
+  -- parent:Heal(self.hp_regen * self.healInterval, ability)
 -- end
 
 function modifier_item_lucience_regen_effect:DeclareFunctions()
   return {
-    MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT
+    MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
+    MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
   }
 end
 
 function modifier_item_lucience_regen_effect:GetModifierConstantHealthRegen()
-  return self.regen
+  return self.hp_regen
+end
+
+function modifier_item_lucience_regen_effect:GetModifierConstantManaRegen()
+  return self.mana_regen
 end
 
 function modifier_item_lucience_regen_effect:GetEffectName()
@@ -340,7 +343,7 @@ function modifier_item_lucience_regen_effect:GetTexture()
   end
 end
 
-------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 modifier_item_lucience_movespeed_effect = class(ModifierBaseClass)
 
@@ -353,25 +356,46 @@ function modifier_item_lucience_movespeed_effect:IsDebuff()
 end
 
 function modifier_item_lucience_movespeed_effect:OnCreated()
+  self.move_speed = 20
+  self.attack_speed = 20
   local ability = self:GetAbility()
-  local move_speed = 20
   if ability and not ability:IsNull() then
-    move_speed = ability:GetSpecialValueFor("speed_bonus")
+    self.move_speed = ability:GetSpecialValueFor("aura_percentage_bonus_movement_speed")
+    self.attack_speed = ability:GetSpecialValueFor("aura_bonus_attack_speed")
   end
-
-  self.movespeedBonus = move_speed
 end
 
-modifier_item_lucience_movespeed_effect.OnRefresh = modifier_item_lucience_movespeed_effect.OnCreated
+function modifier_item_lucience_movespeed_effect:OnRefresh()
+  local move_speed = 20
+  local attack_speed = 20
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    move_speed = ability:GetSpecialValueFor("aura_percentage_bonus_movement_speed")
+    attack_speed = ability:GetSpecialValueFor("aura_bonus_attack_speed")
+  end
+
+  if self.move_speed and self.attack_speed then
+    self.move_speed = math.max(self.move_speed, move_speed)
+    self.attack_speed = math.max(self.attack_speed, attack_speed)
+  else
+    self.move_speed = move_speed
+    self.attack_speed = attack_speed
+  end
+end
 
 function modifier_item_lucience_movespeed_effect:DeclareFunctions()
   return {
-    MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+    MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+    MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
   }
 end
 
 function modifier_item_lucience_movespeed_effect:GetModifierMoveSpeedBonus_Percentage()
-  return self.movespeedBonus
+  return self.move_speed
+end
+
+function modifier_item_lucience_movespeed_effect:GetModifierAttackSpeedBonus_Constant()
+  return self.attack_speed
 end
 
 function modifier_item_lucience_movespeed_effect:GetEffectName()

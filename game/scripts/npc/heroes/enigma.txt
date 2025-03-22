@@ -5,6 +5,7 @@
   //=================================================================================================================
   "npc_dota_hero_enigma"
   {
-
+    "Ability2"                                            "enigma_demonic_conversion_oaa" // replaces enigma_demonic_conversion
+    "Ability7"                                            "enigma_demonic_conversion" // replaces undefined
   }
 }

@@ -1,34 +1,25 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  //  Troll Warlord: Battle Trance
+  // Troll Warlord: Battle Trance
   //=================================================================================================================
   "troll_warlord_battle_trance"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5512"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH" // Valve this is a remnant of the old scepter
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_4"
     "AbilityCastPoint"                                    "0.0"
-    "AbilityCastRange"                                    "525"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90"
+    "AbilityCastRange"                                    "0" // OAA, Valve this is a remnant of the old scepter
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -36,50 +27,42 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "trance_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "trance_duration"                                 "6.5"
+        "value"                                           "6.5"
+        "special_bonus_unique_troll_warlord_battle_trance_movespeed"  "+1.5"
       }
-      "02"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "lifesteal"                                       "40 60 80 100 120"
+        "value"                                           "90 80 70 65 60"
       }
-      "03"
+      "lifesteal"                                         "40 60 80 90 100"
+      "attack_speed"                                      "140 170 200 230 260"
+      "attack_speed_share_percent"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_speed"                                    "140 170 200 230 260"
+        "value"                                           "0"
+        "special_bonus_facet_troll_warlord_bad_influence"  "+50" // based off attack_speed
       }
-      "04"
+      "movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "30 35 40 45 50"
+        "value"                                           "25 30 35 40 45"
       }
-      "05"
+      "range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "range"                                           "900"
+        "value"                                           "900"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "stack_limit_tooltip" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_cooldown"                                "35"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_facet_troll_warlord_bad_influence"  "+12"       // TOOLTIP ONLY: Update stack_limit_during_battle_trance for behavior change
       }
-      "07"
+      "ignore_attack_speed_limit"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_duration_enemies"                        "3.25"
-        "RequiresScepter"                                 "1"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_cast_range_tooltip"                      "525"
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_facet_troll_warlord_bad_influence"  "+1"
       }
     }
   }

@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Trusty Shovel (OAA Rework) - custom neutral tier 1 item
+  //=================================================================================================================
+  "item_trusty_shovel_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/trusty_shovel.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityTextureName"                                  "item_trusty_shovel"
+
+    "AbilityCastRange"                                    "250"
+    "AbilityCooldown"                                     "40"
+    "AbilityCastPoint"                                    "0.1"
+    "AbilityChannelTime"                                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bounty_rune_drop_chance"                           "15"
+    }
+  }
+}

@@ -7,57 +7,54 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5026"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "100" //OAA
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "145 205 265 325 385"
+    "AbilityManaCost"                                     "150 200 250 300 350"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "echo_slam_damage_range" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "echo_slam_damage_range"                          "800" //OAA
+        "value"                                           "750"
         "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "echo_slam_echo_search_range" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "echo_slam_echo_search_range"                     "800" //OAA
+        "value"                                           "750"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "echo_slam_echo_range" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "echo_slam_echo_range"                            "800" //OAA
+        "value"                                           "750"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "echo_slam_echo_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "echo_slam_echo_damage"                           "70 110 150 270 470" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_earthshaker_2"
+        "value"                                           "90 130 170 290 490"
+        "special_bonus_unique_earthshaker_2"              "+100"
       }
-      "05"
+      "echo_slam_initial_damage"                          "100 180 260 500 900" //OAA
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "echo_slam_initial_damage"                        "100 180 260 500 900" //OAA
+        "value"                                           "110 105 100 95 90"
+        "special_bonus_unique_earthshaker_echo_cd"        "-50%"
       }
     }
   }

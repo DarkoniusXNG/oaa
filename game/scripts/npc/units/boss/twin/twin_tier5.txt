@@ -1,0 +1,92 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Boss tier 5 - Twin Boss (melee)
+  //=================================================================================
+  "npc_dota_boss_twin_tier5"
+  {
+    // General
+    //
+    "BaseClass"                                           "npc_dota_creep_neutral" // to use neutral AI
+    "Model"                                               "models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl"
+    "vscripts"                                            "units/twin_tier5.lua"
+    "SoundSet"                                            "Roshan"
+    "ModelScale"                                          "1"
+    "Level"                                               "50"
+    "IsAncient"                                           "1"
+    "ConsideredHero"                                      "1"
+    //"UseNeutralCreepBehavior"                             "0"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"                                            "boss_twin_twin_empathy"
+    "Ability2"                                            "boss_basic_properties_oaa"
+    "Ability3"                                            "boss_regen"
+    "Ability4"                                            "boss_true_strike"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"                                       "43"
+    "MagicalResistance"                                   "-25"
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"                                     "5500"
+    "AttackDamageMax"                                     "5500"
+    "AttackRate"                                          "0.75"
+    "AttackAnimationPoint"                                "0.56"
+    "AttackAcquisitionRange"                              "150"
+    "AttackRange"                                         "128"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "2500" // Total with the other twin: 5000
+    "BountyGoldMin"                                       "0"
+    "BountyGoldMax"                                       "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"                                      "DOTA_HULL_SIZE_HERO"
+    "RingRadius"                                          "110"
+    "HealthBarOffset"                                     "400"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"                                       "420"
+    "MovementTurnRate"                                    "0.8"
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "16000"
+    "StatusHealthRegen"                                   "0"
+    "StatusMana"                                          "8000"
+    "StatusManaRegen"                                     "4000"
+
+    // Creature data
+    //"Creature"
+    //{
+      //"DisableResistance"                                 "80.0"
+    //}
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                                            "DOTA_TEAM_NEUTRALS"
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"                                  "1400"
+    "VisionNighttimeRange"                                "1400"
+
+    // Inventory
+    //----------------------------------------------------------------
+    "HasInventory"                                        "1"
+
+    // Minimap
+    //----------------------------------------------------------------
+    "MinimapIcon"                                         "minimap_roshancamp"
+    "MinimapIconSize"                                     "450"
+  }
+}

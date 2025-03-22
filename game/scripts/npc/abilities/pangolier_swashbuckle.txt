@@ -7,75 +7,65 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                            "6344"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
-    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
-    "AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
 
-    "MaxLevel"                      "6"
-    "RequiredLevel"                 "1"
-    "LevelsBetweenUpgrades"         "2"
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"              "0.0"
-    "AbilityCastRange"              "900"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"               "20 16 12 8 8 8"
+    "AbilityCastPoint"                                    "0.15"
+    "AbilityCastRange"                                    "400 500 600 700 800 900"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"               "80 90 100 110 120 130"
+    "AbilityManaCost"                                     "75 80 85 90 95 100"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"              "FIELD_INTEGER"
-        "dash_range"            "900"
+        "value"                                           "15 14 13 12 11 10"
+        "special_bonus_unique_pangolier_4"                "-4"
       }
-      "02"
+      "dash_range"                                        "400 500 600 700 800 900"
+      "range"
       {
-        "var_type"              "FIELD_INTEGER"
-        "range"                 "1000"
-        "LinkedSpecialBonus"    "special_bonus_unique_pangolier_7"
+        "value"                                           "700"
+        "special_bonus_unique_pangolier"                  "+200"
       }
-      "05"
+      "damage"
       {
-        "var_type"              "FIELD_INTEGER"
-        "damage"                "24 42 60 78 240 402"
-        "LinkedSpecialBonus"    "special_bonus_unique_pangolier_3"
-        "CalculateSpellDamageTooltip" "0"
+        "value"                                           "30 60 90 120 240 480"
+        "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "attack_damage" // percentage of attack damage
       {
-        "var_type"              "FIELD_INTEGER"
-        "dash_speed"            "2000"
+        "value"                                           "0"
+        "special_bonus_unique_pangolier_3"                "+15"
       }
-      "04"
+      "dash_speed"                                        "2000"
+      "attack_interval"                                   "0.1"
+      "start_radius"
       {
-        "var_type"              "FIELD_FLOAT"
-        "attack_interval"       "0.1"
+        "value"                                           "155"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "end_radius"
       {
-        "var_type"              "FIELD_INTEGER"
-        "start_radius"          "125"
+        "value"                                           "155"
+        "affected_by_aoe_increase"                        "1"
       }
-      "07"
+      "strikes"
       {
-        "var_type"              "FIELD_INTEGER"
-        "end_radius"            "125"
+        "value"                                           "3"
       }
-      "08"
-      {
-        "var_type"              "FIELD_INTEGER"
-        "strikes"               "4"
-      }
+      "procs_onhit_effects"                               "1"
     }
   }
 }

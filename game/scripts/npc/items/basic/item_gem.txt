@@ -1,0 +1,9 @@
+"DOTAAbilities"
+{
+  // Gem
+  "item_gem"
+  {
+
+    "SideShop"                                            "1" //OAA
+  }
+}

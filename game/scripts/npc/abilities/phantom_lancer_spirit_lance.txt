@@ -7,18 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5065"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
-
-    "HasScepterUpgrade"                                   "0"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -26,74 +24,60 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "7"
+    "AbilityCooldown"                                     "10 9 8 7 7 7"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "110 120 130 140 150 160"
+    "AbilityManaCost"                                     "90 100 110 120 130 140" //OAA
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "525 600 675 750 825 900"
+    "AbilityCastRange"                                    "600 650 700 750 800 850"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "lance_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "lance_damage"                                    "100 160 220 280 560 840"
-        "LinkedSpecialBonus"                              "special_bonus_unique_phantom_lancer_2"
+        "value"                                           "70 140 210 280 560 840"
       }
-      "02"
+      "lance_speed"                                       "1000"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "lance_speed"                                     "1000"
+        "value"                                           "3.75"
+        "special_bonus_unique_phantom_lancer_lance_slow_duration"  "+1.25"
       }
-      "03"
+      "movement_speed_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.25"
+        "value"                                           "-14 -21 -28 -35 -42 -50"
       }
-      "04"
+      "illusion_duration"                                 "3.5 5.0 6.5 8.0 8.0 8.0"
+      "illusion_damage_out_pct"                           "-85 -83 -81 -79 -77 -75" //OAA
+      "tooltip_illusion_damage"                           "15 17 19 21 23 25" //OAA
+      "illusion_damage_in_pct"                            "300 260 220 180 140 100" //OAA
+      "tooltip_illusion_total_damage_in_pct"              "400 360 320 280 240 200" //OAA
+      "fake_lance_distance"                               "675"
+      "scepter_bounce_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed_pct"                              "-10 -18 -26 -34 -42 -50"
+        "value"                                           "750"
+        "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "scepter_bonus_illusion_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "illusion_duration"                               "2.0 4.0 6.0 8.0 8.5 9.0"
+        "value"                                           "30"
+        "RequiresScepter"                                 "1"
       }
-      "06"
+      "scepter_total_hits"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "illusion_damage_out_pct"                         "-80 -80 -80 -80 -75 -70"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "1"
+        "RequiresScepter"                                 "1"
       }
-      "07"
+      "illusion_lance_damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_illusion_damage"                         "20 20 20 20 25 30"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "illusion_damage_in_pct"                          "300"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "tooltip_illusion_total_damage_in_pct"            "400"
-        "CalculateSpellDamageTooltip"                     "0"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "fake_lance_distance"                             "675"
+        "value"                                           "0"
+        "special_bonus_facet_phantom_lancer_lancelot"     "+25"
       }
     }
   }

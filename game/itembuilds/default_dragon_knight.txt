@@ -1,51 +1,54 @@
 "itembuilds"
 {
-  "author"		"Valve"
-  "hero"			"npc_dota_hero_dragon_knight"
-  "Title"			"Recommended items for Dragon Knight"
+  "author"        "OAA 7.37x"
+  "hero"          "npc_dota_hero_dragon_knight"
+  "Title"         "Recommended items for Dragon Knight"
 
   "Items"
   {
     "#DOTA_Item_Build_Starting_Items"
     {
-      "item"    "item_bracer"
-      "item"    "item_flask"
+      "item"      "item_bracer"
+      "item"      "item_flask"
     }
 
-    "#DOTA_Item_Build_Early_Game"
+    "#DOTA_Item_Build_For_Farming"
     {
-      "item"    "item_magic_wand"
-      "item"    "item_soul_ring"
+      "item"      "item_hand_of_midas_1"
+      "item"      "item_vanguard"
     }
 
-    "#DOTA_Item_Build_Mid_Items"
+    "#DOTA_Item_Build_Utility_Initiation" // Standard dota item progression
     {
-      "item"    "item_sange"
-      "item"    "item_armlet"
+      "item"      "item_mage_slayer"
+      "item"      "item_blink"
+      "item"      "item_orchid"
     }
 
-    "#DOTA_Item_Build_Late_Items"
+    "#DOTA_Item_Build_Physical_Core"
     {
-      "item"    "item_sange_and_yasha"
-      "item"    "item_satanic"
-      "item"    "item_assault"
-      "item"    "item_greater_crit"
-      "item"    "item_abyssal_blade_3"
+      "item"      "item_mjollnir"
+      "item"      "item_monkey_king_bar"
+      "item"      "item_greater_crit"
+      "item"      "item_devastator_oaa_2"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
     }
 
     "#DOTA_Item_Build_Luxury"
     {
-      "item"    "item_blink"
-      "item"    "item_black_king_bar_1"
-      "item"    "item_ancient_janggo"
-      "item"    "item_heavens_halberd"
-      "item"    "item_pipe"
-      "item"    "item_heart"
-      "item"    "item_mjollnir"
-      "item"    "item_silver_edge"
-      "item"    "item_blade_mail"
-      "item"    "item_monkey_king_bar"
-      "item"    "item_hurricane_pike"
+      "item"      "item_black_king_bar_1"
+      "item"      "item_heart_oaa_1"
+      "item"      "item_pipe"
+      "item"      "item_sange_and_yasha"
+      "item"      "item_satanic"
+      "item"      "item_shield_staff"
+      "item"      "item_octarine_core"
+      "item"      "item_abyssal_blade_2"
+      "item"      "item_greater_power_treads"
     }
   }
 }

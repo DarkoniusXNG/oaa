@@ -7,38 +7,35 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"          "5203"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "600"
-    "AbilityCastPoint"        "0.5"
+    "AbilityCastRange"                                    "600"
+    "AbilityCastPoint"                                    "0.5"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "7"
+    "AbilityCooldown"                                     "7"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "0"
+    "AbilityManaCost"                                     "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "burn_amount"
       {
-        "var_type"        "FIELD_INTEGER"
-        "burn_amount"     "125 175 225 350 500 750 1150"
+        "value"                                           "125 175 225 350 500 750 1150"
       }
-      "02"
+      "burn_as_damage_tooltip"
       {
-        "var_type"        "FIELD_INTEGER"
-        "burn_as_damage_tooltip"      "100"
+        "value"                                           "100"
       }
     }
   }

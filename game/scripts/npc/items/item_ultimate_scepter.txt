@@ -7,29 +7,32 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"              "107"                           // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    //"AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "0"
-    "ItemShopTags"          ""
+    "ItemCost"                                            "0"
+    "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
-    "ItemRecipe"          "1"
-    "ItemResult"          "item_ultimate_scepter"
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_ultimate_scepter"
     "ItemRequirements"
     {
-      "01"            "item_point_booster;item_staff_of_wizardry;item_ogre_axe;item_blade_of_alacrity"
+      "01"                                                "item_point_booster;item_staff_of_wizardry;item_ogre_axe;item_blade_of_alacrity"
     }
   }
+
   //=================================================================================================================
   // Scepter
   //=================================================================================================================
   "item_ultimate_scepter"
   {
-    "ID"                                                  "108"
     "AbilityTextureName"                                  "custom/ultimate_scepter"
+
+    "AbilityCastRange"                                    "99999" //OAA, for Alchemist when he gives to others
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "1"
@@ -37,28 +40,12 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_all_stats"                                 "10 20 30 40 50"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "175 275 425 625 875"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "175 275 425 625 875"
-      }
-      "04" // OAA
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "talent_level_tooltip"                            "0 10 15 20 25"
-      }
+      "bonus_all_stats"                                   "10 15 20 25 30"
+      "bonus_health"                                      "175 275 425 625 875"
+      "bonus_mana"                                        "175 275 425 625 875"
+      "talent_level_tooltip"                              "0 10 15 20 25" //OAA
     }
   }
 }

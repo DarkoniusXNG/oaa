@@ -14,7 +14,7 @@ function visage_summon_familiars_oaa:OnSpellStart()
   for _, v in pairs(caster.familiars) do
     if v and not v:IsNull() then
       if v:IsAlive() then
-        v:ForceKill(false)
+        v:ForceKillOAA(false)
       end
     end
   end
@@ -32,28 +32,8 @@ function visage_summon_familiars_oaa:OnSpellStart()
   local familiar_dmg = self:GetLevelSpecialValueFor("familiar_attack_damage", abilityLevel-1)
   local familiar_speed = self:GetLevelSpecialValueFor("familiar_speed", abilityLevel-1)
 
-  if caster:HasScepter() then
-    number_of_familiars = self:GetSpecialValueFor("scepter_total_familiars")
-  end
-
-  -- Talent that increases number of familiars
-  local talent = caster:FindAbilityByName("special_bonus_unique_visage_6")
-  if talent then
-    if talent:GetLevel() > 0 then
-      number_of_familiars = number_of_familiars + talent:GetSpecialValueFor("value")
-    end
-  end
-
-  -- Talent that increases familiar movement speed
-  local talent2 = caster:FindAbilityByName("special_bonus_unique_visage_2")
-  if talent2 then
-    if talent2:GetLevel() > 0 then
-      familiar_speed = familiar_speed + talent2:GetSpecialValueFor("value")
-    end
-  end
-
   for i = 1, number_of_familiars do
-    local familiar = self:SpawnUnit(levelUnitName, caster, playerID, false)
+    local familiar = self:SpawnUnit(levelUnitName, caster, playerID, i)
 
     -- Level the familiar's stone form ability to match ability level
     local stoneFormAbility = familiar:FindAbilityByName("visage_summon_familiars_stone_form")
@@ -95,27 +75,54 @@ function visage_summon_familiars_oaa:OnSpellStart()
 end
 
 function visage_summon_familiars_oaa:OnUpgrade()
+  local caster = self:GetCaster()
   local abilityLevel = self:GetLevel()
-  local self_cast_ability = self:GetCaster():FindAbilityByName("visage_stone_form_self_cast")
+  local self_cast_ability = caster:FindAbilityByName("visage_stone_form_self_cast")
 
   -- Check to not enter a level up loop
   if self_cast_ability and self_cast_ability:GetLevel() ~= abilityLevel then
     self_cast_ability:SetLevel(abilityLevel)
   end
+
+  -- Shard hidden ability
+  if caster:HasShardOAA() then
+    local stone_form_ability = caster:FindAbilityByName("visage_summon_familiars_stone_form")
+
+    -- Check to not enter a level up loop
+    if stone_form_ability then
+      if stone_form_ability:GetLevel() ~= abilityLevel then
+        stone_form_ability:SetLevel(abilityLevel)
+      end
+    end
+  end
 end
 
--- Copied and modified from Beastmaster Call of the Wild Boar and Hawk
-function visage_summon_familiars_oaa:SpawnUnit(levelUnitName, caster, playerID, bRandomPosition)
-  local position = caster:GetOrigin()
+function visage_summon_familiars_oaa:SpawnUnit(unit_name, caster, playerID, n)
+  local position = caster:GetAbsOrigin()
 
-  if bRandomPosition then
-    position = position + RandomVector(1):Normalized() * RandomFloat(50, 100)
+  -- Directions
+  local direction = caster:GetForwardVector()
+  direction.z = 0.0
+  direction = direction:Normalized()
+  local perpendicular_direction = Vector(direction.y, -direction.x, 0.0)
+
+  -- Distances
+  local distance_in_front_of_caster = 200
+  local distance_between = 120
+
+  -- Spawn locations
+  local spawn_location = position + direction * distance_in_front_of_caster
+  if n == 1 then
+    spawn_location = spawn_location - perpendicular_direction * (distance_between / 2)
+  elseif n == 2 then
+    spawn_location = spawn_location + perpendicular_direction * (distance_between / 2)
   end
 
-  local npcCreep = CreateUnitByName(levelUnitName, position, true, caster, caster:GetOwner(), caster:GetTeam())
-  npcCreep:SetControllableByPlayer(playerID, false)
-  npcCreep:SetOwner(caster)
-  npcCreep:SetForwardVector(caster:GetForwardVector())
+  local unit = CreateUnitByName(unit_name, spawn_location, true, caster, caster:GetOwner(), caster:GetTeam())
+  unit:SetControllableByPlayer(playerID, false)
+  unit:SetOwner(caster)
+  unit:SetForwardVector(direction)
+  --FindClearSpaceForUnit(unit, spawn_location, true)
 
-  return npcCreep
+  return unit
 end

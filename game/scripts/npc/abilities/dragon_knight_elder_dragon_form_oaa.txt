@@ -1,13 +1,12 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Dragon Knight: Elder Dragon Form (OAA rework)
+  // Dragon Knight: Elder Dragon Form (OAA rework) - unused
   //=================================================================================================================
   "dragon_knight_elder_dragon_form_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85229"              // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_elder_dragon_form.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -16,108 +15,71 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "AbilityTextureName"                                  "dragon_knight_elder_dragon_form"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     "HasScepterUpgrade"                                   "1"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "70"
+    "AbilityCooldown"                                     "80"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "50"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.35"  // Attacks are primarily about the damage
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "45"
+      // kvs that serve as backup if vanilla ability doesn't work
+      // 5th value will be the same as 4th value no matter what we write here,
+      // so it's better to be the same as 4th value to avoid confusion in the tooltip
+      "bonus_movement_speed"                              "30 35 40 45 45"
+      "bonus_attack_range"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "45"
+        "value"                                           "350"
+        "LinkedSpecialBonus"                              "special_bonus_unique_dragon_knight_7"
       }
-      "02"
+      "bonus_attack_damage"                               "0"
+      "corrosive_breath_damage"                           "25 35 45 90 90"
+      "corrosive_breath_duration"                         "3.0"
+      "splash_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "25"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "splash_damage_percent"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_range"                              "350"
+        "value"                                           "0 75 75 100 100"
+        "LinkedSpecialBonus"                              "special_bonus_unique_dragon_knight_6"
       }
-      "04"
+      "frost_bonus_movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_damage"                             "0"
+        "value"                                           "0 0 -30 -45 -60"
+        "LinkedSpecialBonus"                              "special_bonus_unique_dragon_knight_5"
       }
-      "05"
+      "frost_bonus_attack_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "corrosive_breath_damage"                         "20 40 60 120 180"
+        "value"                                           "0 0 -60 -90 -90"
+        "LinkedSpecialBonus"                              "special_bonus_unique_dragon_knight_5"
       }
-      "06"
+      "frost_duration"                                    "0 0 3"
+      "frost_aoe" // to match splash_radius
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "corrosive_breath_duration"                       "5.0"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "splash_radius"                                   "300"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "splash_damage_percent"                           "75 75 75 115 200"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "frost_bonus_movement_speed"                      "-40 -40 -40 -60 -70"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "frost_bonus_attack_speed"                        "-40 -40 -40 -60 -70"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "frost_duration"                                  "3.0"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "frost_aoe"                                       "300"
-      }
-      "13"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "magic_resistance"                                "0 0 0 40 40"
-      }
-      "14"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "model_scale"                                     "0 0 0 30 35"
-      }
-      "15"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "rage_chance"                                     "40"
-      }
-      "16"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "rage_duration"                                   "2.0"
-      }
+      "model_scale"                                       "0 0 0 30 30"
+      // changing 5th value will have effect for this kv:
+      "magic_resistance"                                  "0 0 0 20 30"
+      // original kvs:
+      "rage_chance"                                       "40" // unused
+      "rage_duration"                                     "2.0" // unused
+      "heal_suppression_pct"                              "40"
     }
   }
 }

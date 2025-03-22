@@ -1,18 +1,16 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Shredder: Whirling Death
+  // Timbersaw: Whirling Death
   //=================================================================================================================
   "shredder_whirling_death"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5524"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -20,53 +18,46 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "300"
     "AbilityCastPoint"                                    "0.0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "6"
+    "AbilityCooldown"                                     "7.5 7 6.5 6 6 6"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70"
+    "AbilityManaCost"                                     "100"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "whirling_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "whirling_radius"                                 "300"
+        "value"                                           "325"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "whirling_damage"                                   "85 130 175 220 440 660"
+      "tree_damage_scale"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "whirling_damage"                                 "90 120 150 180 500 800"
+        "value"                                           "11 18 25 32 46 60"
+        "special_bonus_unique_timbersaw"                  "+75"
       }
-      "03"
+      "whirling_tick"                                     "0.3"
+      "stat_loss_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tree_damage_scale"                               "12 18 24 30 50 100"
+        "value"                                           "13"
+        "special_bonus_unique_timbersaw_5"                "+2.5"
       }
-      "04"
+      "stat_loss_univ"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "whirling_tick"                                   "0.3"
+        "value"                                           "5"
+        "special_bonus_unique_timbersaw_5"                "+2.5"
       }
-      "05"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "stat_loss_pct"                                   "13 14 15 16 17 18"
-        "LinkedSpecialBonus"                              "special_bonus_unique_timbersaw"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "14.0"
+        "value"                                           "12 13 14 15 16 17"
       }
     }
   }
-
 }

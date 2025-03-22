@@ -7,20 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5685"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -30,42 +26,43 @@
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "0"
-    "AbilityCharges"                                      "1 2 3 4 5 6"
-    "AbilityChargeRestoreTime"                            "30" //OAA
+    "AbilityCharges"                                      "2 2 3 4 4 4" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80"
+    "AbilityManaCost"                                     "80 90 100 110 120 130" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage"                                          "14"
+        "value"                                           "25 50 75 100 200 300"
+        "special_bonus_unique_death_prophet_3"            "+25"
       }
-      "02"
+      "damage_pct"                                        "0" // special_bonus_unique_death_prophet_1_oaa
+      "haunt_duration"                                    "6"
+      "siphon_buffer"                                     "250"
+      "AbilityChargeRestoreTime" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_pct"                                      "1.0 2.0 3.0 4.0 6.0 8.0" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_death_prophet_3"
+        "value"                                           "35" // special_bonus_unique_death_prophet_5_oaa
+        "special_bonus_unique_death_prophet_5"            "-15" // special_bonus_unique_death_prophet_5 is not used
       }
-      "03"
+      "shard_bonus_charges"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "haunt_duration"                                  "6"
+        "value"                                           "1"
+        "RequiresShard"                                   "1"
       }
-      "04"
+      "shard_fear_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_steal"                                  "4 6 8 10 12 14"
+        "value"                                           "1.0"
+        "RequiresShard"                                   "1"
       }
-      "05"
+      "shard_consecutive_siphon_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "siphon_buffer"                                   "250"
+        "value"                                           "3"
+        "RequiresShard"                                   "1"
       }
     }
   }

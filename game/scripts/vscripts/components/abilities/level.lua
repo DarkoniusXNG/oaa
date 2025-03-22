@@ -6,6 +6,7 @@ if AbilityLevels == nil then
 end
 
 function AbilityLevels:Init ()
+  self.moduleName = "AbilityLevels"
   FilterManager:AddFilter(FilterManager.ExecuteOrder, self, Dynamic_Wrap(self, "FilterAbilityUpgradeOrder"))
   GameEvents:OnPlayerLevelUp(partial(self.CheckAbilityLevels, self))
   GameEvents:OnPlayerLearnedAbility(partial(self.CheckAbilityLevels, self))
@@ -47,6 +48,7 @@ function AbilityLevels:CheckAbilityLevels (keys)
   if not level then
     level = hero:GetLevel()
   end
+
   local canLevelUp = {}
 
   for index = 0, hero:GetAbilityCount() - 1 do
@@ -63,15 +65,35 @@ function AbilityLevels:CheckAbilityLevels (keys)
   })
 
   self:SetTalents(hero)
+
+  local leveled_up_ability = keys.abilityname
+  if leveled_up_ability then
+    local talent = hero:FindAbilityByName(leveled_up_ability)
+    if IsTalentCustom(leveled_up_ability) then
+      -- Ability is a talent
+
+      -- Check for hero level
+      if level >= 26 then
+        -- Refund a skill point if a player wasted it on a talent that is not supposed to be levelled.
+        if talent:GetLevel() == 0 or talent.granted_with_oaa_scepter then
+          -- Talent wasn't learned or was granted by Aghanim Scepter
+          -- dota_player_learned_ability event doesn't happen for abilities that are lvled with Lua: ability:SetLevel(level)
+          hero:SetAbilityPoints(hero:GetAbilityPoints() + 1)
+        end
+      end
+    end
+  end
 end
 
 function AbilityLevels:SetTalents(hero)
-
   local aghsPower = 0
 
-  for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_6 do
+  local max_slot = DOTA_ITEM_SLOT_6
+  if hero:HasModifier("modifier_spoons_stash_oaa") then
+    max_slot = DOTA_ITEM_SLOT_9
+  end
+  for i = DOTA_ITEM_SLOT_1, max_slot do
     local item = hero:GetItemInSlot(i)
-
     if item then
       if string.sub(item:GetName(), 0, 22) == 'item_aghanims_scepter_' then
         local level = tonumber(string.sub(item:GetName(), 23))
@@ -84,7 +106,6 @@ function AbilityLevels:SetTalents(hero)
 
   -- 10 - 17
   -- input is { [10] = true, [15] = true, ... }
-  local talentOverrides = {}
   local tree = {
     [10] = aghsPower > 1,
     [15] = aghsPower > 2,
@@ -136,6 +157,7 @@ function AbilityLevels:SetTalents(hero)
     if claim then
       if leftLevel == 0 then
         leftAbility:SetLevel(1)
+        leftAbility.granted_with_oaa_scepter = true
         -- Check if this talent is on problematic list, add modifier if true
         for i = 1, #problematic_talents do
           local talent = problematic_talents[i]
@@ -148,10 +170,10 @@ function AbilityLevels:SetTalents(hero)
             end
           end
         end
-
       end
       if rightLevel == 0 then
         rightAbility:SetLevel(1)
+        rightAbility.granted_with_oaa_scepter = true
         -- Check if this talent is on problematic list, add modifier if true
         for i = 1, #problematic_talents do
           local talent = problematic_talents[i]
@@ -164,18 +186,19 @@ function AbilityLevels:SetTalents(hero)
             end
           end
         end
-
       end
     else
       -- print ('disabling talents')
       if hero['talentChoice' .. level] == 'left' then
         if rightLevel ~= 0 then
           rightAbility:SetLevel(0)
+          rightAbility.granted_with_oaa_scepter = nil
           hero:RemoveModifierByName(AbilityLevels:GetTalentModifier(rightAbility:GetName()))
         end
       else
         if leftLevel ~= 0 then
           leftAbility:SetLevel(0)
+          leftAbility.granted_with_oaa_scepter = nil
           hero:RemoveModifierByName(AbilityLevels:GetTalentModifier(leftAbility:GetName()))
         end
       end
@@ -194,10 +217,9 @@ function AbilityLevels:SetTalents(hero)
   end
 
   local abilityTable = {}
-
   for abilityIndex = 0, hero:GetAbilityCount() - 1 do
     local ability = hero:GetAbilityByIndex(abilityIndex)
-    if ability and ability:IsAttributeBonus() then
+    if ability and IsTalentCustom(ability) then
       abilityTable[#abilityTable + 1] = ability
     end
   end
@@ -214,12 +236,13 @@ function AbilityLevels:GetTalentModifier(name)
     special_bonus_spell_immunity = "modifier_special_bonus_spell_immunity",
     special_bonus_haste = "modifier_special_bonus_haste",
     special_bonus_truestrike = "modifier_special_bonus_truestrike",
-    special_bonus_unique_morphling_4 = "modifier_special_bonus_unique_morphling_4",
-    special_bonus_unique_treant_3 = "modifier_special_bonus_unique_treant_3",
     special_bonus_unique_warlock_1 = "modifier_special_bonus_unique_warlock_1",
     special_bonus_unique_warlock_2 = "modifier_special_bonus_unique_warlock_2",
+    special_bonus_unique_warlock_4 = "modifier_warlock_rain_of_chaos_death_trigger",
     special_bonus_unique_undying_3 = "modifier_undying_tombstone_death_trigger",
-    special_bonus_unique_undying_reincarnation = "modifier_special_bonus_reincarnation",
+    special_bonus_reincarnation_200 = "modifier_special_bonus_reincarnation",
+    special_bonus_reincarnation_250 = "modifier_special_bonus_reincarnation",
+    special_bonus_reincarnation_300 = "modifier_special_bonus_reincarnation",
   }
 
   if exceptionBonuses[name] then
@@ -242,19 +265,40 @@ function AbilityLevels:GetRequiredLevel (hero, abilityName)
   local ultimateReqs = {0, 0, 0, 37, 49}
 
   local invokerAbilityReqs = {0, 0, 0, 0, 0, 0, 0, 26, 28, 30, 32, 34, 36, 38}
+  local summonWolvesReqs = {0, 0, 0, 0, 0, 0, 30, 42}
+  local extraLevelbasicReqs = {0, 0, 0, 0, 0, 28, 40}
+  local basicInnateAbilityReqs = {0, 0, 0, 0, 0, 28, 40}
+  local ultimateInnateAbilityReqs = {0, 0, 0, 0, 37, 49}
+
   -- Ability hero level requirements for abilities that don't follow the default pattern
-  local exceptionAbilityReqs = {invoker_quas = invokerAbilityReqs,
-                                invoker_wex = invokerAbilityReqs,
-                                invoker_exort = invokerAbilityReqs}
+  local exceptionAbilityReqs = {
+    invoker_quas = invokerAbilityReqs,
+    invoker_wex = invokerAbilityReqs,
+    invoker_exort = invokerAbilityReqs,
+    lycan_summon_wolves = summonWolvesReqs,
+    magnataur_shockwave = extraLevelbasicReqs,
+    night_stalker_hunter_in_the_night = basicInnateAbilityReqs,
+    night_stalker_void = extraLevelbasicReqs,
+  }
 
   local ability = hero:FindAbilityByName(abilityName)
   local abilityLevel = ability:GetLevel()
-  local abilityType = ability:GetAbilityType()
   local reqTable = basicReqs
 
   if exceptionAbilityReqs[abilityName] then -- Ability doesn't follow default requirement pattern
     reqTable = exceptionAbilityReqs[abilityName]
-  elseif abilityType == 1 then -- Ability is DOTA_ABILITY_TYPE_ULTIMATE
+    if abilityName == "lycan_summon_wolves" and ability:GetSpecialValueFor("max_level") ~= 8 then
+      reqTable = basicReqs
+    elseif (abilityName == "night_stalker_void" or abilityName == "magnataur_shockwave" or abilityName == "monkey_king_tree_dance" or abilityName == "night_stalker_hunter_in_the_night") and ability:GetSpecialValueFor("max_level") ~= 7 then
+      reqTable = basicReqs
+    end
+  elseif IsInnateCustom(abilityName) then
+    if IsUltimateAbilityCustom(abilityName) then
+      reqTable = ultimateInnateAbilityReqs
+    else
+      reqTable = basicInnateAbilityReqs
+    end
+  elseif IsUltimateAbilityCustom(abilityName) then -- Ability is DOTA_ABILITY_TYPE_ULTIMATE
     reqTable = ultimateReqs
   end
 

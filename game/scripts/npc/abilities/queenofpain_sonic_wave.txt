@@ -7,25 +7,19 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5176"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "700"
     "AbilityCastPoint"                                    "0.452"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -33,54 +27,38 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "starting_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "starting_aoe"                                    "100"
+        "value"                                           "100"
       }
-      "02"
+      "distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "distance"                                        "900"
+        "value"                                           "900"
       }
-      "03"
+      "final_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "final_aoe"                                       "450"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "speed"                                             "900"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "900"
+        "value"                                           "350 550 750 1150 1550"
+        "special_bonus_unique_queen_of_pain_7"            "+250"
       }
-      "05"
+      "tick_rate"                                         "0.1"
+      "knockback_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "340 560 780 1220 2100" //OAA
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "knockback_duration"                                "1.4"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "cooldown_scepter"                                "40"
-        "RequiresScepter"                                 "1"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_scepter"                                  "390 610 830 1490 2590" //OAA
-        "RequiresScepter"                                 "1"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "knockback_distance"                              "350"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "knockback_duration"                              "1.4"
+        "value"                                           "90 85 80 75 70"
+        "special_bonus_unique_queen_of_pain_3"            "-35"
       }
     }
   }

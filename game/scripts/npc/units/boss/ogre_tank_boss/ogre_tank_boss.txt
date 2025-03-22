@@ -1,0 +1,98 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Boss Tier 3 - Ogre Tank Boss
+  //=================================================================================
+  "npc_dota_creature_ogre_tank_boss"
+  {
+    // Script
+    "vscripts"                                            "units/ai_ogre_tank_boss.lua"
+
+    // General
+    //----------------------------------------------------------------
+    "Model"                                               "models/creeps/ogre_1/boss_ogre.vmdl"
+    "BaseClass"                                           "npc_dota_creature"
+    "SoundSet"                                            "Hero_Ogre"
+    "GameSoundsFile"                                      "soundevents/game_sounds_creeps.vsndevts"
+    "Level"                                               "40"
+    "ModelScale"                                          "2.1"
+    "ConsideredHero"                                      "1"
+    "IsAncient"                                           "1"
+    "IsBossMonster"                                       "1"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"                                            "ogre_tank_boss_melee_smash"
+    "Ability2"                                            "ogre_tank_boss_jump_smash"
+    "Ability3"                                            "boss_basic_properties_oaa"
+    "Ability4"                                            "boss_regen"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"                                       "32"
+    "MagicalResistance"                                   "-25"
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"                                     "3500" // Melee Smash Damage
+    "AttackDamageMax"                                     "3500" // Melee Smash Damage
+    "AttackRate"                                          "2.0" // Melee Smash Cooldown
+    "AttackAnimationPoint"                                "0.3"
+    "AttackAcquisitionRange"                              "1200"
+    "AttackRange"                                         "1"
+    "ProjectileModel"                                     ""
+    "ProjectileSpeed"                                     "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"                                      "DOTA_HULL_SIZE_REGULAR"
+    "RingRadius"                                          "100"
+    "HealthBarOffset"                                     "360"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "3000"
+    "BountyGoldMin"                                       "0"
+    "BountyGoldMax"                                       "0"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"                                       "200"
+    "MovementTurnRate"                                    "0.2"
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "10000"
+    "StatusHealthRegen"                                   "0"
+    "StatusMana"                                          "5000"
+    "StatusManaRegen"                                     "10"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"                                  "1400"
+    "VisionNighttimeRange"                                "1400"
+
+    // Inventory
+    //----------------------------------------------------------------
+    "HasInventory"                                        "1"
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                                            "DOTA_TEAM_NEUTRALS"
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Creature Data
+    //----------------------------------------------------------------
+    "Creature"
+    {
+      "DisableResistance"                                 "50.0"
+    }
+
+    // Minimap
+    //----------------------------------------------------------------
+    "MinimapIcon"                                         "minimap_roshancamp"
+    "MinimapIconSize"                                     "250"
+  }
+}

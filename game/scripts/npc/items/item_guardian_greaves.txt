@@ -7,24 +7,21 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "230"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "Model"                                               "models/props_gameplay/recipe.vmdl"
-    "AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1600"
+    "ItemCost"                                            "1450"
     "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_guardian_greaves"
-    "AbilityTextureName"                                  "item_recipe"
 
     "ItemRequirements"
     {
-      "01"                                                "item_mekansm;item_arcane_boots"
+      "01"                                                "item_mekansm;item_arcane_boots;item_buckler"
     }
   }
 
@@ -35,23 +32,22 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "231"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "FightRecapLevel"                                     "1"
-    "AbilityTextureName"                                  "item_guardian_greaves"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "40"
-    "AbilityCastRange"                                    "1200"
+    "AbilityCooldown"                                     "25" //OAA
+    "AbilitySharedCooldown"                               "guardian_greaves"
+    "AbilityManaCost"                                     "0"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "0"
-    "ItemCost"                                            "4975"
+    "ItemCost"                                            "5050"
     "ItemShopTags"                                        "int;armor;regen_health;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "guardian greaves"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
     "ItemAlertable"                                       "1"
 
     "MaxUpgradeLevel"                                     "1"
@@ -59,68 +55,31 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_movement"                                    "50"
+      "bonus_armor"                                       "4"
+      "mana_regen"                                        "1.5"
+      "aura_health_regen"                                 "2.5"
+      "aura_armor"                                        "3"
+      "aura_mana_regen"                                   "1.5"
+      "aura_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement"                                  "50"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "aura_health_regen_bonus"                           "14.5"
+      "aura_mana_regen_bonus"                             "5"
+      "aura_armor_bonus"                                  "8"
+      "aura_bonus_threshold"                              "25"
+      "replenish_health"                                  "325"
+      "replenish_mana"                                    "200"
+      "replenish_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "250"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "4"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "aura_health_regen"                               "2.5"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "aura_armor"                                      "3"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_health_regen_bonus"                         "16"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_armor_bonus"                                "10"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_bonus_threshold"                            "20"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "1200"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "replenish_health"                                "300"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "replenish_mana"                                  "200"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "replenish_radius"                                "1200"
-      }
+      "max_health_pct_heal_amount"                        "0"
     }
   }
 }

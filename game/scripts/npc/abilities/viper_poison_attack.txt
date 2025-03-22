@@ -4,7 +4,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5218"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -18,7 +17,7 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600 640 680 720 760 800"
+    "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0"
 
     // Time
@@ -31,41 +30,52 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "25"
+    "AbilityManaCost"                                     "20 25 30 35 40 45" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "4"
+      "damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4"
+        "value"                                           "4 8 12 16 24 32"
+        "special_bonus_unique_viper_7"                    "+15%"
       }
-      "02"
+      "movement_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage"                                          "4 8 12 16 32 48"
+        "value"                                           "3 6 9 12 14 16"
+        "special_bonus_unique_viper_7"                    "+15%"
       }
-      "03"
+      "magic_resistance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "6 8 10 12 14 16"
+        "value"                                           "4 6 8 10 11 12"
       }
-      "04"
+      "max_stacks"                                        "6"
+      "bonus_range"                                       "25"
+      "shard_armor_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "magic_resistance"                                "3 5 7 9 11 13"
+        "special_bonus_shard"                             "1"
+        "RequiresShard"                                   "1"
       }
-      "05"
+      "shard_building_dmg_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_stacks"                                      "5"
+        "special_bonus_shard"                             "40"
+        "RequiresShard"                                   "1"
       }
-      "06" // Viper's attack range is 575
+      "shard_bonus_max_stacks"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_range"                                     "25 65 105 145 185 225"
+        "special_bonus_shard"                             "2"
+        "RequiresShard"                                   "1"
+      }
+      "expiration_damage_radius"
+      {
+        "special_bonus_facet_viper_poison_burst"          "=300"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "accumulated_damage_explosion_pct"
+      {
+        "special_bonus_facet_viper_poison_burst"          "=100"
       }
     }
   }

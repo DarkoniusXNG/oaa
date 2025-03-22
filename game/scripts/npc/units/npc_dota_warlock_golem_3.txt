@@ -1,8 +1,8 @@
 "DOTAUnits"
 {
-//=================================================================================
-// Warlock: Golem 3
-//=================================================================================
+  //=================================================================================
+  // Warlock: Golem 3 - unused
+  //=================================================================================
   "npc_dota_warlock_golem_3"
   {
     // General
@@ -27,14 +27,14 @@
 
     // Armor
     //----------------------------------------------------------------
-    "ArmorPhysical"                                       "30"    // Physical protection.
-    "MagicalResistance"                                   "33"    // Magical protection.
+    "ArmorPhysical"                                       "30" // OAA
+    "MagicalResistance"                                   "33"
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"                                     "300"    // Damage range min.
-    "AttackDamageMax"                                     "300"    // Damage range max.
+    "AttackDamageMin"                                     "330" // OAA
+    "AttackDamageMax"                                     "330" // OAA
     "AttackRate"                                          "1.2"    // Speed of attack.
     "AttackAnimationPoint"                                "0.26"    // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "500"    // Range within a target can be acquired.
@@ -48,7 +48,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                                            "98"    // Experience earn.
+    "BountyXP"                                            "118" // OAA
     "BountyGoldMin"                                       "200"    // Gold earned min.
     "BountyGoldMax"                                       "200"    // Gold earned max.
 
@@ -59,8 +59,8 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "5000"    // Base health.
-    "StatusHealthRegen"                                   "90"    // Health regeneration rate.
+    "StatusHealth"                                        "5000" // OAA
+    "StatusHealthRegen"                                   "90" // OAA
     "StatusMana"                                          "0"      // Base mana.
     "StatusManaRegen"                                     "0"      // Mana regeneration rate.
 
@@ -72,11 +72,10 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"              // Team name.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_HERO"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
     "VoiceFile"                                           "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
+
     //Inventory
     "HasInventory"                                        "0"
   }
@@ -104,14 +103,14 @@
 
     // Armor
     //----------------------------------------------------------------
-    "ArmorPhysical"                                       "30"      // Physical protection.
+    "ArmorPhysical"                                       "30" // OAA
     "MagicalResistance"                                   "33"
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"                                     "225"    // Damage range min.
-    "AttackDamageMax"                                     "225"    // Damage range max.
+    "AttackDamageMin"                                     "250" // OAA
+    "AttackDamageMax"                                     "250" // OAA
     "AttackRate"                                          "1.2"    // Speed of attack.
     "AttackAnimationPoint"                                "0.26"    // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "500"    // Range within a target can be acquired.
@@ -125,9 +124,9 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                                            "98"    // Experience earn.
-    "BountyGoldMin"                                       "50"    // Gold earned min.
-    "BountyGoldMax"                                       "50"    // Gold earned max.
+    "BountyXP"                                            "118" // OAA
+    "BountyGoldMin"                                       "100"    // Gold earned min.
+    "BountyGoldMax"                                       "100"    // Gold earned max.
 
     // Movement
     //----------------------------------------------------------------
@@ -136,8 +135,8 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "3750"    // Base health.
-    "StatusHealthRegen"                                   "90"    // Health regeneration rate.
+    "StatusHealth"                                        "4000" // OAA
+    "StatusHealthRegen"                                   "90" // OAA
     "StatusMana"                                          "0"      // Base mana.
     "StatusManaRegen"                                     "0"      // Mana regeneration rate.
 
@@ -149,8 +148,6 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"              // Team name.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_HERO"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
     "VoiceFile"                                           "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"

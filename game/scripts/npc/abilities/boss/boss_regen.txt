@@ -5,50 +5,24 @@
   //=================================================================================================================
   "boss_regen"
   {
-    "ID"                                                  "9905"
     "BaseClass"                                           "ability_lua"
-    "ScriptFile"                                          "abilities/boss_regen.lua"
+    "ScriptFile"                                          "abilities/boss/boss_regen.lua"
     "AbilityTextureName"                                  "dragon_knight_dragon_blood"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "1"
-    "RequiredLevel"                                       "1"
-    "LevelsBetweenUpgrades"                               "1"
 
     "AbilityCooldown"                                     "5.0"
 
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "regen_interval"                                  "0.1"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "health_regen_rate"                               "3.3"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "degen_duration"                                  "2.0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "degen_interval"                                  "0.5"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "health_degen_rate"                               "1.0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "pauses_during_duel"                              "1"
-      }
+      "regen_interval"                                    "0.1"
+      "health_regen_rate"                                 "3.3"
+      "degen_duration"                                    "2.0"
+      "degen_interval"                                    "0.5"
+      "health_degen_rate"                                 "1.0"
+      "pauses_during_duel"                                "1"
     }
   }
 }

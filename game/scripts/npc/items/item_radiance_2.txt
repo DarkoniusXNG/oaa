@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8478"
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "1500"
     "ItemShopTags"                                        ""
 
@@ -34,52 +34,42 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8570"
     "BaseClass"                                           "item_radiance"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityTextureName"                                  "custom/radiance_2"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "2"
+    "UpgradesItems"                                       "item_radiance_2;item_radiance_3;item_radiance_4;item_radiance_5"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "6650"
+    "ItemCost"                                            "6201"
     "ItemShopTags"                                        "damage"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "radiance 2"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    "UpgradesItems"                                       "item_radiance_2;item_radiance_3;item_radiance_4"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage"                                      "55 75 115 175 255"
+      "aura_damage"                                       "60 95 165 270 410"
+      "aura_damage_illusions"                             "35 52 87 140 210"
+      "upgrade_day_vision"                                "250"
+      "evasion"                                           "20 21 22 23 24"
+      "blind_pct"                                         "10 12 14 16 18"
+      "aura_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "60 80 120 180 260"
+        "value"                                           "650 700 750 800 850"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03" // 02
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_damage"                                     "60 90 150 240 360"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_damage_illusions"                           "35 52 87 140 210"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "blind_pct"                                       "17"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "700"
-      }
+      "illusion_multiplier_pct"                           "120"
     }
   }
 }

@@ -4,75 +4,61 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5289"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.3"
     "AbilityCastRange"                                    "3000"
-    "AbilityCooldown"                                     "35 30 25 20 20 20" //OAA
+    "AbilityCooldown"                                     "23 22 21 20 19 18" //OAA
     "AbilityManaCost"                                     "110"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.2"  // Primarily about the damage
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage"                                            "18 22 26 30 60 90"
+      "attack_rate"                                       "1.2 1.05 0.9 0.75 0.6 0.45"
+      "count"                                             "12"
+      "armor_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "18 20 22 24 28 40"
+        "value"                                           "1"
+        "special_bonus_unique_weaver_3"                   "+0.5"
       }
-      "02"
+      "duration"                                          "16"
+      "destroy_attacks" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "attack_rate"                                     "1.15 1.0 0.85 0.7 0.55 0.4"
+        "value"                                           "6 6 8 8 8 8"
+        "special_bonus_unique_weaver_4"                   "+2"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "count"                                           "12"
+        "value"                                           "100"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "speed"                                             "750"
+      "spawn_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "armor_reduction"                                 "1"
-        "LinkedSpecialBonus"                              "special_bonus_unique_weaver_3"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "shard_cooldown_reduction" // unused?
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "16"
+        "value"                                           "2"
+        "RequiresShard"                                   "1"
       }
-      "06"
+      "experience_gain" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "destroy_attacks"                                 "8"
-        "LinkedSpecialBonus"                              "special_bonus_unique_weaver_4"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "100"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "600"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spawn_radius"                                    "300"
+        "value"                                           "0"
+        "special_bonus_facet_weaver_hivemind"             "=6 =10 =14 =18 =36 =72"
+        "RequiresFacet"                                   "weaver_hivemind"
       }
     }
   }

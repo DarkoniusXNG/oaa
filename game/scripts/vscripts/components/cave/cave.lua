@@ -217,7 +217,7 @@ function CaveHandler:SpawnCreepInRoom (room, properties, teamID, roomID)
   end
 
   local function giveBounty (bounty, exp, playerID)
-    PlayerResource:ModifyGold(
+    Gold:ModifyGold(
       playerID, -- player
       bounty, -- amount
       true, -- is reliable gold
@@ -234,18 +234,18 @@ function CaveHandler:SpawnCreepInRoom (room, properties, teamID, roomID)
     end
   end
 
-  local function handleCreepDeath (gold, exp, _teamID, _roomID)
-    local playerIDs = PlayerResource:GetPlayerIDsForTeam(_teamID)
+  local function handleCreepDeath (gold, exp, teamID_local, roomID_local)
+    local playerIDs = PlayerResource:GetPlayerIDsForTeam(teamID_local)
     local bounty = math.ceil(gold / playerIDs:length())
-    exp = exp / playerIDs:length()
+    local xp = exp / playerIDs:length()
 
-    local multiplier = calculateMultiplier(_teamID)
+    local multiplier = calculateMultiplier(teamID_local)
     bounty = bounty * multiplier
-    exp = exp * multiplier
+    xp = xp * multiplier
 
-    each(partial(giveBounty, bounty, exp), playerIDs)
+    each(partial(giveBounty, bounty, xp), playerIDs)
 
-    self:CreepDeath(_teamID, _roomID)
+    self:CreepDeath(teamID_local, roomID_local)
   end
 
   creep:OnDeath(partial(handleCreepDeath, properties.gold, properties.exp, teamID, roomID))
@@ -433,7 +433,7 @@ function CaveHandler:GiveBounty (teamID, k)
   DebugPrint("Giving " .. playerCount .. " players " .. bounty .. " gold each from a pool of " .. pool .. " gold.")
 
   each(function(playerID)
-    PlayerResource:ModifyGold(
+    Gold:ModifyGold(
       playerID, -- player
       bounty, -- amount
       true, -- is reliable gold
@@ -476,7 +476,6 @@ end
 function CaveHandler:KickPlayers (teamID)
   DebugPrint('Kicking Players out of the cave.')
 
-  local cave = CaveHandler.caves[teamID]
   local spawns = {
     [DOTA_TEAM_GOODGUYS] = Entities:FindByClassname(nil, 'info_player_start_goodguys'):GetAbsOrigin(),
     [DOTA_TEAM_BADGUYS] = Entities:FindByClassname(nil, 'info_player_start_badguys' ):GetAbsOrigin(),
@@ -504,7 +503,7 @@ function CaveHandler:KickPlayers (teamID)
   DebugPrint('Teleporting units now')
 
   Timers:CreateTimer(function()
-      self:TeleportAll(units, spawns)
+    CaveHandler:TeleportAll(units, spawns)
   end)
 end
 
@@ -539,15 +538,14 @@ function CaveHandler:TeleportAll(units, spawns)
             MoveCameraToPlayer(unit)
             unit:Stop()
           else
-            local unlisten = Duels.onEnd(function ()
-
-            FindClearSpaceForUnit(
-              unit, -- unit
-              spawns[unit:GetTeamNumber()], -- location
-              false -- ???
-            )
-            MoveCameraToPlayer(unit)
-            unit:Stop()
+            Duels.onEnd(function ()
+              FindClearSpaceForUnit(
+                unit, -- unit
+                spawns[unit:GetTeamNumber()], -- location
+                false -- ???
+              )
+              MoveCameraToPlayer(unit)
+              unit:Stop()
             end)
           end
         end

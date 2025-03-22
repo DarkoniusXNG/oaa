@@ -7,12 +7,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5106"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -20,56 +18,43 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0.0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "26 22 18 14 14 14"
+    "AbilityCooldown"                                     "20 18 16 14 14 14" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "120"
+    "AbilityManaCost"                                     "95 110 125 140 155 170"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "325 350 375 400 425 450"
+        "value"                                           "600"
+        "special_bonus_unique_tiny_4"                     "+200"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.3"
+        "value"                                           "325 340 355 370 385 400"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "tick_interval"                                     "0.3"
+      "total_duration"                                    "1.5"
+      "tick_count"                                        "5"
+      "stun_duration"                                     "0.3"
+      "projectile_speed"                                  "1200"
+      "avalanche_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "total_duration"                                  "1.4"
+        "value"                                           "100 200 300 400 800 1200"
+        "special_bonus_unique_tiny"                       "+100"
       }
-      "04"
+      "toss_damage_bonus_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tick_count"                                      "5"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "0.2"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "projectile_speed"                                "1200"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "avalanche_damage"                                "75 150 225 300 600 1200"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tiny"
+        "value"                                           "0"
       }
     }
   }

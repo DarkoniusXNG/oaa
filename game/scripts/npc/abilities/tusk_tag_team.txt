@@ -5,7 +5,8 @@
   //=================================================================================================================
   "tusk_tag_team"
   {
-    "ID"                                                  "7322"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    // General
+    //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -20,44 +21,34 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0"
-    "AbilityCastRange"                                    "500"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "24 21 18 15 15 15"
+    "AbilityCooldown"                                     "18 17 16 15 14 13" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "70"
+    "AbilityManaCost"                                     "70 75 80 85 90 95" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "25 50 75 100 150 200"
+        "value"                                           "25 50 75 100 150 200"
       }
-      "02"
+      "movement_slow"                                     "75"
+      "slow_duration"                                     "0.5"
+      "debuff_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_slow"                                   "75"
+        "value"                                           "6"
+        "special_bonus_unique_tusk_3"                     "+2"
       }
-      "03"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "0.4"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "debuff_duration"                                 "5"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "350"
+        "value"                                           "350"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }

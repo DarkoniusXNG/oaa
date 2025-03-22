@@ -1,0 +1,69 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Broodmother: Spawn Spiderlings (OAA Rework)
+  // Notes: Not breakable
+  //=================================================================================================================
+  "broodmother_spawn_spiderlings_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/oaa_broodmother_spawn_spiderlings.lua"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "AbilityTextureName"                                  "broodmother_spawn_spiderlings"
+
+    "MaxLevel"                                            "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "spiderling_base_hp"
+      {
+        "value"                                           "270"
+        //"LinkedSpecialBonus"                              "special_bonus_unique_broodmother_2_oaa"
+      }
+      "spiderling_hp_per_level"
+      {
+        "value"                                           "30"
+        "LinkedSpecialBonus"                              "special_bonus_unique_broodmother_2_oaa"
+      }
+      "spiderling_base_armor"                             "0"
+      "spiderling_armor_per_level"                        "0.25"
+      "spiderling_magic_resist_per_level"                 "1"
+      "spiderling_speed"                                  "350"
+      "spiderling_base_attack_damage"
+      {
+        "value"                                           "11"
+        //"LinkedSpecialBonus"                              "special_bonus_unique_broodmother_4_oaa"
+        "CalculateSpellDamageTooltip"                     "0"
+      }
+      "spiderling_attack_damage_per_level"
+      {
+        "value"                                           "3"
+        "LinkedSpecialBonus"                              "special_bonus_unique_broodmother_4_oaa"
+        "CalculateSpellDamageTooltip"                     "0"
+      }
+      "spiderling_duration"                               "40"
+      "spiderling_spawn_count"                            "1"
+      "spiderling_max_count"                              "20"
+      "giant_spiderling_base_hp"
+      {
+        "value"                                           "540"
+        //"LinkedSpecialBonus"                              "special_bonus_unique_broodmother_2_oaa"
+      }
+      "giant_spiderling_base_attack_damage"
+      {
+        "value"                                           "30"
+        //"LinkedSpecialBonus"                              "special_bonus_unique_broodmother_4_oaa"
+        "CalculateSpellDamageTooltip"                     "0"
+      }
+      "giant_spiderling_spawn_count"                      "1"
+      "spiderling_spawn_radius"                           "900"
+    }
+  }
+}

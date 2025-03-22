@@ -7,14 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5458"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -26,51 +24,49 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15 13 11 9 7 5" //OAA
+    "AbilityCooldown"                                     "15 13 11 9 8 7" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "130 140 150 160 170 180"
-
-    // Cast Range
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "800"
+    "AbilityManaCost"                                     "125 130 135 140 145 150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "240"
+        "value"                                           "800"
+        "special_bonus_shard"                             "+400"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "strikes"                                         "4"
-        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor"
+        "value"                                           "260"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "strikes"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "strike_interval"                                 "2.0"
+        "value"                                           "4"
+        "special_bonus_shard"                             "+1"
       }
-      "04"
+      "strike_interval"                                   "2.0"
+      "strike_damage"                                     "40 65 90 115 230 460" //OAA
+      "strike_damage_bonus"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "strike_damage"                                   "45 70 95 120 240 360"
-        "LinkedSpecialBonus"                              "special_bonus_unique_disruptor_3"
+        "value"                                           "0"
+        "special_bonus_unique_disruptor_consecutive_strike_damage"  "+15"
       }
-      "05"
+      "slow_duration" //OAA, Valve forgot '+0' on special_bonus_unique_disruptor
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "0.1"
+        "value"                                           "0.4"
+        "special_bonus_unique_disruptor"                  "+0.6"
       }
-      "06"
+      "slow_amount"                                       "100"
+      "shard_ground_delay"                                "5"
+      "hits_units_inside_kinetic"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_amount"                                     "100"
+        "value"                                           "0"
+        "special_bonus_facet_disruptor_thunderstorm"      "+1"
       }
     }
   }

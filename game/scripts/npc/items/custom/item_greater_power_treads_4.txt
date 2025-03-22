@@ -1,0 +1,70 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Greater Power Treads 4
+  //=================================================================================================================
+  "item_recipe_greater_power_treads_4"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_greater_power_treads_4"
+    "ItemRequirements"
+    {
+      "01"                                                "item_greater_power_treads_3;item_upgrade_core_4"
+    }
+  }
+
+  //=================================================================================================================
+  // Greater Power Treads 4
+  //=================================================================================================================
+  "item_greater_power_treads_4"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/greater_power_treads.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"                                  "custom/greater_power_treads_4"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "31404"
+    "ItemShopTags"                                        "attack_speed;move_speed;int;agi;str"
+    "ItemQuality"                                         "common"
+    "ItemAliases"                                         "greater power treads 4;power treads 4;treads 4"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
+
+    "SpeciallyBannedFromNeutralSlot"                      "1"
+
+    "MaxUpgradeLevel"                                     "4"
+    "ItemBaseLevel"                                       "4"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_movement_speed"                              "55 60 65 70"
+      "primary_attribute_bonus"                           "15 25 40 60"
+      "bonus_magic_resistance"                            "7 8 9 10"
+      "bonus_attack_speed"                                "30 35 40 45"
+      "bonus_spell_amp"                                   "6 7 8 9"
+      "bonus_damage"                                      "10 30 60 100"
+      "primary_attribute_multiplier"                      "2"
+      "bonus_secondary_stats"                             "10 15 20 25"
+    }
+  }
+}

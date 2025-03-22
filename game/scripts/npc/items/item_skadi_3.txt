@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3191"    // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
 
@@ -34,18 +34,18 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3195"    // unique ID
     "BaseClass"                                           "item_skadi"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityTextureName"                                  "custom/skadi_3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "10300"
+    "ItemCost"                                            "10302"
     "ItemShopTags"                                        "agi;str;int;hard_to_tag;mana_pool;health_pool;unique"
     "ItemQuality"                                         "artifact"
     "ItemAliases"                                         "eos 3;eye of skadi 3;skadi 3"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "3"
@@ -53,43 +53,17 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_all_stats"                                 "25 30 40 55 75"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "225 450 675 900 1125"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "250 350 500 700 950"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cold_slow_melee"                                 "-25 -30 -35 -40 -45"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cold_slow_ranged"                                "-50 -55 -60 -65 -70"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "cold_duration"                                   "3.0"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "heal_reduction"                                  "40 45 50 55 60"
-      }
+      "bonus_all_stats"                                   "22 27 32 37 42"
+      "bonus_health"                                      "250 350 500 700 950"
+      "bonus_mana"                                        "250 350 500 700 950"
+      "cold_slow_melee"                                   "-25 -30 -35 -40 -45"
+      "cold_attack_slow_melee"                            "-20"
+      "cold_slow_ranged"                                  "-40 -45 -50 -55 -60"
+      "cold_attack_slow_ranged"                           "-20"
+      "cold_duration"                                     "3.0"
+      "heal_reduction"                                    "40 45 50 55 60"
     }
   }
 }

@@ -1,0 +1,19 @@
+"DOTAAbilities"
+{
+  "boss_charger_super_armor"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/charger/boss_charger_super_armor.lua"
+    "AbilityTextureName"                                  "courier_shield"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_armor"                                       "100" // Extra armor before hitting a pillar
+      "bonus_magic_resistance"                            "75" // Extra magic resist before hitting a pillar
+    }
+  }
+}

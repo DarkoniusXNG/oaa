@@ -7,70 +7,62 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5285"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    "FightRecapLevel"                                     "1"
-
-    // Unit Targeting
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES" //OAA, Valve forgot about this, slow is dispellable
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "400"
     "AbilityCastPoint"                                    "0.3"
-    "AbilityCooldown"                                     "8"
-    "AbilityManaCost"                                     "120 125 130 135 140 145"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.1"  // just a mini stun
+    "AbilityCooldown"                                     "5"
+    "AbilityManaCost"                                     "75 80 85 90 95 100"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "150 225 300 375 750 1125"
-        "LinkedSpecialBonus"                              "special_bonus_unique_bounty_hunter_2"
+        "value"                                           "100 170 240 310 620 930"
+        "special_bonus_unique_bounty_hunter_2"            "+310"
       }
-      "02"
+      "speed"                                             "1000"
+      "bounce_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "1000"
+        "value"                                           "1200"
       }
-      "03"
+      "slow_duration" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bounce_aoe"                                      "1200"
+        "value"                                           "0.5"
+        "special_bonus_unique_bounty_hunter_5"            "+0.5"
       }
-      "04"
+      "scepter_cooldown" //OAA, Valve has it wrong, luckily it's unused
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "ministun"                                        "0.1"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_cast_range"                              "650"
+        "value"                                           "5"
         "RequiresScepter"                                 "1"
       }
-      "06"
+      "passthrough_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_cooldown"                                "6"
-        "RequiresScepter"                                 "1"
+        "special_bonus_facet_bounty_hunter_shuriken"      "1"
+      }
+      "passthrough_width"
+      {
+        "special_bonus_facet_bounty_hunter_shuriken"      "175"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "cast_range"                                        "525" // OAA, same as AbilityCastRange
+      "slow"                                              "100"
+      "AbilityCastRange" //OAA
+      {
+        "value"                                           "525"
+        "special_bonus_scepter"                           "=600"
       }
     }
   }

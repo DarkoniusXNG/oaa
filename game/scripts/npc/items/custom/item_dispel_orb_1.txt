@@ -1,19 +1,19 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Recipe: dispel_orb_1
+  // Recipe: Dispel Orb 1
   //=================================================================================================================
   "item_recipe_dispel_orb_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3803"   // unique ID
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "3500"
     "ItemShopTags"                                        ""
 
@@ -23,86 +23,62 @@
     "ItemResult"                                          "item_dispel_orb_1"
     "ItemRequirements"
     {
-      "01"                                                "item_lotus_orb_2;item_upgrade_core_2"
+      "01"                                                "item_black_king_bar_2;item_upgrade_core_2"
+      "02"                                                "item_manta_2;item_upgrade_core_2"
     }
   }
 
   //=================================================================================================================
-  // dispel_orb_1
+  // Dispel Orb 1
   //=================================================================================================================
   "item_dispel_orb_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3804"  // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/dispel_orb.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/dispel_orb_1"
-
-    "ScriptFile"                                          "items/reflex/preemptive_purge.lua"
-    "FightRecapLevel"                                     "1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxUpgradeLevel"                                     "3"
     "ItemBaseLevel"                                       "1"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "150"
+    "AbilityManaCost"                                     "100"
     "AbilityCooldown"                                     "20"
     "AbilitySharedCooldown"                               "purge"
-    "AbilityCastPoint"                                    "0.0"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "8950"
-    "ItemShopTags"                                        "regen_health;regen_mana;str;agi;int;hard_to_tag"
+    "ItemCost"                                            "9052"
+    "ItemShopTags"                                        "agi;int;str;damage;hard_to_tag"
     "ItemQuality"                                         "epic"
-    "ItemAliases"                                         "Dispel orb;purge crystal"
+    "ItemAliases"                                         "dispel orb; purge crystal"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
-    // Modifiers
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "Precache"
+    "AbilityValues"
+    {
+      "bonus_strength"                                    "27 42 62" // inherited from BKB
+      "bonus_agility"                                     "41 56 76" // inherited from Manta
+      "bonus_intellect"                                   "22 27 32" // inherited from Manta
+      "bonus_damage"                                      "55 85 125" // inherited from BKB
+      "magic_resist_while_silenced"                       "26 28 30"
+      "tick_interval"                                     "0.2"
+      "duration"                                          "7.0"
+    }
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
     {
       "particle"                                          "particles/items/dispel_orb/dispel_base.vpcf"
       "particle"                                          "particles/items/dispel_orb/dispel_b.vpcf"
       "particle"                                          "particles/items/dispel_orb/dispel_steam.vpcf"
-    }
-
-    "AbilitySpecial"
-    {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "15 19 24"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "11.0 16.0 30.0"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "4.75 5.5 6.5"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "500 700 950"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.2"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
     }
   }
 }

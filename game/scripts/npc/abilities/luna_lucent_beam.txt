@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=================================================================================================================
   // Luna: Lucent Beam
   //=================================================================================================================
@@ -8,48 +7,78 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5222"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0.4"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "6.0"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "90 100 110 120 130 140"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Mostly about the damage
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "0.8"
+        "value"                                           "9.0 8.0 7.0 6.0 6.0 6.0"
+        "special_bonus_unique_luna_2"                     "-2.0"
       }
-      "02"
+      "AbilityManaCost"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "beam_damage"                                     "75 150 225 300 650 1000"
-        "LinkedSpecialBonus"                              "special_bonus_unique_luna_1"
+        "value"                                           "90 100 110 120 130 140"
+      }
+      "beam_damage"
+      {
+        "value"                                           "75 150 225 300 600 1200"
+        "special_bonus_unique_luna_1"                     "+110"
+      }
+      "glaives_fired" // unused
+      {
+        "value"                                           "0"
+        "special_bonus_unique_luna_8"                     "+2"
+      }
+      "glaives_attack_radius" // unused
+      {
+        "value"                                           "0"
+        "special_bonus_unique_luna_8"                     "+500"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "stun_duration"
+      {
+        "value"                                           "0.6"
+        "special_bonus_unique_luna_4"                     "+0.4"
+      }
+      "damage_buff_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_luna_moonstorm"              "+15"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
+      }
+      "damage_buff_per_beam"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_luna_moonstorm"              "+4 7 10 13 19 25"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
+      }
+      "lucent_beam_bounce_range" // Lucent Beam Hits additional Target (within 500 radius)
+      {
+        "special_bonus_unique_luna_5"                     "+500"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "damage_buff_from_eclipse_pct"
+      {
+        "special_bonus_facet_luna_moonstorm"              "=50"
       }
     }
   }

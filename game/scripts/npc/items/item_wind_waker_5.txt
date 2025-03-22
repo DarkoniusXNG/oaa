@@ -1,0 +1,78 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Recipe: Wind Waker 5
+  //=================================================================================================================
+  "item_recipe_wind_waker_5"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_datadriven"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"                                  "custom/recipe/recipe_5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
+    "ItemCost"                                            "17000"
+    "ItemShopTags"                                        ""
+
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                                          "1"
+    "ItemResult"                                          "item_wind_waker_5"
+    "ItemRequirements"
+    {
+      "01"                                                "item_wind_waker_4;item_upgrade_core_4"
+    }
+  }
+
+  //=================================================================================================================
+  // Wind Waker 5
+  //=================================================================================================================
+  "item_wind_waker_5"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_wind_waker"
+    "AbilityTextureName"                                  "custom/wind_waker_5"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "550 575 600 625 650"
+    "AbilityCastPoint"                                    "0.0"
+    "AbilityCooldown"                                     "16.0"
+    "AbilitySharedCooldown"                               "cyclone"
+    "AbilityManaCost"                                     "175"
+
+    // Spicy Parameters
+    //-------------------------------------------------------------------------------------------------------------
+    "MaxUpgradeLevel"                                     "5"
+    "ItemBaseLevel"                                       "5"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "36079"
+    "ItemShopTags"                                        "int;regen_mana;move_speed;hard_to_tag"
+    "ItemQuality"                                         "rare"
+    "ItemAliases"                                         "cyclone 5;wind waker 5;ww 5"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_movement_speed"                              "30 35 40 45 50"
+      "bonus_mana_regen"                                  "3.0 3.25 3.75 4.5 5.5"
+      "bonus_intellect"                                   "35 40 50 65 85"
+      "cyclone_duration"                                  "2.5"
+      "tooltip_drop_damage"                               "50"
+      "tornado_speed"                                     "300"
+    }
+  }
+}

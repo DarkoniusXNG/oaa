@@ -1,0 +1,16 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Generic Boss True Strike ability
+  //=================================================================================================================
+  "boss_true_strike"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/boss_true_strike.lua"
+    "AbilityTextureName"                                  "custom/boss_true_strike"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "1"
+  }
+}

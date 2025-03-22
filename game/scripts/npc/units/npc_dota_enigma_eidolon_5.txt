@@ -1,0 +1,30 @@
+"DOTAUnits"
+{
+  //=================================================================================
+  // Giant Eidolon
+  //=================================================================================
+  "npc_dota_giant_eidolon"
+  {
+    "include_keys_from"                                   "npc_dota_lesser_eidolon"
+
+    "ModelScale"                                          "1.0"
+    "Level"                                               "5"
+
+    "ArmorPhysical"                                       "10"    // Physical protection.
+    "MagicalResistance"                                   "60"    // Magical protection.
+
+    "AttackDamageMin"                                     "100"    // Damage range min.
+    "AttackDamageMax"                                     "100"    // Damage range max.
+    "AttackRange"                                         "500"
+
+    "BountyXP"                                            "20"    // Experience earn.
+    "BountyGoldMin"                                       "56"    // Gold earned min.
+    "BountyGoldMax"                                       "80"    // Gold earned max.
+
+    "HealthBarOffset"                                     "150"
+
+    "MovementSpeed"                                       "370"    // Speed
+
+    "StatusHealth"                                        "1300"    // Base health.
+  }
+}

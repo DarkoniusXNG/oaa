@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5152"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
@@ -21,68 +20,52 @@
     "AbilityCastRange"                                    "300"
     "AbilityCastPoint"                                    "0.53"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14" //OAA
-
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
     "AbilityDamage"                                       "0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "130 150 170 190 290 390"
+    "AbilityManaCost"                                     "100 120 140 160 180 200"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" // OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "900"
+        "value"                                           "25.0 23.0 21.0 19.0 17.0 15.0"
+        "special_bonus_unique_tinkerer_6"                 "-6"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "collision_radius"                                "50"
+        "value"                                           "900"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "collision_radius"                                  "75" // OAA
+      "splash_radius"                                     "150"
+      "duration" // OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "splash_radius"                                   "150"
+        "value"                                           "6.0"
+        "special_bonus_unique_tinkerer_5"                 "+1.0"
       }
-      "04"
+      "speed"                                             "400"
+      "machines_per_sec"                                  "24 26 28 30 32 34" // OAA
+      "distance"                                          "1800"
+      "damage" // OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tinker_5"
+        "value"                                           "17 26 35 44 62 80"
+        "special_bonus_unique_tinkerer_7"                 "+14"
       }
-      "05"
+      "heal_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "400"
+        "value"                                           "0"
+        "special_bonus_facet_tinker_repair_bots"          "+14 +21 +28 +35 +70 +105"
       }
-      "06"
+      "heal_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "machines_per_sec"                                "24"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "distance"                                        "1800"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "distance_scepter"                                "1800"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "16 24 32 40 80 160"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tinker_2"
+        "value"                                           "0"
+        "special_bonus_facet_tinker_repair_bots"          "+4"
       }
     }
   }

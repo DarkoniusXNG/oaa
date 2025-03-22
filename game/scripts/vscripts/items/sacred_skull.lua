@@ -1,290 +1,197 @@
-LinkLuaModifier("modifier_intrinsic_multiplexer", "modifiers/modifier_intrinsic_multiplexer.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_sacred_skull_stacking_stats", "items/sacred_skull.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_sacred_skull_non_stacking_stats", "items/sacred_skull.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_sacred_skull_passives", "items/sacred_skull.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_sacred_skull_armor_reduction_debuff", "items/sacred_skull.lua", LUA_MODIFIER_MOTION_NONE)
 
 item_sacred_skull = class(ItemBaseClass)
 
 function item_sacred_skull:GetIntrinsicModifierName()
-  return "modifier_intrinsic_multiplexer"
+  return "modifier_item_sacred_skull_passives"
 end
 
-function item_sacred_skull:GetIntrinsicModifierNames()
-  return {
-    "modifier_item_sacred_skull_stacking_stats",
-    "modifier_item_sacred_skull_non_stacking_stats"
-  }
-end
+-- function item_sacred_skull:GetHealthCost()
+  -- return self:GetCaster():GetMaxHealth() * self:GetSpecialValueFor("health_cost") * 0.01
+-- end
 
-function item_sacred_skull:OnSpellStart()
-  local caster = self:GetCaster()
-  local damage_table = {}
-  damage_table.attacker = caster
-  damage_table.ability = self
-
-  if not caster:IsInvulnerable() then
-    local current_hp = caster:GetHealth()
-    local current_hp_as_dmg = self:GetSpecialValueFor("health_cost")
-    damage_table.damage = current_hp * current_hp_as_dmg * 0.01
-    damage_table.damage_flags = bit.bor(DOTA_DAMAGE_FLAG_REFLECTION, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION, DOTA_DAMAGE_FLAG_NON_LETHAL, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL)
-    damage_table.damage_type = DAMAGE_TYPE_PURE
-    damage_table.victim = caster
-    ApplyDamage(damage_table)
-    -- Hit Particle
-    local particle = ParticleManager:CreateParticle("particles/items/sacred_skull/vermillion_robe_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-    ParticleManager:DestroyParticle(particle, false)
-    ParticleManager:ReleaseParticleIndex(particle)
-  end
-
-  -- Explosion particle
-  local particle_boom = ParticleManager:CreateParticle("particles/items/sacred_skull/vermillion_robe_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-  ParticleManager:DestroyParticle(particle_boom, false)
-  ParticleManager:ReleaseParticleIndex(particle_boom)
-
-  -- Sound
-  caster:EmitSound("Hero_Jakiro.LiquidFire")
-
-  local caster_team = caster:GetTeamNumber()
-  local caster_location = caster:GetAbsOrigin()
-  local radius = self:GetSpecialValueFor("effect_radius")
-  local target_units = bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC)
-
-	local enemies = FindUnitsInRadius(
-    caster_team,
-    caster_location,
-    nil,
-    radius,
-    DOTA_UNIT_TARGET_TEAM_ENEMY,
-    target_units,
-    DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-    FIND_ANY_ORDER,
-    false
-  )
-  local allies = FindUnitsInRadius(
-    caster_team,
-    caster_location,
-    nil,
-    radius,
-    DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-    target_units,
-    DOTA_UNIT_TARGET_FLAG_NONE,
-    FIND_ANY_ORDER,
-    false
-  )
-
-  -- Calculate damage and heal
-  local dmg_per_missing_hp = self:GetSpecialValueFor("damage_per_missing_hp")
-  local heal_per_missing_hp = self:GetSpecialValueFor("heal_per_missing_hp")
-  local max_hp = caster:GetMaxHealth()
-  local missing_hp = 100*(max_hp - caster:GetHealth())/max_hp
-  damage_table.damage = missing_hp * dmg_per_missing_hp
-  local heal_amount = missing_hp * heal_per_missing_hp
-
-  -- Damage enemies
-  for _, enemy in pairs(enemies) do
-    if enemy and not enemy:IsNull() then
-      -- Hit particle
-      local particle = ParticleManager:CreateParticle("particles/items/sacred_skull/vermillion_robe_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
-      ParticleManager:DestroyParticle(particle, false)
-      ParticleManager:ReleaseParticleIndex(particle)
-      -- Damage
-      damage_table.damage_type = DAMAGE_TYPE_MAGICAL
-      damage_table.damage_flags = DOTA_DAMAGE_FLAG_NONE
-      damage_table.victim = enemy
-      ApplyDamage(damage_table)
-    end
-  end
-
-  -- Heal allies (but not caster)
-  for _, ally in pairs(allies) do
-    if ally and not ally:IsNull() and ally ~= caster then
-      -- Heal particle
-      local particle = ParticleManager:CreateParticle("particles/items/sacred_skull/huskar_inner_vitality_glyph.vpcf", PATTACH_CENTER_FOLLOW, ally)
-      ParticleManager:DestroyParticle(particle, false)
-      ParticleManager:ReleaseParticleIndex(particle)
-      -- Healing
-      ally:Heal(heal_amount, self)
-      SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, ally, heal_amount, nil)
-    end
-  end
-end
-
--- upgrades
 item_sacred_skull_2 = item_sacred_skull
 item_sacred_skull_3 = item_sacred_skull
-item_sacred_skull_4 = item_sacred_skull
 
 ---------------------------------------------------------------------------------------------------
--- Parts of Sacred Skull that should stack with other Sacred Skulls
 
-modifier_item_sacred_skull_stacking_stats = class(ModifierBaseClass)
+modifier_item_sacred_skull_passives = class(ModifierBaseClass)
 
-function modifier_item_sacred_skull_stacking_stats:OnCreated()
-  local ability = self:GetAbility()
-  if ability and not ability:IsNull() then
-    self.bonus_health = ability:GetSpecialValueFor("bonus_health")
-    self.bonus_mana_regen = ability:GetSpecialValueFor("bonus_mana_regen")
-    self.bonus_mana = ability:GetSpecialValueFor("bonus_mana")
-    self.bonus_hp_regen = ability:GetSpecialValueFor("bonus_health_regen")
-    self.bonus_int = ability:GetSpecialValueFor("bonus_intellect")
-    self.bonus_magic_resist = ability:GetSpecialValueFor("bonus_magic_resistance")
-  end
+function modifier_item_sacred_skull_passives:IsHidden()
+  return true
 end
 
-modifier_item_sacred_skull_stacking_stats.OnRefresh = modifier_item_sacred_skull_stacking_stats.OnCreated
+function modifier_item_sacred_skull_passives:IsDebuff()
+  return false
+end
 
-function modifier_item_sacred_skull_stacking_stats:GetAttributes()
+function modifier_item_sacred_skull_passives:IsPurgable()
+  return false
+end
+
+function modifier_item_sacred_skull_passives:GetAttributes()
   return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
-function modifier_item_sacred_skull_stacking_stats:IsHidden()
-  return true
+function modifier_item_sacred_skull_passives:OnCreated()
+  self:OnRefresh()
+  if IsServer() then
+    self:StartIntervalThink(0.3)
+  end
 end
 
-function modifier_item_sacred_skull_stacking_stats:IsDebuff()
-  return false
+function modifier_item_sacred_skull_passives:OnRefresh()
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.bonus_health = ability:GetSpecialValueFor("bonus_health")
+    self.bonus_armor = ability:GetSpecialValueFor("bonus_armor")
+    self.cdr = ability:GetSpecialValueFor("cooldown_reduction")
+  end
+
+  if IsServer() then
+    self:OnIntervalThink()
+  end
 end
 
-function modifier_item_sacred_skull_stacking_stats:IsPurgable()
-  return false
+function modifier_item_sacred_skull_passives:OnIntervalThink()
+  if self:IsFirstItemInInventory() then
+    self:SetStackCount(2)
+  else
+    self:SetStackCount(1)
+  end
 end
 
-function modifier_item_sacred_skull_stacking_stats:DeclareFunctions()
+function modifier_item_sacred_skull_passives:DeclareFunctions()
   return {
-    MODIFIER_EVENT_ON_DEATH,
     MODIFIER_PROPERTY_HEALTH_BONUS, -- GetModifierHealthBonus
-    MODIFIER_PROPERTY_MANA_BONUS, -- GetModifierManaBonus
-    MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT, -- GetModifierConstantHealthRegen
-    MODIFIER_PROPERTY_MANA_REGEN_CONSTANT, -- GetModifierConstantManaRegen
-    MODIFIER_PROPERTY_STATS_INTELLECT_BONUS, -- GetModifierBonusStats_Intellect
-    MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS, -- GetModifierMagicalResistanceBonus
+    MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS, -- GetModifierPhysicalArmorBonus
+    MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE, -- GetModifierPercentageCooldown
+    MODIFIER_EVENT_ON_TAKEDAMAGE,
   }
 end
 
-function modifier_item_sacred_skull_stacking_stats:GetModifierHealthBonus()
+function modifier_item_sacred_skull_passives:GetModifierHealthBonus()
   return self.bonus_health or self:GetAbility():GetSpecialValueFor("bonus_health")
 end
 
-function modifier_item_sacred_skull_stacking_stats:GetModifierManaBonus()
-  return self.bonus_mana or self:GetAbility():GetSpecialValueFor("bonus_mana")
+function modifier_item_sacred_skull_passives:GetModifierPhysicalArmorBonus()
+  return self.bonus_armor or self:GetAbility():GetSpecialValueFor("bonus_armor")
 end
 
-function modifier_item_sacred_skull_stacking_stats:GetModifierConstantHealthRegen()
-  return self.bonus_hp_regen or self:GetAbility():GetSpecialValueFor("bonus_health_regen")
-end
+function modifier_item_sacred_skull_passives:GetModifierPercentageCooldown()
+  -- Prevent stacking with Octarine Core and other Sacred Skulls
+  if self:GetParent():HasModifier("modifier_item_octarine_core") or self:GetStackCount() ~= 2 then
+    return 0
+  end
 
-function modifier_item_sacred_skull_stacking_stats:GetModifierConstantManaRegen()
-  return self.bonus_mana_regen or self:GetAbility():GetSpecialValueFor("bonus_mana_regen")
-end
-
-function modifier_item_sacred_skull_stacking_stats:GetModifierBonusStats_Intellect()
-  return self.bonus_int or self:GetAbility():GetSpecialValueFor("bonus_intellect")
-end
-
-function modifier_item_sacred_skull_stacking_stats:GetModifierMagicalResistanceBonus()
-  return self.bonus_magic_resist or self:GetAbility():GetSpecialValueFor("bonus_magic_resistance")
+  return self.cdr or self:GetAbility():GetSpecialValueFor("cooldown_reduction")
 end
 
 if IsServer() then
-  function modifier_item_sacred_skull_stacking_stats:OnDeath(event)
+  function modifier_item_sacred_skull_passives:OnTakeDamage(event)
+    if self:GetStackCount() ~= 2 then
+      return
+    end
+
     local parent = self:GetParent()
-    local dead = event.unit
+    local attacker = event.attacker
+    local damaged_unit = event.unit
+    local inflictor = event.inflictor
+
+    -- Check if attacker exists
+    if not attacker or attacker:IsNull() then
+      return
+    end
+
+    -- Check if attacker has this modifier
+    if attacker ~= parent then
+      return
+    end
+
+    -- Check if damaged entity exists
+    if not damaged_unit or damaged_unit:IsNull() then
+      return
+    end
+
+    -- Ignore self damage and allies
+    if damaged_unit == attacker or damaged_unit:GetTeamNumber() == attacker:GetTeamNumber() then
+      return
+    end
+
+    -- Check if attacker is dead
+    if not attacker:IsAlive() then
+      return
+    end
+
+    -- Check if entity is an item, rune or something weird
+    if damaged_unit.GetUnitName == nil then
+      return
+    end
+
+    -- Don't affect buildings, wards and invulnerable units.
+    if damaged_unit:IsTower() or damaged_unit:IsBarracks() or damaged_unit:IsBuilding() or damaged_unit:IsOther() or damaged_unit:IsInvulnerable() then
+      return
+    end
+
     local ability = self:GetAbility()
-
-    -- If dead unit is not the parent then dont continue
-    if dead ~= parent then
+    if not ability or ability:IsNull() then
       return
     end
 
-    -- Check if dead unit is nil or its about to be deleted
-    if not dead or dead:IsNull() then
+    -- Check if inflictor exists (if it doesn't, it's not a spell) and damage category
+    if not inflictor or event.damage_category ~= DOTA_DAMAGE_CATEGORY_SPELL then
       return
     end
 
-    -- Check if parent is a real hero
-    if not parent:IsRealHero() or parent:IsTempestDouble() or parent:IsClone() then
+    -- If inflictor is an item (radiance e.g.), don't continue
+    if inflictor and inflictor:IsItem() then
       return
     end
 
-    local parent_team = parent:GetTeamNumber()
-    local death_location = parent:GetAbsOrigin()
-
-    local heal_amount = 300 + parent:GetMaxHealth()
-    local heal_radius = 1200
-
-    if ability and not ability:IsNull() then
-      heal_amount = ability:GetSpecialValueFor("death_heal_base") + parent:GetMaxHealth()
-      heal_radius = ability:GetSpecialValueFor("death_heal_radius")
+    -- Check damage if 0 or negative
+    if event.damage <= 0 then
+      return
     end
 
-    local units = FindUnitsInRadius(
-      parent_team,
-      death_location,
-      nil,
-      heal_radius,
-      DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-      bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC),
-      DOTA_UNIT_TARGET_FLAG_NONE,
-      FIND_ANY_ORDER,
-      false
-    )
-
-    for _, ally in pairs(units) do
-      if ally and not ally:IsNull() then
-        -- Heal particle
-        local particle = ParticleManager:CreateParticle("particles/items/sacred_skull/huskar_inner_vitality_glyph.vpcf", PATTACH_CENTER_FOLLOW, ally)
-        ParticleManager:DestroyParticle(particle, false)
-        ParticleManager:ReleaseParticleIndex(particle)
-        -- Healing
-        ally:Heal(heal_amount, ability)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, ally, heal_amount, nil)
-      end
-    end
-
-    -- Add vision at death location
-    --local vision_radius = ability:GetSpecialValueFor("death_vision_radius")
-    --local vision_duration = ability:GetSpecialValueFor("death_vision_duration")
-    --AddFOWViewer(caster_team, death_location, vision_radius, vision_duration, false)
+    -- Apply Armor Reduction debuff
+    damaged_unit:AddNewModifier(parent, ability, "modifier_item_sacred_skull_armor_reduction_debuff", {duration = ability:GetSpecialValueFor("armor_reduction_duration")})
   end
 end
 
--------------------------------------------------------------------------
--- Parts of Sacred Skull that should NOT stack with other Sacred Skulls
+---------------------------------------------------------------------------------------------------
 
-modifier_item_sacred_skull_non_stacking_stats = class(ModifierBaseClass)
+modifier_item_sacred_skull_armor_reduction_debuff = class(ModifierBaseClass)
 
-function modifier_item_sacred_skull_non_stacking_stats:IsHidden()
+function modifier_item_sacred_skull_armor_reduction_debuff:IsHidden()
+  return false
+end
+
+function modifier_item_sacred_skull_armor_reduction_debuff:IsDebuff()
   return true
 end
 
-function modifier_item_sacred_skull_non_stacking_stats:IsDebuff()
-  return false
+function modifier_item_sacred_skull_armor_reduction_debuff:IsPurgable()
+  return true
 end
 
-function modifier_item_sacred_skull_non_stacking_stats:IsPurgable()
-  return false
+function modifier_item_sacred_skull_armor_reduction_debuff:OnCreated()
+  local ability = self:GetAbility()
+  if ability and not ability:IsNull() then
+    self.armor_reduction = ability:GetSpecialValueFor("passive_armor_reduction")
+  end
 end
 
-function modifier_item_sacred_skull_non_stacking_stats:DeclareFunctions()
+function modifier_item_sacred_skull_armor_reduction_debuff:DeclareFunctions()
   return {
-    MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE, -- GetModifierMPRegenAmplify_Percentage
-    MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,    -- GetModifierSpellAmplify_Percentage
+    MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
   }
 end
 
--- Doesn't stack with Kaya items and Bloodstone
-function modifier_item_sacred_skull_non_stacking_stats:GetModifierMPRegenAmplify_Percentage()
-  local parent = self:GetParent()
-  if not parent:HasModifier("modifier_item_kaya") and not parent:HasModifier("modifier_item_yasha_and_kaya") and not parent:HasModifier("modifier_item_kaya_and_sange") and not parent:HasModifier("modifier_item_bloodstone_non_stacking_stats") then
-    return self:GetAbility():GetSpecialValueFor("mana_regen_multiplier")
-  end
-  return 0
+function modifier_item_sacred_skull_armor_reduction_debuff:GetModifierPhysicalArmorBonus()
+  return 0 - math.abs(self.armor_reduction)
 end
 
--- Doesn't stack with Kaya items and Bloodstone
-function modifier_item_sacred_skull_non_stacking_stats:GetModifierSpellAmplify_Percentage()
-  local parent = self:GetParent()
-  if not parent:HasModifier("modifier_item_kaya") and not parent:HasModifier("modifier_item_yasha_and_kaya") and not parent:HasModifier("modifier_item_kaya_and_sange") and not parent:HasModifier("modifier_item_bloodstone_non_stacking_stats") then
-    return self:GetAbility():GetSpecialValueFor("spell_amp")
-  end
-  return 0
+function modifier_item_sacred_skull_armor_reduction_debuff:GetTexture()
+  return "custom/sacred_skull"
 end

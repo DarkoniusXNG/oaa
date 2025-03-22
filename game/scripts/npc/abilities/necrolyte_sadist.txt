@@ -1,66 +1,33 @@
 "DOTAAbilities"
 {
-  //=================================================================================================================
-  // Ability: Necrolyte's Ghost Shroud
-  //=================================================================================================================
   "necrolyte_sadist"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5160"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
-    "MaxLevel"                                            "6"
+    "MaxLevel"                                            "6" // same as Dependent ability (Reapers Scythe) + 1
+    "Innate"                                              "1"
+    "DependentOnAbility"                                  "necrolyte_reapers_scythe"
 
-    "HasScepterUpgrade"                                   "1"
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "28 24 20 16 16 16"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
-
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "health_regen"                                      "3 4.5 6 7.5 9 10.5"
+      "mana_regen"                                        "3 4.5 6 7.5 9 10.5"
+      "bonus_aoe"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3 3.5 4 4.5 5.0 5.5"
+        "value"                                           "0"
+        "special_bonus_facet_necrolyte_profane_potency"   "+40"
       }
-      "02"
+      "bonus_spell_amp"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "heal_bonus"                                      "75"
+        "value"                                           "0"
       }
-      "03"
+      "hero_multiplier"                                   "6"
+      "regen_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "6 12 18 24 30 36"
-        "LinkedSpecialBonus"                              "special_bonus_unique_necrophos_3"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_aoe"                                        "750"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "-40"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cooldown_scepter"                                "10"
-        "RequiresScepter"                                 "1"
+        "value"                                           "8"
+        "special_bonus_unique_necrophos_heartstopper_regen_duration"  "+2"
       }
     }
   }

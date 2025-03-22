@@ -1,51 +1,57 @@
 "itembuilds"
 {
-	"author"		"Valve"
-	"hero"			"npc_dota_hero_visage"
-	"Title"			"Recommended items for Visage"
+  "author"        "OAA 7.35d"
+  "hero"          "npc_dota_hero_visage"
+  "Title"         "Recommended items for Visage"
 
-	"Items"
-	{
-		"#DOTA_Item_Build_Starting_Items"
-		{
-			"item"		"item_boots"
-			"item"		"item_clarity"
-			"item"		"item_branches"
-			"item"		"item_magic_stick"
-      "item"    "item_flask"
-		}
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
+    {
+      "item"      "item_boots"
+      "item"      "item_clarity"
+      "item"      "item_branches"
+      "item"      "item_magic_stick"
+      "item"      "item_flask"
+    }
 
-		"#DOTA_Item_Build_Early_Game"
-		{
-			"item"		"item_ward_stack"
-			"item"		""
-			"item"		""
-			"item"		"item_solar_crest"
-		}
+    "#DOTA_Item_Build_Core_Items"
+    {
+      "item"      "item_vladmirs_grimoire_1"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_bloodthorn"
+      "item"      "item_assault"
+    }
 
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		"item_greater_guardian_greaves"
-			"item"		"item_vladmir"
-			"item"		"item_ancient_janggo"
-			"item"		"item_heart"
-		}
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
 
-		"#DOTA_Item_Build_Late_Items"
-		{
-			"item"		"item_helm_of_the_dominator_2"
-			"item"		"item_lucience_1"
-			"item"		"item_regen_crystal_1"
-		}
+    "#DOTA_Item_Build_Support_Core"
+    {
+      "item"      "item_guardian_greaves"
+      "item"      "item_shivas_guard"
+      "item"      "item_lotus_orb"
+      "item"      "item_lucience"
+    }
 
-		"#DOTA_Item_Build_Luxury"
-		{
-			"item"		"item_radiance"
-			"item"		"item_octarine_core"
-			"item"		"item_ethereal_blade"
-			"item"		"item_bloodthorn"
-			"item"		"item_rod_of_atos"
-			"item"		"item_assault"
-		}
-	}
+    "#DOTA_Item_Build_Tank_Core"
+    {
+      "item"      "item_shield_staff"
+      "item"      "item_heart_oaa_1"
+      "item"      "item_shade_staff_1"
+      "item"      "item_enrage_crystal_1"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_angels_demise"
+      "item"      "item_crimson_guard"
+      "item"      "item_pipe"
+      "item"      "item_radiance"
+      "item"      "item_sheepstick_4"
+      "item"      "item_martyrs_mail_1"
+    }
+  }
 }

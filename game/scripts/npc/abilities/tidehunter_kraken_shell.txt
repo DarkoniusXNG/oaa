@@ -7,36 +7,43 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5119"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "0"
+    "AbilityCastPoint"                                    "0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "45"
+
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "14 26 38 50 100 200"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tidehunter_4"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "30 29 28 27 26 25"
       }
-      "02"
+      "damage_reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_cleanse"                                  "600 550 500 450 400 350"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "15 35 55 75 150 225"
       }
-      "03"
+      "bonus_reduction_per_kill"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_reset_interval"                           "6.0"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "0"
+        "special_bonus_facet_tidehunter_kraken_swell"     "1 2 3 4 5 6"
       }
+      "creep_reduction_penalty_pct"                       "50.0"
+      "active_pct_effectiveness"                          "200.0"     // "double" is in the loc file. if changing this amount, update the ability description
+      "active_move_speed_penalty_pct"                     "40"
+      "active_duration"                                   "4.0"
     }
   }
 }

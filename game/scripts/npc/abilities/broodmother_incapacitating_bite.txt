@@ -7,9 +7,9 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5281"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -17,22 +17,23 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "miss_chance" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "miss_chance"                                     "30 40 50 60 70 80"
+        "value"                                           "30 40 50 60 65 70"
+        "special_bonus_unique_broodmother_4"              "+25"
       }
-      "02"
+      "bonus_movespeed" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movespeed"                                 "-20 -30 -40 -50 -60 -70"
+        "value"                                           "-15 -20 -25 -30 -35 -40"
+        "special_bonus_unique_broodmother_4"              "-25"
       }
-      "03"
+      "duration"                                          "2.0"
+      "attack_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2.0"
+        "value"                                           "2 4 6 8 16 24"
+        "special_bonus_unique_broodmother_2"              "+10"
       }
     }
   }

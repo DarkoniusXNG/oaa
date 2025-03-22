@@ -7,12 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8542"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
 
@@ -23,10 +24,9 @@
     "ItemRequirements"
     {
       "01"                                                "item_kaya_and_sange_3;item_upgrade_core_3"
-      "02"                                                "item_sange_and_yasha_3;item_upgrade_core_3"
-      "03"                                                "item_yasha_and_kaya_3;item_upgrade_core_3"
     }
   }
+
   //=================================================================================================================
   // Kaya and Sange 4
   //=================================================================================================================
@@ -34,7 +34,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8543"
     "BaseClass"                                           "item_kaya_and_sange"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityTextureName"                                  "custom/kaya_and_sange_4"
@@ -46,53 +45,25 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "17100"
-    "ItemShopTags"          "damage;str;agi;attack_speed;unique"
-    "ItemQuality"         "artifact"
-    "ItemAliases"         "snk 4;s&k 4;sk 4;sange and kaya 4"
-    "ItemDisassembleRule"     "DOTA_ITEM_DISASSEMBLE_NEVER"
-    "ItemDeclarations"        "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    "ShouldBeSuggested"       "1"
+    "ItemCost"                                            "17203"
+    "ItemShopTags"                                        "str;int;regen_mana;unique"
+    "ItemQuality"                                         "artifact"
+    "ItemAliases"                                         "snk 4;s&k 4;sk 4;sange and kaya 4"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_strength"                                  "16 24 32 48 72"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "16 24 32 48 72"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "status_resistance"                               "18 19 20 21 22"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_regen_multiplier"                           "30 40 50 60 70"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spell_amp"                                       "16 20 24 28 32"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "hp_regen_amp"                                    "26 28 30 32 34"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spell_lifesteal_amp"                             "26 28 30 32 34"
-      }
+      "bonus_strength"                                    "20 25 35 50 70"
+      "bonus_intellect"                                   "20 25 35 50 70"
+      "slow_resistance"                                   "22 24 26 28 30"
+      "mana_regen_multiplier"                             "50 60 70 80 90"
+      "spell_amp"                                         "12 16 20 24 28"
+      "hp_regen_amp"                                      "20 22 24 26 28"
+      "spell_lifesteal_amp"                               "14 16 18 20 22"
+      "manacost_reduction"                                "20 22 24 26 28"
     }
   }
 }

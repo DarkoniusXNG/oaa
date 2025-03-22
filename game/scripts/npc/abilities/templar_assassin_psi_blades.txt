@@ -1,44 +1,54 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Templar Assassin: Psi Blades
+  // Templar Assassin: Psi Blades (Innate in OAA)
   //=================================================================================================================
   "templar_assassin_psi_blades"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5196"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
-    "MaxLevel"                                            "6"
-    "RequiredLevel"                                       "1"
-    "LevelsBetweenUpgrades"                               "2"
+    "Innate"                                              "1" //OAA
+
+    "MaxLevel"                                            "7" //OAA
+    "RequiredLevel"                                       "-1" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_attack_range" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_range"                              "60 120 180 240 300 360"
+        "value"                                           "0 50 100 150 200 250 300"
+        "special_bonus_unique_templar_assassin_8"         "+100"
       }
-      "02"
+      "attack_spill_range" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_spill_range"                              "590 630 670 710 750 800"
+        "value"                                           "350 400 500 600 700 750 800"
+        "special_bonus_unique_templar_assassin_8"         "+100"
       }
-      "03"
+      "attack_spill_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_spill_width"                              "90"
+        "value"                                           "90"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "attack_spill_pct"                                  "60 70 80 90 100 110 120" //OAA
+      "meld_strike_spills"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_spill_pct"                                "100"
+        "value"                                           "0.0"
+        "special_bonus_facet_templar_assassin_voidblades"  "+1.0"
+      }
+      "spill_slow_duration"
+      {
+        "value"                                           "0.0"
+        //"special_bonus_facet_templar_assassin_voidblades"  "+3.0"
+      }
+      "spill_movement_slow_pct"
+      {
+        //"special_bonus_facet_templar_assassin_voidblades"  "5 10 15 20 25"
       }
     }
   }

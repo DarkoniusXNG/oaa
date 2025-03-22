@@ -1,0 +1,49 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Magma Boss - Projectile - linear projectile that does damage on impact
+  //=================================================================================================================
+  "magma_boss_projectile"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "batrider_flamebreak"
+    "ScriptFile"                                          "abilities/boss/magma_boss/magma_boss_projectile.lua"
+
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "MaxLevel"                                            "1"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastAnimation"                                "ACT_DOTA_ATTACK"
+    "AbilityCastRange"                                    "1500"
+    "AbilityCastPoint"                                    "1.0"
+    "AnimationPlaybackRate"                               "1.0"
+    "AnimationIgnoresModelScale"                          "1"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "8"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "attack_speed"                                      "700" // projectile speed
+      "attack_width_initial"                              "110" // collision radius at projectile launch
+      "attack_width_end"                                  "110" // collision radius when projectile is about to expire
+      "attack_distance"                                   "1500" // projectile max travel distance
+      "damage_impact"                                     "2500" // magical
+    }
+  }
+}

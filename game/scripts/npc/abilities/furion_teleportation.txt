@@ -7,16 +7,34 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5246"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
-    "AbilityCastPoint"                                    "3 3 3 3 1.9 0.8"
-    "AbilityCooldown"                                     "50 40 30 20 15 10"
-    "AbilityManaCost"                                     "50"
+    "AbilityCastPoint"                                    "3 3 3 3 2.5 2"
+    "AbilityManaCost"                                     "50 60 70 80 90 100"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "35 30 25 20 15 10"
+        "special_bonus_unique_furion_3"                   "-100%"
+      }
+      "barrier"
+      {
+        "value"                                           "100 150 200 250 500 750"
+        "special_bonus_unique_furion_teleportation_barrier"  "+100"
+      }
+      "buff_duration"                                     "15"
+    }
   }
 }

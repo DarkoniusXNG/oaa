@@ -7,103 +7,95 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5229"              // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "70"  //OAA, for picking screen tooltip
+    "AbilityCooldown"                                     "75" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "50"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.35"  // Attacks are primarily about the damage
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "45"  //OAA, for picking screen tooltip
+        "value"                                           "45"
       }
-      "02"
+      "bonus_movement_speed"                              "20 25 30 35 40 45"
+      "bonus_attack_range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "25"
+        "value"                                           "350 350 350 350 350 450"
+        "special_bonus_unique_dragon_knight_7"            "+150"
       }
-      "03"
+      "bonus_attack_damage"                               "20 60 100 140 180 220"
+      "magic_resistance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_range"                              "350"
+        "value"                                           "0"
       }
-      "04"
+      "model_scale"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_damage"                             "0"
+        "value"                                           "10 15 20 25 30 35"
+        "special_bonus_scepter"                           "+10"
       }
-      "05"
+      "is_green_dragon"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "corrosive_breath_damage"                         "20 40 60 120 180" //OAA, for picking screen tooltip
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_corrosive_dragon"  "+1"
       }
-      "06"
+      "is_red_dragon"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "corrosive_breath_duration"                       "5.0"
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_fire_dragon"   "+1"
       }
-      "07"
+      "is_blue_dragon"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "splash_radius"                                   "300"
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_frost_dragon"  "+1"
       }
-      "08"
+      "ranged_splash_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "splash_damage_percent"                           "75 75 75 115 200"
-        "LinkedSpecialBonus"			                        "special_bonus_unique_dragon_knight_6"
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
       }
-      "09"
+      "ranged_splash_damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "frost_bonus_movement_speed"                      "-40 -40 -40 -60 -70"
-        "LinkedSpecialBonus"			                        "special_bonus_unique_dragon_knight_5"
+        "value"                                           "30 40 50 60 70 80"
       }
-      "10"
+      "frost_breath_effect_bonus"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "frost_bonus_attack_speed"                        "-40 -40 -40 -60 -70"
-        "LinkedSpecialBonus"			                        "special_bonus_unique_dragon_knight_5"
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_frost_dragon"  "=20 =30 =40 =50 =55 =60"
+        "special_bonus_unique_dragon_knight_8"            "+50"
+        "RequiresFacet"                                   "dragon_knight_frost_dragon"
       }
-      "11"
+      "corrosive_breath_effect_bonus"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "frost_duration"                                  "3.0"
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_corrosive_dragon"  "=20 =30 =40 =50 =55 =60"
+        "special_bonus_unique_dragon_knight_8"            "+50"
+        "RequiresFacet"                                   "dragon_knight_corrosive_dragon"
       }
-      "12"
+      "fire_breath_effect_bonus"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "frost_aoe"                                       "300"
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_fire_dragon"   "=20 =30 =40 =50 =55 =60"
+        "special_bonus_unique_dragon_knight_8"            "+50"
+        "RequiresFacet"                                   "dragon_knight_fire_dragon"
       }
-      "13"
+      "wyrms_wrath_bonus_tooltip"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "magic_resistance"                                "0 0 0 40 40"
-      }
-      "14"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "model_scale"                                     "0 0 0 30 35"
+        "value"                                           "20 30 40 50 55 60"
+        "special_bonus_unique_dragon_knight_8"            "+50"
       }
     }
   }

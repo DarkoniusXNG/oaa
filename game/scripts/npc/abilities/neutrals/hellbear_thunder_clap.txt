@@ -1,14 +1,14 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Blue Tomato: Vanilla Thunder Clap (Hellbear Smash)
+  // Hellbear Smasher (Blue Tomato): Vanilla Thunder Clap (Hellbear Smash)
+  // TODO: maybe add % max hp dmg
   //=================================================================================================================
   "polar_furbolg_ursa_warrior_thunder_clap"
   {
-    "ID"                                                  "5302"
     //"BaseClass"                                           "ability_lua"
     //"ScriptFile"                                          "abilities/neutrals/oaa_hellbear_thunder_clap.lua"
-    "AbilityTextureName"                                  "polar_furbolg_ursa_warrior_thunder_clap"
+    //"AbilityTextureName"                                  "polar_furbolg_ursa_warrior_thunder_clap"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     //"AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     //"AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -16,42 +16,30 @@
     //"SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
-    "MaxLevel"                                            "1"
+    "MaxLevel"                                            "4"
 
     "AbilityCastPoint"                                    "0.4"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_1"
 
-    "AbilityCooldown"                                     "12.0"
+    "AbilityCooldown"                                     "12.0 11.0 10.0 9.0"
 
     "AbilityManaCost"                                     "50"
     "AbilityProcsMagicStick"                              "1"
 
-    "AbilityDamage"                                       "250" //OAA
+    "AbilityDamage"                                       "110 225 450 900" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "300"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed_slow"                                  "-25"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "attackspeed_slow"                                "-25"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.0"
-      }
+      "movespeed_slow"                                    "-25 -30 -35 -40" //OAA
+      "attackspeed_slow"                                  "-25 -35 -45 -55" //OAA
+      "duration"                                          "3.0"
     }
   }
 }

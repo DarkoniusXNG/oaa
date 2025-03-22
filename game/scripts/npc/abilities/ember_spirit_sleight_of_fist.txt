@@ -7,57 +7,65 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5604"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
-    "AbilityCastRange"                                    "700"
+    "AbilityCastRange"                                    "650"
     "AbilityCastPoint"                                    "0"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "18 14 10 6 6 6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
+    "AbilityManaCost"                                     "60 65 70 75 80 85"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "250 350 450 550 550 550"
+        "value"                                           "250 350 450 550 600 650"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "bonus_hero_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_hero_damage"                               "40 80 120 160 320 640"
-        "LinkedSpecialBonus"                              "special_bonus_unique_ember_spirit_6"
+        "value"                                           "40 80 120 160 320 640"
+        "special_bonus_unique_ember_spirit_6"             "+100"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "attack_interval"                                   "0.25"
+      "creep_damage_penalty"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "attack_interval"                                 "0.2"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_damage_penalty"                            "0" //OAA
+        "value"                                           "0"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "05"
+      "AbilityCharges"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "AbilityCharges"                                  ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_ember_spirit_4"
+        "value"                                           "0"
+        "special_bonus_unique_ember_spirit_4"             "=2"
+      }
+      "AbilityCooldown"
+      {
+        "value"                                           "13 11 9 7 6 5"
+        "special_bonus_unique_ember_spirit_4"             "=0"
+      }
+      "AbilityChargeRestoreTime"
+      {
+        "value"                                           "13 11 9 7 6 5"
+      }
+      "min_enemies_for_double_sleight"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_ember_spirit_double_impact"  "=2"
+      }
+      "second_attack_damage_penalty"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_ember_spirit_double_impact"  "=50"
       }
     }
   }

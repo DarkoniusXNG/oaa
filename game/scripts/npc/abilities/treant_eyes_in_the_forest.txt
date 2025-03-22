@@ -7,26 +7,20 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5649"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_TREE"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "1"
 
-    "IsGrantedByScepter"                                  "1"
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "160"
+    "AbilityCastRange"                                    "200" //OAA
     "AbilityCastPoint"                                    "0.2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCharges"                                      "3"
-    "AbilityChargeRestoreTime"                            "90.0" //OAA
+    "AbilityChargeRestoreTime"                            "60" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,26 +28,23 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "vision_aoe"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "vision_aoe"                                      "800"
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_5"
+        "value"                                           "800"
         "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "overgrowth_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "overgrowth_aoe"                                  "800"
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_5"
+        "value"                                           "800"
         "RequiresScepter"                                 "1"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "tree_respawn_seconds"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "tree_respawn_seconds"                            "10"
+        "value"                                           "10"
         "RequiresScepter"                                 "1"
       }
     }

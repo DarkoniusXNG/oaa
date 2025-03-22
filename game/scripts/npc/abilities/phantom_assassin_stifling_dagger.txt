@@ -7,64 +7,56 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5190"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "525 750 975 1200 1250 1275"
+    "AbilityCastRange"                                    "700 850 1000 1150 1300 1450"
     "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "6"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "30"
+    "AbilityManaCost"                                     "30 35 40 45 50 55" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "move_slow"                                       "-50"
+        "value"                                           "6"
+        "special_bonus_unique_phantom_assassin_7"         "-1.5"
       }
-      "02"
+      "move_slow"                                         "-50"
+      "dagger_speed"                                      "1200"
+      "duration"                                          "2.1 2.4 2.7 3 3.3 3.6"
+      "base_damage"                                       "65 70 75 80 160 240"
+      "attack_factor"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "dagger_speed"                                    "1200"
+        "value"                                           "-70 -55 -40 -25 -15 -5"
+        "special_bonus_unique_phantom_assassin_5"         "+15"
       }
-      "03"
+      "attack_factor_tooltip"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.75 2.5 3.25 4 5 6"
-        "LinkedSpecialBonus"                              "special_bonus_unique_phantom_assassin_5"
+        "value"                                           "30 45 60 75 85 95"
+        "special_bonus_unique_phantom_assassin_5"         "+15"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
       }
-      "04"
+      "dagger_recast_time"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "base_damage"                                     "65"
+        "special_bonus_facet_phantom_assassin_sweet_release"  "6"
       }
-      "05"
+      "dagger_secondary_reduce"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_factor"                                   "-75 -60 -45 -30 -15 0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_factor_tooltip"                           "25 40 55 70 85 100"
+        "special_bonus_facet_phantom_assassin_sweet_release"  "50"
       }
     }
   }

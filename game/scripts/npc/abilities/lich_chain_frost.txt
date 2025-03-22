@@ -7,20 +7,17 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5137"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "0"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -33,61 +30,60 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "200 325 500 725 1000"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.0"  // Primarily about the damage
+    "AbilityManaCost"                                     "180 300 420 540 660"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "250 550 850 1750 2650" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_lich_7"
+        "value"                                           "250 500 750 1250 1750"
       }
-      "02"
+      "bonus_jump_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "jumps"                                           "10"
+        "value"                                           "15 20 25 40 55"
+        "special_bonus_unique_lich_jump_damage"           "+100"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "jumps"                                             "10" // special_bonus_unique_lich_1_oaa
+      "jump_range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "jump_range"                                      "600"
+        "value"                                           "550"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "slow_movement_speed"                               "-65"
+      "slow_attack_speed"                                 "-65"
+      "slow_duration"                                     "2.5"
+      "initial_projectile_speed"                          "1050"
+      "projectile_speed"                                  "850"
+      "vision_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_movement_speed"                             "-65"
+        "value"                                           "800"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "has_unlimited_jumps"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_attack_speed"                               "-65"
+        "value"                                           "0"
       }
-      "06"
+      "should_fire_chain_frost_on_death"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "2.5"
+        "special_bonus_unique_lich_7"                     "+1"
       }
-      "07"
+      "bonus_jumps_per_hero_killed" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "850"
+        "value"                                           "0"
+        "special_bonus_facet_lich_growing_cold"           "+5"
       }
-      "08"
+      "bonus_jumps_per_creep_killed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "vision_radius"                                   "800"
+        "value"                                           "0"
+        "special_bonus_facet_lich_growing_cold"           "+1"
       }
-      "09"
+      "frostbound_duration" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_jump_damage"                               "15 20 25 30 35"
+        "value"                                           "0"
+        "special_bonus_facet_lich_frostbound"             "=3"
       }
     }
   }

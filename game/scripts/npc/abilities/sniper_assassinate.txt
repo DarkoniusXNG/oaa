@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5157"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -16,64 +15,68 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "3000"
     "AbilityCastRangeBuffer"                              "600"
-    "AbilityCastPoint"                                    "2.0"
+    "AbilityCastPoint"                                    "2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "20 15 10 10 10"
 
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "320 650 980 1970 3620" //OAA
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "175 225 275 550 675"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.0"  // Modifier just does damage
+    "AbilityManaCost"                                     "175 185 195 205 215" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "2500"
+        "value"                                           "300 450 600 1050 1500"
+        "special_bonus_unique_sniper_1"                   "+150"
       }
-      "02"
+      "projectile_speed"                                  "2500"
+      "scepter_stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "abilitycastpoint"                                ""
-        "LinkedSpecialBonus"                              "special_bonus_unique_sniper_4"
-        "LinkedSpecialBonusOperation"                     "SPECIAL_BONUS_SUBTRACT"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_stun_duration"                           "1 1.25 1.5 1.55 1.6"
+        "value"                                           "0.8 1.0 1.2 1.4 1.6"
         "RequiresScepter"                                 "1"
       }
-      "04"
+      "scepter_crit"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "scepter_cast_point"                              "0.5"
+        "value"                                           "0"
         "RequiresScepter"                                 "1"
       }
+      "scepter_cast_point"
+      {
+        "value"                                           "0.5"
+        "RequiresScepter"                                 "1"
+      }
+      "scatter_range"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "0"
+      }
+      "scatter_width"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "0"
+        "RequiresShard"                                   "1"
+      }
+      "scatter_damage_pct"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "0"
+        "RequiresShard"                                   "1"
+      }
+      "cooldown_reduction_on_kill"                        "0 5 10 10 10"
     }
   }
 }

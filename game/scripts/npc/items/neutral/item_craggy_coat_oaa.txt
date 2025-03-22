@@ -1,0 +1,43 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Craggy Coat (OAA Rework) - custom neutral tier 4 item
+  //=================================================================================================================
+  "item_craggy_coat_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/craggy_coat.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityTextureName"                                  "item_craggy_coat"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
+    "AbilityCooldown"                                     "15"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage_conversion_pct"                             "75"
+      "duration"                                          "8"
+    }
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "particle"                                          "particles/units/heroes/hero_tiny/tiny_transform.vpcf"
+      "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_tiny.vsndevts"
+    }
+  }
+}

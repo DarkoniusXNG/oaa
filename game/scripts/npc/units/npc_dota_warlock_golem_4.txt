@@ -1,8 +1,8 @@
 "DOTAUnits"
 {
-//=================================================================================
-// Warlock: Golem 4
-//=================================================================================
+  //=================================================================================
+  // Warlock: Golem 4 - unused
+  //=================================================================================
   "npc_dota_warlock_golem_4"
   {
     // General
@@ -27,15 +27,15 @@
 
     // Armor
     //----------------------------------------------------------------
-    "ArmorPhysical"                                       "40"    // Physical protection.
-    "MagicalResistance"                                   "35"    // Magical protection.
+    "ArmorPhysical"                                       "40"
+    "MagicalResistance"                                   "33"
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"                                     "600"    // Damage range min.
-    "AttackDamageMax"                                     "600"    // Damage range max.
-    "AttackRate"                                          "1.2"    // Speed of attack.
+    "AttackDamageMin"                                     "660"
+    "AttackDamageMax"                                     "660"
+    "AttackRate"                                          "1.1"
     "AttackAnimationPoint"                                "0.26"    // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "500"    // Range within a target can be acquired.
     "AttackRange"                                         "225"    // Range within a target can be attacked.
@@ -48,19 +48,19 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                                            "98"    // Experience earn.
-    "BountyGoldMin"                                       "200"    // Gold earned min.
-    "BountyGoldMax"                                       "200"    // Gold earned max.
+    "BountyXP"                                            "236"
+    "BountyGoldMin"                                       "300"
+    "BountyGoldMax"                                       "300"
 
     // Movement
     //----------------------------------------------------------------
     "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"                                       "370"    // Speed.
+    "MovementSpeed"                                       "380"
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "7500"    // Base health.
-    "StatusHealthRegen"                                   "150"    // Health regeneration rate.
+    "StatusHealth"                                        "10400"
+    "StatusHealthRegen"                                   "120"
     "StatusMana"                                          "0"      // Base mana.
     "StatusManaRegen"                                     "0"      // Mana regeneration rate.
 
@@ -72,11 +72,10 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"              // Team name.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_HERO"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
     "VoiceFile"                                           "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
+
     //Inventory
     "HasInventory"                                        "0"
   }
@@ -105,14 +104,14 @@
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"                                       "40"      // Physical protection.
-    "MagicalResistance"                                   "35"
+    "MagicalResistance"                                   "33"
 
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"                                     "450"    // Damage range min.
-    "AttackDamageMax"                                     "450"    // Damage range max.
-    "AttackRate"                                          "1.2"    // Speed of attack.
+    "AttackDamageMin"                                     "495"
+    "AttackDamageMax"                                     "495"
+    "AttackRate"                                          "1.1"
     "AttackAnimationPoint"                                "0.26"    // Normalized time in animation cycle to attack.
     "AttackAcquisitionRange"                              "500"    // Range within a target can be acquired.
     "AttackRange"                                         "225"    // Range within a target can be attacked.
@@ -125,19 +124,19 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                                            "98"    // Experience earn.
-    "BountyGoldMin"                                       "50"    // Gold earned min.
-    "BountyGoldMax"                                       "50"    // Gold earned max.
+    "BountyXP"                                            "236"
+    "BountyGoldMin"                                       "150"
+    "BountyGoldMax"                                       "150"
 
     // Movement
     //----------------------------------------------------------------
     "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"                                       "370"    // Speed.
+    "MovementSpeed"                                       "380"
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"                                        "5625"   // Base health.
-    "StatusHealthRegen"                                   "150"    // Health regeneration rate.
+    "StatusHealth"                                        "8320"
+    "StatusHealthRegen"                                   "120"
     "StatusMana"                                          "0"      // Base mana.
     "StatusManaRegen"                                     "0"      // Mana regeneration rate.
 
@@ -149,8 +148,6 @@
     // Team
     //----------------------------------------------------------------
     "TeamName"                                            "DOTA_TEAM_NEUTRALS"              // Team name.
-    "CombatClassAttack"                                   "DOTA_COMBAT_CLASS_ATTACK_HERO"
-    "CombatClassDefend"                                   "DOTA_COMBAT_CLASS_DEFEND_HERO"
     "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
     "VoiceFile"                                           "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"

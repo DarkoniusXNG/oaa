@@ -1,6 +1,3 @@
-
-LinkLuaModifier( "modifier_octarine_vampirism_buff", "modifiers/modifier_octarine_vampirism_buff.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_intrinsic_multiplexer", "modifiers/modifier_intrinsic_multiplexer.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_item_refresher_core", "items/refresher_core.lua", LUA_MODIFIER_MOTION_NONE )
 
 item_octarine_core_2 = class(ItemBaseClass)
@@ -14,7 +11,7 @@ end
 
 function item_octarine_core_2:GetIntrinsicModifierNames()
   return {
-    "modifier_octarine_vampirism_buff",
+    "modifier_item_spell_lifesteal_oaa",
     "modifier_item_octarine_core"
   }
 end
@@ -25,7 +22,7 @@ item_refresher_core = class(item_octarine_core_2)
 
 function item_refresher_core:GetIntrinsicModifierNames()
   return {
-    "modifier_octarine_vampirism_buff",
+    "modifier_item_spell_lifesteal_oaa",
     "modifier_item_refresher_core"
   }
 end

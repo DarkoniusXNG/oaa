@@ -4,16 +4,17 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5654"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
-    "FightRecapLevel"                                     "2"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO" // OAA, Valve forgot about this
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -22,41 +23,40 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "90"
+    "AbilityCooldown"                                     "90 85 80 75 70" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "250"
+    "AbilityManaCost"                                     "150 200 250 300 350"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "500"
+        "value"                                           "525"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "damage_reduction"                                  "100"
+      "bonus_attack_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "100 100 100 100 80"
+        "value"                                           "65"
+        "special_bonus_unique_winter_wyvern_3"            "+55"
       }
-      "03"
+      "duration"                                          "2"
+      "max_duration"                                      "4.5 5 5.5 6 6.5" //OAA
+      "bonus_duration_per_hero"                           "2"
+      "bonus_duration_per_creep"                          "0.5"
+      "transfer_on_death"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_amplification"                            "0"
+        "value"                                           "0"
+        "special_bonus_facet_winter_wyvern_recursive"     "=1"
       }
-      "04"
+      "transfer_duration_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "55 60 65 70 75" //OAA
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0 4.75 5.5 5.5 5.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_winter_wyvern_3"
+        "value"                                           "0"
+        "special_bonus_facet_winter_wyvern_recursive"     "=50.0"
       }
     }
   }

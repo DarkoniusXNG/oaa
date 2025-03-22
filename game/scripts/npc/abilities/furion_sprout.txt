@@ -7,38 +7,60 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5245"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
-    "FightRecapLevel"                                     "1"
-
-    "MaxLevel"                                            "6"
-
-    // Unit Targeting
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "625 700 775 850 900 1000"
+    "AbilityCastRange"                                    "625 700 775 850 925 1000"
     "AbilityCastPoint"                                    "0.35"
-    "AbilityCooldown"                                     "11 10 9 8 8 8"
-    "AbilityManaCost"                                     "70 90 110 130 150 170"
+    "AbilityCooldown"                                     "14 12 10 8 7 6"
+    "AbilityManaCost"                                     "70 80 90 100 110 120"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "vision_range"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "vision_range"                                    "500"
+        "value"                                           "250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"                                          "2.5 3 3.5 4 4.5 5"
+      "leash"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3 4 5 6 6.5 7"
+        "value"                                           "0"
+      }
+      "sprout_damage" //OAA
+      {
+        "value"                                           "90 160 230 300 600 1200"
+        "special_bonus_unique_furion_4"                   "+200"
+      }
+      "sprout_damage_radius"
+      {
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "sprout_heal_interval"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_furion_soothing_saplings"    "=0.5"
+      }
+      "sprout_heal_per_second" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_facet_furion_soothing_saplings"    "=35 =55 =75 =95 =135 =175"
+      }
+      "building_healing_pct"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_furion_soothing_saplings"    "+50"
       }
     }
   }

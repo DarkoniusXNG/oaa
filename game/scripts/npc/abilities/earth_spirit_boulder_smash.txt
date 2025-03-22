@@ -7,25 +7,22 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5608"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-    "AbilityUnitTargetFlag"                               "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" // OAA, Valve has a typo: AbilityUnitTargetFlag
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "150"
-    "AbilityCastPoint"                                    "0.01"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "22.0 18.0 14.0 10.0 10.0 10.0"
+    "AbilityCastPoint"                                    "0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -33,53 +30,45 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "180"
+        "value"                                           "16 14 12 10 10 10"
+        "special_bonus_unique_earth_spirit_7"             "-3.0"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "rock_search_aoe"                                 "200"
+        "value"                                           "180"  // NOTE: This radius must match the radius for geomagnetic grip
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "rock_search_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "rock_damage"                                     "105 170 235 300 600 1200"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "rock_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "move_slow"                                       "60"
+        "value"                                           "120 180 240 300 600 1200"
+        "special_bonus_unique_earth_spirit_6"             "+120"
       }
-      "05"
+      "move_slow"                                         "50"
+      "duration"                                          "1.25 2.5 3.25 4 4.75 5.5"
+      "speed"                                             "900"
+      "unit_distance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.25 2.5 3.25 4 4.5 5.0"
+        "value"                                           "500.0 600.0 700.0 800.0 900.0 1000.0"
       }
-      "06"
+      "rock_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "900"
+        "value"                                           "2000.0"
       }
-      "07"
+      "remnant_smash_radius_tooltip"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "unit_distance"                                   "500.0 600.0 700.0 800.0 900.0 1000.0"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "rock_distance"                                   "2000.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "remnant_smash_radius_tooltip"                    "200"
-      }
+      "creep_multiplier"                                  "1.0"
     }
   }
 }

@@ -1,7 +1,7 @@
-harpy_storm_null_field_oaa = class(AbilityBaseClass)
+LinkLuaModifier("modifier_harpy_null_field_oaa_applier", "abilities/neutrals/oaa_harpy_storm_null_field.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_harpy_null_field_oaa_effect", "abilities/neutrals/oaa_harpy_storm_null_field.lua", LUA_MODIFIER_MOTION_NONE)
 
-LinkLuaModifier("modifier_harpy_null_field_oaa_applier", "abilities/neutrals/oaa_harpy_storm_null_field.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_harpy_null_field_oaa_effect", "abilities/neutrals/oaa_harpy_storm_null_field.lua", LUA_MODIFIER_MOTION_NONE )
+harpy_storm_null_field_oaa = class(AbilityBaseClass)
 
 function harpy_storm_null_field_oaa:GetIntrinsicModifierName()
   return "modifier_harpy_null_field_oaa_applier"
@@ -9,7 +9,7 @@ end
 
 --------------------------------------------------------------------------------
 
-modifier_harpy_null_field_oaa_applier = class(ModifierBaseClass)
+modifier_harpy_null_field_oaa_applier = class({})
 
 function modifier_harpy_null_field_oaa_applier:IsHidden()
   return true
@@ -51,12 +51,12 @@ function modifier_harpy_null_field_oaa_applier:GetAuraSearchType()
 end
 
 function modifier_harpy_null_field_oaa_applier:GetAuraSearchFlags()
-  return DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD
+  return DOTA_UNIT_TARGET_FLAG_NONE
 end
 
 --------------------------------------------------------------------------------
 
-modifier_harpy_null_field_oaa_effect = class(ModifierBaseClass)
+modifier_harpy_null_field_oaa_effect = class({})
 
 function modifier_harpy_null_field_oaa_effect:IsHidden()
   return false
@@ -85,15 +85,14 @@ function modifier_harpy_null_field_oaa_effect:OnRefresh()
 end
 
 function modifier_harpy_null_field_oaa_effect:DeclareFunctions()
-  local funcs = {
+  return {
     MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
   }
-  return funcs
 end
 
 function modifier_harpy_null_field_oaa_effect:GetModifierMagicalResistanceBonus()
   if self.magic_resistance then
     return self.magic_resistance
   end
-  return -15
+  return -17
 end

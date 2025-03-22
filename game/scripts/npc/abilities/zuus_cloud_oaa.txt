@@ -1,24 +1,23 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Zeus: Zuus Cloud
+  // Zeus: Nimbus (OAA Rework) - scepter ability
   //=================================================================================================================
   "zuus_cloud_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8460" // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "AbilityTextureName"                                  "zuus_cloud"
     "Scriptfile"                                          "abilities/oaa_zuus_cloud.lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
     "MaxLevel"                                            "1"
-    "FightRecapLevel"                                     "1"
+
     "IsGrantedByScepter"                                  "1"
     "HasScepterUpgrade"                                   "1"
 
@@ -34,55 +33,27 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "325"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.1"  // just a ministun
+    "AbilityManaCost"                                     "275"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "cloud_duration"                                    "30"
+      "cloud_bolt_interval"                               "2.5"
+      "cloud_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "cloud_duration"                                  "35"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "ministun_duration" // zuus_lightning_bolt finally has this key-value
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "cloud_bolt_interval"                             "2.25"
+        "value"                                           "0.35"
+        "special_bonus_unique_zeus_3"                     "+0.5"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cloud_radius"                                    "450"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "ministun_duration"                               "0.2"
-        "LinkedSpecialBonus"                              "special_bonus_unique_zeus_3"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "hits_to_kill_tooltip"                            "8"
-        "RequiresScepter"                                 "1"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_hits_to_kill_tooltip"                      "16"
-        "RequiresScepter"                                 "1"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cloud_bounty_tooltip"                            "100"
-        "RequiresScepter"                                 "1"
-      }
+      "hits_to_kill_tooltip"                              "8"
+      "creep_hits_to_kill_tooltip"                        "16"
+      "cloud_bounty_tooltip"                              "125"
     }
   }
 }

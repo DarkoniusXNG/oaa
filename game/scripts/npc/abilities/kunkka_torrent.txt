@@ -7,69 +7,52 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5031"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1500"
+    "AbilityCastRange"                                    "1300"
     "AbilityCastPoint"                                    "0.4"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16 14 12 10 10 10"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "90 100 110 120 130 140"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // applies 2 modifiers
+    "AbilityManaCost"                                     "90"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "225"
-        "LinkedSpecialBonus"                              "special_bonus_unique_kunkka"
+        "value"                                           "250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "movespeed_bonus"                                   "-40"
+      "slow_duration"                                     "1 2 3 4 4 4"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed_bonus"                                 "-35"
+        "value"                                           "1.4"
+        "special_bonus_unique_kunkka_7"                   "+25%"
       }
-      "03"
+      "delay"                                             "1.6"
+      "torrent_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "slow_duration"                                   "1 2 3 4 5 6"
+        "value"                                           "80 160 240 320 640 1280"
+        "special_bonus_unique_kunkka_7"                   "+25%"
       }
-      "04"
+      "percent_instant"                                   "0"
+      "damage_tick_interval"                              "0.2"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.6"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "delay"                                           "1.6"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "torrent_damage"                                  "75 150 225 300 650 1000"
-        "LinkedSpecialBonus"                              "special_bonus_unique_kunkka_2"
+        "value"                                           "16 14 12 10 10 10"
+        "special_bonus_unique_kunkka_torrent_cooldown"    "-4"
       }
     }
   }

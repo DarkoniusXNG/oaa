@@ -1,13 +1,12 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Visage: Summon Familiars (OAA rework)
+  // Visage: Summon Familiars (OAA rework) - unused
   //=================================================================================================================
   "visage_summon_familiars_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8614"
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_visage_summon_familiars.lua"
     "AbilityTextureName"                                  "visage_summon_familiars"
@@ -17,8 +16,6 @@
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -35,42 +32,25 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "familiar_hp"                                       "500 700 900 1500 2500"
+      "familiar_armor"                                    "2 4 6 8 10"
+      "familiar_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "familiar_hp"                                     "500 700 900 1500 2100"
+        "value"                                           "430"
+        //"special_bonus_unique_visage_2"                   "+40"
       }
-      "02"
+      "familiar_attack_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "familiar_armor"                                  "0 1 2 4 7"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "familiar_speed"                                  "430"
-        "LinkedSpecialBonus"                              "special_bonus_unique_visage_2"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "familiar_attack_damage"                          "20 40 60 120 240"
+        "value"                                           "30 75 120 255 390"
+        "special_bonus_unique_visage_7"                   "+6"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "05"
+      "total_familiars"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "total_familiars"                                 "2"
-        "LinkedSpecialBonus"                              "special_bonus_unique_visage_6"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "scepter_total_familiars"                         "3"
-        "LinkedSpecialBonus"                              "special_bonus_unique_visage_6"
-        "RequiresScepter"                                 "1"
+        "value"                                           "2"
+        "special_bonus_unique_visage_6"                   "+1"
       }
     }
   }

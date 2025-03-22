@@ -1,23 +1,22 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Clinkz: Death Pact
+  // Clinkz: Death Pact (OAA Rework) - unused
   //=================================================================================================================
   "clinkz_death_pact_oaa"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85262"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_death_pact.lua"
+    "AbilityTextureName"                                  "clinkz_death_pact"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
-    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
-    "AbilityTextureName"                                  "clinkz_death_pact"
-
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
@@ -30,7 +29,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "80 70 60 60 60"
+    "AbilityCooldown"                                     "80 70 60 50 40"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -38,37 +37,33 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "65"
+      "health_gain_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "65"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "health_gain_pct"                                 "40 60 80 100 120"
+
+        "value"                                           "40 60 80 100 120"
         "LinkedSpecialBonus"                              "special_bonus_clinkz_death_pact_oaa"
       }
-      "03"
+      "damage_gain_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_gain_pct"                                 "4 6 8 10 14"
+
+        "value"                                           "4 8 12 16 20"
         "LinkedSpecialBonus"                              "special_bonus_clinkz_death_pact_oaa"
         "LinkedSpecialBonusField"                         "value2"
       }
-      "04"
+      "health_gain_max"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "health_gain_max"                                 "1000 1500 2000 2500 3000"
+
+        "value"                                           "1000 1500 2000 2500 3000"
         "LinkedSpecialBonus"                              "special_bonus_clinkz_death_pact_oaa"
         "LinkedSpecialBonusField"                         "value3"
       }
-      "05"
+      "damage_gain_max"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_gain_max"                                 "100 150 200 250 300"
+
+        "value"                                           "100 150 200 350 500"
         "LinkedSpecialBonus"                              "special_bonus_clinkz_death_pact_oaa"
         "LinkedSpecialBonusField"                         "value4"
       }

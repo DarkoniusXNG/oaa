@@ -1,0 +1,94 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Marci: Unleash
+  //=================================================================================================================
+  "marci_unleash"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0.2"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "duration"
+      {
+        "value"                                           "16"
+      }
+      "charges_per_flurry"                                "5"
+      "flurry_bonus_attack_speed"                         "700 975 1325 1325 1325"
+      "time_between_flurries"                             "1.5"
+      "pulse_radius"
+      {
+        "value"                                           "800"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "pulse_debuff_duration"                             "2.0"
+      "pulse_damage" //OAA
+      {
+        "value"                                           "50 150 250 450 650"
+        "CalculateSpellDamageTooltip"                     "1"
+      }
+      "pulse_move_slow_pct"                               "30.0"
+      "pulse_attack_slow_pct"                             "60.0 80.0 100.0 120.0 140.0"
+      "max_time_window_per_hit"                           "1.0"
+      "bonus_movespeed"
+      {
+        "value"                                           "15"
+        "special_bonus_unique_marci_unleash_speed"        "+10"
+      }
+      "recovery_fixed_attack_rate"                        "2.0"
+      "shard_push_length"
+      {
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "scepter_cooldown_reduction"
+      {
+        "value"                                           "10.0"
+        "RequiresScepter"                                 "1"
+      }
+      "dispel"
+      {
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+1"
+      }
+      "pulse_silence_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+1"
+      }
+      "extend_duration"
+      {
+        "special_bonus_unique_marci_unleash_extend_duration"  "6"
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "80 70 60 55 50"
+      }
+      "AbilityManaCost"
+      {
+        "value"                                           "100 125 150 175 200"
+      }
+    }
+  }
+}

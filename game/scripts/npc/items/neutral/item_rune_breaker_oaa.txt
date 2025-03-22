@@ -1,0 +1,39 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Rune Breaker - custom neutral tier 5 item
+  //=================================================================================================================
+  "item_rune_breaker_oaa"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "item_lua"
+    "ScriptFile"                                          "items/neutral/rune_breaker.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityTextureName"                                  "item_the_leveller"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "AbilityCastRange"                                    "600"
+    "AbilityCooldown"                                     "20"
+    "AbilityManaCost"                                     "75"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                                            "0"
+    "ItemSellable"                                        "0"
+    "ItemIsNeutralActiveDrop"                             "1"
+    "ItemPurchasable"                                     "0"
+
+    "Model"                                               "models/props_gameplay/neutral_box.vmdl"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "bonus_damage_during_duels"                         "25" // percentage bonus based on base (white) dmg
+      "duration"                                          "4"
+    }
+  }
+}

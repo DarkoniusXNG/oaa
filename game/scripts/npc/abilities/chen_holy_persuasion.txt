@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5330"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
@@ -15,53 +14,52 @@
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
-
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.3"
+    "AbilityCastRange"                                    "600"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
     "AbilityCooldown"                                     "15"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "90 110 130 150 170 190"
+    "AbilityManaCost"                                     "110 130 150 170 190 210"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "max_units"                                         "1 2 3 4 5 6"
+      "level_req"                                         "6" //OAA
+      "health_min" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_units"                                       "1 2 3 4 5 6"
-        "LinkedSpecialBonus"                              "special_bonus_unique_chen_1"
+        "value"                                           "400 600 800 1000 2000 3000"
+        "special_bonus_unique_chen_4"                     "+1400"
       }
-      "02"
+      "bonus_health_per_level"                            "50"
+      "gold_pct"                                          "25 50 75 100 125 150"
+      "movement_speed_bonus"                              "5 10 20 30 45 60"
+      "damage_bonus" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "level_req"                                       "6" //OAA
+        "value"                                           "10 20 30 40 80 160"
+        "special_bonus_unique_chen_5"                     "+24"
       }
-      "03"
+      "is_martyr"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "health_min"                                      "800 1000 1200 1400 2800 5600" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_chen_4"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+1"
       }
-      "04"
+      "current_hp_pct_tooltip"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed_bonus"                            "10 15 20 25 30 35"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+30.0" // TOOLTIP ONLY, reflects current_hp_pct in chen_martyrdom
       }
-      "05"
+      "creep_ability_level"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_bonus"                                    "10 20 30 40 80 160" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_chen_5"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "0"
+        "special_bonus_shard"                             "=2"
       }
     }
   }

@@ -7,20 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5118"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
-
-    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -30,60 +26,51 @@
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "12"
-    "AbilityDuration"                                     "4.0"
+    "AbilityDuration"                                     "4.5"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "90 100 110 120 130 140"
+    "AbilityManaCost"                                     "100"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "gush_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "gush_damage"                                     "110 160 210 260 520 1040"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tidehunter_2"
+        "value"                                           "110 160 210 260 520 1040"
+        "special_bonus_unique_tidehunter_2"               "+200"
       }
-      "02"
+      "projectile_speed"                                  "2500"
+      "movement_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "2500"
+        "value"                                           "-40"
+        "special_bonus_unique_tidehunter_5"               "-15"
       }
-      "03"
+      "negative_armor"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "-40"
+        "value"                                           "3 4 5 6 8 12"
+        "special_bonus_unique_tidehunter"                 "+4"
       }
-      "04"
+      "speed_scepter"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "negative_armor"                                  "4 5 6 7 9 15"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tidehunter"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed_scepter"                                   "1500"
+        "value"                                           "1500"
         "RequiresScepter"                                 "1"
       }
-      "06"
+      "aoe_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "aoe_scepter"                                     "260"
+        "value"                                           "260"
+        "affected_by_aoe_increase"                        "1"
         "RequiresScepter"                                 "1"
       }
-      "07"
+      "cooldown_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cooldown_scepter"                                "7"
+        "value"                                           "7"
         "RequiresScepter"                                 "1"
       }
-      "08"
+      "cast_range_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cast_range_scepter"                              "2200"
+        "value"                                           "2200"
         "RequiresScepter"                                 "1"
       }
     }

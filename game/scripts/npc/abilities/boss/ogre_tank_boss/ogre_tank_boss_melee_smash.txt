@@ -1,0 +1,50 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ability: Ogre Tank Boss Melee Smash
+  //=================================================================================================================
+  "ogre_tank_boss_melee_smash"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/ogre_tank_boss/ogre_tank_boss_melee_smash.lua"
+    "AbilityTextureName"                                  "ogre_bruiser_ogre_smash"
+
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0.03"
+    "AbilityCastRange"                                    "500"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_1"
+    "AnimationPlaybackRate"                               "1.0"
+    "AnimationIgnoresModelScale"                          "1"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "2.0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "impact_radius"                                     "200"
+      "stun_duration"                                     "1.2" // regular version: 1.0
+      "damage"                                            "3500" // physical
+      "base_swing_speed"                                  "1.0"
+    }
+
+    "precache"
+    {
+      "particle"                                          "particles/test_particle/ogre_melee_smash.vpcf"
+      "particle"                                          "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+    }
+  }
+}

@@ -7,47 +7,37 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5068"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16 12 8 4 4 4"
+    "AbilityCooldown"                                     "13 10 7 4 4 4"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "min_distance"                                      "275"
+      "max_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "min_distance"                                    "250"
+        "value"                                           "600 675 750 825 900 975"
+        "special_bonus_unique_phantom_lancer"             "+300"
       }
-      "02"
+      "bonus_speed"                                       "800"
+      "bonus_agility" //OAA, Valve forgot '+' on special_bonus_unique_phantom_lancer_phantom_rush_agility
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_distance"                                    "600 700 800 900 1000 1100"
-        "LinkedSpecialBonus"                              "special_bonus_unique_phantom_lancer"
+        "value"                                           "10 20 30 40 60 80"
+        "special_bonus_unique_phantom_lancer_phantom_rush_agility"  "+10"
       }
-      "03"
+      "agility_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_speed"                                     "800"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_agility"                                   "11 22 33 44 66 88"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "agility_duration"                                "1.5"
+        "value"                                           "2"
+        "special_bonus_unique_phantom_lancer_2"           "+2.5"
       }
     }
   }

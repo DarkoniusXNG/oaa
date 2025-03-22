@@ -7,14 +7,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "109"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "Model"                                               "models/props_gameplay/recipe.vmdl"
-    "AbilityTextureName"                                  "custom/recipe/recipe_1"
-    "FightRecapLevel"                                     "2"
+    //"AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1700"
+    "ItemCost"                                            "200"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -23,7 +21,7 @@
     "ItemResult"                                          "item_refresher"
     "ItemRequirements"
     {
-      "01"                                                "item_pers;item_pers"
+      "01"                                                "item_cornucopia;item_ring_of_tarrasque;item_tiara_of_selemene"
     }
   }
 
@@ -34,51 +32,40 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "8557"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
-    "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/refresher.lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    //"BaseClass"                                           "item_lua"
+    //"ScriptFile"                                          "items/refresher.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/refresher_orb_1"
+
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.0"
-    "AbilityCooldown"                                     "195.0 170.0 145.0 120.0 95.0"
-    "AbilitySharedCooldown"                               "refresher"
+    "AbilityCooldown"                                     "120" //OAA
+    "AbilitySharedCooldown"                               "refresher_oaa" //OAA
+    "AbilityManaCost"                                     "500" //OAA
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "1"
-    "UpgradesItems"                                       "item_refresher"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "375"
     "ItemCost"                                            "5000"
-    "ItemShopTags"                                        "regen_health;regen_mana;hard_to_tag"
+    "ItemShopTags"                                        "health_pool;mana_pool;boost_mana;regen_mana;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "refresher orb;refresher"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     "IsTempestDoubleClonable"                             "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health_regen"                              "13 19 27 42 62"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "425 850 1275 1700 2125"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "425 525 675 875 1125"
-      }
+      "bonus_health"                                      "175 425 675 925 1175" //OAA
+      "bonus_mana"                                        "425 525 675 875 1125" //OAA
+      "bonus_health_regen"                                "0" //OAA
+      "bonus_mana_regen"                                  "6 6.25 6.75 7.5 8.5" //OAA
+      "bonus_damage"                                      "0" //OAA
     }
   }
 }

@@ -1,18 +1,28 @@
-LinkLuaModifier("modifier_intrinsic_multiplexer", "modifiers/modifier_intrinsic_multiplexer.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oaa_dagon_stacking_stats", "items/dagon.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oaa_dagon_non_stacking_stats", "items/dagon.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_oaa_dagon_passive", "items/dagon.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_oaa_dagon_debuff", "items/dagon.lua", LUA_MODIFIER_MOTION_NONE)
 
-item_dagon = class(ItemBaseClass)
-item_dagon_2 = item_dagon
-item_dagon_3 = item_dagon
-item_dagon_4 = item_dagon
-item_dagon_5 = item_dagon
-item_dagon_6 = item_dagon
-item_dagon_7 = item_dagon
-item_dagon_8 = item_dagon
-item_dagon_9 = item_dagon
+item_dagon_oaa_1 = class(ItemBaseClass)
+item_dagon_oaa_2 = item_dagon_oaa_1
+item_dagon_oaa_3 = item_dagon_oaa_1
+item_dagon_oaa_4 = item_dagon_oaa_1
+item_dagon_oaa_5 = item_dagon_oaa_1
+item_dagon_oaa_6 = item_dagon_oaa_1
+item_dagon_oaa_7 = item_dagon_oaa_1
+item_dagon_oaa_8 = item_dagon_oaa_1
+item_dagon_oaa_9 = item_dagon_oaa_1
 
-function item_dagon:OnSpellStart()
+function item_dagon_oaa_1:GetIntrinsicModifierName()
+  return "modifier_intrinsic_multiplexer"
+end
+
+function item_dagon_oaa_1:GetIntrinsicModifierNames()
+  return {
+    "modifier_item_oaa_dagon_passive",
+    "modifier_item_spell_lifesteal_oaa",
+  }
+end
+
+function item_dagon_oaa_1:OnSpellStart()
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
   local level = self:GetLevel()
@@ -24,7 +34,11 @@ function item_dagon:OnSpellStart()
   local particleThickness = 300 + (100 * level) --Control Point 2 in Dagon's particle effect takes a number between 400 and 2000, depending on its level.
 
   local damage = self:GetSpecialValueFor("damage") -- Damage should never be a big value because of the spells like Fatal Bonds that share dmg
+  local hp_percent = self:GetSpecialValueFor("current_hp_dmg")
   local damage_type = DAMAGE_TYPE_MAGICAL
+  local burst_heal_percent = self:GetSpecialValueFor("burst_heal_percent")
+  local hero_spell_lifesteal = self:GetSpecialValueFor("hero_spell_lifesteal")
+  local creep_spell_lifesteal = self:GetSpecialValueFor("creep_spell_lifesteal")
 
   local particle = ParticleManager:CreateParticle(particleName,  PATTACH_POINT_FOLLOW, caster)
   ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster:GetOrigin(), true)
@@ -38,127 +52,142 @@ function item_dagon:OnSpellStart()
   -- Sound on target
   target:EmitSound(soundTarget)
 
-  -- Don't do anything if target has Linken's effect
-  if target:TriggerSpellAbsorb(self) then
+  -- Don't do anything if target has Linken's effect or it's spell-immune
+  if target:TriggerSpellAbsorb(self) or target:IsMagicImmune() then
     return
   end
 
-  -- If the target is an illusion, just kill it and don't do damage
-  if target:IsIllusion() and not target:IsNull() then
+  -- If the target is an illusion, just kill it and don't do damage; same + heal for non-ancient creeps
+  if (target:IsIllusion() and not target:IsNull() and not target:IsStrongIllusionOAA()) or (target:IsCreep() and not target:IsAncient() and not target:IsOAABoss()) then
+    if target:IsCreep() then
+      caster:HealWithParams(target:GetHealth() * burst_heal_percent / 100, self, false, true, caster, true)
+    end
     target:Kill(self, caster)
     return
   end
 
-  ApplyDamage({
+  -- Add debuff
+  if level > 5 then
+    local debuff_duration = target:GetValueChangedByStatusResistance(self:GetSpecialValueFor("blind_duration"))
+    target:AddNewModifier(caster, self, "modifier_item_oaa_dagon_debuff", {duration = debuff_duration})
+  end
+
+  local isRealHero = target:IsRealHero() -- do this check before doing dmg to prevent doing check on a killed/deleted target
+  local isStrongIllu = target:IsStrongIllusionOAA()
+
+  if target:IsOAABoss() then
+    hp_percent = hp_percent * (1 - BOSS_DMG_RED_FOR_PCT_SPELLS/100)
+  end
+
+  local damageDone = ApplyDamage({
     victim = target,
     attacker = caster,
-    damage = damage,
+    damage = damage + target:GetHealth() * hp_percent * 0.01,
     damage_type = damage_type,
     ability = self
   })
-end
 
-function item_dagon:GetIntrinsicModifierName()
-  return "modifier_intrinsic_multiplexer"
-end
-
-function item_dagon:GetIntrinsicModifierNames()
-  return {
-    "modifier_item_oaa_dagon_stacking_stats",
-    "modifier_item_oaa_dagon_non_stacking_stats"
-  }
+  -- healing time!
+  local heal_amount = 0
+  if isRealHero or isStrongIllu then
+    heal_amount = damageDone * (burst_heal_percent - hero_spell_lifesteal) / 100
+  else
+    -- For ancients and bosses
+    heal_amount = damageDone * (burst_heal_percent - creep_spell_lifesteal) / 100
+  end
+  caster:HealWithParams(heal_amount, self, false, true, caster, true)
 end
 
 ---------------------------------------------------------------------------------------------------
--- Parts of Dagon that should stack with other Dagons (stats)
 
-modifier_item_oaa_dagon_stacking_stats = class(ModifierBaseClass)
+modifier_item_oaa_dagon_passive = class(ModifierBaseClass)
 
-function modifier_item_oaa_dagon_stacking_stats:IsHidden()
+function modifier_item_oaa_dagon_passive:IsHidden()
   return true
 end
-function modifier_item_oaa_dagon_stacking_stats:IsDebuff()
+function modifier_item_oaa_dagon_passive:IsDebuff()
   return false
 end
-function modifier_item_oaa_dagon_stacking_stats:IsPurgable()
+function modifier_item_oaa_dagon_passive:IsPurgable()
   return false
 end
 
-function modifier_item_oaa_dagon_stacking_stats:GetAttributes()
+function modifier_item_oaa_dagon_passive:GetAttributes()
   return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
-function modifier_item_oaa_dagon_stacking_stats:OnCreated()
+function modifier_item_oaa_dagon_passive:OnCreated()
   local ability = self:GetAbility()
   if ability and not ability:IsNull() then
-    self.stats = ability:GetSpecialValueFor("bonus_all_stats")
+    self.int = ability:GetSpecialValueFor("bonus_int")
+    self.str = ability:GetSpecialValueFor("bonus_str")
+    self.agi = ability:GetSpecialValueFor("bonus_agi")
+    --self.spell_amp = ability:GetSpecialValueFor("spell_amp")
   end
 end
 
-function modifier_item_oaa_dagon_stacking_stats:OnRefresh()
-  local ability = self:GetAbility()
-  if ability and not ability:IsNull() then
-    self.stats = ability:GetSpecialValueFor("bonus_all_stats")
-  end
-end
+modifier_item_oaa_dagon_passive.OnRefresh = modifier_item_oaa_dagon_passive.OnCreated
 
-function modifier_item_oaa_dagon_stacking_stats:DeclareFunctions()
+function modifier_item_oaa_dagon_passive:DeclareFunctions()
   return {
     MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
     MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
     MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
+    --MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
   }
 end
 
-function modifier_item_oaa_dagon_stacking_stats:GetModifierBonusStats_Strength()
-  return self.stats or self:GetAbility():GetSpecialValueFor("bonus_all_stats")
+function modifier_item_oaa_dagon_passive:GetModifierBonusStats_Strength()
+  return self.str or self:GetAbility():GetSpecialValueFor("bonus_str")
 end
 
-function modifier_item_oaa_dagon_stacking_stats:GetModifierBonusStats_Agility()
-  return self.stats or self:GetAbility():GetSpecialValueFor("bonus_all_stats")
+function modifier_item_oaa_dagon_passive:GetModifierBonusStats_Agility()
+  return self.agi or self:GetAbility():GetSpecialValueFor("bonus_agi")
 end
 
-function modifier_item_oaa_dagon_stacking_stats:GetModifierBonusStats_Intellect()
-  return self.stats or self:GetAbility():GetSpecialValueFor("bonus_all_stats")
+function modifier_item_oaa_dagon_passive:GetModifierBonusStats_Intellect()
+  return self.int or self:GetAbility():GetSpecialValueFor("bonus_int")
 end
+
+--function modifier_item_oaa_dagon_passive:GetModifierSpellAmplify_Percentage()
+  --return self.spell_amp or self:GetAbility():GetSpecialValueFor("spell_amp")
+--end
 
 ---------------------------------------------------------------------------------------------------
--- Parts of Dagon that should NOT stack with other Dagons
 
-modifier_item_oaa_dagon_non_stacking_stats = class(ModifierBaseClass)
+modifier_item_oaa_dagon_debuff = class(ModifierBaseClass)
 
-function modifier_item_oaa_dagon_non_stacking_stats:IsHidden()
+function modifier_item_oaa_dagon_debuff:IsHidden()
+  return false
+end
+
+function modifier_item_oaa_dagon_debuff:IsDebuff()
   return true
 end
 
-function modifier_item_oaa_dagon_non_stacking_stats:IsDebuff()
-  return false
+function modifier_item_oaa_dagon_debuff:IsPurgable()
+  return true
 end
 
-function modifier_item_oaa_dagon_non_stacking_stats:IsPurgable()
-  return false
-end
-
-function modifier_item_oaa_dagon_non_stacking_stats:OnCreated()
+function modifier_item_oaa_dagon_debuff:OnCreated()
   local ability = self:GetAbility()
   if ability and not ability:IsNull() then
-    self.spell_amp = ability:GetSpecialValueFor("spell_amp")
+    self.blind_pct = ability:GetSpecialValueFor("blind_pct")
   end
 end
 
-function modifier_item_oaa_dagon_non_stacking_stats:OnRefresh()
-  local ability = self:GetAbility()
-  if ability and not ability:IsNull() then
-    self.spell_amp = ability:GetSpecialValueFor("spell_amp")
-  end
-end
+modifier_item_oaa_dagon_debuff.OnRefresh = modifier_item_oaa_dagon_debuff.OnCreated
 
-function modifier_item_oaa_dagon_non_stacking_stats:DeclareFunctions()
+function modifier_item_oaa_dagon_debuff:DeclareFunctions()
   return {
-    MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+    MODIFIER_PROPERTY_MISS_PERCENTAGE,
   }
 end
 
-function modifier_item_oaa_dagon_non_stacking_stats:GetModifierSpellAmplify_Percentage()
-  return self.spell_amp or self:GetAbility():GetSpecialValueFor("spell_amp")
+function modifier_item_oaa_dagon_debuff:GetModifierMiss_Percentage()
+  return self.blind_pct or self:GetAbility():GetSpecialValueFor("blind_pct")
+end
+
+function modifier_item_oaa_dagon_debuff:GetTexture()
+  return "item_dagon_5"
 end

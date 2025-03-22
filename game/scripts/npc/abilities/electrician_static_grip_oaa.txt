@@ -8,7 +8,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                                           "ability_lua"
-    "ID"                                                  "8475"
+    "ScriptFile"                                          "abilities/electrician/electrician_static_grip.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -16,20 +16,22 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "AbilityTextureName"                                  "custom/electrician_static_grip"
-    "ScriptFile"                                          "abilities/electrician/electrician_static_grip.lua"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    "HasShardUpgrade"                                     "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.3"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_1"
-    "AbilityCastRange"                                    "400"
+    "AbilityCastRange"                                    "500"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14.0"
-    "AbilityChannelTime"                                  "%channel_time"
+    "AbilityCooldown"                                     "14 13 12 11 11 11"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -37,39 +39,44 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "max_stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "channel_time"                                    "2.75 3.5 4.25 5 5.75 6.5"
+        "value"                                           "1.5 1.8 2.1 2.4 2.5 2.6"
+        "special_bonus_unique_electrician_1_oaa"          "+0.2"
       }
-      "02"
+      "damage_interval"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_interval"                                 "0.25"
+        "value"                                           "0.25"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "damage_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "20 40 60 80 160 320"
+        "value"                                           "50 60 70 80 160 240"
+        "special_bonus_unique_electrician_4_oaa"          "+25%"
       }
-      "04"
+      "pull_speed"                                        "140"
+      "pull_buffer"                                       "150"
+      "damage_width"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_speed"                                      "120"
+        "value"                                           "100"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "pseudochannel"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "pull_buffer"                                     "60"
+        "value"                                           "0"
+        "special_bonus_shard"                             "=1"
+      }
+      "attack_speed_pct"
+      {
+        "value"                                           "0"
       }
     }
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
-    "Precache"
+    "precache"
     {
       "particle"                                          "particles/units/heroes/hero_stormspirit/stormspirit_electric_vortex.vpcf"
       "soundfile"                                         "soundevents/game_sounds_heroes/game_sounds_stormspirit.vsndevts"

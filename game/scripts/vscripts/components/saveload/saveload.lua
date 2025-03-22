@@ -8,7 +8,10 @@ local SaveLoadModules = {
   bosses = BossSpawner,
   gold = Gold,
   heroes = SaveLoadStateHero,
-  capturePoints = CapturePoints
+  capturePoints = CapturePoints,
+  corePoints = CorePointsManager,
+  wandererStatus = Wanderer,
+  grendelStatus = Grendel,
 }
 
 function SaveLoadState:Init ()
@@ -16,6 +19,8 @@ function SaveLoadState:Init ()
   if not SAVE_STATE_ENABLED then
     return
   end
+
+  self.moduleName = "SaveLoadState"
 
   -- check if we can resume state
   Bottlepass:StateLoad(self:GetPlayerList(), function (data)
@@ -46,7 +51,7 @@ end
 
 function SaveLoadState:GetState ()
   local state = {}
-  for name,Module in pairs(SaveLoadModules) do
+  for name, Module in pairs(SaveLoadModules) do
     state[name] = Module:GetState()
   end
 
@@ -55,7 +60,7 @@ end
 
 function SaveLoadState:LoadState (state)
   DebugPrintTable(state)
-  for name,Module in pairs(SaveLoadModules) do
+  for name, Module in pairs(SaveLoadModules) do
     DebugPrint(name .. ' loading state')
     DebugPrintTable(state[name])
     Module:LoadState(state[name])
@@ -68,21 +73,23 @@ function SaveLoadState:GetPlayerList ()
     dire = {}
   }
 
-  for playerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-    local hero = PlayerResource:GetSelectedHeroName(playerID)
-    local steamid = tostring(PlayerResource:GetSteamAccountID(playerID))
+  for playerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+    if PlayerResource:IsValidPlayerID(playerID) and PlayerResource:IsValidPlayer(playerID) then
+      local hero = PlayerResource:GetSelectedHeroName(playerID)
+      local steamid = tostring(PlayerResource:GetSteamAccountID(playerID))
 
-    if steamid ~= '0' then
-      if PlayerResource:GetTeam(playerID) == DOTA_TEAM_GOODGUYS then
-        table.insert(players.radiant, {
-          hero = hero,
-          steamid = tostring(steamid)
-        })
-      elseif PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
-        table.insert(players.dire, {
-          hero = hero,
-          steamid = tostring(steamid)
-        })
+      if steamid ~= '0' then
+        if PlayerResource:GetTeam(playerID) == DOTA_TEAM_GOODGUYS then
+          table.insert(players.radiant, {
+            hero = hero,
+            steamid = tostring(steamid)
+          })
+        elseif PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
+          table.insert(players.dire, {
+            hero = hero,
+            steamid = tostring(steamid)
+          })
+        end
       end
     end
   end

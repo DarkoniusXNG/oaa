@@ -7,58 +7,50 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5439"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "700 800 900 1000 1100 1200"
-    "AbilityCastPoint"                                    "0.45"
+    "AbilityCastPoint"                                    "0.35"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15"
+    "AbilityCooldown"                                     "17 16 15 14 13 12" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "90"
+    "AbilityManaCost"                                     "80 90 100 110 120 130"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "5 6 7 8 9 10"
+      "burn_damage"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "5 6 7 8 9 10"
+        "value"                                           "20 30 40 50 100 150"
+        "special_bonus_unique_ogre_magi_4"                "+12"
       }
-      "02"
+      "slow_movement_speed_pct"                           "-20 -23 -26 -29 -32 -35"
+      "projectile_speed"                                  "1000"
+      "multicast_delay"                                   "0.6"
+      "ignite_multicast_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "burn_damage"                                     "26 34 42 50 100 150"
-        "LinkedSpecialBonus"                              "special_bonus_unique_ogre_magi_4"
+        "value"                                           "1400"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "required_level"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow_movement_speed_pct"                         "-30 -32 -34 -36 -38 -40" //OAA
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "projectile_speed"                                "1000"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "multicast_delay"                                 "0.6"
+        "value"                                           "1"
+        "special_bonus_facet_ogre_magi_learning_curve"    "-1"
       }
     }
   }

@@ -7,42 +7,57 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5282"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
-    "MaxLevel"                                            "5"
-    "RequiredLevel"                                       "6"
-    "LevelsBetweenUpgrades"                               "6"
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.2"
-    "AbilityCooldown"                                     "45.0"
-    "AbilityManaCost"                                     "100"
+    "AbilityCooldown"                                     "33 32 31 30 29 28" //OAA
+    "AbilityManaCost"                                     "80 85 90 95 100 105" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "60 100 140 280 420"
-        "LinkedSpecialBonus"                              "special_bonus_unique_broodmother_1"
+        "value"                                           "40 50 60 70 80 90"
+        "CalculateSpellDamageTooltip"                     "0"
       }
-      "02"
+      "lifesteal_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "lifesteal_pct"                                   "60 100 140 280 420"
-        "LinkedSpecialBonus"                              "special_bonus_unique_broodmother_1"
+        "value"                                           "40 60 80 100 120 140"
       }
-      "03"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "14.0"
+        "value"                                           "8 10 12 14 14 14"
+        "special_bonus_shard"                             "+2"
+      }
+      "bat_bonus"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_broodmother_1"              "+0.25"
+      }
+      "shard_damage_per_tick"
+      {
+        "value"                                           "0"
+        "special_bonus_shard"                             "+4"
+      }
+      "shard_damage_tick_interval"
+      {
+        "value"                                           "1"
+        "RequiresShard"                                   "1"
+      }
+      "aura_radius"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_broodmother_feeding_frenzy"  "=800"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }

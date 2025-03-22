@@ -1,4 +1,4 @@
-require('libraries/functional')
+LinkLuaModifier("modifier_aura_origin_tracker", "modifiers/aura_baseclass.lua", LUA_MODIFIER_MOTION_NONE)
 
 -- Only one instance of the effect modifier is allowed
 AURA_TYPE_NON_STACKING = 0
@@ -24,7 +24,7 @@ function AuraProviderBaseClass:RemoveOnDeath()
 end
 
 if IsServer() then
-  function AuraProviderBaseClass:OnCreated(keys)
+  function AuraProviderBaseClass:OnCreated()
     self:StartIntervalThink(0.03)
   end
 

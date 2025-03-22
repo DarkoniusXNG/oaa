@@ -1,0 +1,97 @@
+"DOTAUnits"
+{
+  "npc_dota_boss_stopfightingyourself"
+  {
+    // General
+    //
+    "BaseClass"                                           "npc_dota_creature"
+    "Model"                                               "models/items/terrorblade/endless_purgatory_demon/endless_purgatory_demon.vmdl"
+    "vscripts"                                            "units/stopfightingyourself.lua"
+    "SoundSet"                                            "Hero_Terrorblade_Morphed"
+    "ModelScale"                                          "1"
+    "Level"                                               "45"
+    "IsAncient"                                           "1"
+    "ConsideredHero"                                      "1"
+    "UseNeutralCreepBehavior"                             "0"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"                                            "boss_stopfightingyourself_dupe_items"
+    "Ability2"                                            "boss_stopfightingyourself_dupe_heroes"
+    "Ability3"                                            "boss_basic_properties_oaa"
+    "Ability4"                                            "boss_regen"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"                                       "37"                // can gain armor from items
+    "MagicalResistance"                                   "-25"               // can gain magic resist from items
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"                                  "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"                                     "1500"              // can gain damage from items
+    "AttackDamageMax"                                     "1500"              // can gain damage from items
+    "AttackRate"                                          "0.9"
+    "AttackAnimationPoint"                                "0.0"
+    "AttackAcquisitionRange"                              "650"
+    "AttackRange"                                         "600"
+    "ProjectileModel"                                     "particles/units/heroes/hero_enigma/enigma_base_attack_eidolon.vpcf"
+    "ProjectileSpeed"                                     "800"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                                            "4000"
+    "BountyGoldMin"                                       "0"
+    "BountyGoldMax"                                       "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"                                      "DOTA_HULL_SIZE_HERO"
+    "RingRadius"                                          "110"
+    "HealthBarOffset"                                     "400"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"                                       "300"               // can gain movement speed from items
+    "MovementTurnRate"                                    "1.0"
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"                                        "15000"             // can gain hp from items
+    "StatusHealthRegen"                                   "0"                 // can gain hp regen from items
+    "StatusMana"                                          "3750"              // can gain mana from items (base like a tier 2 boss)
+    "StatusManaRegen"                                     "10"                // can gain mana regen from items
+
+    // Creature data
+    "Creature"
+    {
+      "DisableResistance"                                 "25.0"              // can gain status resistance from items
+    }
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                                            "DOTA_TEAM_NEUTRALS"
+    "UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"                                  "1400"              // can gain day vision from items
+    "VisionNighttimeRange"                                "1400"              // can gain night vision from items
+
+    // Inventory
+    //----------------------------------------------------------------
+    "HasInventory"                                        "1"
+
+    // Minimap
+    //----------------------------------------------------------------
+    "MinimapIcon"                                         "minimap_roshancamp"
+    "MinimapIconSize"                                     "350"
+
+    "precache"
+    {
+      "model"                                             "models/items/terrorblade/endless_purgatory_demon/endless_purgatory_demon.vmdl"
+      "particle"                                          "particles/units/heroes/hero_enigma/enigma_base_attack_eidolon.vpcf"
+    }
+  }
+}

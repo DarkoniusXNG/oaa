@@ -7,11 +7,9 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5098"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -23,7 +21,6 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "3.5"
     "AbilityDuration"                                     "12.0"
 
     // Cost
@@ -32,29 +29,56 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "static_remnant_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "static_remnant_radius"                           "235"
+        "value"                                           "235"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "static_remnant_damage_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "static_remnant_damage_radius"                    "260"
-        "CalculateSpellDamageTooltip"                     "0"
+        "value"                                           "300"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "static_remnant_delay"                              "0.75"
+      "AbilityCooldown"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "static_remnant_delay"                            "1.0"
+        "value"                                           "3.5"
+        "special_bonus_unique_storm_spirit_8"             "-1.25"
       }
-      "04"
+      "static_remnant_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "static_remnant_damage"                           "120 175 230 285 570 1140" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_storm_spirit_5"
+        "value"                                           "100 160 220 280 560 1120"
+        "special_bonus_unique_storm_spirit_5"             "+80"
+      }
+      "is_point_targeted"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_storm_spirit_static_slide"   "+1"
+      }
+      "AbilityCastRange"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_storm_spirit_static_slide"   "800"
+      }
+      "static_remnant_travel_speed"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_storm_spirit_static_slide"   "300"
+      }
+      "static_remnant_vision_radius_day"
+      {
+        "value"                                           "100"
+        "special_bonus_facet_storm_spirit_static_slide"   "=100"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "static_remnant_vision_radius_night"
+      {
+        "value"                                           "100"
+        "special_bonus_facet_storm_spirit_static_slide"   "=100"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }

@@ -1,6 +1,5 @@
 "DOTAAbilities"
 {
-
   //=================================================================================================================
   // Kunkka: Ghostship
   //=================================================================================================================
@@ -8,26 +7,20 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5035"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "0"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "1000"
     "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "60 55 50 45 40" //OAA
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -39,48 +32,69 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "tooltip_delay"                                     "3.1"
+      "ghostship_distance"                                "2000"
+      "ghostship_width"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "tooltip_delay"                                   "3.1"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "movespeed_bonus"                                   "15" // If changing this, update value in x marks for variant 1
+      "buff_duration"                                     "10"
+      "stun_duration"                                     "1.2"
+      "ghostship_speed"                                   "650"
+      "ghostship_absorb" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "ghostship_distance"                              "2000"
+        "value"                                           "30"  // If changing this, update value in x marks for variant 1
+        "special_bonus_unique_kunkka_rum"                 "+10"
       }
-      "03"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "ghostship_width"                                 "425"
+        "value"                                           "70 65 60 55 50"
       }
-      "04"
+      "fleet_interval"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "movespeed_bonus"                                 "10"
+        "special_bonus_scepter"                           "2.5"
       }
-      "05"
+      "fleet_count"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "buff_duration"                                   "10"
+        "special_bonus_scepter"                           "2"
       }
-      "06"
+      "fire_cannons"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "1.4"
+        "special_bonus_scepter"                           "1"
       }
-      "07"
+      "cannon_ball_damage_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "ghostship_speed"                                 "650"
+        "special_bonus_scepter"                           "40"
       }
-      "08"
+      "cannon_ball_distance"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "ghostship_absorb"                                "40"
+        "special_bonus_scepter"                           "1200"
       }
+      "cannon_ball_speed"
+      {
+        "special_bonus_scepter"                           "1400"
+      }
+      "cannon_count"
+      {
+        "special_bonus_scepter"                           "4"
+      }
+      "cannon_ball_radius"
+      {
+        "special_bonus_scepter"                           "100"
+      }
+      "num_cannon_volleys"                                "3"
+      "cannon_fire_interval"
+      {
+        "special_bonus_scepter"                           "0.78"
+      }
+      "base_cannon_rotation"                              "20"
+      "rotation_per_cannon"                               "12"
+      "initial_cannon_offset"                             "-150"
+      "distance_between_cannons"                          "75"
     }
   }
 }

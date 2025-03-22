@@ -7,25 +7,19 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5437"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-
-    "AbilityCastPoint"                                    "0.5"
-
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "100"
+    "AbilityCastPoint"                                    "0.5"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -33,30 +27,32 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "3 4 5 5.5 6"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3.0 4.0 5.0 5.5 6.0"
+        "value"                                           "800"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "eyes_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "800"
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_5"
+        "value"                                           "800"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "eyes_radius"                                     "800"
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_5"
+        "value"                                           "85 135 185 335 485"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "04"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "75 100 125 200 325" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_treant_11"
+        "value"                                           "100"
+        "special_bonus_unique_treant_14"                  "-40"
+      }
+      "undispellable"
+      {
+        "value"                                           "0"
       }
     }
   }

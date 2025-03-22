@@ -1,0 +1,41 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Magma Boss: Magma Blood - Passive, decreases in size when losing hp, sends pool of Lava to the source of damage
+  //=================================================================================================================
+  "magma_boss_magma_blood"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/magma_boss/magma_boss_magma_blood.lua"
+    "AbilityTextureName"                                  "snapfire_mortimer_kisses"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES" // slow is dispellable, passive isnt
+
+    "MaxLevel"                                            "1"
+
+    "AbilityCooldown"                                     "3.75"
+
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "proc_delay"                                        "1.25"
+      "projectile_speed"                                  "700"
+      "impact_radius"                                     "275"
+      "impact_damage"                                     "1700" // magical
+      "blob_duration"                                     "3.0" // blob is just a visual effect
+      "slow_duration"                                     "2.5"
+      "move_speed_slow"                                   "-40"
+      "damage_threshold"                                  "50"
+      "max_scale"                                         "110" // Boss reduces in size as he loses hp
+    }
+  }
+}

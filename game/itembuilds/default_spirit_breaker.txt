@@ -1,48 +1,49 @@
 "itembuilds"
 {
-    "author"        "Valve"
-    "hero"          "npc_dota_hero_spirit_breaker"
-    "Title"         "Recommended items for Spirit Breaker"
+  "author"        "OAA 7.37x"
+  "hero"          "npc_dota_hero_spirit_breaker"
+  "Title"         "Recommended items for Spirit Breaker"
 
-    "Items"
+  "Items"
+  {
+    "#DOTA_Item_Build_Starting_Items"
     {
-        "#DOTA_Item_Build_Starting_Items"
-        {
-            "item"      "item_boots"
-            "item"      "item_orb_of_vemon"
-        }
-
-        "#DOTA_Item_Build_Early_Game"
-        {
-            "item"      "item_tranquil_boots"
-            "item"      "item_wind_lace"
-        }
-
-        "#DOTA_Item_Build_Mid_Items"
-        {
-            "item"      "item_ancient_janggo"
-            "item"      "item_yasha"
-        }
-
-        "#DOTA_Item_Build_Late_Items"
-        {
-            "item"      "item_ultimate_scepter"
-            "item"      "item_yasha_and_kaya"
-            "item"      "item_lucience"
-            "item"      "item_sonic"
-            "item"      "item_force_boots_1"
-        }
-
-        "#DOTA_Item_Build_Luxury"
-        {
-            "item"      "item_heart"
-            "item"      "item_assault"
-            "item"      "item_far_sight"
-            "item"      "item_solar_crest"
-            "item"      "item_spirit_vessel"
-            "item"      "item_heavens_halberd"
-            "item"      "item_greater_phase_boots"
-            "item"      "item_bloodstone_1"
-        }
+      "item"      "item_boots"
+      "item"      "item_orb_of_venom"
     }
+
+    "#DOTA_Item_Build_For_Farming"
+    {
+      "item"      "item_hand_of_midas_1"
+      "item"      "item_greater_phase_boots"
+    }
+
+    "#DOTA_Item_Build_Core_Items"
+    {
+      "item"      "item_ancient_janggo"
+      "item"      "item_octarine_core"
+      "item"      "item_yasha_and_kaya"
+      "item"      "item_silver_edge"
+      "item"      "item_lucience"
+      "item"      "item_sonic"
+    }
+
+    "#DOTA_Item_Build_Shard"
+    {
+      "item"      "item_aghanims_shard"
+    }
+
+    "#DOTA_Item_Build_Luxury"
+    {
+      "item"      "item_angels_demise"
+      "item"      "item_heart_oaa_1"
+      "item"      "item_heavens_halberd"
+      "item"      "item_solar_crest"
+      "item"      "item_sphere"
+      "item"      "item_wind_waker"
+      "item"      "item_ultimate_scepter"
+      "item"      "item_boots_of_bearing"
+      "item"      "item_greater_travel_boots"
+    }
+  }
 }

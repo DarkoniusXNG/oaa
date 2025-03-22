@@ -7,38 +7,45 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5174"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_OVERSHOOT"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "0"
+    "AbilityCastRange"                                    "1075 1150 1225 1300 1375 1450"
     "AbilityCastPoint"                                    "0.33"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15.0 12.0 9.0 6.0 5.0 4.0"
+    "AbilityCooldown"                                     "15 13 11 9 7 5" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "60"
+    "AbilityManaCost"                                     "65"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "min_blink_range"                                   "200"
+      "shard_damage" //OAA, it's applied twice if blinked within shard_aoe
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "blink_range"                                     "1300"
+        "RequiresShard"                                   "1"
+        "value"                                           "50 75 100 125 250 500"
       }
-
-      "02"
+      "shard_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "min_blink_range"                                 "200"
+        "RequiresShard"                                   "1"
+        "value"                                           "1.75"
+      }
+      "shard_aoe"
+      {
+        "RequiresShard"                                   "1"
+        "value"                                           "300"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }

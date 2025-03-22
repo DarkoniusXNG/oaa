@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Carapace Boss: Crystals - Caster takes bonus damage if attacked from the sides which have crystals. Crystals have hp and explode dealing damage when destroyed.
+  //=================================================================================================================
+  "boss_carapace_crystals"
+  {
+    "BaseClass"                                           "ability_lua"
+    "AbilityTextureName"                                  "bloodseeker_bloodrage"
+    "ScriptFile"                                          "abilities/boss/carapace/boss_carapace_crystals.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
+    "MaxLevel"                                            "1"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "damage_amplification"                              "350"
+      "threshold_min"                                     "70" // min hp of the crystal
+      "threshold_max"                                     "200" // max hp of the crystal
+      "range"                                             "700"
+      "damage"                                            "300" // damage done to enemies that destroy the crystal
+      "crystal_distance"                                  "200"
+      "initial"                                           "5" // starting number of crystals
+      "additional"                                        "4"
+      "bonus_armor"                                       "25"
+      "bonus_magic_resistance"                            "25"
+    }
+  }
+}

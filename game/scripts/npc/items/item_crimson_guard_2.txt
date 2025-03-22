@@ -7,13 +7,13 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3198"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
-    "Model"                                               "models/props_gameplay/recipe.mdl"
+    "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "1500"
     "ItemShopTags"                                        ""
 
@@ -24,7 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_crimson_guard;item_upgrade_core"
-      "02"                                                "item_heart;item_upgrade_core"
     }
   }
 
@@ -35,94 +34,52 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "3199"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_crimson_guard"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "AbilityTextureName"                                  "custom/crimson_guard_2"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "40.0"
+    "AbilityCooldown"                                     "20"
     "AbilitySharedCooldown"                               "guard"
     "AbilityCastRange"                                    "1200"
+    "AbilityManaCost"                                     "75"
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "2"
+    "UpgradesItems"                                       "item_crimson_guard_2;item_crimson_guard_3;item_crimson_guard_4;item_crimson_guard_5"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "5300"
+    "ItemCost"                                            "5226"
     "ItemShopTags"                                        "armor;boost_armor;regen_health;block;health_pool"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "crimson guard 2"
     "ItemAlertable"                                       "1"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    "UpgradesItems"                                       "item_crimson_guard_2;item_crimson_guard_3;item_crimson_guard_4;item_crimson_guard_5"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_health"                                      "350 450 600 800 1050"
+      "bonus_health_regen"                                "12 15 18 21 24"
+      "bonus_armor"                                       "7 8 10 13 17"
+      "block_damage_melee"                                "75 125 175 225 275"
+      "block_damage_ranged"                               "50 85 120 155 190"
+      "block_chance"                                      "60"
+      "duration"                                          "7"
+      "bonus_aoe_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health"                                    "400 1000 1500 2000 2500"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_health_regen"                              "12 20 30 40 50"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "6 7 9 12 16"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "block_damage_melee"                              "70 100 150 200 300"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "block_damage_ranged"                             "35 50 75 100 150"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "block_chance"                                    "50"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "12"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_aoe_radius"                                "1200"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "block_damage_melee_active"                       "60 90 140 180 275"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "block_damage_ranged_active"                      "60 90 140 180 275"
-      }
-      "11"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "block_chance_active"                             "100"
-      }
-      "12"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tooltip_reapply_time"                            "40"
-      }
+      "block_damage_active"                               "70 120 170 220 270"
+      "block_chance_active"                               "100"
+      "tooltip_reapply_time"                              "20"
+      "max_hp_pct"                                        "2.2"
     }
   }
 }

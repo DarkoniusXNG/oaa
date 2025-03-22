@@ -3,113 +3,92 @@
   //=================================================================================================================
   // Recipe: Dagger of Moriah
   //=================================================================================================================
-  "item_recipe_dagger_of_moriah"
+  "item_recipe_dagger_of_moriah_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "9434"       // unique ID
     "BaseClass"                                           "item_datadriven"
     "Model"                                               "models/props_gameplay/recipe.vmdl"
     "AbilityTextureName"                                  "custom/recipe/recipe_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
+    "ItemCorePointCost"                                   "0"
     "ItemCost"                                            "8000"
     "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
     "ItemRecipe"                                          "1"
-    "ItemResult"                                          "item_dagger_of_moriah"
+    "ItemResult"                                          "item_dagger_of_moriah_1"
     "ItemRequirements"
     {
-      "01"                                                "item_veil_of_discord_3;item_upgrade_core_3"
+      "01"                                                "item_shivas_guard_3;item_upgrade_core_3"
     }
   }
 
   //=================================================================================================================
   // Dagger of Moriah
   //=================================================================================================================
-  "item_dagger_of_moriah"
+  "item_dagger_of_moriah_1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "9444"       // unique ID
     "BaseClass"                                           "item_lua"
-    "ScriptFile"                                          "items/transformation/dagger_of_moriah.lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-    "FightRecapLevel"                                     "2"
+    "ScriptFile"                                          "items/dagger_of_moriah.lua"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/dagger_of_moriah_1"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.0"
     "AbilityManaCost"                                     "75"
-    "AbilityCooldown"                                     "16"
+    "AbilityCooldown"                                     "23"
     "AbilitySharedCooldown"                               "dagger_of_moriah"
 
     "MaxUpgradeLevel"                                     "2"
     "ItemBaseLevel"                                       "1"
-    "UpgradesItems"                                       "item_dagger_of_moriah_2"
+    "UpgradesItems"                                       "item_dagger_of_moriah_1;item_dagger_of_moriah_2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "14525"
-    "ItemShopTags"                                        "damage;unique;hard_to_tag"
+    "ItemCost"                                            "16778"
+    "ItemShopTags"                                        "armor;agi;str;int;regen_health;hard_to_tag"
     "ItemQuality"                                         "artifact"
     "ItemAliases"                                         "moriah;dagger;dagger of moriah"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "precache"
+    "AbilityValues"
     {
-      "particle"                                        "particles/items/dagger_of_moriah/dagger_of_moriah_ambient_smoke.vpcf"
-      "particle"                                        "particles/items/dagger_of_moriah/dagger_of_moriah_ambient_smoke_flash.vpcf"
+      "bonus_all_stats"                                   "20 25"
+      "bonus_armor"                                       "16 20"
+      "bonus_health_regen"                                "14 17"
+      "bonus_mana_regen"                                  "0"
+      "spell_amp_per_intellect"                           "0.05"
+      // Active stuff
+      "radius"
+      {
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "magic_dmg_amp"                                     "28"
+      "heal_reduction_duration"                           "3"
+      "heal_reduction_percent"                            "45 50"
+      "duration"                                          "8.0"
+      //"sangromancy_spell_amp"                             "75 100"
+      //"sangromancy_self_damage"                           "100 75"
+      //"sangromancy_bonus_damage_from_others"              "50 25"
     }
 
-    "AbilitySpecial"
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "sangromancy_spell_amp"                           "75 100"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "sangromancy_self_damage"                         "100 75"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "sangromancy_bonus_damage_from_others"            "50 25"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_health_regen"                              "25 40"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_all_stats"                                 "40 60"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "3.0 4.0"
-      }
-	  "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "spell_amp_per_intellect"                         "0.08"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0"
-      }
+      "particle"                                          "particles/items/dagger_of_moriah/dagger_of_moriah_ambient_smoke.vpcf"
+      "particle"                                          "particles/items/dagger_of_moriah/dagger_of_moriah_frostbite.vpcf"
     }
   }
 }

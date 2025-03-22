@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5383"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "MaxLevel"                                            "1"
@@ -18,34 +17,51 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "950"
     "AbilityCastPoint"                                    "0.05"
-    "AbilityCooldown"                                     "30"
+    "AbilityCooldown"                                     "25" //OAA
     "AbilityManaCost"                                     "125"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "delay"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "delay"                                           "2.9"
+        "value"                                           "2.9"
         "levelkey"                                        "wexlevel"
       }
-      "02"
+      "area_of_effect"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "area_of_effect"                                  "675"
+        "value"                                           "675"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "mana_burned" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "mana_burned"                                     "100 175 250 325 400 475 550 625 700 775 850 925 1000 1075 1150"
+        "value"                                           "100 175 250 325 400 475 550 625 775 925 1075 1225 1375 1525 1675 1825 1975"
         "levelkey"                                        "wexlevel"
       }
-      "04"
+      "damage_per_mana_pct" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_mana_pct"                             "60"
+        "value"                                           "65"
+        "special_bonus_facet_invoker_wex_focus"
+        {
+          "value"                                         "0"
+          "special_bonus_shard"                           "+50%"
+        }
+      }
+      "drag_speed"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_invoker_wex_focus"
+        {
+          "value"                                         "0"
+          "special_bonus_shard"                           "+150"
+        }
+      }
+      "self_mana_restore_pct"                             "25"
+      "damage_barriers"
+      {
+        "value"                                           "0"
+        //"special_bonus_facet_invoker_wex_focus"           "1"
       }
     }
   }

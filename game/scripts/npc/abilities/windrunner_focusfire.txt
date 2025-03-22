@@ -4,7 +4,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5133"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -12,44 +11,76 @@
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "MaxLevel"                                            "5"
 
-    "HasScepterUpgrade"                                   "0"
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "50 40 30 30 30" //OAA
-    "AbilityDuration"                                     "20.0"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "75 100 125 175 275"
+    "AbilityManaCost"                                     "75 100 125 150 175"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "475"
+        "value"                                           "40 35 30 25 20"
+        "special_bonus_facet_windrunner_whirlwind"        "=45 =40 =35 =30 =25"
       }
-      "02"
+      "AbilityDuration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "focusfire_damage_reduction"                      "-50 -40 -30 -20 -10"
-        "LinkedSpecialBonus"                              "special_bonus_unique_windranger_8"
+        "value"                                           "20.0"
+        "special_bonus_facet_windrunner_whirlwind"        "=8.0"
       }
-      "03"
+      "bonus_attack_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "focusfire_fire_on_the_move"                      "1"
+        "value"                                           "350 425 500 575 650"
+        "special_bonus_facet_windrunner_whirlwind"        "=0"
       }
+      "attacks_per_second"
+      {
+        "special_bonus_facet_windrunner_whirlwind"        "7 9 11 12 13"
+      }
+      "focusfire_damage_reduction"
+      {
+        "value"                                           "-30"
+        "special_bonus_facet_windrunner_whirlwind"        "-5"
+        "special_bonus_unique_windranger_8"               "+10"
+      }
+      "focusfire_fire_on_the_move"                        "1"
+      "process_procs"
+      {
+        "value"                                           "1"
+      }
+      "is_unfocused"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_windrunner_whirlwind"        "=1"
+      }
+      "duration_increase_per_kill"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_windranger_2"               "+2"
+        "RequiresFacet"                                   "windrunner_whirlwind"
+      }
+      "cooldown_reduction_per_kill"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_windranger_2"               "+18"
+      }
+      "bonus_range"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_windrunner_whirlwind"        "+125"
+      }
+      "unfocused_cancel_initial_cooldown"                 "0.5"
     }
   }
 }

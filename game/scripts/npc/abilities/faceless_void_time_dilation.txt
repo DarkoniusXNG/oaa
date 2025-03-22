@@ -7,8 +7,9 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5691"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
@@ -16,33 +17,32 @@
     "LevelsBetweenUpgrades"                               "2"
 
     "AbilityCastPoint"                                    "0.1"
-    "AbilityCooldown"                                     "40 34 28 22 22 22"
-    "AbilityManaCost"                                     "75"
+    "AbilityCooldown"                                     "19 18 17 16 15 14" //OAA
+    "AbilityManaCost"                                     "90"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "775"
+        "value"                                           "775"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"                                          "8 9 10 11 12 13"
+      "slow"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "8 10 12 14 16 18"
+        "value"                                           "7 8 9 10 11 12"
+        "special_bonus_unique_faceless_void_8"            "+12"
       }
-      "03"
+      "cooldown_percentage"                               "35 40 45 50 55 60" //OAA
+      "base_damage"                                       "0"
+      "damage_per_stack" //OAA, special_bonus_unique_faceless_void_6 is not used
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "slow"                                            "10"
+        "value"                                           "14 16 18 20 40 60"
+        "special_bonus_unique_faceless_void_6"            "+7"
       }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "cooldown_percentage"                             "75"
-      }
+      "heal_prevent_percent"                              "-25 -30 -35 -40 -45 -50" //OAA, unique to OAA
     }
   }
 }

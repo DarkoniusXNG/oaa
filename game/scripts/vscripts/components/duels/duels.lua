@@ -1,9 +1,6 @@
 local HeroState = require("components/duels/savestate")
 local SafeTeleportAll = require("components/duels/teleport").SafeTeleportAll
 
-LinkLuaModifier("modifier_out_of_duel", "modifiers/modifier_out_of_duel.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_duel_invulnerability", "modifiers/modifier_duel_invulnerability", LUA_MODIFIER_MOTION_NONE)
-
 DUEL_IS_STARTING = 21
 
 Duels = Duels or {}
@@ -13,6 +10,9 @@ local zoneNames = {
   "duel_3",
   "duel_4",
   "duel_5",
+  "duel_6",
+  "duel_7",
+  "duel_8",
 }
 
 local DuelPreparingEvent = Event()
@@ -24,12 +24,12 @@ Duels.onPreparing = DuelPreparingEvent.listen
 Duels.onEnd = DuelEndEvent.listen
 
 function Duels:Init ()
-  DebugPrint('Init duels')
+  self.moduleName = "Duels"
   self.currentDuel = nil
   self.allowExperienceGain = 0 -- 0 is no; 1 is yes; 2 is first duel (special no)
   iter(zoneNames):foreach(partial(self.RegisterZone, self))
 
-  GameEvents:OnHeroDied(function (keys)
+  GameEvents:OnHeroKilled(function (keys)
     Duels:CheckDuelStatus(keys)
   end)
 
@@ -45,7 +45,7 @@ function Duels:Init ()
     if playerID then
       local hero = PlayerResource:GetSelectedHeroEntity(playerID)
       if hero and not Duels.currentDuel then
-        hero:SetRespawnsDisabled(false)
+        --hero:SetRespawnsDisabled(false)
         if hero:IsAlive() then
           hero:RemoveModifierByName("modifier_out_of_duel")
         else
@@ -70,6 +70,9 @@ function Duels:Init ()
       hero:RemoveModifierByName("modifier_out_of_duel")
 
       Duels:UnCountPlayerDeath(player)
+    else
+      print("Duels module - player_reconnected event has no PlayerID key. Gj Valve.")
+      return
     end
   end)
 
@@ -99,6 +102,9 @@ function Duels:Init ()
       end
 
       Duels:CountPlayerDeath(player)
+    else
+      print("Duels module - player_disconnect event has no PlayerID key. Gj Valve.")
+      return
     end
   end)
 
@@ -108,7 +114,7 @@ function Duels:Init ()
     Duels:StartDuel({
       players = 0,
       firstDuel = true,
-      timeout = FIRST_DUEL_TIMEOUT
+      timeout = Duels:GetDuelTimeout(1)
     })
   end)
 
@@ -119,15 +125,18 @@ end
 
 function Duels:RegisterZone(zoneName)
   self.zones = self.zones or {}
-  table.insert(
-    self.zones,
-    ZoneControl:CreateZone(zoneName, {
-      mode = ZONE_CONTROL_INCLUSIVE,
-      margin = 500,
-      padding = 200,
-      players = {}
-    })
-  )
+  local zoneExists = Entities:FindAllByName(zoneName)
+  if zoneExists and #zoneExists > 0 then
+    table.insert(
+      self.zones,
+      ZoneControl:CreateZone(zoneName, {
+        mode = ZONE_CONTROL_INCLUSIVE,
+        margin = 500,
+        padding = 200,
+        players = {}
+      })
+    )
+  end
 end
 
 function Duels:CountPlayerDeath (player)
@@ -144,7 +153,8 @@ function Duels:CountPlayerDeath (player)
       winningTeamId = DOTA_TEAM_GOODGUYS
     end
 
-    PointsManager:AddPoints(winningTeamId, 1)
+    -- Gaining a point for winning a duel -> not intuitive
+    --PointsManager:AddPoints(winningTeamId, 1)
 
     self:AllPlayers(self.currentDuel, function (otherPlayer)
       if player.duelNumber ~= otherPlayer.duelNumber then
@@ -179,15 +189,26 @@ function Duels:IsActive ()
   return true
 end
 
-function Duels:CheckDuelStatus (hero)
+function Duels:CheckDuelStatus (event)
   if not self:IsActive() then
     return
   end
+
+  local hero = event.killed
+
+  if hero:IsTempestDouble() or hero:IsSpiritBearOAA() then
+    return
+  end
+
+  if hero:IsClone() then
+    hero = hero:GetCloneSource()
+  end
+
   if hero:IsReincarnating() then
-    hero:SetRespawnsDisabled(false)
-    Timers:CreateTimer(1, function ()
-      hero:SetRespawnsDisabled(true)
-    end )
+    --hero:SetRespawnsDisabled(false)
+    --Timers:CreateTimer(1, function ()
+      --hero:SetRespawnsDisabled(true)
+    --end)
     return
   end
 
@@ -209,6 +230,7 @@ function Duels:CheckDuelStatus (hero)
   if player.killed then
     -- this player is already dead and shouldn't be counted again
     -- this shouldn't happen, but is nice to have here for future use cases of this method
+    -- this can happen for Meepo too
     DebugPrint('Player died twice in duel?')
     DebugPrintTable(self.currentDuel)
     DebugPrintTable(player)
@@ -231,7 +253,7 @@ function Duels:StartDuel(options)
   options = options or {}
   if not options.firstDuel then
     Music:SetMusic(12)
-    self.allowExperienceGain = 0
+    self.allowExperienceGain = 1
   else
     self.allowExperienceGain = 2
   end
@@ -239,21 +261,26 @@ function Duels:StartDuel(options)
   self.currentDuel = DUEL_IS_STARTING
   DuelPreparingEvent.broadcast(true)
 
-  Notifications:TopToAll({text="#duel_imminent_warning", duration=math.min(DUEL_START_WARN_TIME, 5.0), replacement_map={seconds_to_duel = DUEL_START_WARN_TIME}})
-  for index = 0,(DUEL_START_COUNTDOWN - 1) do
-    Timers:CreateTimer(DUEL_START_WARN_TIME - DUEL_START_COUNTDOWN + index, function ()
-      if Duels.wasCanceled then
-        return
-      end
-      Notifications:TopToAll({text=(DUEL_START_COUNTDOWN - index), duration=1.0})
-    end)
-  end
+  local warning = DUEL_START_WARN_TIME - DUEL_START_COUNTDOWN
+  Notifications:TopToAll({text="#duel_imminent_warning", duration=warning, style={color="red", ["font-size"]="50px"}, replacement_map={seconds_to_duel = DUEL_START_WARN_TIME}})
+  -- Use only 1 timer
+  local index = 0
+  Timers:CreateTimer(warning, function ()
+    if Duels.wasCanceled then
+      return
+    end
+    if index < DUEL_START_COUNTDOWN then
+      Notifications:TopToAll({text=tostring(DUEL_START_COUNTDOWN - index), duration=1.0})
+      index = index + 1
+      return 1
+    end
+  end)
 
   Timers:CreateTimer(DUEL_START_WARN_TIME, function ()
     if Duels.wasCanceled then
       return
     end
-    Notifications:TopToAll({text="#duel_start", duration=3.0, style={color="red", ["font-size"]="110px"}})
+    Notifications:TopToAll({text="#duel_start", duration=3.0, style={color="red", ["font-size"]="100px"}})
     for _, zone in ipairs(Duels.zones) do
       ZoneCleaner:CleanZone(zone)
     end
@@ -264,7 +291,7 @@ end
 function Duels:CancelDuel()
   if self.currentDuel == DUEL_IS_STARTING and self.wasCanceled == false then
     self.wasCanceled = true
-    Notifications:TopToAll({text="DUEL CANCELED", duration=3.0, style={color="red", ["font-size"]="110px"}})
+    Notifications:TopToAll({text="DUEL CANCELED", duration=3.0, style={color="red", ["font-size"]="100px"}})
 
     self:CleanUpDuel()
   end
@@ -284,25 +311,25 @@ function Duels:SplitDuelPlayers(options)
     if PlayerResource:IsValidPlayerID(playerId) then
       local player = PlayerResource:GetPlayer(playerId)
       if player ~= nil and not player:IsNull() then
-        if player:GetAssignedHero() then
+        local hero = player:GetAssignedHero()
+        if hero then
           if player:GetTeam() == DOTA_TEAM_BADGUYS then
-            badPlayers[badPlayerIndex] = HeroState.SaveState(player:GetAssignedHero())
+            badPlayers[badPlayerIndex] = HeroState.SaveState(hero)
             badPlayers[badPlayerIndex].id = playerId
             -- used to generate keynames like badEnd1
             -- not used in dota apis
             badPlayers[badPlayerIndex].team = 'bad'
             badPlayerIndex = badPlayerIndex + 1
             validBadPlayerIndex = validBadPlayerIndex + 1
-
           elseif player:GetTeam() == DOTA_TEAM_GOODGUYS then
-            goodPlayers[goodPlayerIndex] = HeroState.SaveState(player:GetAssignedHero())
+            goodPlayers[goodPlayerIndex] = HeroState.SaveState(hero)
             goodPlayers[goodPlayerIndex].id = playerId
             goodPlayers[goodPlayerIndex].team = 'good'
             goodPlayerIndex = goodPlayerIndex + 1
             validGoodPlayerIndex = validGoodPlayerIndex + 1
           end
 
-          HeroState.ResetState(player:GetAssignedHero())
+          HeroState.ResetState(hero)
         end
       else
         local hero = PlayerResource:GetSelectedHeroEntity(playerId)
@@ -354,6 +381,10 @@ function Duels:SplitDuelPlayers(options)
   Music:SetMusic(13)
 
   local playerSplitOffset = RandomInt(0, maxPlayers)
+  -- Uncomment this to disable solo duels
+  --if playerSplitOffset == 1 then
+    --playerSplitOffset = 2
+  --end
   if options.players then
     playerSplitOffset = math.min(options.players, maxPlayers)
   end
@@ -391,11 +422,14 @@ function Duels:ActuallyStartDuel(options)
   DebugPrint("Duel Player Split")
   DebugPrint(split.PlayerSplitOffset)
 
-  local bigArenaIndex = RandomInt(3, 5)
+  if #self.zones < 3 then
+    return
+  end
+
+  local bigArenaIndex = RandomInt(3, #self.zones)
   local smallArenaIndex = RandomInt(1, 2)
 
   local gamemode = GameRules:GetGameModeEntity()
-  gamemode:SetTPScrollSlotItemOverride("item_dust")
   gamemode:SetCustomBackpackSwapCooldown(1.0)
 
   self:SpawnPlayersOnArenas(split, smallArenaIndex, bigArenaIndex)
@@ -415,10 +449,10 @@ function Duels:SpawnPlayerOnArena(playerSplit, arenaIndex, duelNumber)
     guy.duelNumber = duelNumber
     Duels.zones[arenaIndex].addPlayer(guy.id)
 
-    SafeTeleportAll(hero, spawn, 250)
+    SafeTeleportAll(hero, spawn, 350, true)
     MoveCameraToPlayer(hero)
     hero:Stop()
-    hero:SetRespawnsDisabled(true)
+    --hero:SetRespawnsDisabled(true) -- not working properly thanks to Aghs Lab 2
   end
 
   if goodGuy then
@@ -431,26 +465,22 @@ function Duels:SpawnPlayerOnArena(playerSplit, arenaIndex, duelNumber)
 end
 
 function Duels:PreparePlayersToStartDuel(options, playerSplit)
-  for _,player in ipairs(playerSplit.BadPlayers) do
+  for _, player in ipairs(playerSplit.BadPlayers) do
     local hero = PlayerResource:GetSelectedHeroEntity(player.id)
     if player.assigned == nil then
       hero:Stop()
       hero:AddNewModifier(nil, nil, "modifier_out_of_duel", nil)
     else
       hero:AddNewModifier(nil, nil, "modifier_duel_invulnerability", {duration = DUEL_START_PROTECTION_TIME})
-      -- Replace tp scroll with dust
-      Duels:SwapItems("item_dust", hero, player)
     end
   end
-  for _,player in ipairs(playerSplit.GoodPlayers) do
+  for _, player in ipairs(playerSplit.GoodPlayers) do
     local hero = PlayerResource:GetSelectedHeroEntity(player.id)
     if player.assigned == nil then
       hero:Stop()
       hero:AddNewModifier(nil, nil, "modifier_out_of_duel", nil)
     else
       hero:AddNewModifier(nil, nil, "modifier_duel_invulnerability", {duration = DUEL_START_PROTECTION_TIME})
-      -- Replace tp scroll with dust
-      Duels:SwapItems("item_dust", hero, player)
     end
   end
 
@@ -467,13 +497,30 @@ function Duels:PreparePlayersToStartDuel(options, playerSplit)
     goodPlayerIndex = playerSplit.GoodPlayerIndex
   }
 
+  Timers:CreateTimer(2, function()
+    GridNav:RegrowAllTrees()
+    CreepItemDrop:ClearBottles()
+    if options and options.firstDuel and playerSplit then
+      for _, player in ipairs(playerSplit.BadPlayers) do
+        local hero = PlayerResource:GetSelectedHeroEntity(player.id)
+        hero:AddItemByName("item_madstone_bundle")
+        hero:AddItemByName("item_madstone_bundle")
+      end
+      for _, player in ipairs(playerSplit.GoodPlayers) do
+        local hero = PlayerResource:GetSelectedHeroEntity(player.id)
+        hero:AddItemByName("item_madstone_bundle")
+        hero:AddItemByName("item_madstone_bundle")
+      end
+    end
+  end)
+
   DebugPrint("Duel Info")
   DebugPrintTable(self.currentDuel)
 
   DuelStartEvent.broadcast(self.currentDuel)
 
   if options.timeout == nil then
-    options.timeout = DUEL_TIMEOUT
+    options.timeout = Duels:GetDuelTimeout()
   end
 
   if options.timeout ~= 0 then
@@ -525,14 +572,21 @@ function Duels:TimeoutDuel ()
   DebugPrint('timing out the duel because this isnt going well...')
   Timers:RemoveTimer('EndDuel')
 
-  for i = 0,(DUEL_END_COUNTDOWN - 1) do
-    Timers:CreateTimer(i, function ()
-      if Duels.currentDuel == nil then
-        return
-      end
-      Notifications:TopToAll({text=tostring(DUEL_END_COUNTDOWN - i), duration=1.0})
-    end)
-  end
+  local warning = 3
+  Notifications:TopToAll({text="#duel_timeout_warning", duration=warning, style={color="blue", ["font-size"]="50px"}, replacement_map={seconds_to_duel_end = DUEL_END_COUNTDOWN}})
+  -- Use only 1 timer
+  local index = warning
+  Timers:CreateTimer(warning, function ()
+    -- Check if duel ended
+    if Duels.currentDuel == nil then
+      return
+    end
+    if index < DUEL_END_COUNTDOWN then
+      Notifications:TopToAll({text=tostring(DUEL_END_COUNTDOWN - index), duration=1.0})
+      index = index + 1
+      return 1
+    end
+  end)
 
   Timers:CreateTimer('EndDuel', {
     endTime = DUEL_END_COUNTDOWN,
@@ -543,7 +597,7 @@ function Duels:TimeoutDuel ()
 end
 
 function Duels:SetNextDuelTime()
-  Duels.nextDuelTime = HudTimer:GetGameTime() + DUEL_INTERVAL + DUEL_START_WARN_TIME
+  Duels.nextDuelTime = HudTimer:GetGameTime() + Duels:GetDuelIntervalTime() + DUEL_START_WARN_TIME
 end
 
 function Duels:GetNextDuelTime()
@@ -562,7 +616,7 @@ function Duels:CleanUpDuel ()
 
   Music:PlayBackground(1, 7)
 
-  local nextDuelIn = DUEL_INTERVAL
+  local nextDuelIn = Duels:GetDuelIntervalTime()
   Duels:SetNextDuelTime()
 
   if self.startDuelTimer then
@@ -571,15 +625,15 @@ function Duels:CleanUpDuel ()
   end
 
   self.startDuelTimer = Timers:CreateTimer(nextDuelIn - 60 + DUEL_START_WARN_TIME, function ()
-    Notifications:TopToAll({text="#duel_minute_warning", duration=10.0})
-    self.startDuelTimer = Timers:CreateTimer(60 - DUEL_START_WARN_TIME, partial(self.StartDuel, self))
+    Notifications:TopToAll({text="#duel_minute_warning", duration=10.0, style={color="blue", ["font-size"]="50px"}})
+    Duels.startDuelTimer = Timers:CreateTimer(60 - DUEL_START_WARN_TIME, partial(Duels.StartDuel, Duels))
   end)
 
   self.currentDuel = nil
 end
 
 function Duels:EndDuel ()
-  if self.currentDuel == nil or type(self.currentDuel) == "number" then
+  if not self:IsActive() then
     DebugPrint ('There is no duel running')
     return
   end
@@ -593,11 +647,10 @@ function Duels:EndDuel ()
   end
 
   local gamemode = GameRules:GetGameModeEntity()
-  gamemode:SetTPScrollSlotItemOverride("item_tpscroll")
   gamemode:SetCustomBackpackSwapCooldown(3.0)
 
   local currentDuel = self.currentDuel
-  self:CleanUpDuel()
+  self:CleanUpDuel() -- this sets self.currentDuel to nil
 
   Timers:CreateTimer(0.1, function ()
     DebugPrint('Sending all players back!')
@@ -609,8 +662,8 @@ function Duels:EndDuel ()
 
       local hero = player:GetAssignedHero()
       if not hero:IsAlive() then
-        hero:SetRespawnsDisabled(false)
-        hero:RespawnHero(false,false)
+        --hero:SetRespawnsDisabled(false)
+        hero:RespawnHero(false, false)
         -- hero is changed on respawn sometimes
         hero = player:GetAssignedHero()
       else
@@ -624,8 +677,6 @@ function Duels:EndDuel ()
       HeroState.RestoreState(hero, state)
       MoveCameraToPlayer(hero)
       HeroState.PurgeDuelHighgroundBuffs(hero) -- needed to remove undispellable Highground buffs
-      -- Replace dust with tp scroll
-      Duels:SwapItems("item_tpscroll", hero, player)
     end)
     -- Remove Modifier
     for playerId = 0, DOTA_MAX_TEAM_PLAYERS-1 do
@@ -681,17 +732,32 @@ function Duels:PlayerForDuel(playerId)
   return foundIt
 end
 
-function Duels:SwapItems(intendedItemname, hero, player)
-  local current = hero:GetItemInSlot(DOTA_ITEM_TP_SCROLL)
-  if current then
-    -- Set charges to 1
-    if current:GetCurrentCharges() > 1 then
-      current:SetCurrentCharges(1)
-    end
-    -- Remove the item
-    hero:RemoveItem(current)
+function Duels:GetDuelIntervalTime()
+  local lowPlayerCount = GetMapName() == "1v1" or GetMapName() == "tinymode"
+  if HeroSelection then
+    lowPlayerCount = HeroSelection.lowPlayerCount
   end
-  -- Add the item, new item should be auto-added to tpscroll slot
-  local new = CreateItem(intendedItemname, player, player)
-  hero:AddItem(new)
+  if lowPlayerCount then
+    return ONE_V_ONE_DUEL_INTERVAL
+  end
+
+  return DUEL_INTERVAL
+end
+
+function Duels:GetDuelTimeout(duelType)
+  if GetMapName() == "1v1" then
+    return ONE_V_ONE_DUEL_TIMEOUT
+  end
+  if not duelType then
+    -- Duel is not first and not final
+    return DUEL_TIMEOUT
+  elseif duelType == 1 then
+    -- First duel
+    return FIRST_DUEL_TIMEOUT
+  elseif duelType == 2 then
+    -- Final duel
+    return FINAL_DUEL_TIMEOUT
+  end
+
+  return DUEL_TIMEOUT
 end

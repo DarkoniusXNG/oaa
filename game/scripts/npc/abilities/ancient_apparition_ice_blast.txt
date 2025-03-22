@@ -7,13 +7,11 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5348"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -26,65 +24,68 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "40.0"
+    "AbilityCooldown"                                     "100" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "175"
+    "AbilityManaCost"                                     "150 225 300 375 450" //OAA
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "250 350 450 900 1800"
+    "AbilityDamage"                                       "300 400 500 800 1300" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius_min"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius_min"                                      "275"
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "radius_grow"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "radius_grow"                                     "50.0"
+        "value"                                           "50.0"
       }
-      "03"
+      "radius_max"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius_max"                                      "1000"
+        "value"                                           "1000"
+        "affected_by_aoe_increase"                        "1"
       }
-      "04"
+      "path_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "path_radius"                                     "275"
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05"
+      "frostbite_duration" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "frostbite_duration"                              "10 11 12 13 14"
+        "value"                                           "7"
+        "special_bonus_unique_ancient_apparition_ice_vortex_duration"  "+5"
       }
-      "06"
+      "frost_stacks" 
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "dot_damage"                                      "12.5 20.0 32.0 48.5 69.5"
+        "value"                                           "2"
       }
-      "07"
+      "speed"                                             "1500"
+      "kill_pct" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "1500"
+        "value"                                           "10 11 12 13 14"
+        "special_bonus_unique_ancient_apparition_5"       "+4"
       }
-      "08"
+      "cold_feet_stun_duration_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "kill_pct"                                        "10 11 12 13 14" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_ancient_apparition_5"
+        "value"                                           "0"
+        "special_bonus_shard"                             "+60"
       }
-      "09"
+      "cold_feet_aoe"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "target_sight_radius"                             "500"
+        "special_bonus_facet_ancient_apparition_exposure"  "200 350 500 550 600"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "target_sight_radius"
+      {
+        "value"                                           "500"
+        "affected_by_aoe_increase"                        "1"
       }
     }
   }

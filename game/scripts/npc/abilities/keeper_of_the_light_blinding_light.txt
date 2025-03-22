@@ -7,8 +7,8 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5476"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
@@ -18,54 +18,39 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "575 650 725 800 875 950" //OAA
+    "AbilityCastRange"                                    "400 500 600 700 800 900"
     "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "130 145 160 175 190 205"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "1.0"
+    "AbilityManaCost"                                     "120 130 140 150 160 170"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "miss_rate"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "miss_rate"                                       "70"
+        "value"                                           "45"
+        "special_bonus_unique_keeper_of_the_light_8"      "+40"
       }
-      "02"
+      "duration"                                          "4"
+      "radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3 4 5 6 7 8"
+        "value"                                           "425 450 475 500 525 550"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "knockback_duration"                                "0.6"
+      "knockback_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "600"
+        "value"                                           "400"
+        "affected_by_aoe_increase"                        "1"
       }
-      "05" // 04
+      "damage"                                            "90 160 230 300 600 1200" //OAA
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "knockback_duration"                              "0.4"
-      }
-      "06" // 05
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "knockback_distance"                              "350"
-      }
-      "07" // 06
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "75 150 225 300 600 1200" //OAA
+        "value"                                           "18 17 16 15 14 13"
+        "special_bonus_unique_keeper_of_the_light_5"      "-5"
       }
     }
   }

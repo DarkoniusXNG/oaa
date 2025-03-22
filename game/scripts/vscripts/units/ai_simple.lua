@@ -13,7 +13,11 @@ function Spawn( entityKeyValues )
 end
 
 function SimpleBossThink()
-  if GameRules:IsGamePaused() == true or GameRules:State_Get() == DOTA_GAMERULES_STATE_POST_GAME or thisEntity:IsAlive() == false then
+  if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME or not IsValidEntity(thisEntity) or not thisEntity:IsAlive() then
+    return -1
+  end
+
+  if GameRules:IsGamePaused() then
     return 1
   end
 
@@ -30,24 +34,32 @@ function SimpleBossThink()
     thisEntity.initialized = true
   end
 
+  local function IsNonHostileWard(entity)
+    if entity.HasModifier then
+      return entity:HasModifier("modifier_item_buff_ward") or entity:HasModifier("modifier_ward_invisibility")
+    end
+    return false
+  end
+
   local function FindNearestAttackableUnit(thisEntity)
     local nearby_enemies = FindUnitsInRadius(thisEntity:GetTeamNumber(), thisEntity.spawn_position, nil, SIMPLE_BOSS_LEASH_SIZE, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, bit.bor(DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE), FIND_CLOSEST, false)
     if #nearby_enemies ~= 0 then
       for i = 1, #nearby_enemies do
         local enemy = nearby_enemies[i]
         if enemy and not enemy:IsNull() then
-          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not enemy:HasModifier("modifier_item_buff_ward") and not enemy:IsCourier() then
+          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not IsNonHostileWard(enemy) and not enemy:IsCourier() then
             return enemy
           end
         end
       end
     end
+    -- Extend the search radius and find non-visible units too with massive attack range
     nearby_enemies = FindUnitsInRadius(thisEntity:GetTeamNumber(), thisEntity.spawn_position, nil, 3*SIMPLE_BOSS_LEASH_SIZE, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
     if #nearby_enemies ~= 0 then
       for i = 1, #nearby_enemies do
         local enemy = nearby_enemies[i]
         if enemy and not enemy:IsNull() then
-          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not enemy:HasModifier("modifier_item_buff_ward") and not enemy:IsCourier() and enemy:GetAttackRange() > SIMPLE_BOSS_LEASH_SIZE and (enemy:GetAbsOrigin() - thisEntity.spawn_position):Length2D() < 2*SIMPLE_BOSS_LEASH_SIZE then
+          if enemy:IsAlive() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not IsNonHostileWard(enemy) and not enemy:IsCourier() and enemy:GetAttackRange() > SIMPLE_BOSS_LEASH_SIZE and (enemy:GetAbsOrigin() - thisEntity.spawn_position):Length2D() < 2*SIMPLE_BOSS_LEASH_SIZE then
             return enemy
           end
         end
@@ -63,7 +75,7 @@ function SimpleBossThink()
         UnitIndex = thisEntity:entindex(),
         OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
         Position = nearest_enemy:GetAbsOrigin(),
-        Queue = 0,
+        Queue = false,
       })
     end
     thisEntity.aggro_target = nearest_enemy
@@ -75,9 +87,13 @@ function SimpleBossThink()
     return 1
   end
 
+  local current_hp_pct = thisEntity:GetHealth() / thisEntity:GetMaxHealth()
+  local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT / 100
+
   if thisEntity.state == SIMPLE_AI_STATE_IDLE then
-    local current_hp_pct = thisEntity:GetHealth()/thisEntity:GetMaxHealth()
-    local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT/100
+    -- Remove debuff protection
+    thisEntity:RemoveModifierByName("modifier_anti_stun_oaa")
+    -- Check boss hp
     if current_hp_pct < aggro_hp_pct then
       -- Issue an attack-move command towards the nearast unit that is attackable and assign it as aggro_target.
       -- Because of attack priorities (wards have the lowest attack priority) aggro_target will not always be
@@ -134,8 +150,6 @@ function SimpleBossThink()
         end
       end
       -- Check HP of the boss
-      local current_hp_pct = thisEntity:GetHealth()/thisEntity:GetMaxHealth()
-      local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT/100
       if current_hp_pct > aggro_hp_pct then
         thisEntity.aggro_target = nil
       end
@@ -147,8 +161,6 @@ function SimpleBossThink()
       -- OLD: thisEntity:MoveToTargetToAttack(thisEntity.aggro_target)
     else
       -- Check HP of the boss and if its able to attack
-      local current_hp_pct = thisEntity:GetHealth()/thisEntity:GetMaxHealth()
-      local aggro_hp_pct = SIMPLE_BOSS_AGGRO_HP_PERCENT/100
       if current_hp_pct < aggro_hp_pct then -- not thisEntity:IsOutOfGame() and not thisEntity:IsDisarmed() then
         AttackNearestTarget(thisEntity)
       end
@@ -158,6 +170,8 @@ function SimpleBossThink()
       end
     end
   elseif thisEntity.state == SIMPLE_AI_STATE_LEASH then
+    -- Add Debuff Protection when leashing
+    thisEntity:AddNewModifier(thisEntity, nil, "modifier_anti_stun_oaa", {})
     -- Actual leashing
     thisEntity:MoveToPosition(thisEntity.spawn_position)
     -- Check if boss reached the spawn_position
@@ -168,5 +182,6 @@ function SimpleBossThink()
       thisEntity.state = SIMPLE_AI_STATE_IDLE
     end
   end
+
   return 1
 end

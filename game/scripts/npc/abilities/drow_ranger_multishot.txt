@@ -7,13 +7,11 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "343"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "FightRecapLevel"                                     "1"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -23,11 +21,6 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.0"
     "AbilityChannelTime"                                  "1.75"
-    "AbilityCastAnimation"                                "ACT_DOTA_CHANNEL_ABILITY_3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "26 24 22 20 18 16"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -35,43 +28,37 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "wave_count" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "arrow_count"                                     "12"
+        "value"                                           "3"
+        "special_bonus_unique_drow_ranger_8"              "+2"
       }
-      "02" // this is based on Drow's base damage
+      "arrow_count_per_wave"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "arrow_damage_pct"                                "85 110 135 160 260 360"
-        "LinkedSpecialBonus"                              "special_bonus_unique_drow_ranger_1"
+        "value"                                           "4"
+        "special_bonus_unique_drow_ranger_2"              "+1"
       }
-      "03"
+      "arrow_damage_pct" // OAA, this is multiplied with (Drow's base (white) damage + Frost Arrow damage)
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "arrow_slow_duration"                             "1.25 2 2.75 3.5 4.25 5"
+        "value"                                           "100 120 140 160 180 200"
+        "special_bonus_unique_drow_ranger_1"              "+50"
       }
-      "04"
+      "arrow_width"                                       "90"
+      "arrow_speed"                                       "1300"
+      "arrow_range_multiplier"                            "1.75"
+      "arrow_angle"                                       "50"
+      "bypass_block"                                      "1"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "arrow_width"                                     "90"
+        "value"                                           "18 17 16 15 14 13"
+        "special_bonus_unique_drow_ranger_6"              "-6"
       }
-      "05"
+      "multishot_movespeed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "arrow_speed"                                     "1200"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "arrow_range_multiplier"                          "2"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "arrow_angle"                                     "50"
+        "value"                                           "0"
+        "special_bonus_facet_drow_ranger_sidestep"        "25"
       }
     }
   }

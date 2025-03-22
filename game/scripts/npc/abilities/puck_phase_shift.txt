@@ -7,19 +7,16 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5072"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0"
-    "AbilityChannelTime"                                  "0.75 1.50 2.25 3.25 3.37 3.50"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "6"
+    "AbilityCastPoint"                                    "0.01"
+    "AbilityChannelTime"                                  "1 1.75 2.5 3.25 3.25 3.25"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -27,12 +24,22 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "duration"                                          "1 1.75 2.5 3.25 3.25 3.25"
+      "shard_attack_range_bonus"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "0.75 1.50 2.25 3.25 3.37 3.50"
+        "RequiresShard"                                   "1"
+        "value"                                           "0"
+      }
+      "shard_bonus_damage" //OAA, this applies to every attack, not just Phase Shift attack
+      {
+        "RequiresShard"                                   "1"
+        "value"                                           "20 25 30 35 70 105"
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "7.25 7.0 6.75 6.5 6.25 6.0"
       }
     }
   }

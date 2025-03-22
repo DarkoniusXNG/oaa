@@ -6,9 +6,9 @@
 
 #ChangeSpark {
   horizontal-align: left;
-  vertical-align: top;
+  vertical-align: bottom;
   margin-left: -5px;
-  margin-top: 170px;
+  margin-bottom: 265px;
   min-width: 120px;
   flow-children: right;
 }
@@ -93,7 +93,7 @@
 }
 #SparkSelection .SparkPanel.active
 {
-  box-shadow: #ffccccaa 0px 0px 3px 0px;
+  box-shadow: inset #ffccccaa 0px 0px 3px 0px;
 }
 
 #SparkSelection .SparkPanel Label

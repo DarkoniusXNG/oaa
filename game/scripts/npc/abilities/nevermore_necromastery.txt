@@ -1,50 +1,56 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Nevermore Necromastery
+  // Shadow Fiend: Necromastery (Innate)
   //=================================================================================================================
   "nevermore_necromastery"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5062"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "OnCastbar"                                           "0"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
-    "MaxLevel"                                            "6"
-    "RequiredLevel"                                       "1"
-    "LevelsBetweenUpgrades"                               "2"
-
-    "HasScepterUpgrade"                                   "1"
+    "Innate"                                              "1"
+    "MaxLevel"                                            "6" // same as Dependent ability (Requiem) + 1
+    "DependentOnAbility"                                  "nevermore_requiem"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "necromastery_damage_per_soul" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "necromastery_damage_per_soul"                    "1 2 3 4 5 6"
-        "LinkedSpecialBonus"                              "special_bonus_unique_nevermore_1"
+        "value"                                           "1 2 3 4 5 6"
         "CalculateSpellDamageTooltip"                     "0"
+        "special_bonus_unique_nevermore_1"                "+1"
       }
-      "02"
+      "necromastery_max_souls"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "necromastery_max_souls"                          "11 14 17 20 23 26"
-        "LinkedSpecialBonus"                              "special_bonus_unique_nevermore_4"
+        "value"                                           "20"
+        "special_bonus_scepter"                           "+5"
       }
-      "03"
+      "souls_per_kill"                                    "1"
+      "necromastery_soul_release"                         "0.7"
+      "attack_range_bonus"                                "0"
+      "shard_souls_per_kill" // unused
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "necromastery_soul_release"                       "0.5"
+        "value"                                           "2"
+        "RequiresShard"                                   "1"
       }
-      "04"
+      "shard_crit_pct" // unused
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "necromastery_max_souls_scepter"                  "16 19 22 25 28 31" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_nevermore_4"
-        "RequiresScepter"                                 "1"
+        "value"                                           "190"
+        "RequiresShard"                                   "1"
+      }
+      "shard_fear_duration" // unused
+      {
+        "value"                                           "0.4"
+        "RequiresShard"                                   "1"
+      }
+      "soul_release_tooltip"                              "30.0"
+      "max_soul_increase_on_hero_kill" // OAA, because fuck this shit Valve
+      {
+        "value"                                           "0"
+        "special_bonus_facet_nevermore_lasting_presence"  "0"
       }
     }
   }

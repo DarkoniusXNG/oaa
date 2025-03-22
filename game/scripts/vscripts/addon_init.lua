@@ -3,9 +3,12 @@
 require("abilities/baseclass")
 require("items/baseclass")
 require("modifiers/baseclass")
-require("modifiers/aura_baseclass")
+--require("modifiers/aura_baseclass")
+--require("items/transformation/baseclass")
 
-require("items/transformation/baseclass")
-if IsClient() then -- Load clientside utility lib
-  require("libraries/basenpc")
-end
+-- Link modifiers that don't have an ability
+require("linker")
+
+-- Extensions to CDOTA_BaseNPC
+require("libraries/basenpc")
+require("libraries/abilities")

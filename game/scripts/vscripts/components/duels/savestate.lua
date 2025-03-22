@@ -1,12 +1,10 @@
 -- This module contains functions for saving and restoring the state of heroes
 local SafeTeleportAll = require("components/duels/teleport").SafeTeleportAll
 
-LinkLuaModifier('modifier_offside', 'modifiers/modifier_offside.lua', LUA_MODIFIER_MOTION_NONE)
-
 local export = {}
 
 local function RefreshAbilityFilter(ability)
-  return ability:GetAbilityType() ~= 1
+  return ability:GetAbilityType() ~= ABILITY_TYPE_ULTIMATE
 end
 
 local function PurgeDuelHighgroundBuffs(hero)
@@ -14,45 +12,15 @@ local function PurgeDuelHighgroundBuffs(hero)
     "modifier_rune_haste",
     "modifier_rune_doubledamage",
     "modifier_rune_invis",
+    "modifier_rune_arcane",
     "modifier_rune_hill_tripledamage",
+    "modifier_rune_hill_super_sight",
   }
   iter(modifierList):each(partial(hero.RemoveModifierByName, hero))
 end
 
 local function ResetState(hero)
-  if hero:HasModifier("modifier_skeleton_king_reincarnation_scepter_active") then
-    hero:RemoveModifierByName("modifier_skeleton_king_reincarnation_scepter_active")
-  end
-  if hero:HasModifier("modifier_offside") then
-    hero:RemoveModifierByName("modifier_offside")
-  end
-  if hero:HasModifier("modifier_is_in_offside") then
-    hero:RemoveModifierByName("modifier_is_in_offside")
-  end
-
-  if not hero:IsAlive() then
-    hero:RespawnHero(false,false)
-  end
-
-  hero:SetHealth(hero:GetMaxHealth())
-  hero:SetMana(hero:GetMaxMana())
-
-  -- Reset cooldown for abilities
-  for abilityIndex = 0, hero:GetAbilityCount() - 1 do
-    local ability = hero:GetAbilityByIndex(abilityIndex)
-    if ability ~= nil and RefreshAbilityFilter(ability) then
-      ability:EndCooldown()
-      ability:RefreshCharges()
-    end
-  end
-
-  -- Reset cooldown for items
-  for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_6 do
-    local item = hero:GetItemInSlot(i)
-    if item  then
-      item:EndCooldown()
-    end
-  end
+  hero:ResetHeroOAA(true)
 end
 
 local function SaveState(hero)
@@ -62,8 +30,8 @@ local function SaveState(hero)
     items = {},
     modifiers = {},
     offsidesStacks = 0,
-    hp = hero:GetHealthPercent(), -- hero:GetHealth(),
-    mana = hero:GetManaPercent(), -- hero:GetMana(),
+    hpPercent = hero:GetHealth() / hero:GetMaxHealth(),
+    manaPercent = hero:GetMana() / hero:GetMaxMana(),
     assignable = true -- basically just for clearer code
   }
 
@@ -83,16 +51,19 @@ local function SaveState(hero)
     end
   end
 
+  -- Store ability cooldowns and charges
   for abilityIndex = 0, hero:GetAbilityCount() - 1 do
     local ability = hero:GetAbilityByIndex(abilityIndex)
     if ability and RefreshAbilityFilter(ability) then
       state.abilities[ability:GetAbilityName()] = {
-        cooldown = ability:GetCooldownTimeRemaining()
+        cooldown = ability:GetCooldownTimeRemaining(),
+        charges = ability:GetCurrentAbilityCharges()
       }
     end
   end
 
-  for itemIndex = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_6 do
+  -- Store item cooldowns
+  for itemIndex = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9 do
     local item = hero:GetItemInSlot(itemIndex)
     if item then
       state.items[item] = {
@@ -101,15 +72,31 @@ local function SaveState(hero)
     end
   end
 
+  -- Store neutral item cooldown
+  local neutral_item = hero:GetItemInSlot(DOTA_ITEM_NEUTRAL_SLOT)
+  if neutral_item and neutral_item:IsActiveNeutral() then
+    state.items[neutral_item] = {
+      cooldown = neutral_item:GetCooldownTimeRemaining()
+    }
+  end
+
   return state
 end
 
 local function RestoreState(hero, state)
-  SafeTeleportAll(hero, state.location, 150)
+  -- Reset the hero (without cooldowns)
+  hero:ResetHeroOAA(false)
 
-  local hp = state.hp * hero:GetMaxHealth() -- this can be 0 if hero was dead during SaveState
-  if hp < 1 then hp = hero:GetMaxHealth() end -- restore to full hp if hp is 0, prevents Zeus ult abuse for example
-  local mana = state.mana * hero:GetMaxMana()
+  -- Teleport the player's hero and + reset units (without cooldowns)
+  SafeTeleportAll(hero, state.location, 150, false)
+
+  local hp = state.hpPercent * hero:GetMaxHealth()
+  if hp <= 0 then
+    hp = hero:GetMaxHealth() -- restore to full hp if hp is 0, prevents Zeus ult abuse for example
+  end
+
+  local mana = state.manaPercent * hero:GetMaxMana()
+
   hero:SetHealth(math.max(1, hp)) -- I left math.max just in case I forgot about some interaction to prevent SetHealth(0) aka permadeath
   hero:SetMana(mana)
 
@@ -118,7 +105,16 @@ local function RestoreState(hero, state)
     local ability = hero:FindAbilityByName(name)
     if ability then
       ability:EndCooldown()
-      ability:StartCooldown(abilityState.cooldown)
+      if abilityState.cooldown then
+        if abilityState.cooldown > 0 then
+          ability:StartCooldown(abilityState.cooldown)
+        end
+      end
+      if ability:GetMaxAbilityCharges(ability:GetLevel()) > 1 and abilityState.charges then
+        if abilityState.charges > 0 then
+          ability:SetCurrentAbilityCharges(abilityState.charges)
+        end
+      end
     end
   end
 
@@ -129,12 +125,6 @@ local function RestoreState(hero, state)
       item:StartCooldown(itemState.cooldown)
     end
   end
-
-  -- Disjoint disjointable projectiles
-  ProjectileManager:ProjectileDodge(hero)
-
-  -- Absolute Purge (Strong Dispel + removing most undispellable buffs and debuffs)
-  hero:AbsolutePurge()
 
   -- Restore offside stacks if hero had any
   if state.offsidesStacks > 0 then

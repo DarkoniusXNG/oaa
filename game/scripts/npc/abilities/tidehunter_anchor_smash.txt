@@ -7,12 +7,10 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5120"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -20,7 +18,6 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "375"
     "AbilityCastPoint"                                    "0.4"
 
     // Time
@@ -29,41 +26,42 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "30 40 50 60 70 80"
+    "AbilityManaCost"                                     "40 45 50 55 60 65"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "attack_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_damage"                                   "45 90 135 180 360 720"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction"                                "-30 -40 -50 -60 -70 -80"
-        "LinkedSpecialBonus"                              "special_bonus_unique_tidehunter_3"
+        "value"                                           "45 90 135 180 360 540"
+        "special_bonus_unique_tidehunter_9"               "+40"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "damage_reduction"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "reduction_duration"                              "6.0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "375"
-      }
-      "05" //OAA
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_reduction_bosses"                         "-50"
+        "value"                                           "-25 -30 -35 -40 -45 -50"
+        "special_bonus_unique_tidehunter_3"               "-30"
         "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
+      }
+      "reduction_duration"                                "6.0"
+      "radius"
+      {
+        "value"                                           "375"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "targets_buildings"
+      {
+        "value"                                           "0"
+        "special_bonus_unique_tidehunter_10"              "+1"
+      }
+      "damage_reduction_bosses" //OAA
+      {
+        "value"                                           "-25 -30 -35 -40 -45 -50"
+        "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
     }
   }
-
 }

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "85618"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_arcane_orb.lua"
     "AbilityTextureName"                                  "obsidian_destroyer_arcane_orb"
@@ -16,53 +15,39 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     "AbilityCastRange"                                    "450"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_1"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80 120 160 200 400 600"
-    "AbilityCooldown"                                     "0"
+    "AbilityManaCost"                                     "0" // old: "80 120 160 200 400 600"
+    "AbilityCooldown"                                     "3 2 1 0 0 0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "mana_pool_damage_pct"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "mana_pool_damage_pct"                            "7.5 9 10.5 12 13 14"
-        "LinkedSpecialBonus"                              "special_bonus_unique_outworld_devourer"
+        "value"                                           "10 11 12 13 14 15"
+        "special_bonus_unique_outworld_devourer"          "+1.5"
       }
-      "02"
+      "mana_cost_percentage"                              "20"
+      "radius" // splash radius
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "int_steal"                                       "0"
+        "value"                                           "250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "int_steal_duration"                              "0"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "0"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_mana_increase"                               "10 20 30 40 50 60"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_duration"                             "35"
-      }
+      "splash_damage_percent"                             "40"
+      "int_steal"                                         "0"
+      "int_steal_duration"                                "0"
+      "max_mana_increase"                                 "0"
+      "bonus_mana_duration"                               "0"
     }
   }
 }

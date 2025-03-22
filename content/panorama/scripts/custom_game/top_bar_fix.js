@@ -1,12 +1,9 @@
-/* global  GameEvents, DOTALimits_t, Game, DOTA_GameState */
-function FindDotaHudElement (panel) {
-  return $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse(panel);
-}
+/* global  GameEvents, DOTALimits_t, Game, DOTA_GameState, Players, FindDotaHudElement, is10v10 */
 
 function OverrideHeroImage (panel) {
   if (panel) {
-    var name = panel.heroname;
-    if (name === 'sohei' || name === 'electrician') {
+    const name = panel.heroname;
+    if (name === 'sohei' || name === 'electrician' || name === 'eul') {
       panel.style.backgroundImage = 'url("file://{images}/heroes/npc_dota_hero_' + name + '.png")';
       panel.style.backgroundSize = '100% 100%';
     }
@@ -15,11 +12,11 @@ function OverrideHeroImage (panel) {
 
 function OverrideHeroImagesForTeam (team) {
   if (team) {
-    var i;
+    let i;
     for (i = 0; i < DOTALimits_t.DOTA_MAX_TEAM_PLAYERS - 1; i++) {
-      var topBarPanel = FindDotaHudElement(team + 'Player' + i);
+      const topBarPanel = FindDotaHudElement(team + 'Player' + i);
       if (topBarPanel && Players.IsValidPlayerID(i)) {
-        var panel = topBarPanel.FindChildTraverse('HeroImage');
+        const panel = topBarPanel.FindChildTraverse('HeroImage');
         OverrideHeroImage(panel);
       }
     }
@@ -34,6 +31,14 @@ function OverrideTopBarHeroImages () {
 }
 
 (function () {
+  if (is10v10()) {
+    FindDotaHudElement('TopBarLeftFlare').style.visibility = 'collapse';
+    FindDotaHudElement('TopBarRightFlare').style.visibility = 'collapse';
+    FindDotaHudElement('TopBarRadiantTeamContainer').style.marginLeft = '-35px';
+    FindDotaHudElement('TopBarRadiantTeamContainer').style.marginRight = '0px';
+    FindDotaHudElement('TopBarDireTeamContainer').style.marginLeft = '35px';
+    FindDotaHudElement('TopBarDireTeamContainer').style.marginRight = '-35px';
+  }
   GameEvents.Subscribe('game_rules_state_change', OverrideTopBarHeroImages);
-  GameEvents.Subscribe('player_connect', OverrideTopBarHeroImages);
+  GameEvents.Subscribe('player_connect_full', OverrideTopBarHeroImages);
 })();

@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5384"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
     "MaxLevel"                                            "1"
     "HotKeyOverride"                                      "Z"
@@ -16,6 +15,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE" //OAA
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
@@ -23,32 +23,33 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "650"
     "AbilityCastPoint"                                    "0.05"
-    "AbilityCooldown"                                     "17"
-    "AbilityManaCost"                                     "60"
+    "AbilityCooldown"                                     "15"
+    "AbilityManaCost"                                     "90"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_attack_speed"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "10 25 40 55 70 85 100 115 130 145 160 175 190 205 220"
+        "value"                                           "10 22 34 46 58 70 82 94 106 118 130 142 154 166 172 178 184"
         "levelkey"                                        "wexlevel"
-        "LinkedSpecialBonus"                              "special_bonus_unique_invoker_5"
+        "special_bonus_unique_invoker_5"                  "+30"
       }
-      "02"
+      "bonus_damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "10 25 40 55 70 85 100 115 130 145 160 175 190 205 220"
+        "value"                                           "10 22 34 46 58 70 82 94 106 118 130 142 154 166 172 178 184"
         "levelkey"                                        "exortlevel"
-        "LinkedSpecialBonus"                              "special_bonus_unique_invoker_5"
+        "special_bonus_unique_invoker_5"                  "+30"
+        "CalculateSpellDamageTooltip"                     "0"
       }
-      "03"
+      "bonus_attack_range" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "9"
+        "value"                                           "0"
+        "levelkey"                                        "wexlevel"
+        "special_bonus_facet_invoker_wex_focus"           "+70 75 80 85 90 95 100 105 110 115 120 125 130 135 140 145 150"
       }
+      "duration"                                          "9"
     }
   }
 }

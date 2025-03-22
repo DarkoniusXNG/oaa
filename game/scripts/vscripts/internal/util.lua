@@ -10,24 +10,24 @@ Debug = Debug or {
 }
 
 function split(s, delimiter)
-    result = {};
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-        table.insert(result, match);
-    end
-    return result;
+  local result = {}
+  for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+    table.insert(result, match)
+  end
+  return result
 end
 
 function regexsplit(s, delimiter)
-    result = {};
-    for match in s:gmatch("([^"..delimiter.."]+)") do
-        table.insert(result, match);
-    end
-    return result;
+  local result = {}
+  for match in s:gmatch("([^"..delimiter.."]+)") do
+    table.insert(result, match)
+  end
+  return result
 end
 
 function TracesFromFilename (filename)
   local traces = {}
-  local i = 1
+
 
   if filename == 'components' then
     return {
@@ -67,7 +67,7 @@ function IsAnyTraceEnabled (traces)
 end
 
 function Debug:EnableDebugging()
-  local trace, dir = GetCallingFile()
+  local trace, dir = GetCallingFile() --luacheck: ignore dir
   Debug.EnabledModules[trace[#trace]] = true
 end
 
@@ -131,8 +131,7 @@ function DebugPrintTable(...)
 end
 
 function DevPrintTable(...)
-  local trace, dir = GetCallingFile()
-
+  local trace, dir = GetCallingFile() --luacheck: ignore trace
   PrintTable("[" .. dir .. "]", ...)
 end
 
@@ -331,7 +330,7 @@ function FindHeroesInRadius (...)
   local units = FindUnitsInRadius(...)
 
   local function isHero (hero)
-    if hero.IsRealHero and hero:IsRealHero() and not hero:IsTempestDouble() then
+    if hero.IsRealHero and hero:IsRealHero() and not hero:IsTempestDouble() and not hero:IsClone() and not hero:IsSpiritBearOAA() then
       return true
     end
     return false
@@ -367,4 +366,203 @@ function MoveCameraToEntity(playerID, entity)
       PlayerResource:SetCameraTarget(playerID, nil)
     end)
   end
+end
+
+function IsLocationInOffside(location)
+  return IsLocationInRadiantOffside(location) or IsLocationInDireOffside(location)
+end
+
+function IsLocationInRadiantOffside(pos)
+  if not pos then
+    print("Passed parameter to IsLocationInRadiantOffside is nil!")
+    return nil
+  end
+  -- Radiant Offside trigger
+  local trigger = Entities:FindByName(nil, 'boss_good_zone_0')
+  if not trigger then
+    print("Radiant Offside trigger not found or referenced name is wrong.")
+    return false
+  end
+  if IsInTrigger(pos, trigger) then
+    return true
+  elseif GetMapName() == "oaa_legacy" then
+    for i = 1, 4 do
+      local triggerx = Entities:FindByName(nil, 'boss_good_zone_'..tostring(i))
+      if triggerx then
+        if IsInTrigger(pos, triggerx) then
+          return true
+        end
+      end
+    end
+  end
+
+  return false
+end
+
+function IsLocationInDireOffside(pos)
+  if not pos then
+    print("Passed parameter to IsLocationInDireOffside is nil!")
+    return nil
+  end
+  -- Dire Offside trigger
+  local trigger = Entities:FindByName(nil, 'boss_bad_zone_0')
+  if not trigger then
+    print("Dire Offside trigger not found or referenced name is wrong.")
+    return false
+  end
+  if IsInTrigger(pos, trigger) then
+    return true
+  elseif GetMapName() == "oaa_legacy" then
+    for i = 1, 4 do
+      local triggerx = Entities:FindByName(nil, 'boss_bad_zone_'..tostring(i))
+      if triggerx then
+        if IsInTrigger(pos, triggerx) then
+          return true
+        end
+      end
+    end
+  end
+
+  return false
+end
+
+function IsLocationInFountain(location)
+  if not location then
+    print("Passed parameter to IsLocationInFountain is nil!")
+    return nil
+  end
+
+  local fountains = Entities:FindAllByClassname("ent_dota_fountain")
+  local radiant_fountain
+  local dire_fountain
+  for _, entity in pairs(fountains) do
+    if entity:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      radiant_fountain = entity
+    elseif entity:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+      dire_fountain = entity
+    end
+  end
+
+  local radiant_fountain_trigger = Entities:FindByName(nil, "fountain_good_trigger")
+  local dire_fountain_trigger = Entities:FindByName(nil, "fountain_bad_trigger")
+
+  if radiant_fountain_trigger then
+    if IsInTrigger(location, radiant_fountain_trigger) then
+      return true
+    end
+  else
+    print("Radiant fountain trigger not found or referenced name is wrong.")
+    if radiant_fountain then
+      if (radiant_fountain:GetAbsOrigin() - location):Length2D() <= 400 then
+        return true
+      end
+    end
+  end
+
+  if dire_fountain_trigger then
+    if IsInTrigger(location, dire_fountain_trigger) then
+      return true
+    end
+  else
+    print("Dire fountain trigger not found or referenced name is wrong.")
+    if dire_fountain then
+      if (dire_fountain:GetAbsOrigin() - location):Length2D() <= 400 then
+        return true
+      end
+    end
+  end
+
+  return false
+end
+
+-- Calculates the distance between the fountain of the input team and the input location
+function DistanceFromFountainOAA(location, team)
+  if not location or not team then
+    return nil
+  end
+  local fountains = Entities:FindAllByClassname("ent_dota_fountain")
+  local fountain
+  for _, entity in pairs(fountains) do
+    if entity:GetTeamNumber() == team then
+      fountain = entity
+    end
+  end
+  if not fountain then
+    print("Fountain not found for team "..tostring(team))
+    return nil
+  end
+
+  return (fountain:GetAbsOrigin() - location):Length2D()
+end
+
+-- Calculates the approximate center of the map based on fountain locations
+function GetMapCenterOAA()
+  local defaultCenter = Vector(0, 0, 0)
+
+  local fountains = Entities:FindAllByClassname("ent_dota_fountain")
+  local radiant_fountain
+  local dire_fountain
+  for _, entity in pairs(fountains) do
+    if entity:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      radiant_fountain = entity
+    elseif entity:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+      dire_fountain = entity
+    end
+  end
+  if not radiant_fountain then
+    print("Radiant Fountain not found!")
+    return defaultCenter
+  end
+  if not dire_fountain then
+    print("Dire Fountain not found!")
+    return defaultCenter
+  end
+
+  local distance_between_fountains = (radiant_fountain:GetAbsOrigin() - dire_fountain:GetAbsOrigin()):Length2D()
+  -- Center should be between the fountains but fountains don't need to share the y axis
+  -- The following code is true only if the real center of the map is somewhere in the playable non-duel area
+  local center_according_to_radiant = radiant_fountain:GetAbsOrigin() + distance_between_fountains/2 * Vector(1, 0, 0)
+  local center_according_to_dire = dire_fountain:GetAbsOrigin() - distance_between_fountains/2 * Vector(1, 0, 0)
+
+  -- Calculate approximate center of the map
+  local direction = center_according_to_radiant - center_according_to_dire
+  local distance = direction:Length2D()
+  direction.z = 0
+  direction = direction:Normalized()
+  local approx_center = center_according_to_dire + direction * distance/2
+
+  return approx_center
+end
+
+function GetMainAreaBoundsX()
+  local Xbounds = {minX = 0, maxX = 0}
+
+  local fountains = Entities:FindAllByClassname("ent_dota_fountain")
+  local radiant_fountain
+  local dire_fountain
+  for _, entity in pairs(fountains) do
+    if entity:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      radiant_fountain = entity
+    elseif entity:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+      dire_fountain = entity
+    end
+  end
+  if radiant_fountain then
+    Xbounds.minX = radiant_fountain:GetAbsOrigin().x + 100
+  else
+    print("Radiant Fountain not found!")
+  end
+  if dire_fountain then
+    Xbounds.maxX = dire_fountain:GetAbsOrigin().x - 100
+  else
+    print("Dire Fountain not found!")
+  end
+
+  return Xbounds
+end
+
+function GetMainAreaBoundsY()
+  local Ybounds = {minY = -3252, maxY = 4596} -- these numbers are good for all maps
+  -- TODO: Figure out how to get Y coordinates of the main playable area
+  return Ybounds
 end

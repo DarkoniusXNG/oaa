@@ -7,39 +7,64 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5259"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    // Time
+    // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "28 26 24 22 20 18" //OAA, for picking screen tooltip
-    "AbilityCastPoint"                                    "0.0"
+    "AbilityCastRange"                                    "800"
+    "AbilityCastPoint"                                    "0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "40 50 60 70 80 90"
+    "AbilityManaCost"                                     "60 70 80 90 100 110"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "attack_speed_bonus" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "3 4 5 6 6.5 7"
-        "LinkedSpecialBonus"                              "special_bonus_unique_clinkz_2"
+        "value"                                           "120 140 160 180 200 220"
+        "special_bonus_unique_clinkz_7"                   "+40"
       }
-      "02"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "attack_speed_bonus_pct"                          "90 120 150 180 210 240"
-        "LinkedSpecialBonus"                              "special_bonus_unique_clinkz_7"
+        "value"                                           "3.5"
+        "special_bonus_unique_clinkz_1"                   "+0.75"
+      }
+      "attack_range_bonus"
+      {
+        "value"                                           "200" 
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "21 19 17 15 15 15"
+        "special_bonus_unique_clinkz_4"                   "-9"
+      }
+      "strafe_skeleton_radius"
+      {
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "archer_attack_speed_pct"                           "60"
+      "debuff_duration"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_clinkz_suppressive_fire"     "=2.0"
+      }
+      "blind_pct"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_clinkz_suppressive_fire"     "=30"
       }
     }
   }

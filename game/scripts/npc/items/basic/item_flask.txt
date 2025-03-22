@@ -1,0 +1,21 @@
+"DOTAAbilities"
+{
+  // Healing Salve
+  "item_flask"
+  {
+
+    "ItemCost"                                            "60" //OAA
+    "ItemStockTime"                                       "1" //OAA
+    "ItemShareability"                                    "ITEM_FULLY_SHAREABLE_STACKING" //OAA
+    "SideShop"                                            "1" //OAA
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "buff_duration"                                     "10" //OAA
+      "health_regen"                                      "40" //OAA
+      "break_on_hero_damage"                              "1"
+    }
+  }
+}

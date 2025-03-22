@@ -1,0 +1,46 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ability: Tiny Toss Tree (Ability linked to Tree Grab)
+  //=================================================================================================================
+  "tiny_toss_tree"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "1200"
+    "AbilityCastPoint"                                    "0.2"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "speed"                                             "900.0"
+      "range"                                             "1200"
+      "bonus_damage"
+      {
+        "value"                                           "20"
+        "special_bonus_shard"                             "+100"
+        "CalculateSpellDamageTooltip"                     "0"
+      }
+      "splash_radius"
+      {
+        "value"                                           "275"
+        "affected_by_aoe_increase"                        "1"
+      }
+      "movement_slow"                                     "25"
+      "slow_duration"                                     "2.5"
+    }
+  }
+}

@@ -57,12 +57,8 @@ game/soundevents/
 game/sounds/
 
 *.vpk
-
-# DotaStats
-settings.kv
-.DS_Store
-demoheader.tmp
-server_log.txt
+*.vmat_c
+*.vtex_c
 
 rich_presence_persistent_data.txt
 cache_*.soc
@@ -74,7 +70,6 @@ game/screenshots/
 # I thinke we should really add all precompiled files
 # Unignore precompiled files  (SiltBreaker)
 
-
 !game/models/
 game/models/*
 !game/models/creeps/
@@ -85,30 +80,7 @@ game/models/items/*
 game/models/heroes/*
 !game/models/heroes/lycan/
 
-!game/materials/
-game/materials/*
-!game/materials/models/
-game/materials/models/*
-!game/materials/models/creeps/
-game/materials/models/creeps/*
-!game/materials/models/heroes/
-game/materials/models/heroes/*
-!game/materials/models/heroes/broodmother/
-!game/materials/models/heroes/lycan/
-!game/materials/models/heroes/ogre_magi/
-!game/materials/models/heroes/omniknight/
-!game/materials/models/items/
-game/materials/models/items/*
-!game/materials/models/creeps/knoll_1/
-!game/materials/models/creeps/spiders/
-!game/materials/models/creeps/omni_golem/
-!game/materials/models/creeps/forest_bear/
-!game/materials/models/creeps/ice_biome/
-!game/materials/models/creeps/neutral_creeps/
-game/materials/models/creeps/neutral_creeps/*
-!game/materials/models/creeps/creep_bad_melee/
-!game/materials/models/creeps/neutral_creeps/*ogre*
-!game/materials/models/creeps/neutral_creeps/*furbolg*
-
 # IDE specific directories
 .idea
+
+.vscode/settings.json

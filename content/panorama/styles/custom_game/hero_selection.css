@@ -105,11 +105,21 @@ Label {
   height: 100%;
 }
 
-#TeamRadiant {
-  flow-children: right;
+#TeamRadiant, #TeamDire {
   width: 45%;
   height: 65%;
   background-color: #171A2590;
+}
+
+.SINGLE_DRAFT_MODE #TeamRadiant, #TeamDire {
+  height: 85%;
+}
+
+#TeamRadiant {
+  flow-children: right;
+}
+#TeamDire {
+  flow-children: left;
 }
 
 #Clock {
@@ -133,17 +143,36 @@ Label {
   vertical-align: bottom;
 }
 
-#TeamDire {
-  flow-children: left;
-  width: 45%;
-  height: 65%;
-  background-color: #171A2590;
-}
-
- .Player {
+.Player {
   margin: 0 3px 5px 3px;
   width: 18%;
   height: 100%;
+}
+
+.SINGLE_DRAFT_MODE .PlayerImage {
+  height: 70%;
+  z-index: 0;
+}
+
+.SINGLE_DRAFT_MODE .PlayerLabel {
+  z-index: 2;
+  transform: translateY(-15px);
+}
+
+#SingleDraftChoices {
+  height: 30%;
+  width: 100%;
+  vertical-align: bottom;
+  z-index: 1;
+  flow-children: right;
+}
+
+#SingleDraftChoices RadioButton {
+  width: 22%;
+  height: 90%;
+  box-shadow: none;
+  margin: 3px;
+  vertical-align: bottom;
 }
 
 .TenVTen .Player {
@@ -245,7 +274,7 @@ DOTAMinimap {
 
 .HeroWrapper {
   flow-children: down;
-  width: 33.3%;
+  width: 25%;
 }
 
 .AttrHolder {
@@ -473,6 +502,15 @@ DOTAMinimap {
   margin-right: 10px;
 }
 
+#VoidHolder {
+  background-image: url("s2r://panorama/images/primary_attribute_icons/primary_attribute_icon_all_psd.vtex");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 90%;
+  width: height-percentage( 100% );
+  margin-right: 10px;
+}
+
 .HeroHolder {
   margin: 0 0 10px 0;
   width: 100%;
@@ -484,6 +522,12 @@ RadioButton {
   width: 80px;
   height: 45px;
   box-shadow: #000000ff -2px -2px 4px 4px;
+}
+
+.SINGLE_DRAFT_MODE .HeroHolder RadioButton {
+  margin: 3px;
+  width: 400px;
+  height: 225px;
 }
 
 RadioButton:hover {
@@ -511,19 +555,51 @@ RadioButton.Disabled:selected {
   width: 100%;
 }
 
-#HeroSelector {
-  width: 37%;
+#PreviewPanel {
+  margin-top: 20px;
+  width: fill-parent-flow(1.0);
+  height: fill-parent-flow(1.0);
+  horizontal-align: center;
+}
+
+#APHeroPreview {
+  flow-children: right;
+  horizontal-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+#APHeroPreview #LeftMenuOptions {
+  width: 30%;
+}
+
+#APHeroPreview #HeroSelector {
+  width: 30%;
   height: fill-parent-flow(1.0);
   flow-children: right;
   horizontal-align: center;
   margin-bottom: 15px;
 }
 
-#PreviewPanel {
-  margin-top: 20px;
+#APHeroPreview #HeroPickContainer {
+  width: 215px;
+  height: 100%;
+  flow-children: down;
+  margin-bottom: 30px;
+  vertical-align: bottom;
+  horizontal-align: right;
+}
+
+#APHeroPreview .BottlePassSelection
+{
+  height: 100%;
   width: fill-parent-flow(1.0);
-  height: fill-parent-flow(1.0);
-  horizontal-align: center;
+  vertical-align: top;
+}
+
+#ExtraInfo
+{
+  font-size: 22px;
 }
 
 #ChatBoxHolder {
@@ -632,19 +708,10 @@ DOTAScenePanel {
   border-radius: 8px;
 }
 
-#HeroPickContainer {
-  width: 32%;
-  height: 100%;
-  flow-children: down;
-  margin-bottom: 30px;
-  vertical-align: bottom;
-  horizontal-align: right;
-}
-
 .HeroPickerButton {
   margin: 10px;
   height: 60px;
-  width: 185px;
+  width: 215px;
   background-position: 10px center;
   background-repeat: no-repeat;
   background-size: auto 32px;
@@ -699,6 +766,11 @@ DOTAScenePanel {
 
 #HeroRandom {
   background-image: url("s2r://panorama/images/control_icons/random_dice_psd.vtex");
+}
+#HeroReRandom {
+  margin-top: 120px;
+  background-image: none;
+  padding-left: 10px;
 }
 
 #HeroRandom.Activated {
@@ -928,14 +1000,6 @@ DOTAScenePanel {
 
 .captains_mode #AbilityPreview{
   height: 80px;
-}
-
-.BottlePassSelection
-{
-  height: 600px;
-  width: 400px;
-  horizontal-align: right;
-  vertical-align: top;
 }
 
 #BottlePassSelectionTitle
@@ -1232,4 +1296,49 @@ DOTAScenePanel {
 }
 #Bottle55 Panel{
   background-image: url("file://panorama/images/items/custom/bottles/bottle_darkonius.png");
+}
+#Bottle56 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_dota1.png");
+}
+#Bottle57 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_satsaa.png");
+}
+#Bottle58 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_hastedd.png");
+}
+#Bottle59 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_nate.png");
+}
+#Bottle60 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_frostkitten.png");
+}
+#Bottle61 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_starfire.png");
+}
+#Bottle62 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_pixel.png");
+}
+#Bottle63 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_thedud.png");
+}
+#Bottle64 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_ogre.png");
+}
+#Bottle65 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_zap.png");
+}
+#Bottle66 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_nature.png");
+}
+#Bottle67 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_skull.png");
+}
+#Bottle68 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_eye.png");
+}
+#Bottle69 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/bottle_coffee.png");
+}
+#Bottle70 Panel{
+  background-image: url("file://panorama/images/items/custom/bottles/salt_bottle.png");
 }

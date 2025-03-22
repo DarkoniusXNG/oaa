@@ -1,0 +1,42 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Ability: Ogre Magi Bloodlust
+  //=================================================================================================================
+  "ogre_magi_channelled_bloodlust"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/ogre_seer/ogre_magi_channelled_bloodlust.lua"
+    "AbilityTextureName"                                  "ogre_magi_bloodlust"
+
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "650"
+    "AbilityCastPoint"                                    "0.56"
+    "AbilityCastAnimation"                                "ACT_DOTA_VICTORY"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "1.0"
+    "AbilityChannelTime"                                  "8"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "modelscale"                                        "10"
+      "bonus_movement_speed"                              "100"
+      "bonus_attack_speed"                                "100"
+      "interrupted_cooldown"                              "4"
+      "duration"                                          "8" // for the tooltip only
+    }
+  }
+}

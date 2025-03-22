@@ -7,19 +7,18 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5631"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-
     "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "1400"
-    "AbilityCastAnimation"                                "ACT_INVALID"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -31,54 +30,25 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "hp_cost_perc"                                      "20"
+      "spirit_duration"                                   "20.0"
+      "spirit_speed"                                      "1000"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hp_cost_perc"                                    "20"
+        "value"                                           "200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "duration"                                          "4.0"
+      "attackspeed_slow"                                  "-50 -80 -110 -140 -170 -200"
+      "damage_per_second" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "spirit_duration"                                 "20.0"
+        "value"                                           "20 40 60 80 160 240"
+        "special_bonus_unique_phoenix_3"                  "+30"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spirit_speed"                                    "900"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "175"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "4.0"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "attackspeed_slow"                                "-80 -100 -120 -140 -280 -420" //OAA
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_second"                               "15 35 55 75 150 300"
-        "LinkedSpecialBonus"                              "special_bonus_unique_phoenix_3"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "spirit_count"                                    "4"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "1.0"
-      }
+      "spirit_count"                                      "5"
+      "tick_interval"                                     "0.2"
     }
   }
 }

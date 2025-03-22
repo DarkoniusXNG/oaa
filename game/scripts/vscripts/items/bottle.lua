@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_bottle_regeneration", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_bottle_texture_tracker", "items/bottle.lua", LUA_MODIFIER_MOTION_NONE)
 
 --------------------------------------------------------------------------------
@@ -58,8 +57,22 @@ local bonusNames = {
   'custom/bottles/bottle_nohnius',
   'custom/bottles/bottle_archemagarch',
   'custom/bottles/bottle_obby',
-  'custom/bottles/bottle_darkonius',
-
+  'custom/bottles/bottle_darkonius', --55
+  'custom/bottles/bottle_dota1',
+  'custom/bottles/bottle_satsaa',
+  'custom/bottles/bottle_hastedd',
+  'custom/bottles/bottle_nate',
+  'custom/bottles/bottle_frostkitten', --60
+  'custom/bottles/bottle_starfire',
+  'custom/bottles/bottle_pixel',
+  'custom/bottles/bottle_thedud',
+  'custom/bottles/bottle_ogre',
+  'custom/bottles/bottle_zap', --65
+  'custom/bottles/bottle_nature',
+  'custom/bottles/bottle_skull',
+  'custom/bottles/bottle_eye',
+  'custom/bottles/bottle_coffee',
+  'custom/bottles/salt_bottle',
 }
 
 --------------------------------------------------------------------------------
@@ -74,11 +87,14 @@ function item_infinite_bottle:OnSpellStart()
   local restore_time = self:GetSpecialValueFor("restore_time")
   local caster = self:GetCaster()
 
-  EmitSoundOnClient("Bottle.Drink", caster:GetPlayerOwner())
+  -- Sound for the owner only
+  local playerID = UnitVarToPlayerID(caster)
+  --EmitSoundOnClient("Bottle.Drink", PlayerResource:GetPlayer(playerID)) -- emits at the center of the map
+  EmitSoundOnLocationForPlayer("Bottle.Drink", caster:GetAbsOrigin(), playerID)
 
   caster:AddNewModifier(caster, self, "modifier_bottle_regeneration", { duration = restore_time })
 
-  self:SpendCharge()
+  self:SpendCharge(0.1)
 end
 
 function item_infinite_bottle:GetAbilityTextureName()
@@ -108,9 +124,6 @@ function modifier_bottle_texture_tracker:OnCreated()
 
   if IsServer() then
     local playerID = parent:GetPlayerOwnerID()
-    local steamid = PlayerResource:GetSteamAccountID(playerID)
-    local playerName = PlayerResource:GetPlayerName(playerID)
-    DebugPrint("Steam ID of " .. playerName .. ": " .. steamid)
     self:SetStackCount(tonumber(HeroSelection:GetSelectedBottleForPlayer(playerID)) or 0)
   end
 end

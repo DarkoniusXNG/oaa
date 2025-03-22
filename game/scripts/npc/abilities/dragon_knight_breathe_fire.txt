@@ -7,69 +7,67 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5226"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600"
     "AbilityCastPoint"                                    "0.2"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "14 13 12 11 11 11"
 
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "90 170 240 300 600 1200"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 110 120 130 140 150"
+    "AbilityManaCost"                                     "90 95 100 105 110 115"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "start_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "start_radius"                                    "150"
+        "value"                                           "150"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "end_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "end_radius"                                      "250"
+        "value"                                           "250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
+      "range"                                             "750"
+      "AbilityCastRange"                                  "600"
+      "speed"                                             "1050"
+      "damage" //OAA, special_bonus_unique_dragon_knight_1_oaa
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "range"                                           "750"
+        "value"                                           "90 160 230 300 600 900"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "04"
+      "reduction"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "1050"
+        "value"                                           "-30"
+        "special_bonus_unique_dragon_knight_3"            "-30"
       }
-      "05"
+      "dragon_form_bonus_pct" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "reduction"                                       "-25"
-        "LinkedSpecialBonus"                              "special_bonus_unique_dragon_knight_3"
+        "value"                                           "0"
+        "special_bonus_unique_dragon_knight_9"            "+100"
       }
-      "06"
+      "duration"                                          "11"
+      "physical_damage_type"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "11"
-      }
+        "value"                                           "0"
+        "special_bonus_facet_dragon_knight_corrosive_dragon"  "+1"
+      } 
     }
   }
 }

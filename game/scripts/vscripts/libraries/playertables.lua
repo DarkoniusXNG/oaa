@@ -150,8 +150,7 @@ function PlayerTables:PlayerTables_Connected(args)
   local player = PlayerResource:GetPlayer(pid)
   --print('player: ', player)
 
-
-  for k,v in pairs(PlayerTables.subscriptions) do
+  for k, v in pairs(PlayerTables.subscriptions) do
     if v[pid] then
       if player then
         CustomGameEventManager:Send_ServerToPlayer(player, "pt_fu", {name=k, table=PlayerTables.tables[k]} )
@@ -166,7 +165,7 @@ function PlayerTables:CreateTable(tableName, tableContents, pids)
 
   if pids == true then
     pids = {}
-    for i=0,DOTA_MAX_TEAM_PLAYERS-1 do
+    for i = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
       pids[#pids+1] = i
     end
   end
@@ -183,7 +182,7 @@ function PlayerTables:CreateTable(tableName, tableContents, pids)
     if type(v) == "number" then
       pid = v
     end
-    if pid >= 0 and pid < DOTA_MAX_TEAM_PLAYERS then
+    if pid >= 0 and PlayerResource:IsValidPlayerID(pid) and PlayerResource:IsValidPlayer(pid) then
       self.subscriptions[tableName][pid] = true
       local player = PlayerResource:GetPlayer(pid)
       if player then
@@ -201,7 +200,6 @@ function PlayerTables:DeleteTable(tableName)
     return
   end
 
-  local table = self.tables[tableName]
   local pids = self.subscriptions[tableName]
 
   for k,v in pairs(pids) do
@@ -234,7 +232,7 @@ function PlayerTables:SetPlayerSubscriptions(tableName, pids)
     if type(v) == "number" then
       pid = v
     end
-    if pid >= 0 and pid < DOTA_MAX_TEAM_PLAYERS then
+    if pid >= 0 and PlayerResource:IsValidPlayerID(pid) and PlayerResource:IsValidPlayer(pid) then
       self.subscriptions[tableName][pid] = true
       local player = PlayerResource:GetPlayer(pid)
       if player and oldPids[pid] == nil then
@@ -256,14 +254,14 @@ function PlayerTables:AddPlayerSubscription(tableName, pid)
   local oldPids = self.subscriptions[tableName]
 
   if not oldPids[pid] then
-    if pid >= 0 and pid < DOTA_MAX_TEAM_PLAYERS then
+    if pid >= 0 and PlayerResource:IsValidPlayerID(pid) and PlayerResource:IsValidPlayer(pid) then
       self.subscriptions[tableName][pid] = true
       local player = PlayerResource:GetPlayer(pid)
       if player then
         CustomGameEventManager:Send_ServerToPlayer(player, "pt_fu", {name=tableName, table=table} )
       end
     else
-      print("[playertables.lua] Warning: Pid value '" .. v .. "' is not an integer between [0," .. DOTA_MAX_TEAM_PLAYERS .. "].  Ignoring.")
+      print("[playertables.lua] Warning: Pid value '" .. pid .. "' is not an integer between [0," .. DOTA_MAX_TEAM_PLAYERS .. "].  Ignoring.")
     end
   end
 end
@@ -274,7 +272,6 @@ function PlayerTables:RemovePlayerSubscription(tableName, pid)
     return
   end
 
-  local table = self.tables[tableName]
   local oldPids = self.subscriptions[tableName]
   oldPids[pid] = nil
 end

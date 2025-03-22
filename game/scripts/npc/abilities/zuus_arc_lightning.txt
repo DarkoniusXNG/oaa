@@ -4,7 +4,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5110"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -12,10 +11,12 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "850"
+    "AbilityCastRange"                                    "800"
     "AbilityCastPoint"                                    "0.2"
 
     // Time
@@ -24,33 +25,24 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80"
+    "AbilityManaCost"                                     "75 85 95 105 115 125"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "arc_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "arc_damage"                                      "75 100 125 150 250 350"
-        "LinkedSpecialBonus"                              "special_bonus_unique_zeus_2"
+        "value"                                           "90 120 150 180 360 540"
+        "special_bonus_unique_zeus_2"                     "+30"
       }
-      "02"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "500"
+        "value"                                           "450"
+        "affected_by_aoe_increase"                        "1"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "jump_count"                                      "5 7 9 15 20 40"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "jump_delay"                                      "0.25"
-      }
+      "jump_count"                                        "5 7 9 11 13 15" //OAA
+      "jump_delay"                                        "0.25"
     }
   }
 }

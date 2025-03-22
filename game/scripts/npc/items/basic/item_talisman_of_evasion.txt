@@ -1,0 +1,8 @@
+"DOTAAbilities"
+{
+  "item_talisman_of_evasion"
+  {
+
+    "SecretShop"                                          "0" //OAA
+  }
+}

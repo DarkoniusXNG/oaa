@@ -2,16 +2,19 @@
 
 -- Taken from bb template
 if Courier == nil then
-  Debug.EnabledModules['courier:*'] = true
+  if Debug == nil or DebugPrint == nil then
+    require('internal/util')
+  end
+  Debug.EnabledModules['courier:*'] = false
   DebugPrint ( 'creating new Courier object' )
   Courier = class({})
 end
 
 function Courier:Init ()
-  Courier.hasCourier = {}
-  LinkLuaModifier("modifier_custom_courier_stuff", "components/courier/courier.lua", LUA_MODIFIER_MOTION_NONE)
-  Courier.enableCustomCourier = false -- if you want custom couriers just set this to true
-  if Courier.enableCustomCourier then
+  self.moduleName = "Courier"
+  self.hasCourier = {}
+  self.enableCustomCourier = false -- if you want custom couriers just set this to true
+  if self.enableCustomCourier then
     GameEvents:OnHeroInGame(Courier.SpawnCourier)
   else
     GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
@@ -27,7 +30,7 @@ function Courier.SpawnCourier(hero)
     return
   end
 
-  if hero:IsTempestDouble() or hero:IsClone() then
+  if hero:IsTempestDouble() or hero:IsClone() or hero:IsSpiritBearOAA() then
     return
   end
 
@@ -56,10 +59,10 @@ function Courier:OnNpcSpawned(keys)
   if keys.entindex then
     npc = EntIndexToHScript(keys.entindex)
   end
-  if not npc then
+  if not npc or npc:IsNull() then
     return
   end
-  if npc:IsCourier() then
+  if npc.IsCourier ~= nil and npc:IsCourier() then
     npc:AddNewModifier(npc, nil, "modifier_custom_courier_stuff", {})
   end
 end
@@ -128,14 +131,33 @@ function modifier_custom_courier_stuff:CheckState()
   return state
 end
 
-function modifier_custom_courier_stuff:OnTakeDamage(event)
-  if event.unit == self:GetParent() then
-    --print("Courier has taken damage")
+if IsServer() then
+  function modifier_custom_courier_stuff:OnTakeDamage(event)
     local parent = self:GetParent()
+    local attacker = event.attacker
+    local damaged_unit = event.unit
+
+    -- Check if attacker exists
+    if not attacker or attacker:IsNull() then
+      return
+    end
+
+    -- Check if damaged entity exists
+    if not damaged_unit or damaged_unit:IsNull() then
+      return
+    end
+
+    if damaged_unit ~= parent then
+      return
+    end
+
+    --print("Courier has taken damage")
     parent.taken_damage = true
 
     Timers:CreateTimer(1, function()
-      parent.taken_damage = false
+      if parent and not parent:IsNull() then
+        parent.taken_damage = false
+      end
     end)
   end
 end

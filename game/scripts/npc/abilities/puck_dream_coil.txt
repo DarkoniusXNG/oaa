@@ -7,93 +7,71 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5073"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
-    //"AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "750"
     "AbilityCastPoint"                                    "0.1"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "70 65 60 55 50"
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 150 200 250 300"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Does two modifiers
+    "AbilityManaCost"                                     "125 175 225 275 325"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "coil_duration"                                   "6.0"
+        "value"                                           "75 70 65 60 55"
+        "special_bonus_unique_puck"                       "-15"
       }
-      "02"
+      "coil_duration"                                     "5 5.5 6 6.5 7"
+      "coil_break_radius"                                 "600"
+      "stun_duration"                                     "0.5"
+      "coil_initial_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "coil_break_radius"                               "600"
+        "value"                                           "175 325 475 925 1375"
+        "special_bonus_unique_puck_coil_damage"           "+200"
       }
-      "03"
+      "coil_stun_duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "0.5"
+        "value"                                           "1.5 2.0 2.5 3.0 3.5"
       }
-      "04"
+      "coil_break_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "coil_initial_damage"                             "100 200 300 600 1100" //OAA
+        "value"                                           "200 400 600 1200 2200"
+        "special_bonus_unique_puck_coil_damage"           "+200"
       }
-      "05"
+      "coil_radius"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "coil_stun_duration"                              "1.8 2.4 3.0 3.5 4.0"
+        "value"                                           "375"
+        "affected_by_aoe_increase"                        "1"
       }
-      "06"
+      "coil_rapid_fire_rate" // unused
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "coil_break_damage"                               "300 500 700 1300 2300" //OAA
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+0.6"
       }
-      "07"
+      "coil_rapid_fire_z_offset"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "coil_radius"                                     "375"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+150"
       }
-      "08"
+      "attack_rate_pct" //OAA coil_rapid_fire_rate exists lmao but they had to make a new kv
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "coil_duration_scepter"                           "8"
-        "RequiresScepter"                                 "1"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "coil_break_damage_scepter"                       "400 700 1000 1700 2800" //OAA
-        "RequiresScepter"                                 "1"
-      }
-      "10"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "coil_stun_duration_scepter"                      "1.8 3.0 4.5 4.75 5.0" //OAA
-        "RequiresScepter"                                 "1"
+        "value"                                           "0"
+        "special_bonus_scepter"                           "+100"
       }
     }
   }

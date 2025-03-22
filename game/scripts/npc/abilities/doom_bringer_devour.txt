@@ -7,8 +7,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5339"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
@@ -25,7 +24,6 @@
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "300"
-    "AbilityCooldown"                                     "20" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -33,23 +31,41 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_gold" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_gold"                                      "50 100 150 200 600 1000"
-        "LinkedSpecialBonus"                              "special_bonus_unique_doom_3"
+        "value"                                           "50 100 150 200 400 800"
       }
-      "02"
+      "creep_level"                                       "6" //OAA
+      "ability_bonus_level"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "regen"                                           "5 10 20 30 60 120" //OAA
+        "special_bonus_facet_doom_bringer_gluttony"       "+1"
       }
-      "03"
+      "hero_ability_steal_time"                           "99999"
+      "magic_resist"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_level"                                     "6" //OAA
+        "value"                                           "0"
+        "special_bonus_unique_doom_3"                     "+15"
+      }
+      "AbilityCharges"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_doom_bringer_gluttony"       "=2"
+      }
+      "AbilityChargeRestoreTime" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_facet_doom_bringer_gluttony"       "=45"
+      }
+      "AbilityCooldown" //OAA
+      {
+        "value"                                           "30"
+        "special_bonus_facet_doom_bringer_gluttony"       "=0.0"
+      }
+      "can_target_ancient"
+      {
+        "special_bonus_unique_doom_2"                     "=1"
       }
     }
   }

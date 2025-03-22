@@ -7,19 +7,17 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"          "5200"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityType"         "DOTA_ABILITY_TYPE_BASIC"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "explosion"
       {
-        "var_type"        "FIELD_INTEGER"
-        "explosion"       "600 700 800 1200 1800 2600 3600"
+        "value"                                           "600 700 800 1200 1800 2600 3600"
       }
     }
   }

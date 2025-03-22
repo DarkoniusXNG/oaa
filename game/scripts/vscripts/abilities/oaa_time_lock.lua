@@ -2,7 +2,7 @@ faceless_void_time_lock_oaa = class( AbilityBaseClass )
 
 LinkLuaModifier("modifier_faceless_void_time_lock_oaa", "abilities/oaa_time_lock.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_faceless_void_time_walk_scepter_proc_oaa", "abilities/oaa_time_lock.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_faceless_void_chronosphere_scepter_oaa", "abilities/oaa_time_lock.lua", LUA_MODIFIER_MOTION_NONE)
+--LinkLuaModifier("modifier_faceless_void_chronosphere_scepter_oaa", "abilities/oaa_time_lock.lua", LUA_MODIFIER_MOTION_NONE)
 
 --------------------------------------------------------------------------------
 
@@ -39,13 +39,11 @@ end
 --------------------------------------------------------------------------------
 
 function modifier_faceless_void_time_lock_oaa:DeclareFunctions()
-  local funcs = {
+  return {
     --MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_MAGICAL, -- old time lock
     MODIFIER_EVENT_ON_ATTACK_LANDED,
     MODIFIER_EVENT_ON_MODIFIER_ADDED,
   }
-
-  return funcs
 end
 
 --------------------------------------------------------------------------------
@@ -99,8 +97,8 @@ if IsServer() then
       target:AddNewModifier( parent, spell, "modifier_faceless_void_timelock_freeze", { duration = duration } )
       target:EmitSound( "Hero_FacelessVoid.TimeLockImpact" )
 
-      -- use cooldown ( and mana, if necessary )
-      spell:UseResources( true, true, true )
+      -- go on cooldown
+      spell:UseResources( false, false, false, true )
 
       -- do another atttack that cannot miss after cd is started to prevent self-proccing
       parent:PerformAttack(target, true, true, true, false, false, false, true)
@@ -131,9 +129,16 @@ if IsServer() then
   function modifier_faceless_void_time_lock_oaa:OnAttackLanded(event)
     local parent = self:GetParent()
     local ability = self:GetAbility()
+    local attacker = event.attacker
     local target = event.target
 
-    if parent ~= event.attacker then
+    -- Check if attacker exists
+    if not attacker or attacker:IsNull() then
+      return
+    end
+
+    -- Check if attacker has this modifier
+    if attacker ~= parent then
       return
     end
 
@@ -142,12 +147,8 @@ if IsServer() then
       return
     end
 
-    -- To prevent crashes:
-    if not target then
-      return
-    end
-
-    if target:IsNull() then
+    -- Check if attacked unit exists
+    if not target or target:IsNull() then
       return
     end
 
@@ -162,12 +163,17 @@ if IsServer() then
       return
     end
 
+    -- Don't trigger when attacking allies or self
+    if target == parent or target:GetTeamNumber() == parent:GetTeamNumber() then
+      return
+    end
+
     -- Don't bash while on cooldown
     if not ability:IsCooldownReady() then
       return
     end
 
-    local chance = ability:GetSpecialValueFor("chance_pct")/100
+    local chance = ability:GetSpecialValueFor("chance_pct") / 100
 
     -- Get number of failures
     local prngMult = self:GetStackCount() + 1
@@ -210,23 +216,39 @@ if IsServer() then
     target:EmitSound("Hero_FacelessVoid.TimeLockImpact")
 
     -- Start cooldown respecting cooldown reductions
-    ability:UseResources(true, true, true)
+    ability:UseResources(false, false, false, true)
 
     -- Calculate bonus damage
-    local bonus_damage = ability:GetSpecialValueFor("bonus_damage")
-    local talent = parent:FindAbilityByName("special_bonus_unique_faceless_void_3")
+    local min_damage = ability:GetSpecialValueFor("min_damage")
+    local max_damage = ability:GetSpecialValueFor("max_damage")
 
+    -- Bonus damage talent
+    local talent = parent:FindAbilityByName("special_bonus_unique_faceless_void_3_oaa")
     if talent and talent:GetLevel() > 0 then
-      bonus_damage = bonus_damage + talent:GetSpecialValueFor("value")
+      min_damage = min_damage + talent:GetSpecialValueFor("value")
+      max_damage = max_damage + talent:GetSpecialValueFor("value2")
+    end
+
+    local bonus_damage = min_damage
+
+    -- Imitate multiple proccing without instant attack on each proc
+    -- We use true random to simplify the code and to make it more fair and balanced
+    local chance = ability:GetSpecialValueFor("chance_pct")
+    if RandomInt(0, 100) <= chance then
+      bonus_damage = (min_damage + max_damage) / 2
+      if RandomInt(0, 100) <= chance then
+        bonus_damage = max_damage
+      end
     end
 
     -- Damage table
-    local damage_table = {}
-    damage_table.attacker = parent
-    damage_table.damage_type = ability:GetAbilityDamageType()
-    damage_table.ability = ability
-    damage_table.damage = bonus_damage
-    damage_table.victim = target
+    local damage_table = {
+      attacker = parent,
+      victim = target,
+      damage = bonus_damage,
+      damage_type = ability:GetAbilityDamageType(),
+      ability = ability,
+    }
 
     -- Apply bonus damage
     ApplyDamage(damage_table)
@@ -239,10 +261,9 @@ if IsServer() then
     ParticleManager:ReleaseParticleIndex(particle)
 
     -- Second attack
-    -- Delay is hard-coded in normal dota to 0.33 seconds as per the particle constraints
-    local delay = ability:GetSpecialValueFor("second_attack_delay") or 0.33
+    local delay = ability:GetSpecialValueFor("second_attack_delay") or 0.4
     Timers:CreateTimer(delay, function()
-      if target:IsAlive() and not target:IsNull() then
+      if target:IsAlive() and not target:IsNull() then -- and target:HasModifier("modifier_faceless_void_time_lock_oaa")
         -- Perform the second attack (can trigger attack modifiers)
         parent:PerformAttack(target, false, true, true, false, false, false, false)
         -- Emit sound again
@@ -251,7 +272,7 @@ if IsServer() then
     end)
   end
 
-  -- Scepter effects: Time Walk applies AoE Time Lock and Chronosphere applies Frozen Time modifier
+  -- Scepter effects: Time Walk applies AoE Time Lock
   function modifier_faceless_void_time_lock_oaa:OnModifierAdded(event)
     local parent = self:GetParent()
 
@@ -263,15 +284,22 @@ if IsServer() then
     -- Unit that gained a modifier
     local unit = event.unit
 
-    if parent == unit then
+    if parent == unit and not parent:HasModifier("modifier_faceless_void_time_walk_scepter_proc_oaa") then
       local time_walk_modifier = parent:FindModifierByName("modifier_faceless_void_time_walk")
       if not time_walk_modifier then
         return
+      end
+      local ability = time_walk_modifier:GetAbility()
+      if ability then
+        if ability:GetName() ~= "faceless_void_time_walk" then
+          return
+        end
       end
       local remaining_duration = time_walk_modifier:GetRemainingTime()
       parent:AddNewModifier(parent, nil, "modifier_faceless_void_time_walk_scepter_proc_oaa", {duration = remaining_duration})
     end
 
+    --[[
     -- If the unit is not actually a unit but its an entity that can gain modifiers
     if unit.HasModifier == nil then
       return
@@ -291,6 +319,7 @@ if IsServer() then
       local chrono_duration = chrono_ability:GetLevelSpecialValueFor("duration", chrono_ability:GetLevel()-1)
       unit:AddNewModifier(parent, nil, "modifier_faceless_void_chronosphere_scepter_oaa", {duration = chrono_duration})
     end
+    ]]
   end
 end
 
@@ -342,7 +371,7 @@ function modifier_faceless_void_time_walk_scepter_proc_oaa:OnDestroy()
   --print("Cast Position is: "..tostring(cast_position))
 
   -- Get radius
-  local radius = time_walk_ability:GetSpecialValueFor("radius_scepter")
+  local radius = time_walk_ability:GetSpecialValueFor("radius")
 
   -- Find enemies in radius (ignore spell immune enemies on purpose)
   local enemies = FindUnitsInRadius(
@@ -358,16 +387,14 @@ function modifier_faceless_void_time_walk_scepter_proc_oaa:OnDestroy()
   )
 
   for _, enemy in pairs(enemies) do
-    if enemy and not enemy:IsNull() then
-      if not enemy:IsMagicImmune() and not enemy:IsAttackImmune() and not parent:IsDisarmed() and not enemy:IsInvulnerable() then
-        time_lock_modifier:ApplyTimeLock(time_lock_ability, enemy)
-      end
+    if enemy and not enemy:IsNull() and not enemy:IsMagicImmune() and not enemy:IsAttackImmune() and not enemy:IsInvulnerable() and not parent:IsDisarmed() then
+      time_lock_modifier:ApplyTimeLock(time_lock_ability, enemy)
     end
   end
 end
 
 ---------------------------------------------------------------------------------------------------
-
+--[[ -- modifier that disables evasion, disables healing and "freezes" ability cooldowns
 modifier_faceless_void_chronosphere_scepter_oaa = class(ModifierBaseClass)
 
 function modifier_faceless_void_chronosphere_scepter_oaa:IsHidden()
@@ -387,18 +414,15 @@ function modifier_faceless_void_chronosphere_scepter_oaa:IsPurgable()
 end
 
 function modifier_faceless_void_chronosphere_scepter_oaa:CheckState()
-  local state = {
+  return {
     [MODIFIER_STATE_EVADE_DISABLED] = true,
   }
-
-  return state
 end
 
 function modifier_faceless_void_chronosphere_scepter_oaa:DeclareFunctions()
-  local funcs = {
+  return {
     MODIFIER_PROPERTY_DISABLE_HEALING,
   }
-  return funcs
 end
 
 function modifier_faceless_void_chronosphere_scepter_oaa:GetDisableHealing()
@@ -415,12 +439,16 @@ if IsServer() then
   function modifier_faceless_void_chronosphere_scepter_oaa:OnIntervalThink()
     local parent = self:GetParent()
     self:CooldownFreeze(parent)
+    -- Remove this debuff if parent is not affected by Chronosphere anymore
+    if not parent:HasModifier("modifier_faceless_void_chronosphere_freeze") then
+      self:Destroy()
+    end
   end
 end
 
 function modifier_faceless_void_chronosphere_scepter_oaa:CooldownFreeze(target)
   -- Adds 0.1 second to the current cooldown to every spell off cooldown
-  for i = 0, target:GetAbilityCount()-1 do
+  for i = 0, target:GetAbilityCount() - 1 do
     local target_ability = target:GetAbilityByIndex(i)
     if target_ability then
       local cd = target_ability:GetCooldownTimeRemaining()
@@ -430,3 +458,4 @@ function modifier_faceless_void_chronosphere_scepter_oaa:CooldownFreeze(target)
     end
   end
 end
+]]

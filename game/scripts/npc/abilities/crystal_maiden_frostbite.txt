@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5127"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_BASIC"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -15,60 +14,35 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "550"
-    "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "9 8 7 6 6 6"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "140 145 150 155 160 165"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"                         "0.5"  // Applies multiple modifiers
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "total_damage"                                    "150 200 250 300 600 1200"
+        "value"                                           "600"
+        "special_bonus_unique_crystal_maiden_frostbite_castrange"  "+100"
       }
-      "02"
+      "AbilityCastPoint"                                  "0.3"
+      "AbilityCooldown"                                   "9 8 7 6 6 6"
+      "AbilityManaCost"                                   "125 135 145 155 165 175"
+      "damage_per_second"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_total_damage"                              "1000"
+        "value"                                           "100 100 100 100 200 300"
+        "CalculateSpellDamageTooltip"                     "1"
       }
-      "03"
+      "duration"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "1.5 2.0 2.5 3.0 3.5 4.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_crystal_maiden_1"
+        "value"                                           "1.5 2 2.5 3 3.5 4"
+        "special_bonus_unique_crystal_maiden_1"           "+1.0"
       }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "creep_duration"                                  "10.0"
-        "LinkedSpecialBonus"                              "special_bonus_unique_crystal_maiden_1"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tick_interval"                                   "0.7"
-      }
+      "creep_multiplier"                                  "4"
+      "tick_interval"                                     "0.25"
     }
   }
 }

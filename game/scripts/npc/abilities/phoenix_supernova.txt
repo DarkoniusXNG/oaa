@@ -7,7 +7,6 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5630"  // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -16,11 +15,10 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
-
-    "HasScepterUpgrade"                                   "1"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -34,45 +32,38 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "200"
+    "AbilityManaCost"                                     "150 200 250 300 350"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "aura_radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "aura_radius"                                     "1300"
+        "value"                                           "1200"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "damage_per_sec"                                    "60 120 180 360 540" //OAA
+      "tick_interval"                                     "0.2"
+      "stun_duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_per_sec"                                  "60 120 180 360 540" //OAA
+        "value"                                           "1.6 2 2.4 2.5 2.6"
+        "special_bonus_unique_phoenix_2"                  "+0.5"
       }
-      "03"
+      "max_hero_attacks" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "2.0 2.5 3.0 3.25 3.5"
-        "LinkedSpecialBonus"                              "special_bonus_unique_phoenix_2"
+        "value"                                           "6 9 12 14 16"
+        "special_bonus_unique_phoenix_1"                  "+2"
       }
-      "04"
+      "max_hero_attacks_scepter" // OAA, max_hero_attacks + 1
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_hero_attacks"                                "6 10 14 16 18" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_phoenix_1"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "max_hero_attacks_scepter"                        "7 12 17 19 21" //OAA
-        "LinkedSpecialBonus"                              "special_bonus_unique_phoenix_1"
+        "value"                                           "7 10 13 15 17"
+        "special_bonus_unique_phoenix_1"                  "+2"
         "RequiresScepter"                                 "1"
       }
-      "07" // 06
+      "cast_range_tooltip_scepter"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "cast_range_tooltip_scepter"                      "500"
+        "value"                                           "500"
         "RequiresScepter"                                 "1"
       }
     }

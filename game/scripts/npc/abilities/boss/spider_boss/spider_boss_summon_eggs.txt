@@ -1,0 +1,36 @@
+"DOTAAbilities"
+{
+  //=================================================================================================================
+  // Spider Boss: Summon Eggs - unused
+  //=================================================================================================================
+  "spider_boss_summon_eggs"
+  {
+    "BaseClass"                                           "ability_lua"
+    "ScriptFile"                                          "abilities/boss/spider_boss/spider_boss_summon_eggs.lua"
+    "AbilityTextureName"                                  "broodmother_spawn_spiderlings"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "1.0"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "20.0"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+      "spider_lifetime"                                   "90"
+      "egg_spider_lifetime"                               "45"
+      "num_egg_spawn"                                     "5"
+      "num_poison_spider_spawn"                           "3"
+    }
+  }
+}

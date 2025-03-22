@@ -7,22 +7,21 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "245"    // unique ID
     "Model"                                               "models/props_gameplay/recipe.vmdl"
+    //"AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1000"
+    "ItemCost"                                            "450"
     "ItemShopTags"                                        ""
 
     // Recipe
     //-------------------------------------------------------------------------------------------------------------
     "ItemRecipe"                                          "1"
     "ItemResult"                                          "item_bloodthorn"
-    "AbilityTextureName"                                  "custom/recipe/recipe_1"
-    "ItemRequirements"
+    "ItemRequirements" //OAA
     {
-      "01"                                                "item_orchid;item_hyperstone"
+      "01"                                                "item_orchid;item_javelin;item_hyperstone"
     }
   }
 
@@ -33,11 +32,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "250"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "AbilityTextureName"                                  "custom/bloodthorn"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "FightRecapLevel"                                     "1"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,8 @@
     "AbilityCastPoint"                                    "0.0"
     "AbilityCooldown"                                     "15.0"
     "AbilitySharedCooldown"                               "orchid"
-    "AbilityTextureName"                                  "custom/bloodthorn"
+    "AbilityManaCost"                                     "125"
+
     // Spicy Parameters
     //-------------------------------------------------------------------------------------------------------------
     "MaxUpgradeLevel"                                     "5"
@@ -54,57 +55,30 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
-    "ItemCost"                                            "6475"
+    "ItemCost"                                            "6625"
     "ItemShopTags"                                        "int;attack_speed;damage;regen_mana;damage;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "orchid malevolence;bloodthorn"
-    "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ItemDeclarations"                                    "DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_intellect"                                 "25 40 60 85 115"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "85 90 95 100 105" //OAA
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "30 40 60 90 130"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "bonus_mana_regen"                                "5.5 5.75 6.25 7.0 8.0"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "silence_damage_percent"                          "30"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "silence_duration"                                "5"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "target_crit_multiplier"                          "130 140 150 160 170"
-      }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "tooltip_crit_chance"                             "100"
-      }
+      "bonus_intellect"                                   "10 15 25 40 60" // Orchid (10);
+      "bonus_attack_speed"                                "95 100 105 110 115" // Orchid (35); Hyperstone (60);
+      "bonus_damage"                                      "10 20 40 70 110" // Orchid (10);
+      "bonus_mana_regen"                                  "3.25 3.5 4.0 4.75 5.75" // Orchid (3);
+      "bonus_health_regen"                                "6.5 9 12 15 18" // Orchid (6);
+      "silence_duration"                                  "5"
+      "silence_damage_percent"                            "40 45 50 55 60" //OAA
+      "duration"                                          "6" // unused
+      "spell_amp_debuff"                                  "35" // unused
+      "proc_damage_heroes"                                "40 45 55 70 90" //OAA, illusions are considered heroes
+      "proc_damage_creeps"                                "25 30 40 55 70"
+      "passive_proc_damage"                               "60 70 90 120 160"
+      "proc_chance"                                       "40"
     }
   }
 }

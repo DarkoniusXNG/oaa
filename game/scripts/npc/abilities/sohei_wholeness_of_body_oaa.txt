@@ -1,72 +1,61 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Sohei: Wholeness of Body
+  // Sohei: Wholeness of Body - scepter ability
   //=================================================================================================================
   "sohei_wholeness_of_body"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                                           "ability_lua"
-    "ID"                                                  "9511"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "ScriptFile"                                          "abilities/sohei/sohei_wholeness_of_body.lua"
+    "AbilityTextureName"                                  "custom/ronin_guard"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityTextureName"                                  "custom/ronin_guard"
-    "ScriptFile"                                          "abilities/sohei/sohei_wholeness_of_body.lua"
 
-    "MaxLevel"                                            "6"
+    "MaxLevel"                                            "1"
+    "IsGrantedByScepter"                                  "1"
+    "HasScepterUpgrade"                                   "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0.25"
-    "AbilityCastRange"                                    "500"
-    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2"
+    "AbilityCastRange"                                    "550"
+    "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_2" // does nothing for Sohei, but it does something for Rubick
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "19 18 17 16 15 14"
+    "AbilityCooldown"                                     "14"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "85"
+    "AbilityManaCost"                                     "90"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
       "particle"                                          "particles/hero/sohei/guard.vpcf"
-      "particle"                                          "particles/hero/sohei/knockback.vpcf"
+      //"particle"                                          "particles/hero/sohei/knockback.vpcf"
       "soundfile"                                         "soundevents/units/game_sounds_sohei.vsndevts"
     }
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bonus_magic_resistance"                            "60"
+      "duration"                                          "6"
+      "post_heal"                                         "75"
+      "damage_taken_as_heal"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_magic_resistance"                          "90"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "6.0 6.5 7.0 7.5 8.0 8.5"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "post_heal"                                       "90 160 230 300 600 900"
-      }
-      "04"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_taken_heal"                               "25"
+        "value"                                           "25"
         "CalculateSpellDamageTooltip"                     "0"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
     }
   }

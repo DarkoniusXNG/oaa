@@ -7,65 +7,70 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5075"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "1300"
     "AbilityCastPoint"                                    "0.3"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15 14 13 12 11 10" //OAA
-
-    // Damage.
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "150 220 290 360 720 1440" // Damage appears in tooltip twice
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 130 135 140 145 150"
+    "AbilityManaCost"                                     "110"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "damage"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "150 220 290 360 720 1440"
-        "LinkedSpecialBonus"                              "special_bonus_unique_pudge_7"
+        "value"                                           "150 220 290 360 720 1440"
+        "special_bonus_facet_pudge_flayers_hook"          "=80 =120 =160 =200 =400 =800"
+        "special_bonus_unique_pudge_7"                    "+150"
       }
-      "02"
+      "hook_speed"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "hook_speed"                                      "1450.0"
+        "value"                                           "1600.0"
+        "special_bonus_facet_pudge_flayers_hook"          "+0"
       }
-      "03"
+      "hook_width"                                        "100"
+      "AbilityCastRange"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hook_width"                                      "100"
+        "value"                                           "1300"
+        "special_bonus_facet_pudge_flayers_hook"          "+15%"
       }
-      "04"
+      "vision_radius"                                     "500"
+      "vision_duration"                                   "4.0"
+      "reveal_duration"                                   "00"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "hook_distance"                                   "1300"
+        "value"                                           "15 14 13 12 11 10"
+        "special_bonus_unique_pudge_5"                    "-4"
       }
-      "05"
+      "vector_target_distance"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "vision_radius"                                   "500"
+        "value"                                           "0"
       }
-      "06"
+      "distance_to_damage" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "vision_duration"                                 "4.0"
+        "special_bonus_shard"                             "12 15 18 21 24 27"
+      }
+      "min_distance_damage"
+      {
+        "special_bonus_shard"                             "10"
+      }
+      "cooldown_reduction_pct_allied_hook"
+      {
+        "special_bonus_shard"                             "50"
+      }
+      "self_stun_duration_percent"
+      {
+        "value"                                           "65"
       }
     }
   }

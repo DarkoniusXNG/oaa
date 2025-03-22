@@ -1,0 +1,8 @@
+"DOTAAbilities"
+{
+  "item_demon_edge"
+  {
+
+    "SecretShop"                                          "0" //OAA
+  }
+}

@@ -1,28 +1,25 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Mirana Invis
+  // Ability: Mirana Moonlight Shadow
   //=================================================================================================================
   "mirana_invis"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5049"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "FightRecapLevel"                                     "2"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
 
     "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
     "AbilityCastPoint"                                    "0.5"
-
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120 110 100 100 100" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -30,23 +27,22 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "AbilityCooldown" //OAA
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "fade_delay"                                      "2.5 2.0 1.5 1.25 1.0"
+        "value"                                           "120 110 100 95 90"
+        "special_bonus_unique_mirana_4"                   "-20" // special_bonus_unique_mirana_4 is not used
       }
-      "02"
+      "fade_delay"                                        "2.5 2.25 2.0 1.75 1.5" //OAA
+      "duration"                                          "11" //OAA
+      "bonus_movement_speed"                              "9 12 15 18 21"
+      "evasion"
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "18.0"
+        "value"                                           "0"
+        "special_bonus_unique_mirana_5"                   "+20"
       }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "9 12 15 18 21"
-      }
+      "bonus_outgoing_damage_pct"                         "9.0 12.0 15.0 18.0 21.0"
     }
   }
 }

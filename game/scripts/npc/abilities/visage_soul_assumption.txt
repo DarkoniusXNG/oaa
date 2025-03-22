@@ -4,15 +4,15 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5481"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "FightRecapLevel"                                     "1"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -20,11 +20,11 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "4.0"
+    "AbilityCooldown"                                     "4"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "135 140 145 150 155 160"
+    "AbilityManaCost"                                     "110 115 120 125 130 135" //OAA
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
@@ -32,54 +32,49 @@
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "bolt_speed"                                        "1000"
+      "soul_base_damage"                                  "20"
+      "soul_charge_damage" //OAA
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "bolt_speed"                                      "1000"
+        "value"                                           "70 70 70 70 110 150"
+        "special_bonus_unique_visage_4"                   "+40"
       }
-      "02"
+      "soul_charge_gold"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "soul_base_damage"                                "20"
+        "value"                                           "0"
+        "special_bonus_facet_visage_gold_assumption"      "30"    // if changing this, change gold_max_tooltip
       }
-      "03"
+      "gold_creep_pct"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "soul_charge_damage"                              "75"
-        "LinkedSpecialBonus"                              "special_bonus_unique_visage_4"
+        "value"                                           "0"
+        "special_bonus_facet_visage_gold_assumption"      "15"
       }
-      "04"
+      "gold_grace_period_hero"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "stack_limit"                                     "3 4 5 6 11 16"
+        "value"                                           "0"
+        "special_bonus_facet_visage_gold_assumption"      "3.0"
       }
-      "05"
+      "gold_max_tooltip" // soul_charge_gold x stack_limit
       {
-        "var_type"                                        "FIELD_FLOAT"
-        "stack_duration"                                  "6.0"
+        "value"                                           "0"
+        "special_bonus_facet_visage_gold_assumption"      "90 120 150 180 210 240"       // TOOLTIP ONLY, if changing this, change soul_charge_gold
       }
-      "06"
+      "stack_limit"                                       "3 4 5 6 7 8"
+      "stack_duration"                                    "6.0"
+      "damage_limit"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "damage_limit"                                    "100"
+        "value"                                           "100"
+        "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "07"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1500"
+        "value"                                           "1800"
+        "affected_by_aoe_increase"                        "1"
       }
-      "08"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_min"                                      "2.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "damage_max"                                      "3000.0"
-      }
+      "damage_min"                                        "2.0"
+      "damage_max"                                        "3000.0"
     }
   }
 }

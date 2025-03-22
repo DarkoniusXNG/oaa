@@ -7,13 +7,11 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"                                                  "5121"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "FightRecapLevel"                                     "2"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -21,39 +19,34 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "0"
     "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "130.0" //OAA
+    "AbilityCooldown"                                     "120 115 110 100 90" //OAA
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"                                       "200 400 600 1200 2200" //OAA
+    "AbilityDamage"                                       "275 475 675 1275 2275" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "150 225 325 450 600"
+    "AbilityManaCost"                                     "125 225 325 425 525"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
+    "AbilityValues"
     {
-      "01"
+      "radius"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "1250"
+        "value"                                           "1250"
+        "affected_by_aoe_increase"                        "1"
       }
-      "02"
+      "speed"                                             "725"
+      "duration"
       {
-        "var_type"                                        "FIELD_INTEGER"
-        "speed"                                           "725"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "2.4 2.6 2.8 3.0 3.2"
+        "value"                                           "2.0 2.2 2.4 2.6 2.8"
+        "special_bonus_unique_tidehunter_7"               "+0.8"
       }
     }
   }

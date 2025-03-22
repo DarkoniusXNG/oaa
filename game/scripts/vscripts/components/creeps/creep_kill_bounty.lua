@@ -1,16 +1,15 @@
 GameEvents:OnEntityFatalDamage(function (keys)
+  if not keys.entindex_killed or not keys.entindex_attacker then
+    return
+  end
   local killedUnit = EntIndexToHScript(keys.entindex_killed)
-  if not killedUnit:IsCreep() then
+  if not killedUnit or killedUnit.IsCreep == nil or not killedUnit:IsCreep() then
     return
   end
   local attacker = EntIndexToHScript(keys.entindex_attacker)
-  local player = attacker:GetPlayerOwner()
   local playerID = attacker:GetPlayerOwnerID()
 
-  local function divBy100(num)
-    return num / 100
-  end
-
+  --[[
   local sharedBountyItems = {
     "item_travel_origin",
     "item_greater_travel_boots",
@@ -19,6 +18,7 @@ GameEvents:OnEntityFatalDamage(function (keys)
     "item_greater_travel_boots_4",
     "item_greater_travel_boots_5",
   }
+  ]]
   -- table of player id to share with,
   local shareTable = {}
 
@@ -26,7 +26,7 @@ GameEvents:OnEntityFatalDamage(function (keys)
   if killedUnit:IsNeutralUnitType() then
     local allies = FindUnitsInRadius(
       PlayerResource:GetTeam(playerID),
-      attacker:GetOrigin(),
+      killedUnit:GetAbsOrigin(),
       nil,
       CREEP_BOUNTY_SHARE_RADIUS,
       DOTA_UNIT_TARGET_TEAM_FRIENDLY,
@@ -48,6 +48,7 @@ GameEvents:OnEntityFatalDamage(function (keys)
         -- this is a really ugly hardcoded way to do this
         -- but the day valve gives us custom modifier properties
         -- is the day i know we're in the matrix
+        --[[
         if unit:HasInventory() then
           for _, itemName in pairs(sharedBountyItems) do
             local item = unit:FindItemInInventory(itemName)
@@ -63,6 +64,7 @@ GameEvents:OnEntityFatalDamage(function (keys)
             end
           end
         end
+        ]]
       end
     end
 
@@ -71,7 +73,7 @@ GameEvents:OnEntityFatalDamage(function (keys)
     for pID, bonus in pairs(shareTable) do
       local percent = CREEP_BOUNTY_SHARE_PERCENT + bonus
       -- minimum shared bounty of 1 because really now
-      local bounty = math.max(1, killedUnit:GetGoldBounty() * divBy100(percent))
+      local bounty = math.max(1, killedUnit:GetGoldBounty() * percent / 100)
       local allyPlayer = PlayerResource:GetPlayer(pID)
 
       Gold:ModifyGold(pID, bounty, false, DOTA_ModifyGold_SharedGold)
@@ -81,6 +83,9 @@ GameEvents:OnEntityFatalDamage(function (keys)
 
   -- old fool's gold reduction after shared bounty
   --[[
+  local function divBy100(num)
+    return num / 100
+  end
   local function HasCreepBountyMult(modifier)
     return modifier.DeclareFunctions and
       contains(MODIFIER_PROPERTY_BOUNTY_CREEP_MULTIPLIER, modifier:DeclareFunctions())
@@ -96,10 +101,11 @@ GameEvents:OnEntityFatalDamage(function (keys)
 
   -- bonus gold if player has specific sparks that give percentage gold bonus bounty
   -- I am not using MODIFIER_PROPERTY_BOUNTY_CREEP_MULTIPLIER in case Valve makes it actually work
+  --[[ -- uncomment if you want sparks to give bonus gold again
   local creepBountyMultiplier = 1
   if attacker:HasModifier("modifier_spark_cleave") then
     creepBountyMultiplier = creepBountyMultiplier + CREEP_BOUNTY_BONUS_PERCENT_CLEAVE/100
-  elseif attacker:HasModifier("modifier_spark_power") then
+  elseif attacker:HasModifier("modifier_spark_power") or attacker:HasModifier("modifier_spark_power_effect") then
     creepBountyMultiplier = creepBountyMultiplier + CREEP_BOUNTY_BONUS_PERCENT_POWER/100
   end
 
@@ -109,4 +115,12 @@ GameEvents:OnEntityFatalDamage(function (keys)
   local newGoldBountyMax = oldGoldBountyMax * creepBountyMultiplier
   killedUnit:SetMinimumGoldBounty(newGoldBountyMin)
   killedUnit:SetMaximumGoldBounty(newGoldBountyMax)
+  ]]
+
+  --[[ -- uncomment this if vanilla gold gain from killing creeps is somehow disabled
+  local newBounty = math.ceil((newGoldBountyMin + newGoldBountyMax) / 2)
+  local attackingPlayer = PlayerResource:GetPlayer(playerID)
+  Gold:ModifyGold(playerID, newBounty, false, DOTA_ModifyGold_CreepKill)
+  SendOverheadEventMessage(attackingPlayer, OVERHEAD_ALERT_GOLD, killedUnit, newBounty, attackingPlayer)
+  ]]
 end)
