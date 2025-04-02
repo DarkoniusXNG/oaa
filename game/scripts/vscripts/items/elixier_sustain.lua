@@ -47,7 +47,7 @@ function modifier_elixier_sustain_active:RemoveOnDeath()
 end
 
 function modifier_elixier_sustain_active:GetEffectName()
-  return "particles/generic_gameplay/rune_regeneration_sparks.vpcf"
+  return "particles/items/elixiers/elixier_sustain.vpcf"
 end
 
 function modifier_elixier_sustain_active:GetEffectAttachType()
@@ -129,11 +129,6 @@ if IsServer() then
       return
     end
 
-    -- Ignore damage with no-reflect flag
-    if bit.band(dmg_flags, DOTA_DAMAGE_FLAG_REFLECTION) > 0 then
-      return
-    end
-
     -- Ignore damage with HP removal flag
     if bit.band(dmg_flags, DOTA_DAMAGE_FLAG_HPLOSS) > 0 then
       return
@@ -149,28 +144,42 @@ if IsServer() then
       return
     end
 
-    -- Ignore damage with no-spell-lifesteal flag
-    if inflictor and bit.band(dmg_flags, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) > 0 then
-      return
+    local dmg_category = event.damage_category
+    local dmg_type = event.damage_type
+
+    -- Determine lifesteal or spell lifesteal
+    local lifesteal_bool = false
+    local spell_lifesteal_bool = false
+    if dmg_category == DOTA_DAMAGE_CATEGORY_ATTACK then
+      if dmg_type == DAMAGE_TYPE_PHYSICAL then
+        -- Physical attacks
+        lifesteal_bool = true
+      else
+        -- Magical attacks
+        spell_lifesteal_bool = true
+      end
+    elseif dmg_category == DOTA_DAMAGE_CATEGORY_SPELL then
+      -- Spell damage
+      spell_lifesteal_bool = true
     end
 
-    -- Ignore damage with no-spell-amplification flag
-    if bit.band(dmg_flags, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) > 0 then
-      return
+    if not inflictor or inflictor:IsNull() then
+      -- Normal attacks and weird stuff do not have inflictor
+      lifesteal_bool = true
     end
 
     local lifesteal_pct = 0
-    if inflictor then
+    if spell_lifesteal_bool then
       lifesteal_pct = self.hero_spell_lifesteal
-    else
+    elseif lifesteal_bool then
       lifesteal_pct = self.hero_lifesteal
     end
 
     -- Illusions are treated as creeps too
     if not damaged_unit:IsRealHero() and not damaged_unit:IsStrongIllusionOAA() then
-      if inflictor then
+      if spell_lifesteal_bool then
         lifesteal_pct = self.creep_spell_lifesteal
-      else
+      elseif lifesteal_bool then
         lifesteal_pct = self.creep_lifesteal
       end
     end
@@ -179,16 +188,43 @@ if IsServer() then
     local lifesteal_amount = damage * lifesteal_pct / 100
 
     if lifesteal_amount > 0 then
-      --attacker:Heal(lifesteal_amount, nil)
       -- Particle
-      if inflictor then
+      if spell_lifesteal_bool then
+        local succubus = attacker:FindAbilityByName("queenofpain_succubus")
+        local isSuccubus = succubus and succubus:GetLevel() > 0
+        local spellLifestealReflected = false
+        if isSuccubus then
+          spellLifestealReflected = succubus:GetSpecialValueFor("lifesteal_reflected") == 1
+        end
+
+        -- Ignore pure damage
+        if dmg_type == DAMAGE_TYPE_PURE then
+          if not isSuccubus then
+            return
+          end
+        end
+
+        -- Ignore damage that has the no-reflect flag
+        if bit.band(dmg_flags, DOTA_DAMAGE_FLAG_REFLECTION) > 0 then
+          if not spellLifestealReflected then
+            return
+          end
+        end
+
+        -- Ignore damage that has the no-spell-lifesteal flag
+        if bit.band(dmg_flags, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) > 0 then
+          if not spellLifestealReflected then
+            return
+          end
+        end
+
         -- Spell Lifesteal
         attacker:HealWithParams(lifesteal_amount, nil, false, true, attacker, true)
 
         local particle1 = ParticleManager:CreateParticle("particles/items3_fx/octarine_core_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, attacker)
         ParticleManager:SetParticleControl(particle1, 0, attacker:GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex(particle1)
-      else
+      elseif lifesteal_bool then
         -- Normal Lifesteal
         attacker:HealWithParams(lifesteal_amount, nil, true, true, attacker, false)
 

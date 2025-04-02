@@ -5,6 +5,7 @@
 
 DOTA_TEAM_SPECTATOR = 1
 MANUAL_GARBAGE_CLEANING_TIME = 6
+DOTA_ITEM_NEUTRAL_SLOT = DOTA_ITEM_NEUTRAL_ACTIVE_SLOT or 16
 
 -----------------------------------------------------------------------------------
 -- OAA specific settings
@@ -41,6 +42,7 @@ TEN_V_TEN_KILL_LIMIT = 4                  -- Starting KILL_LIMIT = 10 + TEN_V_TE
 KILL_LIMIT_INCREASE = 1                   -- Extend amount = KILL_LIMIT_INCREASE x number of players: 5v5 - 10; 4v4 - 8;
 TEN_V_TEN_LIMIT_INCREASE = 1              -- Extend amount = TEN_V_TEN_LIMIT_INCREASE x number of players: 10v10 - 20; 8v8 - 16; 6v6 - 12;
 ONE_V_ONE_LIMIT_INCREASE = 2              -- Extend amount = min(ONE_V_ONE_LIMIT_INCREASE x number of players, 6): 1v1 - 4; 2v2 - 6; 3v3 - 6; 4v4 - 6; solo - 2;
+LIMIT_INCREASE_STARTING_COOLDOWN = 60 * 8 -- same as DUEL_INTERVAL so the extension shrine becomes active before the duel
 
 -- poop wards
 POOP_WARD_DURATION = 360
@@ -113,6 +115,7 @@ BOSS_RESPAWN_TIMER = 180                -- time after boss death before spawning
 BOSS_RESPAWN_START = 180                -- time for the first boss spawn
 BOSS_LEASH_SIZE = 1200                  -- number of units a boss will walk before starting to head back
 BOSS_AGRO_FACTOR = 15                   -- boss must take (tier * n) damage before agro
+BOSS_DMG_RED_FOR_PCT_SPELLS = 50        -- boss additional damage reduction against percent damage spells (in %)
 BOSS_WANDERER_MIN_SPAWN_TIME = 12       -- min time at which first Wanderer can spawn (in minutes)
 BOSS_WANDERER_MAX_SPAWN_TIME = 15       -- max time at which first Wanderer can spawn (in minutes)
 BOSS_WANDERER_MIN_RESPAWN_TIME = 4      -- min respawn time of the Wanderer (in minutes)
@@ -171,11 +174,11 @@ HERO_DYING_STREAK_MAX = 5            -- After how many deaths, hero stops giving
 USE_DEFAULT_RUNE_SYSTEM = false      -- Should we use the default dota rune spawn timings and the same runes as dota have?
 -- Bounty Runes
 FIRST_BOUNTY_RUNE_SPAWN_TIME = 0     -- After what delay in seconds will the first bounty rune spawn?
-BOUNTY_RUNE_SPAWN_INTERVAL = 180     -- How long in seconds should we wait between bounty rune respawns?
+BOUNTY_RUNE_SPAWN_INTERVAL = 240     -- How long in seconds should we wait between bounty rune respawns?
 BOUNTY_RUNE_INITIAL_TEAM_GOLD = 16
 BOUNTY_RUNE_INITIAL_TEAM_XP = 9
 -- Power-up Runes
-FIRST_POWER_RUNE_SPAWN_TIME = 0      -- After what delay in seconds will the first power-up rune spawn?
+FIRST_POWER_RUNE_SPAWN_TIME = 120    -- After what delay in seconds will the first power-up rune spawn?
 POWER_RUNE_SPAWN_INTERVAL = 120      -- How long in seconds should we wait between power-up runes respawns?
 
 -- end OAA specific settings

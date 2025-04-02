@@ -33,6 +33,7 @@
         "Icon"                                            "damage"
         "Color"                                           "Red"
         "GradientID"                                      "0"
+        "Deprecated"                                      "true"
         "Abilities"
         {
           "Ability1"
@@ -54,6 +55,21 @@
           {
             "AbilityName"                                 "bristleback_bristleback"
             "ReplaceAbility"                              "bristleback_bristleback_oaa"
+            "AutoLevelAbility"                            "false"
+          }
+        }
+      }
+      "bristleback_seeing_red"
+      {
+        "Icon"                                            "no_vision"
+        "Color"                                           "Red"
+        "GradientID"                                      "0"
+        "Abilities"
+        {
+          "Ability1"
+          {
+            "AbilityName"                                 "bristleback_scepter_oaa"
+            "AbilityIndex"                                "4"
             "AutoLevelAbility"                            "false"
           }
         }

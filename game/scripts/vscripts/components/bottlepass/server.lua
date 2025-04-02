@@ -74,7 +74,7 @@ function Bottlepass:SendWinner (winner)
     end
   end
 
-  self:Request('match/complete', {
+  local req = self:Request('match/complete', {
     winner = winner,
     endTime = endTime,
     gameLength = gameLength,
@@ -121,7 +121,7 @@ function Bottlepass:SendWinner (winner)
 ]]
   end)
 
-  if IsInToolsMode() then
+  if not req then
     Bottlepass:SendEndGameStats()
   end
 end
@@ -145,8 +145,8 @@ function Bottlepass:SendBans (data)
     self:Request('match/send_bans', {
       banChoices = banChoices,
       bans = data.bans
-    }, function (err, data)
-      DebugPrintTable(data)
+    }, function (err, response)
+      DebugPrintTable(response)
     end)
   end
 end
@@ -165,8 +165,8 @@ function Bottlepass:SendHeroPicks (data)
         didPick = true
         heroPicks[steamid] = {
           hero = choiceTable.selectedhero,
-          random = choiceTable.didRandom == "true",
-          rerandom = choiceTable.didRandom == "rerandom"
+          random = choiceTable.didRandom == "true" or choiceTable.didRandom == "rerandomed",
+          rerandom = choiceTable.didRandom == "rerandomed"
         }
       end
     end
@@ -174,8 +174,8 @@ function Bottlepass:SendHeroPicks (data)
   if didPick then
     self:Request('match/send_heroes', {
       picks = heroPicks
-    }, function (err, data)
-      DebugPrintTable(data)
+    }, function (err, response)
+      DebugPrintTable(response)
     end)
   end
 end
@@ -200,8 +200,25 @@ function Bottlepass:SendTeams ()
   self:Request('match/send_teams', {
     dire = dire,
     radiant = radiant
-  }, function (err, data)
-    DebugPrintTable(data)
+  }, function (err, response)
+    DebugPrintTable(response)
+  end)
+end
+
+function Bottlepass:GetUnpopularHeroes (callback)
+  DebugPrint('Fetching unpopular hero pick list')
+
+  local heroList = HeroSelection:GetHeroList()
+  local heroes = {}
+  for key,_ in pairs(heroList) do
+    table.insert(heroes, key)
+  end
+
+  self:Request('match/unpopular_heroes', {
+    heroes = heroes
+  }, function (err, response)
+    DebugPrintTable(response)
+    callback(response)
   end)
 end
 
@@ -263,6 +280,15 @@ function Bottlepass:Request(api, data, cb)
     --cb("No bottlepass in 10v10", {})
     --return
   --end
+  if OAAOptions then
+    if OAAOptions.settings then
+      local s = OAAOptions.settings
+      if s.HEROES_MODS ~= "HMN" or s.HEROES_MODS_2 ~= "HMN" or s.HEROES_MODS_BUNDLE ~= "HMBN" or s.BOSSES_MODS ~= "BMN" then
+        cb("No bottlepass when modifiers are ON", {})
+        return
+      end
+    end
+  end
   if GameRules:IsCheatMode() and not IsInToolsMode() then
     cb("No Bottlepass while in cheats mode", {})
     return

@@ -5,7 +5,7 @@ g_ItemPrecache = {
   "item_butterfly_oaa",
   "item_craggy_coat_oaa",
   "item_dagger_of_moriah_1",
-  "item_dagon_oaa",
+  "item_dagon_oaa_1",
   "item_demon_stone",
   "item_devastator_oaa_2",
   "item_dispel_orb_1",
@@ -18,7 +18,6 @@ g_ItemPrecache = {
   "item_far_sight",
   "item_giant_form",
   "item_greater_phase_boots",
-  "item_greater_tranquil_boots",
   "item_heart_oaa_1",
   "item_heart_transplant",
   "item_lucience",
@@ -31,7 +30,8 @@ g_ItemPrecache = {
   "item_regen_crystal_1",
   --"item_rune_breaker_oaa",
   --"item_sacred_skull",
-  "item_satanic_core",
+  --"item_satanic_core_1",
+  "item_shade_staff_1",
   "item_shield_staff",
   "item_siege_mode",
   --"item_silver_staff",
@@ -45,6 +45,8 @@ g_ItemPrecache = {
 g_UnitPrecache = {
   "dota_fountain",
   "npc_dota_demon_stone_demon",
+  "npc_dota_eul_tornado",
+  "npc_dota_eul_wildkin",
   "npc_dota_monkey_clone_oaa",
   "npc_dota_tinkerer_keen_node",
   --"npc_dota_visage_familiar", -- should be precached together with Visage
@@ -88,6 +90,7 @@ g_UnitPrecache = {
   "npc_dota_boss_wanderer_2",
   "npc_dota_boss_wanderer_3",
   "npc_dota_boss_grendel",
+  "npc_dota_neutral_custom_small_ghost",
 }
 
 g_ModelPrecache = {
@@ -95,6 +98,9 @@ g_ModelPrecache = {
   "models/items/upgrade_2.vmdl",
   "models/items/upgrade_3.vmdl",
   "models/items/upgrade_4.vmdl",
+  "models/items/wards/knightstatue_ward/knightstatue_ward.vmdl",
+  "models/creeps/neutral_creeps/n_creep_satyr_spawn_a/n_creep_satyr_spawn_a.vmdl",
+  "models/prefab_base/pedestal/pedestal.vmdl",
 }
 
 g_ParticlePrecache = {
@@ -102,8 +108,11 @@ g_ParticlePrecache = {
   "particles/items/upgrade_2.vpcf",
   "particles/items/upgrade_3.vpcf",
   "particles/items/upgrade_4.vpcf",
-  "particles/units/heroes/hero_pugna/pugna_netherblast_pre.vpcf",
-  "particles/units/heroes/hero_pugna/pugna_netherblast.vpcf",
+  "particles/units/heroes/hero_pugna/pugna_netherblast_pre.vpcf", -- For Explosive Death modifier
+  "particles/units/heroes/hero_pugna/pugna_netherblast.vpcf", -- For Explosive Death modifier
+  "particles/units/heroes/hero_ogre_magi/ogre_magi_multicast.vpcf", -- For Multicast modifier
+  "particles/units/heroes/hero_ogre_magi/ogre_magi_multicast_b.vpcf", -- For Multicast modifier
+  "particles/units/heroes/hero_ogre_magi/ogre_magi_multicast_c.vpcf", -- For Multicast modifier
   "particles/items/phase_splinter_impact_model.vpcf", -- Cleave Spark particle
   "particles/units/heroes/hero_treant/treant_leech_seed_damage_glow.vpcf", -- Midas Spark particle
   "particles/dungeon_overhead_timer_colored.vpcf", -- Offside overhead numbers
@@ -133,6 +142,7 @@ g_ParticleFolderPrecache = {
 g_SoundPrecache = {
   "soundevents/game_sounds_heroes/game_sounds_treant.vsndevts", -- Midas Spark sounds, Giant Form sound
   "soundevents/game_sounds_heroes/game_sounds_pugna.vsndevts", -- For Explosive Death modifier
+  "soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts", -- For Multicast modifier
   -- Ambient sounds
   --"soundevents/ambient/doors.vsndevts",
   "soundevents/music/music.vsndevts",

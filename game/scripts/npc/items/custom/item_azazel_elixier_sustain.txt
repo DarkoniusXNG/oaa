@@ -37,13 +37,15 @@
 
     "SecretShop"                                          "1"
     "IsTempestDoubleClonable"                             "0"
+    "SpeciallyBannedFromNeutralSlot"                      "1"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
-      "particle"                                          "particles/generic_gameplay/rune_regeneration.vpcf"
-      "particle"                                          "particles/generic_gameplay/rune_regeneration_sparks.vpcf"
+      "particle"                                          "particles/items/elixiers/elixier_sustain.vpcf"
+      "particle"                                          "particles/items/elixiers/elixier_sustain_b.vpcf"
+      "particle"                                          "particles/items/elixiers/elixier_sustain_c.vpcf"
     }
 
     // Special

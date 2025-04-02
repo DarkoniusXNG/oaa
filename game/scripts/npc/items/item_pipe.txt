@@ -61,7 +61,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "health_regen"                                      "6 7 8 9 10" // OAA, Ring of Tarrasque (6);
+      "health_regen"                                      "12 13 14 15 16" // OAA, Ring of Tarrasque (12);
       "magic_resistance"                                  "20 22 24 26 28"
       "barrier_debuff_duration"                           "50.0"
       "tooltip_resist"                                    "20 22 24 26 28"
@@ -72,15 +72,15 @@
         "value"                                           "1200"
         "affected_by_aoe_increase"                        "1"
       }
-      "barrier_block"                                     "450 550 750 1050 1450"
-      "barrier_duration"                                  "10.0"
+      "barrier_block"                                     "425 525 725 1025 1425"
+      "barrier_duration"                                  "8.0"
       "barrier_radius"
       {
         "value"                                           "1200"
         "affected_by_aoe_increase"                        "1"
       }
       "bonus_all_stats"                                   "0"
-      "barrier_block_creep"                               "450 550 750 1050 1450"
+      "barrier_block_creep"                               "425 525 725 1025 1425"
     }
   }
 }

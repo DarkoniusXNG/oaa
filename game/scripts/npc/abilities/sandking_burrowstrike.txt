@@ -26,7 +26,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "110 120 130 140 150 160"
 
-    "AbilityDamage"                                       "100 160 220 280 560 840" //OAA
+    "AbilityDamage"                                       "80 140 200 260 520 1040"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,6 @@
       "burrow_duration"
       {
         "value"                                           "1.2 1.4 1.6 1.8 1.9 2.0"
-        "special_bonus_unique_sand_king_burrowstrike_stun"  "+0.3"
       }
       "burrow_speed"                                      "2000"
       "burrow_anim_time"                                  "0.52"
@@ -56,8 +55,7 @@
       }
       "burrow_speed_scepter" // unused
       {
-        "value"                                           "3000"
-        "RequiresScepter"                                 "1"
+        "special_bonus_scepter"                           "3000"
       }
       "scepter_channel_time"                              "2" // unused
       "scepter_max_power"                                 "2" // unused

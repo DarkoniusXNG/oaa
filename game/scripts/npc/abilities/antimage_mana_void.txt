@@ -49,7 +49,7 @@
       "mana_void_aoe_radius"
       {
         "value"                                           "500"
-        "special_bonus_unique_antimage_manavoid_aoe"      "+150"
+        "special_bonus_unique_antimage_manavoid_aoe"      "+200"
         "affected_by_aoe_increase"                        "1"
       }
       "thirst_enabled"
@@ -80,15 +80,13 @@
       }
       "bonus_attack_damage"
       {
-        "value"                                           "20 45 70 120 270"
-        "RequiresFacet"                                   "antimage_mana_thirst"
+        "special_bonus_facet_antimage_mana_thirst"        "20 45 70 120 270"
         "CalculateSpellDamageTooltip"                     "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
       }
       "linger_duration"
       {
-        "value"                                           "4.0"
-        "RequiresFacet"                                   "antimage_mana_thirst"
+        "special_bonus_facet_antimage_mana_thirst"        "4.0"
       }
     }
   }

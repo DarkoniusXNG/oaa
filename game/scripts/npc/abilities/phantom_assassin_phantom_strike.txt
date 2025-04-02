@@ -14,6 +14,8 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -21,7 +23,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "12 11 10 9 8 6" //OAA
+    "AbilityCooldown"                                     "12 11 10 9 7 5" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -41,12 +43,12 @@
         "value"                                           "2.5"
         "special_bonus_unique_phantom_assassin_4"         "+0.5"
       }
-      "AbilityCastRange"
+      "AbilityCastRange" //OAA
       {
-        "value"                                           "1000"
+        "value"                                           "950"
         "special_bonus_unique_phantom_assassin_6"         "+200"
       }
-      "creep_lifesteal_penalty"                           "40"
+      "creep_lifesteal_penalty"                           "40" // unused
     }
   }
 }

@@ -19,6 +19,7 @@ function PointsManager:Init ()
   self.hasGameEnded = false
   self.extend_counter = 0
   self.limitConstant = 16
+  self.timesUsedShrine = 0
 
   local scoreLimit = NORMAL_KILL_LIMIT
   if HeroSelection.is10v10 then
@@ -106,12 +107,12 @@ function PointsManager:Init ()
   end
 
   -- Create shrines in front of the fountains
-  local coreDude = CreateUnitByName("npc_dota_core_guy", radiant_shrine, true, radiant_fountain, radiant_fountain, DOTA_TEAM_GOODGUYS)
-  coreDude = CreateUnitByName("npc_dota_core_guy", dire_shrine, true, dire_fountain, dire_fountain, DOTA_TEAM_BADGUYS)
+  self.radiant_shrine = CreateUnitByName("npc_dota_core_guy", radiant_shrine, true, radiant_fountain, radiant_fountain, DOTA_TEAM_GOODGUYS)
+  self.dire_shrine = CreateUnitByName("npc_dota_core_guy", dire_shrine, true, dire_fountain, dire_fountain, DOTA_TEAM_BADGUYS)
 
   -- Store their locations
-  PointsManager.radiant_shrine = radiant_shrine
-  PointsManager.dire_shrine = dire_shrine
+  self.radiant_shrine_location = radiant_shrine
+  self.dire_shrine_location = dire_shrine
 end
 
 function PointsManager:GetState ()
@@ -119,7 +120,8 @@ function PointsManager:GetState ()
     limit = self:GetLimit(),
     goodScore = self:GetPoints(DOTA_TEAM_GOODGUYS),
     badScore = self:GetPoints(DOTA_TEAM_BADGUYS),
-    extend_counter = self.extend_counter
+    extend_counter = self.extend_counter,
+    timesUsedShrine = self.timesUsedShrine
   }
 end
 
@@ -127,7 +129,8 @@ function PointsManager:LoadState (state)
   self:SetLimit(state.limit)
   self:SetPoints(DOTA_TEAM_GOODGUYS, state.goodScore)
   self:SetPoints(DOTA_TEAM_BADGUYS, state.badScore)
-  self.extend_counter = state.extend_counter
+  self.extend_counter = state.extend_counter or 0
+  self.timesUsedShrine = state.timesUsedShrine or self.extend_counter
 end
 
 function PointsManager:CheckWinCondition(teamID, points)
@@ -149,6 +152,38 @@ function PointsManager:SetWinner(teamID)
   GAME_WINNER_TEAM = teamID
   GAME_TIME_ELAPSED = GameRules:GetDOTATime(false, false)
 
+  -- Celebration for winners
+  for playerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+    if PlayerResource:IsValidPlayerID(playerID) and PlayerResource:IsValidPlayer(playerID) then
+      local player = PlayerResource:GetPlayer(playerID)
+      if player ~= nil and not player:IsNull() then
+        local hero = player:GetAssignedHero()
+        if hero then
+          hero:Stop()
+          hero:RemoveModifierByName("modifier_out_of_duel")
+          hero:AddNewModifier(hero, nil, "modifier_end_game_oaa", {})
+          if player:GetTeam() == teamID then
+            hero:StartGesture(ACT_DOTA_VICTORY)
+          else
+            hero:StartGesture(ACT_DOTA_DEFEAT)
+          end
+        end
+      else
+        local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+        if hero then
+          hero:Stop()
+          hero:RemoveModifierByName("modifier_out_of_duel")
+          hero:AddNewModifier(hero, nil, "modifier_end_game_oaa", {})
+          if PlayerResource:GetTeam(playerID) == teamID then
+            hero:StartGesture(ACT_DOTA_VICTORY)
+          else
+            hero:StartGesture(ACT_DOTA_DEFEAT)
+          end
+        end
+      end
+    end
+  end
+
   Bottlepass:SendWinner(teamID)
 
   Timers:CreateTimer(2, function()
@@ -158,7 +193,11 @@ function PointsManager:SetWinner(teamID)
     --elseif teamID == DOTA_TEAM_BADGUYS then
       --GameRules:SetCustomVictoryMessage("#dota_post_game_dire_victory")
     --end
-    GameRules:SetCustomVictoryMessageDuration(POST_GAME_TIME)
+    if IsInToolsMode() then
+      GameRules:SetCustomVictoryMessageDuration(99999)
+    else
+      GameRules:SetCustomVictoryMessageDuration(POST_GAME_TIME)
+    end
   end)
 end
 

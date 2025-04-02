@@ -13,6 +13,10 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
 
+    "MaxLevel"                                            "5"
+    "RequiredLevel"                                       "6"
+    "LevelsBetweenUpgrades"                               "6"
+
     // Unit Targeting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -30,10 +34,10 @@
     "AbilityValues"
     {
       "max_targets"                                       "16"
-      "damage" //OAA
+      "damage" //OAA, special_bonus_unique_furion_5 is not used
       {
-        "value"                                           "150 185 220 325 500"
-        "special_bonus_unique_furion_5"                   "+30"
+        "value"                                           "125 165 205 325 445"
+        "special_bonus_unique_furion_5"                   "+25"
       }
       "damage_percent_add"
       {
@@ -42,13 +46,13 @@
         "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
       "jump_delay"                                        "0.15"
-      "kill_damage"
+      "kill_damage" // unused
       {
         "value"                                           "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "kill_damage_duration"
+      "kill_damage_duration" // unused
       {
         "value"                                           "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
@@ -57,17 +61,15 @@
       "AbilityCooldown"
       {
         "value"                                           "85"
-        "special_bonus_scepter"                           "-25"
+        "special_bonus_unique_furion_7"                   "-15"
       }
       "scepter_min_entangle_duration"
       {
-        "value"                                           "1.5"
-        "RequiresScepter"                                 "1"
+        "special_bonus_scepter"                           "1.5"
       }
       "scepter_max_entangle_duration"
       {
-        "value"                                           "3.0"
-        "RequiresScepter"                                 "1"
+        "special_bonus_scepter"                           "3.0"
       }
     }
   }

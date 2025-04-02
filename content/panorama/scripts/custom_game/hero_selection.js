@@ -91,7 +91,7 @@ const hilariousLoadingPhrases = [
   'If you think you found a bug or a weird interaction, please share it on our discord server. Thank you',
   'Every hero has a Town Portal Scroll and it will not disappear when used',
   'Heroes are purged and invulnerable for 2 seconds at the start of every duel',
-  'Open Angel Arena games can be spectated live with no delay',
+  'Open Angel Arena games can be spectated with small delay',
   'Passive experience gain doesn\'t work in Duels',
   'You have questions about the game? Check out our discord server. We might know a few new tricks for your favorite hero',
   'You gain all talents at level 50',
@@ -172,6 +172,11 @@ function handleOAASettingsChange (n, key, settings) {
     return;
   }
 
+  if (!settings) {
+    $.Msg('Failed to lock and load settings, they are undefined');
+    return;
+  }
+
   const lines = [];
 
   lines.push($.Localize('#game_options_hero_selection') + ' ' + $.Localize('#game_option_' + settings.GAME_MODE.toLowerCase()));
@@ -224,6 +229,8 @@ function handleOAASettingsChange (n, key, settings) {
     HM41: '#game_option_crimson_magic',
     HM42: '#game_option_ludo',
     HM43: '#game_option_battlemage',
+    HM44: '#game_option_multicast',
+    HM45: '#game_option_spoons_stash',
     HMB01: '#game_option_giant',
     HMB02: '#game_option_league',
     HMB03: '#game_option_turbo',
@@ -856,7 +863,7 @@ function ChangeHeroImage (container, hero) {
   container.heroname = hero;
   // when we read the value, it's always the short-hand version without the prefix
   const shortHeroName = container.heroname;
-  if (shortHeroName === 'sohei' || shortHeroName === 'electrician') {
+  if (shortHeroName === 'sohei' || shortHeroName === 'electrician' || shortHeroName === 'eul') {
     // re-add prefix
     container.style.backgroundImage = 'url("file://{images}/heroes/npc_dota_hero_' + shortHeroName + '.png")';
     container.style.backgroundSize = '100% 100%';
@@ -1305,6 +1312,19 @@ function CreateHeroPanel (parent, hero) {
     scene = $.CreatePanel('DOTAScenePanel', parent, id, {
       style: "opacity-mask: url('s2r://panorama/images/masks/softedge_box_png.vtex');",
       map: 'prefabs\\heroes\\electrician',
+      particleonly: 'false',
+      renderdeferred: 'false',
+      camera: 'camera1',
+      rotateonhover: 'true',
+      yawmin: '-10',
+      yawmax: '10',
+      pitchmin: '-10',
+      pitchmax: '10'
+    });
+  } else if (hero === 'npc_dota_hero_eul') {
+    scene = $.CreatePanel('DOTAScenePanel', parent, id, {
+      style: "opacity-mask: url('s2r://panorama/images/masks/softedge_box_png.vtex');",
+      map: 'prefabs\\heroes\\eul',
       particleonly: 'false',
       renderdeferred: 'false',
       camera: 'camera1',

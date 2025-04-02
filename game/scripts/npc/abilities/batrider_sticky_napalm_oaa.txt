@@ -33,16 +33,16 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "22 27 32 37 42 47"
+    "AbilityManaCost"                                     "30 35 40 45 50 55"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "damage_per_stack"
+      "damage_per_stack" // application (first) damage and proc damage per stack
       {
         "value"                                           "5 10 15 20 40 60"
-        "special_bonus_unique_batrider_4"                 "+10"
+        "special_bonus_unique_batrider_4"                 "+15"
         "CalculateSpellDamageTooltip"                     "1"
       }
       "radius"
@@ -60,12 +60,12 @@
       "damage_bosses" // Percentage of damage dealt to bosses
       {
         "value"                                           "20"
-        "special_bonus_facet_batrider_arsonist"           "+80"
+        "special_bonus_facet_batrider_arsonist"           "+20"
       }
       "shard_number_of_attack_proc"
       {
-        "value"                                           "2"
-        "RequiresShard"                                   "1"
+        "value"                                           "0"
+        "special_bonus_shard"                             "2"
       }
     }
   }

@@ -12,6 +12,8 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -51,10 +53,8 @@
       "bounce_delay"                                      "0.1"
       "bounce_bonus_damage"
       {
-        "value"                                           "0"
         "CalculateSpellDamageTooltip"                     "1"
         "special_bonus_facet_witch_doctor_headhunter"     "+30"
-        "RequiresFacet"                                   "witch_doctor_headhunter"
       }
       "creep_damage_pct"                                  "150"
     }

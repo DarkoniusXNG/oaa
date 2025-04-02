@@ -12,6 +12,8 @@
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
 
     "MaxLevel"                                            "6"
+    "RequiredLevel"                                       "1"
+    "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -19,11 +21,11 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "120 130 140 150 160 170"
+    "AbilityManaCost"                                     "110 120 130 140 150 160"
 
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "600 700 800 900 1000 1100"
+    "AbilityCastRange"                                    "650 700 750 800 850 900"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -31,7 +33,7 @@
     {
       "damage"
       {
-        "value"                                           "15 25 35 45 145 245"
+        "value"                                           "15 25 35 45 90 180"
       }
       "duration"
       {
@@ -44,14 +46,13 @@
         "special_bonus_unique_warlock_7"                  "+150"
         "affected_by_aoe_increase"                        "1"
       }
-      "shard_movement_speed_pct"
+      "shard_movement_speed_pct" // unused
       {
-        "value"                                           "0"
-        "RequiresShard"                                   "1"
+        "special_bonus_shard"                             "0"
       }
-      "AbilityCooldown" //OAA
+      "AbilityCooldown"
       {
-        "value"                                           "14 13 12 11 10 9"
+        "value"                                           "15 14 13 12 11 10"
       }
     }
   }

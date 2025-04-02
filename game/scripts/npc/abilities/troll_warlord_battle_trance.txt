@@ -36,23 +36,33 @@
       }
       "AbilityCooldown"
       {
-        "value"                                           "90 80 70 60 50"
+        "value"                                           "90 80 70 65 60"
       }
-      "lifesteal"                                         "40 60 80 100 120"
+      "lifesteal"                                         "40 60 80 90 100"
       "attack_speed"                                      "140 170 200 230 260"
       "attack_speed_share_percent"
       {
         "value"                                           "0"
-        "special_bonus_facet_troll_warlord_bad_influence"  "+30"
+        "special_bonus_facet_troll_warlord_bad_influence"  "+50" // based off attack_speed
       }
       "movement_speed"
       {
         "value"                                           "25 30 35 40 45"
       }
-      "range"        
+      "range"
       {
         "value"                                           "900"
         "affected_by_aoe_increase"                        "1"
+      }
+      "stack_limit_tooltip" //OAA
+      {
+        "value"                                           "0"
+        "special_bonus_facet_troll_warlord_bad_influence"  "+12"       // TOOLTIP ONLY: Update stack_limit_during_battle_trance for behavior change
+      }
+      "ignore_attack_speed_limit"
+      {
+        "value"                                           "0"
+        "special_bonus_facet_troll_warlord_bad_influence"  "+1"
       }
     }
   }

@@ -25,11 +25,11 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16 14 12 10 9 9" //OAA
+    "AbilityCooldown"                                     "15 13 11 9 9 9" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "50"
+    "AbilityManaCost"                                     "50 55 60 65 70 75" //OAA
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -49,23 +49,19 @@
       }
       "trail_duration"
       {
-        "value"                                           "7"
-        "RequiresShard"                                   "1"
+        "special_bonus_shard"                             "7"
       }
       "trail_move_slow"
       {
-        "value"                                           "-50"
-        "RequiresShard"                                   "1"
+        "special_bonus_shard"                             "-50"
       }
       "trail_damage" //OAA
       {
-        "value"                                           "25 30 35 40 80 160"
-        "RequiresShard"                                   "1"
+        "special_bonus_shard"                             "25 30 35 40 80 160"
       }
       "trail_damage_interval"
       {
-        "value"                                           "0.5"
-        "RequiresShard"                                   "1"
+        "special_bonus_shard"                             "0.5"
       }
     }
   }

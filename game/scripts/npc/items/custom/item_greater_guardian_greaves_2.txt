@@ -49,13 +49,15 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "8552"
+    "ItemCost"                                            "8652"
     "ItemShopTags"                                        "move_speed;mana_pool;armor;regen_health;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "greater guardian greaves 2;guardian greaves 2;ggg 2"
     "ItemDisassembleRule"                                 "DOTA_ITEM_DISASSEMBLE_NEVER"
     "ItemDeclarations"                                    "DECLARE_PURCHASES_TO_SPECTATORS"
     "ItemAlertable"                                       "1"
+
+    "SpeciallyBannedFromNeutralSlot"                      "1"
 
     "MaxUpgradeLevel"                                     "4"
     "ItemBaseLevel"                                       "2"
@@ -68,8 +70,8 @@
       "bonus_movement"                                    "55 60 65 70"
       "bonus_armor"                                       "5 6 7 8"
       "mana_regen"                                        "1.75 2.25 3 4"
-      "aura_health_regen"                                 "4 5 6 7"
-      "aura_armor"                                        "4 5 6 7"
+      "aura_health_regen"                                 "5.5 8.5 11.5 14.5"
+      "aura_armor"                                        "4 6 9 13"
       "aura_mana_regen"                                   "1.75 2.25 3 4"
       "aura_radius"
       {
@@ -80,7 +82,7 @@
       "aura_mana_regen_bonus"                             "5.25 5.75 6.5 7.5"
       "aura_armor_bonus"                                  "9 11 14 18"
       "aura_bonus_threshold"                              "25"
-      "replenish_health"                                  "450 650 950 1350"
+      "replenish_health"                                  "425 625 925 1325"
       "replenish_mana"                                    "300 425 575 750"
       "replenish_radius"
       {

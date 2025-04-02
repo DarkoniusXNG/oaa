@@ -13,9 +13,18 @@ function CorePointsManager:Init()
   FilterManager:AddFilter(FilterManager.ExecuteOrder, self, Dynamic_Wrap(CorePointsManager, "FilterOrders"))
   GameEvents:OnHeroInGame(partial(self.InitializeCorePointsCounter, self))
   ChatCommand:LinkDevCommand("-corepoints", Dynamic_Wrap(CorePointsManager, "CorePointsCommand"), self)
-
+  local custom_items = LoadKeyValues("scripts/npc/npc_items_custom.txt")
+  local custom_items_ids = {}
+  for k,v in pairs(custom_items) do
+    local item_data = GetAbilityKeyValuesByName(k)
+    if item_data then
+      custom_items_ids[k] = item_data.ID
+    end
+  end
+  CustomNetTables:SetTableValue("item_kv", "custom_items", custom_items_ids)
   self.playerID_table = {}
 end
+
 
 function CorePointsManager:GetState()
   local state = {}
@@ -75,6 +84,8 @@ function CorePointsManager:FilterOrders(keys)
   -- DOTA_UNIT_ORDER_SET_ITEM_COMBINE_LOCK = 32
   -- DOTA_UNIT_ORDER_DROP_ITEM_AT_FOUNTAIN = 37
   -- DOTA_UNIT_ORDER_TAKE_ITEM_FROM_NEUTRAL_ITEM_STASH = 39
+  -- DOTA_UNIT_ORDER_CONSUME_ITEM = 41
+  -- DOTA_UNIT_ORDER_SET_ITEM_MARK_FOR_SELL = 42
 
   if order == DOTA_UNIT_ORDER_PURCHASE_ITEM then
     -- Check if needed variables exist
@@ -136,6 +147,12 @@ function CorePointsManager:FilterOrders(keys)
       if string.find(target:GetName(), "shop") ~= nil then
         --local purchaser = ability:GetPurchaser()
         self:AddCorePoints(self:GetCorePointsSellValue(ability), unit_with_order, playerID)
+      end
+    end
+  elseif order == DOTA_UNIT_ORDER_SET_ITEM_MARK_FOR_SELL then
+    if unit_with_order and ability then
+      if CorePointsManager:GetCorePointsFullValue(ability) > 0 then
+        return false
       end
     end
   end
