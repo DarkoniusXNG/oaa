@@ -48,6 +48,7 @@
 
     "MaxUpgradeLevel"                                     "3"
     "ItemBaseLevel"                                       "2"
+    "UpgradesItems"                                       "item_regen_crystal_3"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------

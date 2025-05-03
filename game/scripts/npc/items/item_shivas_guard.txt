@@ -45,6 +45,7 @@
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "1"
+    "UpgradesItems"                                       "item_shivas_guard_2"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
