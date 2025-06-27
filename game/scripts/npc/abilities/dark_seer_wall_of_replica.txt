@@ -8,7 +8,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
-    "AbilityType"                                         "DOTA_ABILITY_TYPE_ULTIMATE"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -55,7 +55,7 @@
         "affected_by_aoe_increase"                        "1"
       }
       "replica_scale"                                     "0"
-      "movement_slow"                                     "50 60 70 80 90"
+      "movement_slow"                                     "40"
       "slow_duration"
       {
         "value"                                           "1"
