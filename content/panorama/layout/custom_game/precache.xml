@@ -4,6 +4,7 @@
 			<Image src="file://panorama/images/heroes/npc_dota_hero_sohei.png" hittest="false" />
       <Image src="file://panorama/images/heroes/npc_dota_hero_electrician.png" hittest="false" />
       <Image src="file://panorama/images/heroes/npc_dota_hero_eul.png" hittest="false" />
+      <Image src="file://panorama/images/heroes/npc_dota_hero_bubble_witch.png" hittest="false" />
       <Image src="file://panorama/images/heroes/selection/npc_dota_hero_electrician.png" hittest="false" />
       <Image src="file://panorama/images/heroes/selection/npc_dota_hero_sohei.png" hittest="false" />
       <!-- <Image src="file://materials/overviews/oaa.tga" hittest="false" /> -->
@@ -77,7 +78,6 @@
       <Image src="file://panorama/images/items/custom/reflection_shard_1.png" hittest="false" />
       <Image src="file://panorama/images/items/custom/reflex_core.png" hittest="false" />
       <Image src="file://panorama/images/items/custom/refresher_orb_4.png" hittest="false" />
-      <Image src="file://panorama/images/items/custom/regen_crystal_1.png" hittest="false" />
       <Image src="file://panorama/images/items/custom/revenants_brooch_4.png" hittest="false" />
       <Image src="file://panorama/images/items/custom/sange_and_yasha.png" hittest="false" />
       <Image src="file://panorama/images/items/custom/satanic.png" hittest="false" />
