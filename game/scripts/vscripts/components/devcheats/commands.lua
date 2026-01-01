@@ -34,7 +34,6 @@ function DevCheats:Init()
 end
 
 -- Print all modifiers on player's hero to console
--- TODO: Allow printing modifiers on selected units if possible
 function DevCheats:PrintModifiers(keys)
   local playerID = keys.playerid
   local hero = PlayerResource:GetSelectedHeroEntity(playerID)
@@ -94,21 +93,8 @@ function DevCheats:AddBots(keys)
   -- GameRules:GetGameModeEntity():SetBotThinkingEnabled(true)
   -- GameRules:GetGameModeEntity():SetBotsInLateGame(true)
 
-  -- This applies the simple bot controller ability, which shouldn't be necessary since bots have a semi-proper AI by RamonNZ.
+  -- bots have a semi-proper AI by RamonNZ.
   -- The AI probably doesn't quite work right due to all the map changes though. Don't think the bots know where all the camps are now.
-  -- Timers:CreateTimer(5,function()
-  --   PlayerResource:GetAllTeamPlayerIDs():each(function(playerID)
-  --     local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-  --     if hero ~= nil and IsValidEntity(hero) and PlayerResource:GetSteamAccountID(playerID) == 0 then
-  --       hero:AddAbility("dev_bot_control")
-  --       local controller = hero:FindAbilityByName("dev_bot_control")
-  --       if controller then
-  --         controller:UpgradeAbility(false)
-  --         controller:SetHidden(true)
-  --       end
-  --     end
-  --   end)
-  -- end)
 end
 
 -- Remove fog of war on the map, revealing everything
