@@ -8,8 +8,7 @@
   {
     "#DOTA_Item_Build_Starting_Items"
     {
-      "item"      "item_clarity"
-      "item"      "item_clarity"
+      "item"      "item_boots"
       "item"      "item_flask"
       "item"      "item_mango"
       "item"      "item_mango"
@@ -19,7 +18,6 @@
     {
       "item"      "item_kaya_and_sange"
       "item"      "item_shivas_guard"
-      "item"      "item_eternal_shroud"
       "item"      "item_ultimate_scepter"
       "item"      "item_sacred_skull"
     }

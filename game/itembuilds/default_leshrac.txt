@@ -40,13 +40,11 @@
     {
       "item"      "item_black_king_bar_1"
       "item"      "item_bloodstone_1"
-      "item"      "item_eternal_shroud"
       "item"      "item_ethereal_blade"
       "item"      "item_glimmer_cape"
       "item"      "item_lotus_orb"
       "item"      "item_sphere"
       "item"      "item_greater_travel_boots"
-      "item"      "item_dagger_of_moriah_1"
     }
   }
 }
