@@ -1,19 +1,18 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Omniknight: Purification
+  // Omniknight: Purification FIXEDFUCK
   //=================================================================================================================
   "omniknight_purification"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
-    "HasShardUpgrade"                                     "1"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -31,19 +30,19 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "heal" //OAA
+      "heal" //OAA, because of special_bonus_unique_omniknight_1 talent
       {
-        "value"                                           "90 160 230 300 300 300"
+        "value"                                           "90 160 230 300 600 900"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_PURE"
         "CalculateSpellDamageTooltip"                     "1"
-        "special_bonus_unique_omniknight_1"               "+160"
+        "special_bonus_unique_omniknight_1"               "+200"
       }
       "AbilityCooldown"
       {
         "value"                                           "15 14 13 12 11 10"
         "special_bonus_unique_omniknight_6"               "-3"
       }
-      "radius" //OAA, Valve has it wrong: special_bonus_unique_omniknight_4 is a Hammer or Purity talent
+      "radius"
       {
         "value"                                           "260"
         "affected_by_aoe_increase"                        "1"

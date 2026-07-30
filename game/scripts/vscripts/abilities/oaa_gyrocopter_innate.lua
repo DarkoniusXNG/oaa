@@ -10,6 +10,7 @@ function gyrocopter_innate_oaa:Spawn()
     if not caster:HasModifier("modifier_gyrocopter_innate_oaa") then
       caster:AddNewModifier(caster, self, "modifier_gyrocopter_innate_oaa", {})
     end
+    --self:SetLevel(1)
   end
 end
 
@@ -77,6 +78,6 @@ if IsServer() then
     end
 
     -- Roll chance for true strike (accuracy) again
-    self.truestrike = RandomInt(0, 100) <= self.chance
+    self.truestrike = RollPseudoRandomPercentage(self.chance, DOTA_PSEUDO_RANDOM_CUSTOM_GAME_2, parent)
   end
 end

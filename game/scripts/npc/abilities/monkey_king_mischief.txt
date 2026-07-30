@@ -1,28 +1,23 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // General
+  // Monkey King: Mischief (Innate) FIXEDFUCK
   //=================================================================================================================
   "monkey_king_mischief"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
     "MaxLevel"                                            "1"
-    "RequiredLevel"                                       "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"                                    "0"
 
-    // Time
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "18 16 14 12 11 10" //OAA
-
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "0 0 0 0"
+    "AbilityManaCost"                                     "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -30,10 +25,10 @@
     {
       "movespeed"                                         "8"
       "reveal_radius"                                     "200"
-      "AbilityCooldown"
+      "AbilityCooldown" //OAA, intentionally nerfed hero_levelup
       {
         "value"                                           "24.5"
-        "hero_levelup"                                    "-0.5"
+        "hero_levelup"                                    "-0.4"
       }
       "invul_duration"
       {

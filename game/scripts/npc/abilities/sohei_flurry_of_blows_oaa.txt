@@ -15,7 +15,7 @@
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY" // this is for UI tooltip
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" // this is for UI tooltip
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES" // this is for UI tooltip
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
@@ -33,7 +33,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 150 200 250 300"
+    "AbilityManaCost"                                     "100 125 150 175 200"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@
     {
       "flurry_radius"
       {
-        "value"                                           "450"
+        "value"                                           "475"
         //"special_bonus_unique_sohei_4_oaa"                "+250"
         "affected_by_aoe_increase"                        "1"
       }
@@ -67,14 +67,14 @@
       "attack_interval"                                   "0.3"
       "bonus_damage"
       {
-        "value"                                           "20 30 40 50 60"
+        "value"                                           "10 20 30 50 80"
         "CalculateSpellDamageTooltip"                     "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
       "heal_per_second"
       {
         "value"                                           "0"
-        "special_bonus_facet_sohei_monk"                  "=160 =170 =180 =190 =200"
+        //"special_bonus_facet_sohei_monk"                  "=160 =170 =180 =190 =200"
       }
     }
   }

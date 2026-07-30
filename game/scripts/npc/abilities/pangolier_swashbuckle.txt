@@ -1,16 +1,16 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Pangolier: Swashbuckle
+  // Pangolier: Swashbuckle FIXEDFUCK
   //=================================================================================================================
   "pangolier_swashbuckle"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -22,24 +22,18 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "75 80 85 90 95 100"
+    "AbilityManaCost"                                     "85 90 95 100 105 115"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "dash_range"                                        "575 650 725 800 875 950"
-      "dash_speed"                                        "2000"
-      "attack_interval"                                   "0.1 0.1 0.1 0.1 0.1 0.1"
-      "procs_onhit_effects"                               "1"
-      "slow_duration"                                     "0.6"
-      "slow_percent"                                      "100"
-      "damage_penalty"                                    "25"
-      "AbilityCooldown" //OAA
+      "AbilityCooldown" //OAA, intentionally buffed early levels cant be too low because of farming speed
       {
-        "value"                                           "19 16 13 10 10 10"
+        "value"                                           "16 14 12 10 9 8"
         "special_bonus_unique_pangolier_4"                "-2"
       }
+      "dash_range"                                        "575 650 725 800 875 950"
       "range"
       {
         "value"                                           "850"
@@ -50,11 +44,13 @@
         "value"                                           "35 65 95 125 250 375"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "attack_damage"
+      "attack_damage" // percentage of Pangolier's total attack damage
       {
         "value"                                           "0"
         "special_bonus_unique_pangolier_3"                "+20"
       }
+      "dash_speed"                                        "2000"
+      "attack_interval"                                   "0.1"
       "start_radius"
       {
         "value"                                           "155"
@@ -69,6 +65,10 @@
       {
         "value"                                           "3"
       }
+      "procs_onhit_effects"                               "1"
+      "slow_duration"                                     "0.6"
+      "slow_percent"                                      "100"
+      "damage_penalty"                                    "25"
     }
   }
 }

@@ -16,7 +16,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1150"
+    "ItemCost"                                            "1050"
     "ItemShopTags"                                        ""
 
     // Recipe
@@ -25,7 +25,7 @@
     "ItemResult"                                          "item_dagon_oaa_1"
     "ItemRequirements"
     {
-      "01"                                                "item_point_booster;item_crown;item_wizard_hat"
+      "01"                                                "item_staff_of_wizardry;item_crown;item_wizard_hat"
     }
   }
 
@@ -46,7 +46,7 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "700 750 800 850 900 950 1000 1050 1100"
+    "AbilityCastRange"                                    "640"
 
     "AbilityCooldown"                                     "27 24 21 18 15 14 13 12 11"
     "AbilitySharedCooldown"                               "dagon"
@@ -62,7 +62,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "3050"
+    "ItemCost"                                            "2750"
     "ItemShopTags"                                        "damage;int;str;agi;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "dagon 1"
@@ -71,18 +71,18 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "bonus_int"                                         "7 9 11 13 15 20 25 30 35"
-      "bonus_str"                                         "7 9 11 13 15 20 25 30 35"
-      "bonus_agi"                                         "7 9 11 13 15 20 25 30 35"
+      "bonus_int"                                         "14 15 16 17 18 23 28 33 38" // Crown (4); Staff of Wizardry (10);
+      "bonus_str"                                         "4 5 6 7 8 13 18 23 28" // Crown (4);
+      "bonus_agi"                                         "4 5 6 7 8 13 18 23 28" // Crown (4);
+      "bonus_health"                                      "0" // Point Booster (175)
+      "bonus_mana"                                        "125 150 175 200 225 325 475 675 925" // Point Booster (175); Wizard Hat (125);
+      "cast_range_bonus"                                  "60 90 120 150 180 230 280 330 380"
       "spell_amp"                                         "0"
       "damage"                                            "400 500 600 700 800 900 1000 1100 1200"
       "current_hp_dmg"                                    "0 0 0 0 0 6 9 12 15"
-      "hero_spell_lifesteal"                              "15 16 17 18 19 21 23 25 27"
-      "creep_spell_lifesteal"                             "3.0 3.2 3.4 3.6 3.8 4.2 4.6 5.0 5.4" // hero_spell_lifesteal / 5
-      "burst_heal_percent"                                "75"
       "damage_delay"                                      "0"
-      "blind_pct"                                         "100" // Blind is applied only for Dagons 6+
-      "blind_duration"                                    "0 0 0 0 0 3 3.5 4 4.5"
+      "blind_pct"                                         "60" // Blind is applied only for Dagons 6+
+      "blind_duration"                                    "3"
       "mana_cost_tooltip"                                 "120 140 160 180 200 220 240 260 280"
       "cooldown_tooltip"                                  "27 24 21 18 15 14 13 12 11"
     }

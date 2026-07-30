@@ -36,7 +36,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                                           "item_lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "AbilityTextureName"                                  "custom/reduction_orb"
     "ScriptFile"                                          "items/reduction_orb.lua"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
@@ -49,7 +49,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "35100"
+    "ItemCost"                                            "35200"
     "ItemShopTags"                                        "health_pool;armor;magic_resist;unique;hard_to_tag"
     "ItemQuality"                                         "epic"
     "ItemAliases"                                         "reduction orb"

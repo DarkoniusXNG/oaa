@@ -5,13 +5,15 @@
   //=================================================================================================================
   "brewmaster_thunder_clap"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY" //OAA, for UI tooltip
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" //OAA, for UI tooltip
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -29,10 +31,10 @@
     "AbilityValues"
     {
       "movement_slow"                                     "15 30 45 60 65 70"
-      "attack_speed_slow"                                 "15 30 45 60 90 120"
-      "AbilityCooldown" //OAA
+      "attack_speed_slow"                                 "15 30 45 60 75 90"
+      "AbilityCooldown" //OAA, intentionally buffed
       {
-        "value"                                           "18 16 14 12 12 12"
+        "value"                                           "15 14 13 12 11 10"
         "special_bonus_unique_brewmaster_thunderclap_cd"  "-3"
       }
       "radius"
@@ -47,8 +49,7 @@
       }
       "duration"
       {
-        "value"                                           "4.0"
-        "special_bonus_unique_brewmaster_7"               "+1.5"
+        "value"                                           "4.0 4.25 4.5 4.75 5.0 5.25"
       }
     }
   }

@@ -13,7 +13,7 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "IsBreakable"                                         "1"
+    "IsBreakable"                                         "1" // needed because it's a custom ability
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -29,8 +29,7 @@
       "slow"                                              "0"
       "armor"
       {
-        "value"                                           "3 5 7 9 13 17"
-        "special_bonus_unique_pangolier_luckyshot_armor"  "+4"
+        "value"                                           "2 4 6 8 12 16"
       }
     }
   }

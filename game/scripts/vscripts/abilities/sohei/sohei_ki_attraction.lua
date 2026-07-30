@@ -9,19 +9,20 @@ local forbidden_modifiers = {
   "modifier_faceless_void_chronosphere_freeze",
   "modifier_legion_commander_duel",
   "modifier_batrider_flaming_lasso",
-  "modifier_disruptor_kinetic_field",
 }
 
 function sohei_ki_attraction:CastFilterResultTarget(target)
   local caster = self:GetCaster()
   local defaultFilterResult = self.BaseClass.CastFilterResultTarget(self, target)
 
-  if target == caster then
-    return UF_FAIL_CUSTOM
-  end
-
   for _, modifier in pairs(forbidden_modifiers) do
     if target:HasModifier(modifier) then
+      return UF_FAIL_CUSTOM
+    end
+  end
+
+  if target:GetTeamNumber() == caster:GetTeamNumber() then
+    if (target:HasModifier("modifier_disruptor_kinetic_field") and not target:IsDebuffImmune()) or target:IsLeashedOAA() or target == caster then
       return UF_FAIL_CUSTOM
     end
   end
@@ -31,18 +32,23 @@ end
 
 function sohei_ki_attraction:GetCustomCastErrorTarget(target)
   local caster = self:GetCaster()
-  if target == caster then
-    return "#dota_hud_error_cant_cast_on_self"
-  elseif target:HasModifier("modifier_enigma_black_hole_pull") then
-    return "#oaa_hud_error_pull_staff_black_hole"
+  if target:HasModifier("modifier_enigma_black_hole_pull") then
+    return "#dota_hud_error_target_cannot_be_moved" --"#oaa_hud_error_pull_staff_black_hole"
   elseif target:HasModifier("modifier_faceless_void_chronosphere_freeze") then
-    return "#oaa_hud_error_pull_staff_chronosphere"
+    return "#dota_hud_error_target_cannot_be_moved" --"#oaa_hud_error_pull_staff_chronosphere"
   elseif target:HasModifier("modifier_legion_commander_duel") then
-    return "#oaa_hud_error_pull_staff_duel"
+    return "#dota_hud_error_target_cannot_be_moved" --"#oaa_hud_error_pull_staff_duel"
   elseif target:HasModifier("modifier_batrider_flaming_lasso") then
     return "#oaa_hud_error_pull_staff_lasso"
-  elseif target:HasModifier("modifier_disruptor_kinetic_field") then
-    return "#oaa_hud_error_pull_staff_kinetic_field"
+  end
+  if target:GetTeamNumber() == caster:GetTeamNumber() then
+    if target == caster then
+      return "#dota_hud_error_cant_cast_on_self"
+    elseif target:HasModifier("modifier_disruptor_kinetic_field") and not target:IsDebuffImmune() then
+      return "#oaa_hud_error_pull_staff_kinetic_field"
+    elseif target:IsLeashedOAA() then
+      return "#dota_hud_error_cant_cast_on_tethered_target" --"#dota_hud_error_target_cannot_be_moved"
+    end
   end
 end
 
@@ -63,14 +69,28 @@ function sohei_ki_attraction:OnSpellStart()
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 
-  -- Do nothing for self-cast
-  -- (This should never happen because of cast filter)
-  if target == caster then
+  -- Check if target and caster entities exist
+  if not target or not caster then
     return
   end
 
+  -- Check if target is something weird
+  if target.TriggerSpellAbsorb == nil then
+    return
+  end
+
+  local isTargetAnEnemy = target:GetTeamNumber() ~= caster:GetTeamNumber()
+
+  -- Check if the enemy has spell block or spell immunity
+  if isTargetAnEnemy then
+    -- Don't do anything if target has Linken's effect or it's spell-immune
+    if target:TriggerSpellAbsorb(self) or target:IsMagicImmune() then
+      return
+    end
+  end
+
   -- Do nothing if target has a forbidden modifier
-  -- (this will happen rarely (lotus orb maybe) because the cast filter already checks this)
+  -- this will happen rarely (lotus orb maybe) because the cast filter already checks this
   for _, modifier in pairs(forbidden_modifiers) do
     if target:HasModifier(modifier) then
       return
@@ -79,18 +99,15 @@ function sohei_ki_attraction:OnSpellStart()
 
   local target_loc = target:GetAbsOrigin()
   local caster_loc = caster:GetAbsOrigin()
-  local isTargetAnEnemy = target:GetTeamNumber() ~= caster:GetTeamNumber()
 
   local speed = self:GetSpecialValueFor("pull_speed")
   local reposition_range = self:GetSpecialValueFor("pull_length")
   local modifier_duration = self:GetSpecialValueFor("duration")
 
-  -- Pulling towards the caster
-  local direction = caster_loc - target_loc
-  local distance = reposition_range -- this is pull distance for allies, for enemies is defined later
-  local flurry = caster:HasModifier("modifier_sohei_flurry_self")
+  local direction = caster_loc - target_loc -- pulling towards the caster
 
-  -- Pulling towards Flurry of Blows center during Flurry of Blows
+  -- Direction is different during Flurry of Blows (towards the center)
+  local flurry = caster:HasModifier("modifier_sohei_flurry_self")
   if flurry then
     local flurry_mod = caster:FindModifierByName("modifier_sohei_flurry_self")
     if flurry_mod.center then
@@ -98,13 +115,9 @@ function sohei_ki_attraction:OnSpellStart()
     end
   end
 
+  local distance = 0
   if isTargetAnEnemy then
-    -- Don't do anything if target has Linken's effect or it's spell-immune
-    if target:TriggerSpellAbsorb(self) or target:IsMagicImmune() then
-      return
-    end
-
-    -- Different distance during Flurry of Blows
+    -- Distance is different during Flurry of Blows
     if not flurry then
       distance = direction:Length2D() - caster:GetPaddedCollisionRadius() - target:GetPaddedCollisionRadius()
     else
@@ -114,9 +127,11 @@ function sohei_ki_attraction:OnSpellStart()
     if distance > reposition_range then -- to prevent pulling enemies more than reposition_range
       distance = reposition_range
     end
-    if distance <= 0 then -- to prevent pulling enemies behind you or out of Flurry radius
+    if distance <= 0 then -- to prevent pulling enemies behind the caster or out of Flurry radius
       distance = 1
     end
+  else
+    distance = reposition_range -- allies can be pulled behind the caster
   end
 
   -- Normalize direction
@@ -130,11 +145,19 @@ function sohei_ki_attraction:OnSpellStart()
 
   -- Sounds and modifiers
   if not isTargetAnEnemy then
+    -- Sound for allies
     target:EmitSound("Sohei.Dash")
-    target:AddNewModifier(caster, self, "modifier_sohei_ki_attraction_buff", {duration = modifier_duration})
+    -- Buff Amp
+    local real_buff_duration = GetValueChangedByBuffAmplification(modifier_duration, target, caster)
+    -- Apply the buff
+    target:AddNewModifier(caster, self, "modifier_sohei_ki_attraction_buff", {duration = real_buff_duration})
   else
+    -- Sound for enemies
     target:EmitSound("Sohei.Momentum")
-    target:AddNewModifier(caster, self, "modifier_sohei_ki_attraction_debuff", {duration = modifier_duration})
+    -- Status Resistance and Debuff Amp
+    local real_debuff_duration = target:GetValueChangedByStatusResistance(modifier_duration, caster, self)
+    -- Apply the debuff
+    target:AddNewModifier(caster, self, "modifier_sohei_ki_attraction_debuff", {duration = real_debuff_duration})
   end
 
   -- Apply motion controller
@@ -404,7 +427,7 @@ if IsServer() then
     local bonus_damage = str_multiplier * caster:GetStrength() * 0.01
     local total_damage = base_damage + bonus_damage
 
-    local heal_amount = total_damage * heal_ratio
+    local heal_amount = total_damage * heal_ratio * 0.01
 
     -- Healing
     --unit:Heal(heal_amount, ability) -- not affected by heal amp for some reason

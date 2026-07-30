@@ -1,18 +1,16 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Slark: Pounce
+  // Slark: Pounce FIXEDFUCK
   //=================================================================================================================
   "slark_pounce"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -26,7 +24,6 @@
     "AbilityValues"
     {
       "pounce_damage"                                     "0"
-      "pounce_acceleration"                               "7000.0"
       "pounce_distance"
       {
         "value"                                           "700"
@@ -35,6 +32,7 @@
       {
         "value"                                           "933.33"
       }
+      "pounce_acceleration"                               "7000.0"
       "pounce_radius"
       {
         "value"                                           "120"
@@ -52,9 +50,9 @@
       {
         "special_bonus_scepter"                           "2"
       }
-      "charge_restore_time" //OAA
+      "charge_restore_time" //OAA, intentionally rescaled; same as AbilityCooldown
       {
-        "special_bonus_scepter"                           "12"
+        "special_bonus_scepter"                           "15 14 13 12 11 10"
       }
       "pounce_distance_scepter"
       {
@@ -64,9 +62,9 @@
       {
         "value"                                           "1 2 3 4 5 6"
       }
-      "AbilityCooldown" //OAA
+      "AbilityCooldown" //OAA, intentionally buffed
       {
-        "value"                                           "24 20 16 12 12 12"
+        "value"                                           "15 14 13 12 11 10"
       }
     }
   }

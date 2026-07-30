@@ -1,7 +1,7 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Vengeful Spirit: Vengeance Aura (OAA Rework)
+  // Vengeful Spirit: Vengeance Aura (OAA Rework) FIXEDFUCK
   //=================================================================================================================
   "vengefulspirit_command_aura_oaa"
   {
@@ -15,13 +15,13 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ALLIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "IsBreakable"                                         "1"
+    "IsBreakable"                                         "1" // needed because it's a custom ability
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
+    "HasScepterUpgrade"                                   "1" // needed because it's a custom ability
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -38,6 +38,11 @@
         "CalculateSpellDamageTooltip"                     "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
+      "self_multiplier"
+      {
+        "value"                                           "25"
+        "special_bonus_scepter"                           "+10"
+      }
       "aura_radius"
       {
         "value"                                           "1200"
@@ -51,7 +56,7 @@
       "scepter_illusion_damage_in_pct"
       {
         "value"                                           "0"
-        "special_bonus_scepter"                           "130 125 120 115 110 105"
+        "special_bonus_scepter"                           "100"
       }
       "scepter_illusion_ms_bonus_pct"
       {

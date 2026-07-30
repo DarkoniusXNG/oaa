@@ -1,11 +1,10 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Storm Spirit: Electric Vortex
+  // Storm Spirit: Electric Vortex FIXEDFUCK
   //=================================================================================================================
   "storm_spirit_electric_vortex"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -13,7 +12,7 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -21,11 +20,11 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "300"
-    "AbilityCastPoint"                                    "0.3 0.3 0.3 0.3 0.3 0.3"
+    "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "17 16 15 14 13 12" //OAA, special_bonus_unique_storm_spirit_2_oaa
+    "AbilityCooldown"                                     "17 16 15 14 13 12" //OAA, intentionally buffed; uses special_bonus_unique_storm_spirit_2_oaa
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -37,8 +36,8 @@
     {
       "electric_vortex_pull_distance"                     "180 220 260 300 340 380"
       "electric_vortex_pull_tether_range"                 "1200.0"
-      "electric_vortex_self_slow"                         "-50"
-      "electric_vortex_self_slow_duration"                "1.1 1.4 1.7 2.0 2.1 2.2" //OAA, maybe unused
+      "electric_vortex_self_slow"                         "-50" // unused
+      "electric_vortex_self_slow_duration"                "3.0" // unused
       "AbilityDuration"
       {
         "value"                                           "1.1 1.4 1.7 2.0 2.1 2.2"

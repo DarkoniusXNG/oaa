@@ -1,11 +1,10 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // OAA
+  // Slark: Saltwater Shiv FIXEDFUCK
   //=================================================================================================================
   "slark_saltwater_shiv"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
@@ -13,7 +12,7 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -25,11 +24,11 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "14 12 10 8 4 4"
+    "AbilityCooldown"                                     "10.5 9.5 8.5 7.5 6.5 5.5" //OAA, intentionally buffed
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "25 30 35 40 40 40"
+    "AbilityManaCost"                                     "25 30 35 40 45 50"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -38,9 +37,9 @@
       "duration"                                          "12"
       "agi_bonus_damage_factor"                           "0"
       "base_health_rest_steal"                            "0"
-      "health_rest_steal"                                 "3 4 5 6 7 8" //OAA
-      "regen_steal"                                       "3 4 5 6 7 8" //OAA
-      "ms_steal"                                          "3 4 5 6 7 8" //OAA
+      "health_rest_steal"                                 "4 5 6 7 8 9" //OAA, intentionally nerfed
+      "regen_steal"                                       "4 8 12 16 20 24" // flat hp regen
+      "ms_steal"                                          "4 8 12 16 20 24" // flat move speed
       "melee_range_buffer"                                "50"
     }
   }

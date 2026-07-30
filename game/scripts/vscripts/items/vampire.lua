@@ -14,9 +14,15 @@ end
 
 function item_vampire:OnSpellStart()
   local caster = self:GetCaster()
-  local modifierName = "modifier_item_vampire_active"
 
-  caster:AddNewModifier(caster, self, modifierName, {duration = self:GetSpecialValueFor("duration")})
+  -- Buff Amp
+  local real_buff_duration = GetValueChangedByBuffAmplification(self:GetSpecialValueFor("duration"), caster, caster)
+
+  -- Apply the buff
+  caster:AddNewModifier(caster, self, "modifier_item_vampire_active", {duration = real_buff_duration})
+
+  -- Activation Sound
+  caster:EmitSound("Vampire.Activate.Begin")
 end
 
 item_vampire_2 = item_vampire
@@ -97,21 +103,24 @@ function modifier_item_vampire:GetModifierBonusStats_Strength()
 end
 
 function modifier_item_vampire:GetModifierStatusResistanceStacking()
-  if self:GetStackCount() == 2 then
-    return self.bonus_status_resist or self:GetAbility():GetSpecialValueFor("bonus_status_resistance")
-  else
+  -- Prevent multiple Vampire Fangs stacking status resistance
+  if self:GetStackCount() ~= 2 then
     return 0
   end
+
+  return self.bonus_status_resist or self:GetAbility():GetSpecialValueFor("bonus_status_resistance")
 end
 
--- Still doesn't work, Thanks Valve
--- function modifier_item_vampire:GetModifierSlowResistance_Stacking()
-  -- if self:GetStackCount() == 2 then
-    -- return self.bonus_slow_resist or self:GetAbility():GetSpecialValueFor("bonus_slow_resist")
-  -- else
-    -- return 0
-  -- end
--- end
+--[[
+function modifier_item_vampire:GetModifierSlowResistance_Stacking()
+  -- Prevent multiple Vampire Fangs stacking slow resistance
+  if self:GetStackCount() ~= 2 then
+    return 0
+  end
+
+  return self.bonus_slow_resist or self:GetAbility():GetSpecialValueFor("bonus_slow_resist")
+end
+]]
 
 function modifier_item_vampire:GetBonusNightVision()
   if self:GetStackCount() == 2 then
@@ -246,8 +255,6 @@ function modifier_item_vampire_active:OnCreated()
     end
     self:StartIntervalThink(interval)
 
-    parent:EmitSound("Vampire.Activate.Begin")
-
     if self.particle == nil then
       self.particle = ParticleManager:CreateParticle( "particles/items/vampire/vampire.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent )
     end
@@ -273,8 +280,6 @@ function modifier_item_vampire_active:OnRefresh()
     end
 
     local parent = self:GetParent()
-
-    parent:EmitSound("Vampire.Activate.Begin")
 
     if self.particle == nil then
       self.particle = ParticleManager:CreateParticle( "particles/items/vampire/vampire.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent )
@@ -413,6 +418,7 @@ if IsServer() then
     local attacker = event.attacker
     local damaged_unit = event.unit
     local damage = event.damage
+    local lifesteal_percent = amount
 
     -- Check if attacker exists
     if not attacker or attacker:IsNull() then
@@ -436,7 +442,8 @@ if IsServer() then
 
     self.procRecords[event.record] = nil
 
-    if damage <= 0 or amount <= 0 then
+    -- Check if damage and lifesteal are > 0
+    if damage <= 0 or lifesteal_percent <= 0 then
       return
     end
 
@@ -464,9 +471,21 @@ if IsServer() then
       parentTeam
     )
 
+    -- Reduce lifesteal percent when calculating lifesteal against illusions because they receive more dmg
+    if damaged_unit:IsIllusion() then
+      lifesteal_percent = lifesteal_percent / 2
+    end
+
+    -- Reduce lifesteal against creeps by 40% (Vampire Fang intentionally does not have penalty)
+    --if damaged_unit:IsCreep() and not damaged_unit:IsOAABoss() and not damaged_unit:IsCreepHero() then
+      --lifesteal_percent = lifesteal_percent * 0.6
+    --end
+
     if ufResult == UF_SUCCESS then
-      local lifesteal_amount = damage * amount * 0.01
-      parent:HealWithParams(lifesteal_amount, spell, true, true, parent, false)
+      local health_restore = damage * lifesteal_percent * 0.01
+
+      -- Apply Lifesteal
+      parent:HealWithParams(health_restore, spell, true, true, parent, false)
 
       local part = ParticleManager:CreateParticle( "particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_ABSORIGIN, parent )
       ParticleManager:ReleaseParticleIndex( part )

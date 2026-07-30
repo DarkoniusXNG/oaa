@@ -1,19 +1,18 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Bane Brain Sap
+  // Bane: Brain Sap FIXEDFUCK
   //=================================================================================================================
   "bane_brain_sap"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
-    "HasShardUpgrade"                                     "1"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -24,7 +23,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "120 130 140 150 160 170"
+    "AbilityManaCost"                                     "105 120 135 150 165 180"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -35,9 +34,9 @@
         "value"                                           "90 160 230 300 600 900"
         "special_bonus_unique_bane_2"                     "+275"
       }
-      "AbilityCooldown" //OAA
+      "AbilityCooldown" //OAA, intentionally buffed
       {
-        "value"                                           "17 15 13 11 11 11"
+        "value"                                           "14 13 12 11 10 9"
         "special_bonus_shard"                             "-3"
       }
       "shard_radius"

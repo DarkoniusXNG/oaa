@@ -17,8 +17,14 @@ function item_sacred_skull:OnSpellStart()
 
   local buff_duration = self:GetSpecialValueFor("buff_duration")
 
+  -- Buff Amp
+  local real_buff_duration = GetValueChangedByBuffAmplification(buff_duration, caster, caster)
+
   -- Apply the buff to the caster
-  caster:AddNewModifier(caster, self, "modifier_item_sacred_skull_buff", {duration = buff_duration})
+  caster:AddNewModifier(caster, self, "modifier_item_sacred_skull_buff", {duration = real_buff_duration})
+
+  -- Activation Sound
+  --caster:EmitSound("")
 end
 
 item_sacred_skull_2 = item_sacred_skull
@@ -91,7 +97,7 @@ end
 
 function modifier_item_sacred_skull_passives:GetModifierPercentageCooldown()
   -- Prevent stacking with Octarine Core, Nether Core and other Sacred Skulls -> Octarine Core and Nether Core have higher priority, Octarine Core is highest priority
-  if self:GetParent():HasModifier("modifier_item_octarine_core") or self:GetParent():HasModifier("modifier_item_nether_core") or self:GetStackCount() ~= 2 then
+  if self:GetParent():HasModifier("modifier_item_octarine_core") or self:GetParent():HasModifier("modifier_item_nether_core_passive") or self:GetStackCount() ~= 2 then
     return 0
   end
 
@@ -100,6 +106,7 @@ end
 
 if IsServer() then
   function modifier_item_sacred_skull_passives:OnTakeDamage(event)
+    -- Prevent triggering multiple Sacred Skulls
     if self:GetStackCount() ~= 2 then
       return
     end
@@ -294,7 +301,7 @@ if IsServer() then
 
     ApplyDamage(damage_table)
 
-    return -200
+    return -200 -- Simulates damage type conversion by reducing the original damage
   end
 end
 

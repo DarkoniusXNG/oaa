@@ -1,11 +1,10 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Doom Bringer: Devour
+  // Doom Bringer: Devour FIXEDFUCK
   //=================================================================================================================
   "doom_bringer_devour"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
@@ -13,15 +12,15 @@
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "HasShardUpgrade"                                     "1"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "300 300 300 300 300 300"
-    "AbilityCastPoint"                                    "0.3 0.3 0.3 0.3 0.3 0.3"
+    "AbilityCastRange"                                    "300"
+    "AbilityCastPoint"                                    "0.3"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -31,32 +30,31 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "creep_level"                                       "6" //OAA
-      "hero_ability_steal_time"                           "99999"
-      "bonus_gold" //OAA
+      "bonus_gold" //OAA, intentionally buffed
       {
-        "value"                                           "35 70 105 140 140 140"
+        "value"                                           "50 80 110 140 280 560"
       }
+      "creep_level"                                       "6" //OAA, intentionally buffed
       "ability_bonus_level"
       {
         "value"                                           "0"
       }
+      "hero_ability_steal_time"                           "99999"
       "magic_resist"
       {
         "value"                                           "0"
-        "special_bonus_unique_doom_3"                     "+15"
       }
       "AbilityCharges"
       {
         "value"                                           "0"
         "special_bonus_shard"                             "+2"
       }
-      "AbilityChargeRestoreTime" //OAA
+      "AbilityChargeRestoreTime"
       {
         "value"                                           "0"
         "special_bonus_shard"                             "+66"
       }
-      "AbilityCooldown" //OAA
+      "AbilityCooldown"
       {
         "value"                                           "66.0"
         "special_bonus_shard"                             "=0.0"
@@ -68,7 +66,7 @@
       "bonus_aoe_pct"
       {
         "value"                                           "0"
-        "special_bonus_shard"                             "20"
+        "special_bonus_shard"                             "15"
       }
       "bonus_spell_amp_pct"
       {

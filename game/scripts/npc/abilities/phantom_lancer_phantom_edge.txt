@@ -5,13 +5,11 @@
   //=================================================================================================================
   "phantom_lancer_phantom_edge"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -33,7 +31,7 @@
       "max_distance"
       {
         "value"                                           "600 675 750 825 900 975"
-        "special_bonus_scepter"                           "+625"
+        "special_bonus_scepter"                           "+575"
       }
       "illusion_spawn_radius"
       {

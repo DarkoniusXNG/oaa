@@ -24,10 +24,12 @@ const ignoredBaseClasses = [
   'item_bfury',
   'item_blink',
   'item_bloodthorn',
+  'item_consecrated_wraps',
+  'item_crellas_crozier',
   'item_crimson_guard',
   'item_devastator',
   'item_disperser',
-  'item_eternal_shroud',
+  'item_essence_distiller',
   'item_ethereal_blade',
   'item_glimmer_cape',
   'item_greater_crit',
@@ -37,6 +39,7 @@ const ignoredBaseClasses = [
   'item_heavens_halberd',
   'item_helm_of_the_overlord',
   'item_hurricane_pike',
+  'item_hydras_breath',
   'item_kaya_and_sange',
   'item_lotus_orb',
   'item_manta',
@@ -94,15 +97,10 @@ const ignoreValuesFor = [
   'item_infused_raindrop',
   'item_nether_shawl',
   'item_aghanims_shard',
-  'item_cornucopia',
   'item_ring_of_tarrasque',
   'item_tiara_of_selemene',
-  'item_smoke_of_deceit',
-  'centaur_stampede',
-  'templar_assassin_psi_blades'
-  // 'shredder_chakram',
-  // 'shredder_chakram_2',
-  // 'tiny_grow',
+  'item_smoke_of_deceit'
+  // 'centaur_stampede',
 ];
 
 // Keys at the top-level ability definition that are expected to scale by level

@@ -10,18 +10,20 @@
     "BaseClass"                                           "ability_lua"
     "ScriptFile"                                          "abilities/oaa_witch_doctor_innate.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_INNATE_UI | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS"
-    "IsBreakable"                                         "1"
+    "IsBreakable"                                         "1" // needed because it's a custom ability
 
     "Innate"                                              "1"
-    "DependentOnAbility"                                  "witch_doctor_death_ward_oaa"
-    "MaxLevel"                                            "6" // same as Dependent ability + 1
+    "MaxLevel"                                            "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "heal_prevent_percent"                              "-10 -11 -12 -13 -14 -15" // reduces only healing
-      "health_restoration"                                "-10 -11 -12 -13 -14 -15" // reduces everything else
+      "health_restoration" // reduces all health restoration
+      {
+        "value"                                           "10.5"
+        "hero_levelup"                                    "+0.5"
+      }
       "duration"                                          "3"
     }
   }

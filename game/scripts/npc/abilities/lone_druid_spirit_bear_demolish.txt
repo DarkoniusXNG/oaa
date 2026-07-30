@@ -1,25 +1,24 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Lone Druid: Spirit Bear Demolish (Innate)
+  // Spirit Bear: Demolish (Innate) FIXEDFUCK
   //=================================================================================================================
   "lone_druid_spirit_bear_demolish"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
     "MaxLevel"                                            "1"
-    "RequiredLevel"                                       "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "bonus_building_damage"
+      "bonus_building_damage" // percentage bonus damage against bosses
       {
         "value"                                           "30"
-        "special_bonus_unique_lone_druid_spirit_bear_demolish"  "+20"
+        "special_bonus_unique_lone_druid_spirit_bear_demolish"  "+15"
       }
       "bonus_damage_against_entangled"
       {

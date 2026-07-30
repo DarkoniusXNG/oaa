@@ -1,21 +1,20 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // General
+  // Undying: Ceaseless Dirge (Innate) FIXEDFUCK
   //=================================================================================================================
   "undying_ceaseless_dirge"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     "MaxLevel"                                            "1"
-    "RequiredLevel"                                       "1"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "480"
+    "AbilityCooldown"                                     "360" //OAA, intentionally buffed
 
     // Special
     //-------------------------------------------------------------------------------------------------------------

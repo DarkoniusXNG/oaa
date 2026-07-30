@@ -1,36 +1,43 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Pudge Rot
+  // Pudge: Rot FIXEDFUCK
   //=================================================================================================================
   "pudge_rot"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "HasScepterUpgrade"                                   "1"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0 0 0 0 0 0"
+    "AbilityCastPoint"                                    "0"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "0" //OAA, Valve forgot
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "0" //OAA, Valve forgot
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "rot_tick"                                          "0.2"
       "rot_radius"
       {
         "value"                                           "250"
         "special_bonus_scepter"                           "+200"
         "affected_by_aoe_increase"                        "1"
       }
+      "rot_tick"                                          "0.2"
       "rot_slow"
       {
         "value"                                           "-14 -20 -26 -32 -38 -44"
@@ -41,9 +48,9 @@
         "value"                                           "30 60 90 120 240 480"
         "special_bonus_scepter"                           "+90"
       }
-      "scepter_rot_regen_reduction_pct" //OAA
+      "scepter_rot_regen_reduction_pct" //OAA, intentionally rescaled
       {
-        "special_bonus_scepter"                           "20"
+        "special_bonus_scepter"                           "5 10 15 20 25 30"
       }
     }
   }

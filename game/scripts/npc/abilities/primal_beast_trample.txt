@@ -1,44 +1,44 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Primal Beast: Trample
+  // Primal Beast: Trample FIXEDFUCK
   //=================================================================================================================
   "primal_beast_trample"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
+    "AbilityManaCost"                                     "100 105 110 115 120 125" //OAA, intentionally nerfed
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "step_distance"                                     "140"
-      "duration"                                          "5.5"
       "effect_radius"
       {
-        "value"                                           "230"
+        "value"                                           "200"
         "affected_by_aoe_increase"                        "1"
       }
+      "step_distance"                                     "140"
       "base_damage"
       {
         "value"                                           "15 30 45 60 120 180"
         "CalculateSpellDamageTooltip"                     "1"
       }
-      "attack_damage" //OAA
+      "duration"                                          "5.5"
+      "attack_damage" //OAA, intentionally rescaled
       {
-        "value"                                           "35"
+        "value"                                           "20 25 30 35 40 45"
         "special_bonus_unique_primal_beast_trample_attack_damage"  "+20"
       }
       "bonus_magic_resistance"
@@ -46,9 +46,9 @@
         "value"                                           "0"
         "special_bonus_unique_primal_beast_trample_magic_resist"  "+25"
       }
-      "AbilityCooldown" //OAA
+      "AbilityCooldown" //OAA, intentionally buffed
       {
-        "value"                                           "30 27 24 21 21 21"
+        "value"                                           "24 23 22 21 20 19"
         "special_bonus_unique_primal_beast_trample_cooldown"  "-5"
       }
       "unslowable"

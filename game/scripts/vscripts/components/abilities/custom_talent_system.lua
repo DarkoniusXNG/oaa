@@ -43,26 +43,20 @@ local abilities_with_custom_talents = {
   faceless_void_chronosphere = {
     AbilityCooldown = {"special_bonus_unique_faceless_void_2_oaa", "+"},
   },
-  faceless_void_time_zone = {
-    AbilityCooldown = {"special_bonus_unique_faceless_void_2_oaa", "+"},
-  },
   gyrocopter_flak_cannon = {
     radius = {"special_bonus_unique_gyrocopter_1_oaa", "+"},
   },
   huskar_inner_fire = {
     damage = {"special_bonus_unique_huskar_1_oaa", "+"},
   },
-  keeper_of_the_light_illuminate = {
-    speed = {"special_bonus_unique_keeper_of_the_light_1_oaa", "%"},
-  },
+  -- keeper_of_the_light_illuminate = {
+    -- speed = {"special_bonus_unique_keeper_of_the_light_1_oaa", "%"},
+  -- },
   lich_chain_frost = {
     jumps = {"special_bonus_unique_lich_1_oaa", "+"},
   },
   life_stealer_open_wounds = {
     AbilityCooldown = {"special_bonus_unique_lifestealer_1_oaa", "+"},
-  },
-  mars_arena_of_blood = {
-    spear_damage = {"special_bonus_unique_mars_2_oaa", "+"},
   },
   mirana_leap = {
     leap_bonus_duration = {"special_bonus_unique_mirana_3_oaa", "+"},
@@ -72,9 +66,6 @@ local abilities_with_custom_talents = {
   },
   muerta_pierce_the_veil = {
     AbilityCooldown = {"special_bonus_unique_muerta_2_oaa", "+"},
-  },
-  obsidian_destroyer_ominous_discernment = {
-    bonus_max_mana_per_int = {"special_bonus_unique_obsidian_destroyer_1_oaa", "+"},
   },
   queenofpain_shadow_strike = {
     duration_damage = {"special_bonus_unique_queen_of_pain_4_oaa", "+"},
@@ -94,9 +85,9 @@ local abilities_with_custom_talents = {
   winter_wyvern_cold_embrace = {
     heal_percentage = {"special_bonus_unique_winter_wyvern_1_oaa", "+"},
   },
-  zuus_thundergods_wrath = {
-    AbilityCooldown = {"special_bonus_unique_zeus_1_oaa", "+"},
-  },
+  -- zuus_thundergods_wrath = {
+    -- AbilityCooldown = {"special_bonus_unique_zeus_1_oaa", "+"},
+  -- },
 }
 
 ---------------------------------------------------------------------------------------------------

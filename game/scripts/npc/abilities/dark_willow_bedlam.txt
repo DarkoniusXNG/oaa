@@ -5,23 +5,19 @@
   //=================================================================================================================
   "dark_willow_bedlam"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
-    "LinkedAbility"                                       "dark_willow_terrorize"
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "900"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -39,9 +35,9 @@
       "attack_targets"                                    "1"
       "roaming_seconds_per_rotation"                      "1.5"
       "travel_speed"                                      "1800"
-      "attack_damage" //OAA
+      "attack_damage" //OAA, intentionally buffed
       {
-        "value"                                           "70 120 170 170 170"
+        "value"                                           "70 170 270 470 770"
         "special_bonus_unique_dark_willow_4"              "+30"
       }
       "attack_radius"

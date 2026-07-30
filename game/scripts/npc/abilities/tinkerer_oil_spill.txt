@@ -20,7 +20,7 @@
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
-    "HasScepterUpgrade"                                   "1"
+    "HasScepterUpgrade"                                   "1" // needed because it's a custom ability
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,6 @@
       "duration"
       {
         "value"                                           "5" // original 2/3/4/5
-        //"special_bonus_unique_tinkerer_4"                 "+2"
       }
       "move_speed_slow"
       {
@@ -73,7 +72,7 @@
       }
       "burn_dps"
       {
-        "value"                                           "25 35 45 55 110 220" // original: 15/20/25/30
+        "value"                                           "25 30 35 40 80 160" // original: 15/20/25/30
         "special_bonus_unique_tinkerer_6"                 "+30"
       }
       "burn_interval"                                     "0.25"
@@ -86,7 +85,7 @@
       "damage_amp"
       {
         "value"                                           "0"
-        "special_bonus_unique_tinkerer_7"                 "+17"
+        "special_bonus_unique_tinkerer_7"                 "+15"
       }
     }
   }

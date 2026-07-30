@@ -11,10 +11,13 @@ function item_butterfly_oaa:OnSpellStart()
   local caster = self:GetCaster()
   local buff_duration = self:GetSpecialValueFor("buff_duration")
 
-  -- Apply a Butterfly special buff to the caster
-  caster:AddNewModifier(caster, self, "modifier_item_butterfly_oaa_active", {duration = buff_duration})
+  -- Buff Amp
+  local real_buff_duration = GetValueChangedByBuffAmplification(buff_duration, caster, caster)
 
-  -- Sound
+  -- Apply a Butterfly special buff to the caster
+  caster:AddNewModifier(caster, self, "modifier_item_butterfly_oaa_active", {duration = real_buff_duration})
+
+  -- Activation Sound
   caster:EmitSound("DOTA_Item.Butterfly")
 end
 
@@ -87,7 +90,7 @@ function modifier_item_butterfly_oaa_passive:GetModifierBonusStats_Agility()
 end
 
 function modifier_item_butterfly_oaa_passive:GetModifierAttackSpeedBonus_Constant()
-  -- Prevent stacking with itself
+  -- Prevent multiple Butterflies stacking attack speed
   if self:GetStackCount() ~= 2 then
     return 0
   end

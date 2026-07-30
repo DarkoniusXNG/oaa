@@ -1,19 +1,19 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Doom Bringer: Infernal Blade
+  // Doom Bringer: Infernal Blade FIXEDFUCK
   //=================================================================================================================
   "doom_bringer_infernal_blade"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -21,7 +21,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "200"
-    "AbilityCastPoint"                                    "0.0 0.0 0.0 0.0 0.0 0.0"
+    "AbilityCastPoint"                                    "0.0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "35 45 55 65 75 85" //OAA, intentional nerf
+    "AbilityManaCost"                                     "35 45 55 65 75 85" //OAA, intentionally nerfed
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -39,10 +39,10 @@
       {
         "value"                                           "15 30 45 60 120 180"
       }
-      "burn_damage_pct"
+      "burn_damage_pct" //OAA, intentionally nerfed
       {
-        "value"                                           "1 2 3 4 4.5 5"
-        "special_bonus_unique_doom_1"                     "+2.5"
+        "value"                                           "1.0 1.5 2.0 2.5 3.0 3.5"
+        "special_bonus_unique_doom_1"                     "+1.5"
       }
       "burn_duration"
       {

@@ -5,17 +5,17 @@
   //=================================================================================================================
   "huskar_life_break"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
@@ -23,11 +23,11 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "550"
-    "AbilityCastPoint"                                    "0.3 0.3 0.3 0.3 0.3"
+    "AbilityCastPoint"                                    "0.3"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "0 0 0 0 0"
+    "AbilityManaCost"                                     "0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -35,18 +35,18 @@
     {
       "health_cost_percent"                               "0.32 0.38 0.44 0.5 0.56"
       "charge_speed"                                      "1200"
-      "movespeed"                                         "-60 -60 -60 -60 -60"
+      "movespeed"                                         "-60"
       "attack_speed"                                      "60 100 140 180 220"
       "immunity_resist"                                   "60"
       "health_damage"
       {
         "value"                                           "0.32 0.38 0.44 0.5 0.56"
-        "special_bonus_unique_huskar"                     "+0.22"
+        "special_bonus_unique_huskar"                     "+0.22" // we dont use this so ignore
       }
       "tooltip_health_damage"
       {
         "value"                                           "32 38 44 50 56"
-        "special_bonus_unique_huskar"                     "+22"
+        "special_bonus_unique_huskar"                     "+22" // we dont use this so ignore
       }
       "tooltip_health_cost_percent"
       {
@@ -54,7 +54,7 @@
         "CalculateSpellDamageTooltip"                     "1"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
-      "AbilityDuration"
+      "AbilityDuration" // Life Break uses AbilityDuration for slow duration
       {
         "value"                                           "3 4 5 6 7"
         "special_bonus_unique_huskar_4"                   "+2"

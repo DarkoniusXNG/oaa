@@ -5,25 +5,24 @@
   //=================================================================================================================
   "death_prophet_exorcism"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.5 0.5 0.5 0.5 0.5"
+    "AbilityCastPoint"                                    "0.5"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "120" //OAA
+    "AbilityCooldown"                                     "120" //OAA, intentionally buffed
     "AbilityDuration"                                     "40"
 
     // Cost
@@ -37,15 +36,15 @@
       "spirit_speed"                                      "525"
       "max_distance"                                      "2000"
       "give_up_distance"                                  "1200"
-      "min_damage"                                        "62 72 82 112 162" //OAA
-      "max_damage"                                        "67 77 87 117 167" //OAA
+      "min_damage"                                        "62 72 82 112 162" //OAA, intentionally buffed
+      "max_damage"                                        "67 77 87 117 167" //OAA, intentionally rescaled
       "heal_percent"                                      "25"
-      "average_damage"                                    "65 75 85 115 165" //OAA, important for tooltip
+      "average_damage"                                    "65 75 85 115 165" //OAA, intentionally buffed; important for tooltip: (min_damage + max_damage) / 2
       "ghost_spawn_rate"                                  "0.25"
       "movement_bonus"                                    "0"
       "radius"
       {
-        "value"                                           "700 700 700 700 700"
+        "value"                                           "700"
         "affected_by_aoe_increase"                        "1"
       }
       "spirits"
@@ -57,17 +56,17 @@
       {
         "special_bonus_scepter"                           "20"
       }
-      "scepter_spirit_bonus_damage"
+      "scepter_spirit_bonus_damage" // this is a percent increase
       {
         "special_bonus_scepter"                           "60"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "duration_increase_per_kill"
+      "duration_increase_per_kill" //OAA, because of special_bonus_unique_death_prophet_exorcism_duration_on_kill nerf
       {
         "value"                                           "0"
-        "special_bonus_unique_death_prophet_exorcism_duration_on_kill"  "+8"
+        "special_bonus_unique_death_prophet_exorcism_duration_on_kill"  "+4"
       }
-      "building_dmg_pct"                                  "150" //OAA, percentage bonus damage against bosses
+      "building_dmg_pct"                                  "150" //OAA, additional effect; percentage bonus damage against bosses
     }
   }
 }

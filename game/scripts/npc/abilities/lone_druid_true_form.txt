@@ -1,26 +1,27 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Lone Druid: True Form
+  // Lone Druid: True Form FIXEDFUCK
   //=================================================================================================================
   "lone_druid_true_form"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0 0 0 0 0"
+    "AbilityCastPoint"                                    "0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "80"
+    "AbilityManaCost"                                     "80 85 90 95 100" //OAA, intentionally nerfed
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -33,7 +34,7 @@
       }
       "bonus_hp"
       {
-        "value"                                           "500 1000 1500 3000 4500"
+        "value"                                           "500 1000 1500 2500 4000"
         "special_bonus_facet_lone_druid_unbearable"       "-100%"
       }
       "bonus_attack_damage"
@@ -49,6 +50,7 @@
       "duration"
       {
         "value"                                           "25"
+        "special_bonus_unique_lone_druid_2"               "+5"
       }
       "AbilityCooldown"
       {

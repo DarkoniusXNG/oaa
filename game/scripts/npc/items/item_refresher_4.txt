@@ -36,14 +36,14 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/refresher.lua"
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityTextureName"                                  "custom/refresher_orb_4"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "180"
     "AbilitySharedCooldown"                               "refresher_oaa"
-    "AbilityManaCost"                                     "500"
+    "AbilityManaCost"                                     "325"
 
     "MaxUpgradeLevel"                                     "5"
     "ItemBaseLevel"                                       "4"

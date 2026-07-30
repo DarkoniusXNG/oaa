@@ -13,11 +13,17 @@ function item_martyrs_mail_1:GetIntrinsicModifierName()
 end
 
 function item_martyrs_mail_1:OnSpellStart()
-	local hCaster = self:GetCaster()
-	local martyr_duration = self:GetSpecialValueFor( "martyr_duration" )
+  local caster = self:GetCaster()
+  local martyr_duration = self:GetSpecialValueFor("martyr_duration")
 
-	--hCaster:EmitSound("")
-	hCaster:AddNewModifier( hCaster, self, "modifier_item_martyrs_mail_martyr_active", { duration = martyr_duration } )
+  -- Buff Amp
+  local real_buff_duration = GetValueChangedByBuffAmplification(martyr_duration, caster, caster)
+
+  -- Apply Martyrs Mail buff to caster
+  caster:AddNewModifier(caster, self, "modifier_item_martyrs_mail_martyr_active", {duration = real_buff_duration})
+
+  -- Activation Sound
+  --caster:EmitSound("")
 end
 
 --------------------------------------------------------------------------------
@@ -74,7 +80,7 @@ end
 
 if IsServer() then
   function modifier_item_martyrs_mail_passive:OnDeath(event)
-    -- Only the first item will proc
+    -- Prevent triggering multiple Martyr Mails
     if not self:IsFirstItemInInventory() then
       return
     end
@@ -129,11 +135,15 @@ if IsServer() then
 
     for _, ally in pairs(allies) do
       if ally and not ally:IsNull() then
-        -- Healing
-        ally:Heal(heal_amount, ability)
+        -- Healing (it should work with heal amp)
+        --ally:Heal(heal_amount, ability)
+        ally:HealWithParams(heal_amount, ability, false, true, parent, false)
+        -- Visual effect
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, ally, heal_amount, nil)
+        -- Buff Amp
+        local real_buff_duration = GetValueChangedByBuffAmplification(effect_duration, ally, parent)
         -- Buff
-        ally:AddNewModifier(parent, ability, "modifier_item_martyrs_mail_death_buff", {duration = effect_duration})
+        ally:AddNewModifier(parent, ability, "modifier_item_martyrs_mail_death_buff", {duration = real_buff_duration})
       end
     end
 

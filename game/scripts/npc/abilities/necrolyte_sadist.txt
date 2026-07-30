@@ -5,13 +5,11 @@
   //=================================================================================================================
   "necrolyte_sadist"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_FORCE_NO_INNATE_UI"
-    "MaxLevel"                                            "6"
-    "RequiredLevel"                                       "1"
-    "LevelsBetweenUpgrades"                               "2"
+
+    "MaxLevel"                                            "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -33,8 +31,6 @@
         "value"                                           "8"
         "special_bonus_unique_necrophos_heartstopper_regen_duration"  "+2"
       }
-      "health_regen"                                      "3.5 5.0 6.5 8.0 9.5 11.0" //OAA, for readability
-      "mana_regen"                                        "3.5 5.0 6.5 8.0 9.5 11.0" //OAA, for readability
     }
   }
 }

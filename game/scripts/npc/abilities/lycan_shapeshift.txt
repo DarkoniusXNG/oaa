@@ -1,46 +1,47 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Lycan: Shapeshift
+  // Lycan: Shapeshift FIXEDFUCK
   //=================================================================================================================
   "lycan_shapeshift"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100"
+    "AbilityManaCost"                                     "100 105 110 115 120" //OAA, intentionally nerfed
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
+      "duration" //OAA, because of Wolf Bite
+      {
+        "value"                                           "15"
+        "special_bonus_unique_lycan_1"                    "+6"
+      }
       "speed"                                             "550"
       "bonus_night_vision"                                "1000"
       "transformation_time"                               "1.1"
       "crit_chance"                                       "40"
-      "crit_multiplier"                                   "160 190 220 250 280" //OAA, intentional nerf
-      "health_bonus"                                      "225 325 425 725 1025"
+      "crit_multiplier"                                   "160 190 220 250 280" //OAA, intentionally nerfed
+      "health_bonus"                                      "225 325 425 625 925"
       "is_wolfpack"                                       "1"
-      "duration" //OAA, because of Bite
-      {
-        "value"                                           "25"
-        "special_bonus_unique_lycan_1"                    "+7"
-      }
       "kill_duration_extension"
       {
         "value"                                           "0"
       }
-      "AbilityCooldown" //OAA
+      "AbilityCooldown" //OAA, intentionally buffed
       {
-        "value"                                           "110 100 90 90 90"
+        "value"                                           "95 90 85 80 75"
         "special_bonus_unique_lycan_8"                    "-15"
       }
     }

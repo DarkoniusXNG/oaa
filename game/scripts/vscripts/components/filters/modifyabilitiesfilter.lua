@@ -42,7 +42,7 @@ function ModifyAbilitiesFilter:ModifierFilter(keys)
     end
   elseif ability_name == "faceless_void_time_dilation" and modifier_name == "modifier_faceless_void_time_dilation_slow" then
     victim:AddNewModifier(caster, ability, "modifier_faceless_void_time_dilation_degen_oaa", {duration = modifier_duration})
-    victim:ApplyNonStackableBuff(caster, ability, "modifier_item_enhancement_crude", modifier_duration)
+    --victim:ApplyNonStackableBuff(caster, ability, "modifier_item_enhancement_crude", modifier_duration)
   elseif (ability_name == "elder_titan_natural_order" or ability_name == "elder_titan_natural_order_spirit") and modifier_name == "modifier_elder_titan_natural_order_magic_resistance" then
     if not victim:HasModifier("modifier_elder_titan_natural_order_correction_oaa") and ability:GetLevel() > 4 and not victim:IsOAABoss() then
       victim:AddNewModifier(caster, ability, "modifier_elder_titan_natural_order_correction_oaa", {})
@@ -50,22 +50,22 @@ function ModifyAbilitiesFilter:ModifierFilter(keys)
   elseif ability_name == "tidehunter_anchor_smash" and modifier_name == "modifier_tidehunter_anchor_smash" and victim:IsOAABoss() then
     victim:AddNewModifier(caster, ability, "modifier_tidehunter_anchor_smash_oaa_boss", {duration = modifier_duration})
     return false
-  elseif ability_name == "rubick_fade_bolt" and modifier_name == "modifier_rubick_fade_bolt_debuff" and victim:IsOAABoss() then
-    victim:AddNewModifier(caster, ability, "modifier_rubick_fade_bolt_debuff_oaa_boss", {duration = modifier_duration})
-    return false
-  elseif modifier_name == "modifier_windrunner_windrun_invis" then
-    victim:AddNewModifier(caster, ability, "modifier_windranger_scepter_oaa", {duration = modifier_duration})
-    return false
+  --elseif ability_name == "rubick_fade_bolt" and modifier_name == "modifier_rubick_fade_bolt_debuff" and victim:IsOAABoss() then
+    --victim:AddNewModifier(caster, ability, "modifier_rubick_fade_bolt_debuff_oaa_boss", {duration = modifier_duration})
+    --return false
+  --elseif modifier_name == "modifier_windrunner_windrun_invis" then
+    --victim:AddNewModifier(caster, ability, "modifier_windranger_scepter_oaa", {duration = modifier_duration})
+    --return false
   elseif modifier_name == "modifier_muerta_pierce_the_veil_buff" then
     victim:AddNewModifier(caster, ability, "modifier_muerta_pierce_the_veil_penalty_oaa", {duration = modifier_duration})
-  elseif modifier_name == "modifier_skeleton_king_reincarnation_scepter_active" then
+  elseif modifier_name == "modifier_skeleton_king_reincarnation_scepter_active" and victim ~= caster then
     victim:AddNewModifier(caster, ability, "modifier_wraith_form_penalty_oaa", {duration = modifier_duration})
-  elseif modifier_name == "modifier_legion_commander_duel" and caster:HasScepter() then
-    if victim ~= caster then
-      victim:AddNewModifier(caster, ability, "modifier_legion_duel_debuff_oaa", {duration = modifier_duration})
+  --elseif modifier_name == "modifier_legion_commander_duel" and caster:HasScepter() then
+    --if victim ~= caster then
+      --victim:AddNewModifier(caster, ability, "modifier_legion_duel_debuff_oaa", {duration = modifier_duration})
     -- else
       -- victim:AddNewModifier(caster, ability, "modifier_legion_duel_buff_oaa", {duration = modifier_duration})
-    end
+    --end
   elseif ability_name == "viper_viper_strike" and modifier_name ~= "modifier_viper_viper_strike_silence" then
     local talent = caster:FindAbilityByName("special_bonus_unique_viper_3_oaa")
     if talent and talent:GetLevel() > 0 then
@@ -80,16 +80,28 @@ function ModifyAbilitiesFilter:ModifierFilter(keys)
       victim:AddNewModifier(caster, ability, "modifier_viper_viper_strike_silence", {duration = modifier_duration})
     end
   elseif modifier_name == "modifier_mars_arena_of_blood_animation" and victim ~= caster and victim:GetTeamNumber() ~= caster:GetTeamNumber() then
-    local facet = caster:GetHeroFacetID()
-    if tostring(facet) == "2" then
+    --local facet = caster:GetHeroFacetID()
+    --if tostring(facet) == "2" then
+    local talent = caster:FindAbilityByName("special_bonus_unique_mars_2_oaa")
+    if talent and talent:GetLevel() > 0 then
       victim:AddNewModifier(caster, ability, "modifier_mars_arena_of_blood_leash_oaa", {})
     end
   elseif modifier_name == "modifier_wisp_relocate_return" then
     victim:AddNewModifier(caster, ability, "modifier_wisp_relocate_shield_oaa", {})
-  elseif modifier_name == "modifier_bristleback_warpath_active" then
-    victim:AddNewModifier(caster, ability, "modifier_bristleback_seeing_red_oaa", {duration = modifier_duration})
-  elseif modifier_name == "modifier_slark_shadow_dance_aura" then
-    victim:AddNewModifier(caster, ability, "modifier_slark_shadow_dance_oaa", {duration = modifier_duration})
+  --elseif modifier_name == "modifier_bristleback_warpath_active" then
+    --victim:AddNewModifier(caster, ability, "modifier_bristleback_seeing_red_oaa", {duration = modifier_duration})
+  elseif modifier_name == "modifier_slark_shadow_dance_aura" or modifier_name == "modifier_slark_depth_shroud" then
+    local shadow_dance_additional_mod = victim:FindModifierByNameAndCaster("modifier_slark_shadow_dance_oaa", caster)
+    if not shadow_dance_additional_mod then
+      victim:AddNewModifier(caster, ability, "modifier_slark_shadow_dance_oaa", {})
+    else
+      -- Check the ability and apply the stronger version only
+      local ab = shadow_dance_additional_mod:GetAbility()
+      if ability_name == "slark_shadow_dance" and ab:GetName() == "slark_depth_shroud" then
+        shadow_dance_additional_mod:Destroy()
+        victim:AddNewModifier(caster, ability, "modifier_slark_shadow_dance_oaa", {})
+      end
+    end
   elseif modifier_name == "modifier_item_overwhelming_blink_debuff" and ability_name ~= "item_overwhelming_blink" then
     victim:AddNewModifier(caster, ability, "modifier_item_overwhelming_blink_debuff_oaa", {duration = modifier_duration})
   end
@@ -114,47 +126,70 @@ function ModifyAbilitiesFilter:ModifierFilter(keys)
     end
   end
 
-  if real_caster:HasModifier("modifier_item_nether_core") and modifier_duration ~= -1 and modifier_duration > 0.5 then
-    local nether_core_mod = real_caster:FindModifierByNameAndCaster("modifier_item_nether_core", real_caster)
+  if real_caster:HasModifier("modifier_item_nether_core_passive") and modifier_duration ~= -1 and modifier_duration > 0.5 then
+    local nether_core_mod = real_caster:FindModifierByNameAndCaster("modifier_item_nether_core_passive", real_caster)
     if nether_core_mod and nether_core_mod:IsFirstItemInInventory() then
       local nether_core_item = nether_core_mod:GetAbility()
       if nether_core_item then
         local duration_decrease = nether_core_item:GetSpecialValueFor("modifier_duration_decrease")
         local exceptions = {
-          modifier_battlemage_cooldown_oaa = true,
+          --modifier_dark_seer_surge_trail = true,
+          --modifier_illusion = true,
+          --modifier_invisible = true,
+          --modifier_kill = true,
+          modifier_battlemage_cooldown_oaa = true, -- not intended
+          modifier_black_king_bar_immune = true, -- 7.41b
           modifier_bloodseeker_bloodbath_thinker = true,
+          modifier_bottle_regeneration = true, -- like Largo Encore
           modifier_dark_willow_cursed_crown = true,
           modifier_dawnbreaker_solar_guardian_air_time = true,
-          modifier_echo_strike_cooldown_oaa = true,
+          modifier_echo_strike_cooldown_oaa = true, -- not intended
           modifier_elder_titan_earth_splitter_thinker = true,
+          modifier_enchantress_bunny_hop = true,
+          modifier_enraged_wildkin_hurricane = true,
+          modifier_eul_cyclone = true, -- like Largo Encore
           modifier_invoker_sun_strike = true,
           modifier_invoker_sun_strike_cataclysm = true,
-          modifier_item_bubble_orb_effect_cd = true,
-          modifier_item_crimson_guard_nostack = true,
-          modifier_item_harpoon_internal_cd = true,
-          modifier_item_mekansm_noheal = true,
-          modifier_item_reflex_core_cooldown = true,
+          modifier_item_assault_positive = true, -- aura
+          modifier_item_bloodstone_drained = true, -- not intended
+          modifier_item_bubble_orb_effect_cd = true, -- not intended
+          modifier_item_buckler_effect = true, -- aura
+          modifier_item_crimson_guard_nostack = true, -- like Largo Encore
+          modifier_item_forcestaff_active = true, -- like Largo Encore
+          modifier_item_harpoon_internal_cd = true, -- not intended
+          modifier_item_harpoon_pull = true, -- like Largo Encore
+          modifier_item_hurricane_pike_active = true, -- like Largo Encore
+          modifier_item_hurricane_pike_active_alternate = true, -- like Largo Encore
+          modifier_item_mekansm_noheal = true, -- like Largo Encore
+          modifier_item_pipe_debuff = true, -- like Largo Encore
+          modifier_item_preemptive_bubble_block = true, -- not intended
+          modifier_item_psychic_headband_active = true, -- like Largo Encore
+          modifier_item_reflex_core_cooldown = true, -- not intended
+          modifier_item_ring_of_basilius_effect = true, -- aura
           modifier_item_sphere_target = true,
           modifier_item_ward_true_sight = true,
           modifier_keeper_of_the_light_illuminate = true,
+          modifier_knockback = true, -- like Largo Encore
           modifier_magnataur_skewer_movement = true,
-          modifier_magus_cooldown_oaa = true,
+          modifier_magus_cooldown_oaa = true, -- not intended
+          modifier_mana_draught_regeneration = true, -- like Largo Encore
           modifier_manta = true,
           modifier_marci_unleash_flurry_cooldown = true,
-          modifier_observer_ward_recharger = true,
+          modifier_observer_ward_recharger = true, -- not intended
           modifier_phoenix_sun = true,
           modifier_primal_beast_onslaught_movement_adjustable = true,
           modifier_primal_beast_onslaught_windup = true,
-          modifier_pull_staff_echo_strike_cd = true,
           modifier_pugna_nether_blast_thinker = true,
-          modifier_roshan_bash_cooldown_oaa = true,
-          modifier_sentry_ward_recharger = true,
+          modifier_pull_staff_echo_strike_cd = true, -- not intended
+          modifier_roshan_bash_cooldown_oaa = true, -- not intended
+          modifier_sentry_ward_recharger = true, -- not intended
           modifier_shredder_reactive_armor = true,
-          modifier_spell_block_cooldown_oaa = true,
+          modifier_spell_block_cooldown_oaa = true, -- not intended
           modifier_techies_sticky_bomb_countdown = true,
-          modifier_teleporting = true,
-          modifier_ui_custom_observer_ward_charges = true,
-          modifier_ui_custom_sentry_ward_charges = true,
+          modifier_teleporting = true, -- not intended
+          modifier_ui_custom_observer_ward_charges = true, -- not intended
+          modifier_ui_custom_sentry_ward_charges = true, -- not intended
+          modifier_wind_waker = true, -- like Largo Encore
         }
         local isDebuff = victim:GetTeamNumber() ~= caster:GetTeamNumber()
         local allowed
@@ -181,6 +216,7 @@ function ModifyAbilitiesFilter:ModifierFilter(keys)
   return true
 end
 
+--[[
 function ModifyAbilitiesFilter:ProjectileFilter(keys)
   local source_index = keys.entindex_source_const
   local is_an_attack_projectile = keys.is_attack    -- values: 1 for yes or 0 for no
@@ -200,3 +236,4 @@ function ModifyAbilitiesFilter:ProjectileFilter(keys)
 
   return true
 end
+]]

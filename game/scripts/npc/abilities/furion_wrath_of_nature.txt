@@ -1,20 +1,20 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Nature's Prophet: Wrath of Nature
+  // Nature's Prophet: Wrath of Nature FIXEDFUCK
   //=================================================================================================================
   "furion_wrath_of_nature"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
@@ -22,7 +22,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
-    "AbilityCastPoint"                                    "0.5 0.5 0.5 0.5 0.5"
+    "AbilityCastPoint"                                    "0.5"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -33,11 +33,10 @@
     "AbilityValues"
     {
       "max_targets"                                       "16"
-      "jump_delay"                                        "0.15"
-      "damage" //OAA, special_bonus_unique_furion_5 is not used
+      "damage" //OAA, intentionally buffed
       {
-        "value"                                           "90 130 170 170 170"
-        "special_bonus_unique_furion_5"                   "+25"
+        "value"                                           "125 180 235 345 455"
+        "special_bonus_unique_furion_5"                   "+25" // we dont use this so ignore
       }
       "damage_percent_add"
       {
@@ -45,13 +44,14 @@
         "CalculateSpellDamageTooltip"                     "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
       }
-      "kill_damage"
+      "jump_delay"                                        "0.15"
+      "kill_damage" // unused
       {
         "value"                                           "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_PHYSICAL"
         "CalculateSpellDamageTooltip"                     "0"
       }
-      "kill_damage_duration"
+      "kill_damage_duration" // unused
       {
         "value"                                           "0"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_NONE"
@@ -60,7 +60,7 @@
       "AbilityCooldown"
       {
         "value"                                           "85"
-        "special_bonus_unique_furion_7"                   "-15"
+        "special_bonus_unique_furion_7"                   "-20"
       }
       "scepter_min_entangle_duration"
       {

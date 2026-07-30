@@ -42,7 +42,7 @@ function modifier_multicast_oaa:OnCreated()
     arc_warden_tempest_double = 1,                       -- multiple Tempest Doubles and lag
     bane_nightmare_end = 1,                              -- useless
     --beastmaster_call_of_the_wild_boar_oaa = 1,         -- lag
-    --beastmaster_call_of_the_wild_hawk = 1,             -- lag
+    beastmaster_summon_raptor = 1,                       -- lag
     brewmaster_primal_split = 1,                         -- bugs out?
     broodmother_spin_web = 1,                            -- bugs out the screen
     centaur_mount = 1,                                   -- bugs out?
@@ -112,8 +112,9 @@ function modifier_multicast_oaa:OnCreated()
     muerta_parting_shot = 1,                             -- bugs out
     muerta_the_calling = 1,                              -- lag
     naga_siren_song_of_the_siren_cancel = 1,             -- useless
-    nevermore_frenzy = 1,                                -- self grief in most cases
-    night_stalker_hunter_in_the_night = 1,               -- instant kill
+    nevermore_frenzy = 1,                                -- useless
+    --night_stalker_hunter_in_the_night = 1,               -- instant kill
+    night_stalker_midnight_feast = 1,                    -- instant kill
     nyx_assassin_burrow = 1,                             -- bugs out?
     nyx_assassin_unburrow = 1,                           -- self grief
     --obsidian_destroyer_astral_imprisonment = 1,        -- grief, trolling
@@ -122,7 +123,7 @@ function modifier_multicast_oaa:OnCreated()
     pangolier_rollup_stop = 1,                           -- useless
     --phantom_lancer_doppelwalk = 1,                     -- lag
     --phantom_lancer_juxtapose = 1,                      -- lag because of shard
-    --phantom_lancer_spirit_lance = 1,                   -- lag because of scepter
+    --phantom_lancer_spirit_lance = 1,                   -- lag
     phoenix_icarus_dive_stop = 1,                        -- useless
     phoenix_sun_ray_stop = 1,                            -- useless
     phoenix_sun_ray_toggle_move = 1,                     -- useless
@@ -144,9 +145,7 @@ function modifier_multicast_oaa:OnCreated()
     shadow_shaman_mass_serpent_ward = 1,                 -- lag, powerful
     shadow_shaman_mass_serpent_ward_oaa = 1,             -- lag, powerful
     shredder_chakram = 1,                                -- multiplies Chakrams
-    shredder_chakram_2 = 1,                              -- multiplies Chakrams
     shredder_return_chakram = 1,                         -- useless
-    shredder_return_chakram_2 = 1,                       -- useless
     --shredder_timber_chain = 1,                         -- bugs out?
     --silencer_global_silence = 1,                       -- powerful because of scepter?
     skeleton_king_bone_guard = 1,                        -- lag because of the talent that grants free skeletons
@@ -180,6 +179,8 @@ function modifier_multicast_oaa:OnCreated()
     --warlock_rain_of_chaos = 1,                         -- lag
     --weaver_time_lapse = 1,                             -- powerful or grief with scepter?
     --winter_wyvern_cold_embrace = 1,                    -- grief
+    wisp_spirits_in = 1,                                 -- useless
+    wisp_spirits_out = 1,                                -- useless
     wisp_tether_break = 1,                               -- useless
     witch_doctor_voodoo_switcheroo_oaa = 1,              -- multiplies
     --zuus_cloud_oaa = 1,                                -- powerful

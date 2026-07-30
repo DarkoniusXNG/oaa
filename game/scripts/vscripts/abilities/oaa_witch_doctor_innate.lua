@@ -114,7 +114,7 @@ if IsServer() then
 
     -- Apply Heal reduction debuff
     damaged_unit:AddNewModifier(parent, self:GetAbility(), "modifier_witch_doctor_innate_oaa_effect", {duration = self.heal_prevent_duration})
-    damaged_unit:ApplyNonStackableBuff(parent, self:GetAbility(), "modifier_item_enhancement_crude", self.heal_prevent_duration)
+    --damaged_unit:ApplyNonStackableBuff(parent, self:GetAbility(), "modifier_item_enhancement_crude", self.heal_prevent_duration)
   end
 end
 
@@ -142,12 +142,13 @@ function modifier_witch_doctor_innate_oaa_effect:OnCreated()
   self.heal_prevent_percent = -10
   local ability = self:GetAbility()
   if ability and not ability:IsNull() then
-    self.heal_prevent_percent = ability:GetSpecialValueFor("heal_prevent_percent")
+    self.heal_prevent_percent = ability:GetSpecialValueFor("health_restoration")
   end
 end
 
 modifier_witch_doctor_innate_oaa_effect.OnRefresh = modifier_witch_doctor_innate_oaa_effect.OnCreated
 
+--[[
 function modifier_witch_doctor_innate_oaa_effect:OnDestroy()
   if not IsServer() then
     return
@@ -172,23 +173,34 @@ function modifier_witch_doctor_innate_oaa_effect:OnDestroy()
     end
   end
 end
+]]
 
 function modifier_witch_doctor_innate_oaa_effect:DeclareFunctions()
   return {
-    MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
+    --MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
     --MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE,
     --MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE,
     --MODIFIER_PROPERTY_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,
+    MODIFIER_PROPERTY_RESTORATION_AMPLIFICATION,
+    MODIFIER_PROPERTY_TOOLTIP,
   }
 end
 
-function modifier_witch_doctor_innate_oaa_effect:GetModifierHealAmplify_PercentageTarget()
+function modifier_witch_doctor_innate_oaa_effect:GetModifierPropertyRestorationAmplification()
+  return 0 - math.abs(self.heal_prevent_percent)
+end
+
+function modifier_witch_doctor_innate_oaa_effect:OnTooltip()
   return self.heal_prevent_percent
 end
 
-function modifier_witch_doctor_innate_oaa_effect:GetModifierHPRegenAmplify_Percentage()
-  return self.heal_prevent_percent
-end
+-- function modifier_witch_doctor_innate_oaa_effect:GetModifierHealAmplify_PercentageTarget()
+  -- return self.heal_prevent_percent
+-- end
+
+-- function modifier_witch_doctor_innate_oaa_effect:GetModifierHPRegenAmplify_Percentage()
+  -- return self.heal_prevent_percent
+-- end
 
 -- Doesn't work, Thanks Valve!
 -- function modifier_witch_doctor_innate_oaa_effect:GetModifierLifestealRegenAmplify_Percentage()

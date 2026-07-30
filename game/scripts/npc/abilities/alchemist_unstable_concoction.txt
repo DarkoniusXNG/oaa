@@ -1,29 +1,29 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Alchemist: Unstable Concoction
+  // Alchemist: Unstable Concoction FIXEDFUCK
   //=================================================================================================================
   "alchemist_unstable_concoction"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "775"
+    "AbilityCastRange"                                    "775" // for visualization on hover and for the tooltip
     "AbilityCastPoint"                                    "0.0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "17"
+    "AbilityCooldown"                                     "17 16 15 14 13 12" //OAA, intentionally buffed
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -33,10 +33,26 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "brew_time"                                         "5.0"
-      "brew_explosion"                                    "5.5"
-      "min_stun"                                          "0.25"
-      "max_stun"                                          "1.7 2.2 2.7 3.2 3.3 3.4"
+      "brew_time"
+      {
+        "value"                                           "5.0"
+        "display_type"                                    "kDuration"
+      }
+      "brew_explosion"
+      {
+        "value"                                           "5.5"
+        "display_type"                                    "kDuration"
+      }
+      "min_stun"
+      {
+        "value"                                           "0.25"
+        "display_type"                                    "kDebuffDuration"
+      }
+      "max_stun"
+      {
+        "value"                                           "1.7 2.2 2.7 3.2 3.3 3.4"
+        "display_type"                                    "kDebuffDuration"
+      }
       "min_damage"                                        "0"
       "max_damage"
       {
@@ -51,7 +67,7 @@
       }
       "move_speed"
       {
-        "value"                                           "4 8 12 16 16 16"
+        "value"                                           "4 8 12 16 20 24"
         "display_type"                                    "kBuffPercentage"
       }
       "chemical_rage_cooldown_reduction_pct"

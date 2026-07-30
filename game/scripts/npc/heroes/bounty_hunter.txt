@@ -1,11 +1,11 @@
 "DOTAHeroes"
 {
   //=================================================================================================================
-  // HERO: Bounty Hunter
+  // HERO: Bounty Hunter FIXEDFUCK
   //=================================================================================================================
   "npc_dota_hero_bounty_hunter"
   {
-    "Ability5"                                            "generic_hidden" // replaces bounty_hunter_big_game_hunter
+    //"Ability5"                                            "generic_hidden" // replaces bounty_hunter_big_game_hunter
 
     //"Ability10"                                           "special_bonus_unique_bounty_hunter_5"
     "Ability11"                                           "special_bonus_unique_bounty_hunter" // special_bonus_attack_damage_30
@@ -21,7 +21,7 @@
 
     // special_bonus_unique_bounty_hunter - Jinada bonus gold steal
     // special_bonus_unique_bounty_hunter_2 - Shuriken Toss Damage
-    // special_bonus_unique_bounty_hunter_3 - Track bonus gold
+    // special_bonus_unique_bounty_hunter_3 - Track bonus gold                                          - unused
     // special_bonus_unique_bounty_hunter_4 - Jinada bonus damage                                       - unused
     // special_bonus_unique_bounty_hunter_5 - Shuriken Toss bonus slow duration
     // special_bonus_unique_bounty_hunter_7 - Shuriken Toss charges

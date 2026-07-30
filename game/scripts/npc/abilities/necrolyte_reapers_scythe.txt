@@ -5,15 +5,16 @@
   //=================================================================================================================
   "necrolyte_reapers_scythe"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
@@ -24,7 +25,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "100 95 90 85 80" //OAA
+    "AbilityCooldown"                                     "100 95 90 85 80" //OAA, intentionally buffed
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,12 +35,12 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "stun_duration"                                     "1.5 1.5 1.5 1.5 1.5"
+      "stun_duration"                                     "1.5"
       "hp_per_kill"                                       "1 2 3 4 5"
       "mana_per_kill"                                     "1 2 3 4 5"
       "damage_per_health"
       {
-        "value"                                           "0.7 0.8 0.9 0.9 0.9"
+        "value"                                           "0.7 0.8 0.9 1.0 1.1"
         "special_bonus_unique_necrophos_reaper_scythe_damage_per_health"  "+0.3"
       }
       "AbilityCastRange"

@@ -14,14 +14,8 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "30.0" //OAA
+    "AbilityCooldown"                                     "30.0" //OAA, intentionally buffed
     "AbilitySharedCooldown"                               "drums"
-
-    // Spicy Parameters
-    //-------------------------------------------------------------------------------------------------------------
-    //"MaxUpgradeLevel"                                     "5"
-    //"ItemBaseLevel"                                       "1"
-    //"UpgradesItems"                                       "item_ancient_janggo;item_ancient_janggo_2;item_ancient_janggo_3;item_ancient_janggo_4"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -40,7 +34,7 @@
       "bonus_str"                                         "8"
       "bonus_int"                                         "0"
       "bonus_attack_speed_pct"                            "35"
-      "bonus_movement_speed_pct"                          "15" //OAA
+      "bonus_movement_speed_pct"                          "15" //OAA, intentionally buffed
       "duration"                                          "6"
       "radius"
       {

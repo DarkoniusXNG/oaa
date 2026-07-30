@@ -7,11 +7,10 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_INNATE_UI | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
-    "IsBreakable"                                         "1"
+    "IsBreakable"                                         "1" // needed because it's a custom ability
 
     "Innate"                                              "1"
-    "DependentOnAbility"                                  "bubble_witch_bubble_of_protection"
-    "MaxLevel"                                            "6" // same as Dependent ability + 1
+    "MaxLevel"                                            "1"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
@@ -27,8 +26,9 @@
     {
       "base_dmg"
       {
-        "value"                                           "50 75 100 125 250 375"
-        "special_bonus_facet_bubble_witch_extra_bubbly"   "=50 =60 =70 =80 =160 =240"
+        "value"                                           "46"
+        "hero_levelup"                                    "+4"
+        //"special_bonus_facet_bubble_witch_extra_bubbly"   "=50 =60 =70 =80 =160 =240"
         "special_bonus_unique_bubble_witch_8"             "+25"
         "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
@@ -42,12 +42,12 @@
       "immune_time"
       {
         "value"                                           "0.1"
-        "special_bonus_facet_bubble_witch_extra_bubbly"   "=0"
+        //"special_bonus_facet_bubble_witch_extra_bubbly"   "=0"
       }
       "always_explode_on_owner"
       {
         "value"                                           "0"
-        "special_bonus_facet_bubble_witch_extra_bubbly"   "=1"
+        //"special_bonus_facet_bubble_witch_extra_bubbly"   "=1"
       }
     }
   }

@@ -5,21 +5,20 @@
   //=================================================================================================================
   "templar_assassin_refraction"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
-    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PHYSICAL"
-    "HasShardUpgrade"                                     "1"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.0 0.0 0.0 0.0 0.0 0.0"
+    "AbilityCastPoint"                                    "0.0"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
@@ -42,13 +41,12 @@
       }
       "shield_per_instance"
       {
-        "value"                                           "30"
+        "value"                                           "30 30 30 30 60 90"
       }
-      "bonus_damage" //OAA, because of special_bonus_unique_templar_assassin_refraction_damage
+      "bonus_damage"
       {
-        "value"                                           "15 30 45 60 60 60"
+        "value"                                           "15 30 45 60 120 180"
         "special_bonus_shard"                             "+30"
-        "special_bonus_unique_templar_assassin_refraction_damage"  "+60"
       }
       "bonus_damage_per_instance_burn"
       {

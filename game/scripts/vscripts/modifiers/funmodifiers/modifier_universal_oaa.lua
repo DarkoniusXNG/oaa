@@ -52,7 +52,7 @@ function modifier_universal_oaa:DeclareFunctions()
   return {
     MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_SOURCE,
-    MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
+    --MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
     MODIFIER_PROPERTY_TOOLTIP,
   }
 end
@@ -73,13 +73,13 @@ function modifier_universal_oaa:GetModifierHealAmplify_PercentageSource()
   end
 end
 
-function modifier_universal_oaa:GetModifierHealAmplify_PercentageTarget()
-  if self:GetStackCount() == self.stack_uni then
-    return self.heal_amp_uni
-  else
-    return self.heal_amp_other
-  end
-end
+--function modifier_universal_oaa:GetModifierHealAmplify_PercentageTarget()
+  --if self:GetStackCount() == self.stack_uni then
+    --return self.heal_amp_uni
+  --else
+    --return self.heal_amp_other
+  --end
+--end
 
 function modifier_universal_oaa:OnTooltip()
   return self:GetStackCount()
@@ -94,7 +94,7 @@ function modifier_universal_oaa:GetModifierAura()
 end
 
 function modifier_universal_oaa:GetAuraRadius()
-  return 50000
+  return FIND_UNITS_EVERYWHERE
 end
 
 function modifier_universal_oaa:GetAuraSearchTeam()
@@ -125,6 +125,10 @@ function modifier_universal_oaa:GetAuraEntityReject(hEntity)
   end
 
   return false
+end
+
+function modifier_universal_oaa:IsAuraActiveOnDeath()
+  return true
 end
 
 function modifier_universal_oaa:GetTexture()
@@ -179,6 +183,9 @@ if IsServer() then
 
   function modifier_universal_summons_oaa:GetModifierTotalDamageOutgoing_Percentage(event)
     local caster = self:GetCaster()
+    if not caster or caster:IsNull() then
+      return 0
+    end
     return caster:GetModifierStackCount("modifier_universal_oaa", caster)
   end
 end

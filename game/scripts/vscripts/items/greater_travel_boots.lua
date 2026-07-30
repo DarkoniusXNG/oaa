@@ -143,6 +143,24 @@ function item_greater_travel_boots:OnChannelFinish(wasInterupted)
   FindClearSpaceForUnit(hCaster, self.targetEntity:GetAbsOrigin(), true)
 
   EmitSoundOnLocationWithCaster(hCaster:GetOrigin(), "Portal.Hero_Appear", hCaster)
+
+  -- Apply Underlord innate buff to the caster if there is someone on their team with that innate
+  local allied_heroes = FindUnitsInRadius(hCaster:GetTeamNumber(), Vector(0, 0, 0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_ANY_ORDER, false)
+  for _, hero in pairs(allied_heroes) do
+    if hero and not hero:IsNull() then
+      local innate = hero:FindAbilityByName("abyssal_underlord_innate_oaa")
+      if innate and not innate:IsNull() then
+        if innate:GetLevel() > 0 then
+          -- Buff Amp
+          local real_buff_duration = GetValueChangedByBuffAmplification(innate:GetSpecialValueFor("buff_duration"), hCaster, hero)
+          -- Apply the buff
+          hCaster:AddNewModifier(hero, innate, "modifier_underlord_raid_boss_buff_oaa", {duration = real_buff_duration})
+          -- Break the 'for' loop
+          break
+        end
+      end
+    end
+  end
 end
 
 item_greater_travel_boots_2 = class(item_greater_travel_boots)
@@ -174,7 +192,7 @@ end
 function modifier_item_greater_travel_boots_passives:OnCreated()
   self:OnRefresh()
   if IsServer() then
-    self:StartIntervalThink(0.1)
+    self:StartIntervalThink(0.3)
   end
 end
 
@@ -186,10 +204,13 @@ function modifier_item_greater_travel_boots_passives:OnRefresh()
     self.spell_amp = ability:GetSpecialValueFor("bonus_spell_amp_during_duels")
     self.boss_dmg = ability:GetSpecialValueFor("bonus_boss_damage")
   end
+  if IsServer() then
+    self:OnIntervalThink()
+  end
 end
 
 function modifier_item_greater_travel_boots_passives:OnIntervalThink()
-  if Duels:IsActive() and self:IsFirstItemInInventory() then
+  if Duels:IsActive() then
     self:SetStackCount(2)
   else
     self:SetStackCount(1)
@@ -210,22 +231,28 @@ function modifier_item_greater_travel_boots_passives:GetModifierMoveSpeedBonus_S
 end
 
 function modifier_item_greater_travel_boots_passives:GetModifierBaseDamageOutgoing_Percentage()
-  if self:GetStackCount() == 2 then
-    return self.dmg or self:GetAbility():GetSpecialValueFor("bonus_damage_during_duels")
+  -- Do not provide the bonus outside of Duels
+  if self:GetStackCount() ~= 2 then
+    return 0
   end
-  return 0
+
+  return self.dmg or self:GetAbility():GetSpecialValueFor("bonus_damage_during_duels")
 end
 
 function modifier_item_greater_travel_boots_passives:GetModifierSpellAmplify_Percentage()
-  if self:GetStackCount() == 2 then
-    return self.spell_amp or self:GetAbility():GetSpecialValueFor("bonus_spell_amp_during_duels")
+  -- Do not provide the bonus outside of Duels
+  if self:GetStackCount() ~= 2 then
+    return 0
   end
-  return 0
+
+  return self.spell_amp or self:GetAbility():GetSpecialValueFor("bonus_spell_amp_during_duels")
 end
 
 function modifier_item_greater_travel_boots_passives:GetModifierTotalDamageOutgoing_Percentage(event)
-  if event.target:IsOAABoss() then
-    return self.boss_dmg or self:GetAbility():GetSpecialValueFor("bonus_boss_damage")
+  if event.target then
+    if event.target:IsOAABoss() then
+      return self.boss_dmg or self:GetAbility():GetSpecialValueFor("bonus_boss_damage")
+    end
   end
   return 0
 end

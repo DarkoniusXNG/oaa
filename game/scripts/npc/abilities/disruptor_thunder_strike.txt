@@ -5,7 +5,6 @@
   //=================================================================================================================
   "disruptor_thunder_strike"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -14,29 +13,29 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "HasShardUpgrade"                                     "0"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.05 0.05 0.05 0.05 0.05 0.05"
+    "AbilityCastPoint"                                    "0.05"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15 13 11 9 8 7" //OAA
+    "AbilityCooldown"                                     "15 13 11 9 8 7" //OAA, intentionally buffed
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "125 130 135 140 145 150"
+    "AbilityManaCost"                                     "115 120 125 130 135 140"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
       "strike_damage"                                     "30 60 90 120 230 460"
-      "slow_amount"                                       "100"
+      "slow_amount"                                       "100" // same kv for ms and as slow
       "shard_ground_delay"                                "4"
       "AbilityCastRange"
       {

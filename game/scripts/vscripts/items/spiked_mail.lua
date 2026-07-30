@@ -9,12 +9,17 @@ end
 
 function item_spiked_mail_1:OnSpellStart()
   local caster = self:GetCaster()
-  -- Sound
-  caster:EmitSound("DOTA_Item.BladeMail.Activate")
-  -- Get duration
+
   local buff_duration = self:GetSpecialValueFor("duration")
+
+  -- Buff Amp
+  local real_buff_duration = GetValueChangedByBuffAmplification(buff_duration, caster, caster)
+
   -- Apply modifier
-  caster:AddNewModifier(caster, self, "modifier_item_spiked_mail_active_return", {duration = buff_duration})
+  caster:AddNewModifier(caster, self, "modifier_item_spiked_mail_active_return", {duration = real_buff_duration})
+
+  -- Activation Sound
+  caster:EmitSound("DOTA_Item.BladeMail.Activate")
 end
 
 item_spiked_mail_2 = item_spiked_mail_1
@@ -76,6 +81,7 @@ end
 
 if IsServer() then
   function modifier_item_spiked_mail_passives:OnTakeDamage(event)
+    -- Prevent multiple Spiked Mails stacking damage return
     if not self:IsFirstItemInInventory() then
       return
     end
@@ -106,12 +112,12 @@ if IsServer() then
     end
 
     -- If there is a stronger reflection modifier, don't continue
-    --if parent:HasModifier("modifier_item_spiked_mail_active_return")  then
+    --if parent:HasModifier("modifier_item_spiked_mail_active_return") then
       --return
     --end
 
-    -- If parent has Blade Mail passive/item or Blade Mail buff, don't continue to prevent stacking
-    if parent:HasModifier("modifier_item_blade_mail") or parent:HasModifier("modifier_item_blade_mail_reflect") then
+    -- Prevent stacking with Blademail damage return
+    if parent:HasModifier("modifier_item_blade_mail") then
       return
     end
 
@@ -156,44 +162,67 @@ if IsServer() then
 
     local damaging_ability = event.inflictor
     local damage_type = event.damage_type
-    local return_damage_flags = bit.bor(damage_flags, DOTA_DAMAGE_FLAG_REFLECTION, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL)
+    local return_damage_flags = bit.bor(DOTA_DAMAGE_FLAG_REFLECTION, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL)
+    local return_damage_type = damage_type -- Same damage type as original damage
 
     -- Interaction with Debuff Immunity
     if attacker:IsDebuffImmune() then
       -- Pure damage abilities that don't pierce Debuff Immunity
       local ability_blacklist = {
+        "axe_battle_hunger",
         --"axe_counter_helix",
         --"axe_culling_blade",
         --"bane_brain_sap",
         "bane_enfeeble",
         --"bane_fiends_grip",
-        "bloodseeker_bloodrage", -- shard
+        --"bloodseeker_bloodrage", -- shard
+        "bloodseeker_blood_bath",
         --"bloodseeker_rupture",
+        "chen_penitence",
         --"doom_bringer_doom",
+        "electrician_cleansing_shock",
         "enchantress_impetus",
         --"enigma_black_hole",
-        --"huskar_burning_spear", -- talent
         --"invoker_sun_strike",
         --"jakiro_macropyre", -- scepter
+        --"kez_raptor_dance",
         --"leshrac_diabolic_edict",
-        "meepo_ransack",
+        --"meepo_ransack",
         --"nyx_assassin_vendetta",
-        "omniknight_hammer_of_purity",
-        "omniknight_purification",
+        --"omniknight_hammer_of_purity",
+        --"omniknight_purification",
         --"pudge_meat_hook",
         --"queenofpain_sonic_wave",
-        --"spectre_desolate",
-        --"spectre_spectral_dagger",
-        --"templar_assassin_psi_blades",
         "shredder_chakram",
-        "shredder_chakram_2",
         "shredder_timber_chain",
         "shredder_whirling_death",
+        --"spectre_desolate",
+        --"templar_assassin_psi_blades",
         "tinker_laser",
         "tinkerer_laser_oaa",
         --"warlock_golem_flaming_fists",
         --"witch_doctor_death_ward_oaa",
         --"witch_doctor_voodoo_switcheroo_oaa",
+        "item_trumps_fists_1",
+        "item_trumps_fists_2",
+        "boss_alchemist_acid_spray",
+        "boss_alchemist_cannonshot",
+        "boss_carapace_crystals",
+        "boss_carapace_headbutt",
+        "boss_slime_jump",
+        "boss_slime_shake",
+        "boss_slime_slam",
+        "boss_spooky_ghost_siphon",
+        "lycan_boss_rupture_ball",
+        "lycan_boss_rupture_ball_tier5",
+        "temple_guardian_hammer_throw",
+        "temple_guardian_hammer_throw_tier5",
+        "temple_guardian_purification",
+        "temple_guardian_purification_tier5",
+        "temple_guardian_wrath",
+        "temple_guardian_wrath_tier5",
+        "wanderer_point_aversion",
+        "wanderer_sticky_blood",
       }
 
       if damaging_ability and not damaging_ability:IsNull() and damage_type == DAMAGE_TYPE_PURE then
@@ -224,14 +253,26 @@ if IsServer() then
     -- Calculating damage that will be returned to attacker
     local new_damage = damage * damage_return / 100
 
-    -- If attacker has Veil of Discord debuff, try to find the item and reduce the damage because it will be amped by Veil
-    if attacker:HasModifier("modifier_item_veil_of_discord_debuff") then
+    -- If attacker has item debuffs with MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE, try to find the item and reduce the damage because it will be amped
+    if attacker:HasModifier("modifier_item_veil_of_discord_debuff") or attacker:HasModifier("modifier_item_bloodstone_aura") then
       local veil_debuff = attacker:FindModifierByName("modifier_item_veil_of_discord_debuff")
-      local veil_item = veil_debuff:GetAbility()
-      if veil_item then
-        local damage_amp = veil_item:GetSpecialValueFor("spell_amp")
-        if damage_amp then
-          new_damage = new_damage / (1 + damage_amp/100)
+      local bloodstone_debuff = attacker:FindModifierByName("modifier_item_bloodstone_aura")
+      if veil_debuff then
+        local veil_item = veil_debuff:GetAbility()
+        if veil_item then
+          local damage_amp = veil_item:GetSpecialValueFor("spell_amp")
+          if damage_amp then
+            new_damage = new_damage / (1 + damage_amp/100)
+          end
+        end
+      end
+      if bloodstone_debuff then
+        local bloodstone_item = bloodstone_debuff:GetAbility()
+        if bloodstone_item then
+          local damage_amp = bloodstone_item:GetSpecialValueFor("aura_spell_vulnerability")
+          if damage_amp then
+            new_damage = new_damage / (1 + damage_amp/100)
+          end
         end
       end
     end
@@ -244,7 +285,7 @@ if IsServer() then
       attacker = parent,
       victim = attacker,
       damage = new_damage,
-      damage_type = damage_type, -- Same damage type as original damage
+      damage_type = return_damage_type,
       damage_flags = return_damage_flags,
       ability = ability,
     }
@@ -377,54 +418,6 @@ if IsServer() then
     local damaging_ability = event.inflictor
     local damage_type = event.damage_type
 
-    -- Interaction with Debuff Immunity
-    if attacker:IsDebuffImmune() then
-      -- Pure damage abilities
-      local ability_blacklist = {
-        "axe_counter_helix",
-        --"axe_culling_blade",
-        "bane_brain_sap",
-        "bane_enfeeble",
-        --"bane_fiends_grip",
-        "bloodseeker_bloodrage", -- shard
-        --"bloodseeker_rupture",
-        --"doom_bringer_doom",
-        "enchantress_impetus",
-        --"enigma_black_hole",
-        "huskar_burning_spear", -- talent
-        "invoker_sun_strike",
-        --"jakiro_macropyre", -- scepter
-        "leshrac_diabolic_edict",
-        "meepo_ransack",
-        --"nyx_assassin_vendetta",
-        "omniknight_hammer_of_purity",
-        "omniknight_purification",
-        "pudge_meat_hook",
-        --"queenofpain_sonic_wave",
-        "spectre_desolate",
-        "spectre_spectral_dagger",
-        "templar_assassin_psi_blades",
-        --"shredder_chakram",
-        --"shredder_chakram_2",
-        "shredder_timber_chain",
-        "shredder_whirling_death",
-        "tinker_laser",
-        "tinkerer_laser_oaa",
-        "warlock_golem_flaming_fists",
-        --"witch_doctor_death_ward_oaa",
-        --"witch_doctor_voodoo_switcheroo_oaa",
-      }
-
-      if damaging_ability and not damaging_ability:IsNull() and damage_type == DAMAGE_TYPE_PURE then
-        local name = damaging_ability:GetAbilityName()
-        for _, v in pairs(ability_blacklist) do
-          if name == v then
-            return -- don't return dmg
-          end
-        end
-      end
-    end
-
     -- Interaction with Spell Immunity
     if attacker:IsMagicImmune() then
       if damaging_ability and not damaging_ability:IsNull() then
@@ -451,18 +444,31 @@ if IsServer() then
     -- Calculating damage that will be returned to attacker
     local new_damage = damage * damage_return / 100
 
-    -- If attacker has Veil of Discord debuff, try to find the item and reduce the damage because it will be amped by Veil
-    if attacker:HasModifier("modifier_item_veil_of_discord_debuff") then
+    -- If attacker has item debuffs with MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE, try to find the item and reduce the damage because it will be amped
+    if attacker:HasModifier("modifier_item_veil_of_discord_debuff") or attacker:HasModifier("modifier_item_bloodstone_aura") then
       local veil_debuff = attacker:FindModifierByName("modifier_item_veil_of_discord_debuff")
-      local veil_item = veil_debuff:GetAbility()
-      if veil_item then
-        local damage_amp = veil_item:GetSpecialValueFor("spell_amp")
-        if damage_amp then
-          new_damage = new_damage / (1 + damage_amp/100)
+      local bloodstone_debuff = attacker:FindModifierByName("modifier_item_bloodstone_aura")
+      if veil_debuff then
+        local veil_item = veil_debuff:GetAbility()
+        if veil_item then
+          local damage_amp = veil_item:GetSpecialValueFor("spell_amp")
+          if damage_amp then
+            new_damage = new_damage / (1 + damage_amp/100)
+          end
+        end
+      end
+      if bloodstone_debuff then
+        local bloodstone_item = bloodstone_debuff:GetAbility()
+        if bloodstone_item then
+          local damage_amp = bloodstone_item:GetSpecialValueFor("aura_spell_vulnerability")
+          if damage_amp then
+            new_damage = new_damage / (1 + damage_amp/100)
+          end
         end
       end
     end
 
+    local return_damage_type = damage_type -- Same damage type as original damage
     local return_damage_flags = bit.bor(DOTA_DAMAGE_FLAG_REFLECTION, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL)
     if damage_type == DAMAGE_TYPE_PHYSICAL then
       return_damage_flags = bit.bor(return_damage_flags, DOTA_DAMAGE_FLAG_BYPASSES_PHYSICAL_BLOCK)
@@ -472,7 +478,7 @@ if IsServer() then
       attacker = parent,
       victim = attacker,
       damage = new_damage,
-      damage_type = damage_type, -- Same damage type as original damage
+      damage_type = return_damage_type,
       damage_flags = return_damage_flags,
       ability = ability,
     }

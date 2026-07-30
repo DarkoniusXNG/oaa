@@ -12,8 +12,13 @@ end
 function item_dispel_orb_1:OnSpellStart()
   local caster = self:GetCaster()
 
+  -- Intentionally NOT affected by Buff Amp
+
   -- Apply modifier that dispels OnIntervalThink
   caster:AddNewModifier(caster, self, "modifier_item_dispel_orb_active", { duration = self:GetSpecialValueFor("duration") })
+
+  -- Activation Sound
+  --caster:EmitSound("")
 end
 
 ---------------------------------------------------------------------------------------------------
@@ -93,6 +98,7 @@ function modifier_item_dispel_orb_passive:GetModifierPreAttack_BonusDamage()
 end
 
 function modifier_item_dispel_orb_passive:GetModifierMagicalResistanceBonus()
+  -- Prevent multiple Dispel Orbs stacking magic resistance
   if self:GetStackCount() ~= 2 then
     return 0
   end

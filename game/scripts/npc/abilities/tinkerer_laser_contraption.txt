@@ -22,12 +22,11 @@
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
 
-    "HasScepterUpgrade"                                   "1"
-    "HasShardUpgrade"                                     "1"
+    "HasScepterUpgrade"                                   "1" // needed because it's a custom ability
+    "HasShardUpgrade"                                     "1" // needed because it's a custom ability
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "700"
     "AbilityCastPoint"                                    "0.4"
     "AbilityCastAnimation"                                "ACT_DOTA_CAST_ABILITY_1"
 
@@ -53,14 +52,9 @@
         "affected_by_aoe_increase"                        "1"
       }
       "duration"                                          "9"
-      // "initial_damage"
-      // {
-        // "value"                                           "150 300 450 900 1350" // original: 200/300/400
-        // "DamageTypeTooltip"                               "DAMAGE_TYPE_PURE" // original: magical
-      // }
       "damage_per_second"
       {
-        "value"                                           "130 260 390 780 1170" // original: 75 125 175
+        "value"                                           "140 260 380 620 980" // original: 75 125 175
         "DamageTypeTooltip"                               "DAMAGE_TYPE_MAGICAL"
       }
       "damage_interval"
@@ -73,20 +67,24 @@
         "value"                                           "1 1 2 2 2"
         "special_bonus_scepter"                           "+1"
       }
-      "scepter_cast_range"
+      "AbilityCastRange"
       {
-        "value"                                           "0"
-        "special_bonus_scepter"                           "1000"
+        "value"                                           "700"
+        "special_bonus_scepter"                           "=1000"
       }
-      "scepter_heal_prevent_percent" // reduces only healing
+      "health_restoration" // reduces all health restoration
       {
         "value"                                           "0"
         "special_bonus_scepter"                           "-25 -30 -35 -40 -45"
       }
-      "health_restoration" // reduces everything else
+      "apply_tar_spill"
       {
         "value"                                           "0"
-        "special_bonus_scepter"                           "-25 -30 -35 -40 -45"
+        "special_bonus_scepter"                           "+1"
+      }
+      "apply_march"
+      {
+        "value"                                           "0"
       }
       "scepter_tar_spill_interval"                        "3"
     }

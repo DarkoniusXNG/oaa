@@ -17,8 +17,11 @@ function item_elixier_hybrid:OnSpellStart()
   -- Activation sound
   caster:EmitSound("DOTA_Item.FaerieSpark.Activate")
 
+  -- Buff Amp
+  local real_buff_duration = GetValueChangedByBuffAmplification(self:GetSpecialValueFor("duration"), caster, caster)
+
   -- Apply a buff
-  local buff = caster:AddNewModifier(caster, self, "modifier_elixier_hybrid_active", {duration = self:GetSpecialValueFor("duration")})
+  local buff = caster:AddNewModifier(caster, self, "modifier_elixier_hybrid_active", {duration = real_buff_duration})
   buff.regen = self:GetSpecialValueFor("bonus_mana_regen")
   buff.magic_damage = self:GetSpecialValueFor("bonus_magic_damage")
   buff.physical_damage = self:GetSpecialValueFor("bonus_physical_damage")
@@ -154,16 +157,20 @@ if IsServer() then
     local non_trigger_inflictors = {
       ["batrider_sticky_napalm"] = true,
       ["batrider_sticky_napalm_oaa"] = true,
+      ["item_conjurers_catalyst"] = true,
       ["item_trumps_fists"] = true,           -- Blade of Judecca
       ["item_trumps_fists_2"] = true,
-      ["lina_combustion"] = true,
+      ["jakiro_liquid_ice"] = true,
+      ["largo_croak_of_genius"] = true,
+      ["warlock_fatal_bonds"] = true,
     }
 
     if non_trigger_inflictors[inflictor:GetName()] then
       return
     end
 
-    -- Check if modifier_elixier_hybrid_not_allowed is applied to prevent proccing on DOTs with with short time intervals
+    -- Check if modifier_elixier_hybrid_not_allowed is applied to prevent proccing on DOTs with short dmg tick intervals (<0.5s)
+    -- This is mostly for stuff like Dark Seer Ion Shell, Pudge Rot and Phoenix spells
     if damaged_unit:FindModifierByNameAndCaster("modifier_elixier_hybrid_not_allowed", parent) then
       return
     end

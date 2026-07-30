@@ -1,18 +1,17 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Ability: Earthshaker Totem
+  // Earthshaker: Enchant Totem
   //=================================================================================================================
   "earthshaker_enchant_totem"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
-    "HasScepterUpgrade"                                   "1"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -29,7 +28,6 @@
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "45 55 65 75 85 95"
-    "AbilityDamage"                                       "0 0 0 0 0 0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -58,7 +56,7 @@
       }
       "scepter_cleave_pct"
       {
-        "special_bonus_scepter"                           "40"
+        "special_bonus_scepter"                           "40 40 40 40 50 60"
       }
       "scepter_cleave_starting_width"
       {

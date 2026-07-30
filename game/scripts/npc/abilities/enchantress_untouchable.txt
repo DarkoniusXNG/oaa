@@ -1,16 +1,17 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Enchantress: Untouchable
+  // Enchantress: Untouchable FIXEDFUCK
   //=================================================================================================================
   "enchantress_untouchable"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityType"                                         "ABILITY_TYPE_ULTIMATE"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
     "MaxLevel"                                            "5"
     "RequiredLevel"                                       "6"
     "LevelsBetweenUpgrades"                               "6"
@@ -19,10 +20,10 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "slow_attack_speed" //OAA
+      "slow_attack_speed" //OAA, because of special_bonus_unique_enchantress_3 nerf
       {
-        "value"                                           "-110 -160 -210 -210 -210"
-        "special_bonus_unique_enchantress_3"              "-80"
+        "value"                                           "-110 -160 -210 -260 -310"
+        "special_bonus_unique_enchantress_3"              "-50"
       }
       "slow_duration"
       {

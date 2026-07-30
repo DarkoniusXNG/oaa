@@ -5,7 +5,6 @@
   //=================================================================================================================
   "razor_static_link"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -14,17 +13,18 @@
     "AbilityUnitTargetFlags"                              "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"                                    "0.3 0.3 0.3 0.3 0.3 0.3"
+    "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "26 24 22 20 20 20" //OAA
+    "AbilityCooldown"                                     "23 22 21 20 20 20" //OAA, intentionally buffed
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -34,19 +34,19 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "drain_duration"                                    "12 14 16 18 18 18"
+      "drain_duration"                                    "12 14 16 18 18 18" // buff duration
       "drain_range_buffer"                                "250"
-      "radius"                                            "200 200 200 200 200 200"
-      "speed"                                             "900 900 900 900 900 900"
-      "vision_duration"                                   "3.34 3.34 3.34 3.34 3.34 3.34"
-      "drain_length"
+      "radius"                                            "200"
+      "speed"                                             "900"
+      "vision_duration"                                   "3.34"
+      "drain_length" // link duration
       {
         "value"                                           "10"
       }
       "drain_rate"
       {
-        "value"                                           "6 12 18 24 40 60"
-        "special_bonus_unique_razor"                      "+5"
+        "value"                                           "6 12 18 24 36 48"
+        "special_bonus_unique_razor"                      "+6"
       }
       "attack_speed_factor"
       {

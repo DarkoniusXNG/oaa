@@ -17,15 +17,17 @@ function item_enrage_crystal_1:OnSpellStart()
   caster:RemoveModifierByName("modifier_slark_pounce_leash")
   caster:RemoveModifierByName("modifier_invoker_deafening_blast_disarm")
 
-  -- Sound
-  caster:EmitSound("DOTA_Item.MinotaurHorn.Cast")
-
   -- Particle
   local particle = ParticleManager:CreateParticle("particles/items/enrage_crystal/enrage_crystal_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
   ParticleManager:ReleaseParticleIndex(particle)
 
+  -- Intentionally NOT affected by Buff Amp
+
   -- Apply brief debuff immunity
   caster:AddNewModifier(caster, self, "modifier_item_enrage_crystal_active", {duration = self:GetSpecialValueFor("active_duration")})
+
+  -- Activation Sound
+  caster:EmitSound("DOTA_Item.MinotaurHorn.Cast")
 end
 
 item_enrage_crystal_2 = item_enrage_crystal_1
@@ -63,7 +65,7 @@ function modifier_item_enrage_crystal_passive:OnRefresh()
     self.bonus_str = ability:GetSpecialValueFor("bonus_strength")
     self.bonus_damage = ability:GetSpecialValueFor("bonus_damage")
     self.bonus_status_resist = ability:GetSpecialValueFor("bonus_status_resist")
-    --self.bonus_slow_resist = ability:GetSpecialValueFor("bonus_slow_resist")
+    self.bonus_slow_resist = ability:GetSpecialValueFor("bonus_slow_resist")
     self.dmg_reduction = ability:GetSpecialValueFor("dmg_reduction_while_stunned")
   end
 
@@ -85,7 +87,7 @@ function modifier_item_enrage_crystal_passive:DeclareFunctions()
     MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
     MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
     MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING,
-    --MODIFIER_PROPERTY_SLOW_RESISTANCE,
+    MODIFIER_PROPERTY_SLOW_RESISTANCE_STACKING,
     MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK,
   }
 end
@@ -99,24 +101,26 @@ function modifier_item_enrage_crystal_passive:GetModifierPreAttack_BonusDamage()
 end
 
 function modifier_item_enrage_crystal_passive:GetModifierStatusResistanceStacking()
-  if self:GetStackCount() == 2 then
-    return self.bonus_status_resist or self:GetAbility():GetSpecialValueFor("bonus_status_resist")
-  else
+  -- Prevent multiple Enrage Crystals stacking status resistance
+  if self:GetStackCount() ~= 2 then
     return 0
   end
+
+  return self.bonus_status_resist or self:GetAbility():GetSpecialValueFor("bonus_status_resist")
 end
 
--- Doesn't work, Thanks Valve
--- function modifier_item_enrage_crystal_passive:GetModifierSlowResistance()
-  -- if self:GetStackCount() == 2 then
-    -- return self.bonus_slow_resist or self:GetAbility():GetSpecialValueFor("bonus_slow_resist")
-  -- else
-    -- return 0
-  -- end
--- end
+function modifier_item_enrage_crystal_passive:GetModifierSlowResistance_Stacking()
+  -- Prevent multiple Enrage Crystals stacking slow resistance
+  if self:GetStackCount() ~= 2 then
+    return 0
+  end
+
+  return self.bonus_slow_resist or self:GetAbility():GetSpecialValueFor("bonus_slow_resist")
+end
 
 if IsServer() then
   function modifier_item_enrage_crystal_passive:GetModifierTotal_ConstantBlock(event)
+    -- Prevent multiple Enrage Crystals stacking damage reduction
     if self:GetStackCount() ~= 2 then
       return 0
     end

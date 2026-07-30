@@ -1,22 +1,21 @@
 "DOTAAbilities"
 {
   //=================================================================================================================
-  // Leshrac: Defilement (Innate)
+  // Leshrac: Defilement (Innate) FIXEDFUCK
   //=================================================================================================================
   "leshrac_defilement"
   {
-
     // General
     //-------------------------------------------------------------------------------------------------------------
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
     "MaxLevel"                                            "1"
-    "RequiredLevel"                                       "1"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-      "aoe_per_int"                                       "0.2" //OAA
+      "aoe_per_int"                                       "0.2" //OAA, intentionally nerfed
       "current_aoe_bonus"
       {
         "dynamic_value"                                   "true"

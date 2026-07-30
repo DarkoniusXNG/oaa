@@ -270,34 +270,41 @@ if IsServer() then
     local non_trigger_inflictors = {
       ["batrider_sticky_napalm"] = true,
       ["batrider_sticky_napalm_oaa"] = true,
-      ["item_orb_of_venom"] = true,
+      ["largo_croak_of_genius"] = true,
+      ["item_angels_halo"] = true, -- only non-consumed version
+      ["item_blood_grenade"] = true,
+      ["item_cloak_of_flames"] = true,
+      ["item_conjurers_catalyst"] = true,
+      ["item_essence_distiller"] = true,
+      ["item_essence_distiller_2"] = true,
+      ["item_essence_distiller_3"] = true,
+      ["item_essence_distiller_4"] = true,
+      ["item_essence_distiller_5"] = true,
+      ["item_mage_slayer"] = true,
       ["item_orb_of_corrosion"] = true,
+      ["item_orb_of_venom"] = true,
+      ["item_paintball"] = true,              -- Fae Grenade
       ["item_radiance"] = true,
       ["item_radiance_2"] = true,
       ["item_radiance_3"] = true,
       ["item_radiance_4"] = true,
       ["item_radiance_5"] = true,
-      ["item_urn_of_shadows"] = true,
-      ["item_urn_of_shadows_oaa"] = true,
-      ["item_spirit_vessel"] = true,
-      ["item_spirit_vessel_oaa"] = true,
-      ["item_spirit_vessel_2"] = true,
-      ["item_spirit_vessel_3"] = true,
-      ["item_spirit_vessel_4"] = true,
-      ["item_spirit_vessel_5"] = true,
-      ["item_cloak_of_flames"] = true,
-      ["item_trumps_fists"] = true,           -- Blade of Judecca
-      ["item_trumps_fists_2"] = true,
-      --["item_silver_staff"] = true,
-      --["item_silver_staff_2"] = true,
-      ["item_paintball"] = true,              -- Fae Grenade
-      ["item_blood_grenade"] = true,
-      ["item_mage_slayer"] = true,
+      ["item_searing_signet"] = true,
       ["item_spell_breaker_1"] = true,
       ["item_spell_breaker_2"] = true,
       ["item_spell_breaker_3"] = true,
       ["item_spell_breaker_4"] = true,
       ["item_spell_breaker_5"] = true,
+      ["item_spirit_vessel"] = true,
+      ["item_spirit_vessel_2"] = true,
+      ["item_spirit_vessel_3"] = true,
+      ["item_spirit_vessel_4"] = true,
+      ["item_spirit_vessel_5"] = true,
+      ["item_spirit_vessel_oaa"] = true,
+      ["item_trumps_fists"] = true,           -- Blade of Judecca
+      ["item_trumps_fists_2"] = true,
+      ["item_urn_of_shadows"] = true,
+      ["item_urn_of_shadows_oaa"] = true,
     }
 
     -- For debugging
@@ -440,7 +447,7 @@ if IsServer() then
     --local number = ability:GetSpecialValueFor("shard_number_of_attack_proc")
     --local condition = RandomInt(1, 100) <= chance
     --local condition = self.count > 0 and (self.count % number == 0)
-    local stacks_per_attack = ability:GetSpecialValueFor("stacks_per_attack")
+    local stacks_per_attack = ability:GetSpecialValueFor("napalm_stacks_on_attack")
     local condition = stacks_per_attack ~= 0
     if condition then
 
